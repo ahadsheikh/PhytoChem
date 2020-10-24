@@ -6,6 +6,13 @@ def index(request):
     context = {
         'title': "Home",
     }
+    return render(request, 'main/index.html', context=context)
+
+
+def results(request):
+    context = {
+        'title': "Search results",
+    }
     if request.method == 'POST':
         option = request.POST['option'][0]
         if option == '1':
@@ -30,4 +37,4 @@ def index(request):
             except Compound.DoesNotExist:
                 context['compounds'] = None
 
-    return render(request, 'main/index.html', context=context)
+    return render(request, 'main/results.html', context=context)

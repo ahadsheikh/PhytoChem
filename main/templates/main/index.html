@@ -2,10 +2,10 @@
 
 {% block body %}
     <div class="container">
-        <div class="row d-flex justify-content-center mt-3">
+        <div class="row mt-3">
             <!-- Search form -->
             <div class="col-sm">
-                <form action="{% url 'index' %}" method="post">
+                <form action="{% url 'results' %}" method="post">
                 {% csrf_token %}
                 <div class="input-group">
                     <select name="option" class="selectpicker">
@@ -24,56 +24,8 @@
             </form>
             </div>
         </div>
-        <div class="pt-5">
-            {% if compounds %}
-                {% for compound in compounds %}
-                    <div class="row mb-3" style="border: lightgray solid 3px">
-                        <table class="table">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th colspan="2"><em>Molecular Formula:</em> {{ compound.Molecular_Formula }}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="row">
-                                <td class="col-sm pl-3" align="center"> {{ compound.ROMol|safe }} </td>
-                                <td class="col-sm">
-                                    <table class="table-striped">
-                                        <tr>
-                                            <td><em>Canonical SMILES:</em></td>
-                                            <td>{{ compound.Smiles }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><em>Molecular Weight:</em></td>
-                                            <td>{{ compound.Molecular_Weight }} g/mol</td>
-                                        </tr>
-                                        <tr>
-                                            <td><em>Hydrogen Bond Acceptor Count:</em></td>
-                                            <td>{{ compound.H_Bond_Acceptors }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><em>Hydrogen Bond Donor Count:</em></td>
-                                            <td>{{ compound.H_Bond_Donors }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><em>Molar Refractivity:</em></td>
-                                            <td>{{ compound.Molar_Refractivity }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><em>TPSA:</em></td>
-                                            <td>{{ compound.TPSA }} Å²</td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                {% endfor %}
-
-            {% else %}
-                <h3>Not Found</h3>
-            {% endif %}
+        <div class="row p-5">
+            <h2>Welcome BioChemical Data HOME</h2>
         </div>
     </div>
 {% endblock %}
