@@ -6,20 +6,29 @@
             <!-- Search form -->
             <div class="col-sm">
                 <form action="{% url 'results' %}" method="get">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" aria-label="Search"
-                           value=request.GET["search"] name="search">
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" aria-label="Search"
+                               value="{{ request.GET.search }}" name="search">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
             </div>
         </div>
-        <div class="row p-5">
-            <h2>Welcome</h2>
+        <div class="row p-5 d-flex justify-content-center">
+            <h2>Welcome to Phytochemical Database</h2>
+            <figure class="figure text-center">
+                {% load static %}
+                <img class="figure-img img-fluid" src="{% static "main/images/chemistry-2938901_640.jpg" %}" alt="phytochem"/>
+                <figcaption class="figure-caption">Image by <a
+                        href="https://pixabay.com/users/colin00b-346653/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2938901">Colin
+                    Behrens</a> from <a
+                        href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2938901">Pixabay</a>
+                </figcaption>
+            </figure>
         </div>
     </div>
 {% endblock %}

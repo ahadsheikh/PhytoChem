@@ -8,7 +8,7 @@
                 <form action="{% url 'results' %}" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" aria-label="Search"
-                               name="search">
+                               value="{{ request.GET.search }}" name="search">
                         <div class="input-group-append">
                             <button class="btn btn-secondary" type="submit">
                                 <i class="fa fa-search"></i>
@@ -28,35 +28,35 @@
                         </div>
                         <table class="table">
                             <tr class="row">
-                                <td class="col-sm" align="center" valign="middle"> {{ compound.ROMol|safe }} </td>
+                                <td class="col-sm" align="center"> {{ compound.ROMol|safe }} </td>
                                 <td class="col-sm">
                                     <table class="table-striped">
                                         <tr>
-                                            <td><em>Molecular Formula:</em></td>
+                                            <td>Molecular Formula:</td>
                                             <td>{{ compound.Molecular_Formula }}</td>
                                         </tr>
                                         <tr>
-                                            <td><em>Canonical SMILES:</em></td>
+                                            <td>Canonical SMILES:</td>
                                             <td>{{ compound.Smiles }}</td>
                                         </tr>
                                         <tr>
-                                            <td><em>Molecular Weight:</em></td>
+                                            <td>Molecular Weight:</td>
                                             <td>{{ compound.Molecular_Weight|floatformat:3 }} g/mol</td>
                                         </tr>
                                         <tr>
-                                            <td><em>Hydrogen Bond Acceptor Count:</em></td>
+                                            <td>Hydrogen Bond Acceptor Count:</td>
                                             <td>{{ compound.H_Bond_Acceptors }}</td>
                                         </tr>
                                         <tr>
-                                            <td><em>Hydrogen Bond Donor Count:</em></td>
+                                            <td>Hydrogen Bond Donor Count:</td>
                                             <td>{{ compound.H_Bond_Donors }}</td>
                                         </tr>
                                         <tr>
-                                            <td><em>Molar Refractivity:</em></td>
+                                            <td>Molar Refractivity:</td>
                                             <td>{{ compound.Molar_Refractivity|floatformat:3 }}</td>
                                         </tr>
                                         <tr>
-                                            <td><em>TPSA:</em></td>
+                                            <td>TPSA:</td>
                                             <td>{{ compound.TPSA|floatformat:3 }} Å²</td>
                                         </tr>
                                     </table>
