@@ -3,13 +3,13 @@ from main.models import Compound
 import django
 
 
-def read_csv_todb(path):
+def read_csv_to_db(path):
     with open(path) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
             if line_count != 0:
-                id = row[0]
+                # Get values from list
                 PID = row[1]
                 Smiles = row[2]
                 Molecular_Formula = row[3]
@@ -20,6 +20,7 @@ def read_csv_todb(path):
                 TPSA = row[8]
                 ROMol = row[9]
 
+                # save the values in database
                 compound = Compound()
                 compound.PID = PID
                 compound.Smiles = Smiles
