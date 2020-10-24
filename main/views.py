@@ -1,40 +1,22 @@
 from django.shortcuts import render
+from django.db.models import Q
 from main.models import Compound
 
 
 def index(request):
     context = {
-        'title': "Home",
+        'title': "Home"
     }
     return render(request, 'main/index.html', context=context)
 
 
 def results(request):
+    search = request.GET['search']
+    if search.isnumeric():
+        search = 'Phytochem_' + search.zfill(5)
+    compounds = Compound.objects.filter(Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search))
     context = {
-        'title': "Search results",
+        'title': 'Search results',
+        'compounds': compounds
     }
-    if request.method == 'POST':
-        option = request.POST['option'][0]
-        if option == '1':
-            pid = request.POST.get('search', -1)
-            try:
-                compounds = Compound.objects.filter(PID=pid)
-                context['compounds'] = compounds
-            except Compound.DoesNotExist:
-                context['compounds'] = None
-        elif option == '2':
-            smiles = request.POST.get('search', -1)
-            try:
-                compounds = Compound.objects.filter(Smiles=smiles)
-                context['compounds'] = compounds
-            except Compound.DoesNotExist:
-                context['compounds'] = None
-        else:
-            formula = request.POST.get('search', -1)
-            try:
-                compounds = Compound.objects.filter(Molecular_Formula=formula)
-                context['compounds'] = compounds
-            except Compound.DoesNotExist:
-                context['compounds'] = None
-
     return render(request, 'main/results.html', context=context)

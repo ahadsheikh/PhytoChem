@@ -5,16 +5,10 @@
         <div class="row mt-3">
             <!-- Search form -->
             <div class="col-sm">
-                <form action="{% url 'results' %}" method="post">
-                {% csrf_token %}
+                <form action="{% url 'results' %}" method="get">
                 <div class="input-group">
-                    <select name="option" class="selectpicker">
-                        <option value="1">CID</option>
-                        <option value="2">Smiles</option>
-                        <option value="3">Formula</option>
-                    </select>
                     <input type="text" class="form-control" placeholder="Search" aria-label="Search"
-                           name="search">
+                           value=request.GET["search"] name="search">
                     <div class="input-group-append">
                         <button class="btn btn-secondary" type="submit">
                             <i class="fa fa-search"></i>
@@ -25,7 +19,7 @@
             </div>
         </div>
         <div class="row p-5">
-            <h2>Welcome BioChemical Data HOME</h2>
+            <h2>Welcome</h2>
         </div>
     </div>
 {% endblock %}
