@@ -1,13 +1,14 @@
 import csv
 from main.models import Compound
+import django
 
 
-def read_csv_todb():
-    with open('utills/data/out.csv') as csv_file:
+def read_csv_todb(path):
+    with open(path) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
-            if line_count != 0 and line_count < 10:
+            if line_count != 0:
                 id = row[0]
                 PID = row[1]
                 Smiles = row[2]
@@ -19,12 +20,28 @@ def read_csv_todb():
                 TPSA = row[8]
                 ROMol = row[9]
 
-                print(Smiles)
+                compound = Compound()
+                compound.PID = PID
+                compound.Smiles = Smiles
+                compound.Molecular_Formula = Molecular_Formula
+                compound.Molecular_Weight = Molecular_Weight
+                compound.H_Bond_Acceptors = H_Bond_Acceptors
+                compound.H_Bond_Donors = H_Bond_Donors
+                compound.Molar_Refractivity = Molar_Refractivity
+                compound.TPSA = TPSA
+                compound.ROMol = ROMol
+                compound.save()
+
+                if line_count % 100 == 0:
+                    print(line_count, 'Data Processed..')
+
+                # print(f'{id} {PID} {Smiles} {Molecular_Formula} {Molecular_Weight} {H_Bond_Acceptors} {H_Bond_Donors} {Molar_Refractivity} {TPSA}')
                 line_count += 1
+
             else:
                 line_count += 1
 
-        print(f'Processed {line_count} lines.')
+        print('Processed Successfully.')
 
 
 

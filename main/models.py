@@ -2,9 +2,9 @@ from django.db import models
 
 
 class Compound(models.Model):
-    PID = models.CharField(max_length=60)
-    Smiles = models.CharField(max_length=250)
-    Molecular_Formula = models.CharField(max_length=50)
+    PID = models.CharField(max_length=60, unique=True)
+    Smiles = models.CharField(max_length=250, db_index=True)
+    Molecular_Formula = models.CharField(max_length=50, db_index=True)
     Molecular_Weight = models.FloatField()
     H_Bond_Acceptors = models.IntegerField()
     H_Bond_Donors = models.IntegerField()

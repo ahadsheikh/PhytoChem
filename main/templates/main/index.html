@@ -7,31 +7,59 @@
             <!-- Search form -->
             <form class="form-inline active-cyan-4" action="{% url 'index' %}" method="post">
                 {% csrf_token %}
-              <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
-                aria-label="Search" name="search">
-                <button class="fas fa-search" aria-hidden="true" style="border: none; background: none"></button>
+
+                <div class="row">
+                    <div class="col">
+                        <select name="option" class="mdb-select md-form">
+                          <option value="1">CID</option>
+                          <option value="2">Smiles</option>
+                          <option value="3">Formula</option>
+                        </select>
+
+                    </div>
+                    <div class="col">
+                        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+                               aria-label="Search" name="search">
+                        <button class="fas fa-search" aria-hidden="true"
+                                style="border: none; background: none"></button>
+                    </div>
+                </div>
             </form>
 
 
-{#            {% for compound in compounds %}#}
-{#                <h3>{{ compound.Molecular_Formula }}</h3>#}
-{#            {% endfor %}#}
+            {#            {% for compound in compounds %}#}
+            {#                <h3>{{ compound.Molecular_Formula }}</h3>#}
+            {#            {% endfor %}#}
 
 
-
-
-{#            <form action="{% url 'index' %}" method="post">#}
-{#                {% csrf_token %}#}
-{#                <input id="search" type="text" name="search">#}
-{#                <button type="submit">Submit</button>#}
-{#            </form>#}
+            {#            <form action="{% url 'index' %}" method="post">#}
+            {#                {% csrf_token %}#}
+            {#                <input id="search" type="text" name="search">#}
+            {#                <button type="submit">Submit</button>#}
+            {#            </form>#}
 
         </div>
         <div class="row pt-5">
-            <h3>{{ compounds.Molecular_Formula }}</h3>
-            <div style="width: 20px">
-                {{ compounds.ROMol|safe }}
-            </div>
+            {% if compounds %}
+                {% for compound in compounds %}
+                    <table>
+                        <th>
+                            <td colspan="3">{{ compound.Molecular_Formula }}</td>
+                        </th>
+                        <tr>
+                            <td colspan="2">
+                                {{ compound.ROMol|safe }}
+                            </td>
+                            <td>
+                                {{ compound.Smiles }}
+                            </td>
+                        </tr>
+                    </table>
+                {% endfor %}
+
+            {% else %}
+                <h3>Not Found</h3>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
