@@ -1,7 +1,5 @@
 import csv
 from main.models import Compound
-import django
-
 
 def read_csv_to_db(path):
     with open(path) as csv_file:
@@ -35,10 +33,7 @@ def read_csv_to_db(path):
 
                 if line_count % 100 == 0:
                     print(line_count, 'Data Processed..')
-
-                # print(f'{id} {PID} {Smiles} {Molecular_Formula} {Molecular_Weight} {H_Bond_Acceptors} {H_Bond_Donors} {Molar_Refractivity} {TPSA}')
                 line_count += 1
-
             else:
                 line_count += 1
 
