@@ -21,6 +21,10 @@
         <div class="pt-5">
             {% if compounds %}
                 <h3>Showing {{ compounds|length }} result(s) matching your query</h3>
+                <form method="get" action="{% url 'download_all_results' %}">
+                    <input type="hidden" name="search" value="{{ request.GET.search }}"/>
+                    <button type="submit">Download all as SDF</button>
+                </form>
                 {% for compound in compounds %}
                     <div class="card card-body row mb-3">
                         <div class="card-header bg-dark text-white">
