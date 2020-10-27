@@ -23,7 +23,13 @@
                 <h3>Showing {{ compounds|length }} result(s) matching your query</h3>
                 <form method="get" action="{% url 'download_all_results' %}">
                     <input type="hidden" name="search" value="{{ request.GET.search }}"/>
-                    <button type="submit">Download all as SDF</button>
+                    <label for="filetype">Download as</label>
+                    <select id="filetype" name="filetype">
+                        <option value="sdf">SDF</option>
+                        <option value="pdb">PDB</option>
+                        <option value="mol">MOL</option>
+                    </select>
+                    <button type="submit">Download</button>
                 </form>
                 {% for compound in compounds %}
                     <div class="card card-body row mb-3">
