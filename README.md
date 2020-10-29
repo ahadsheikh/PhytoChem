@@ -10,6 +10,6 @@ an environment from `vevn.yml` file and activate
 it-
 
 ```
-conda env create -f vevn.yml
+conda env create -f venv.yml
 conda activate venv
 ```
