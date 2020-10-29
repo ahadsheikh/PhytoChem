@@ -42,6 +42,7 @@ def download_file(request):
             search = 'Phytochem_' + search.zfill(5)
         compounds = Compound.objects.filter(Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search))
         compounds_df = query_to_df(compounds)
+
         if filetype == 'sdf':
             tmp = tempfile.NamedTemporaryFile(suffix=".sdf", prefix="pc_{}_".format(search), delete=False)
             df_to_sdf(compounds_df, tmp)
