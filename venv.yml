@@ -65,4 +65,3 @@ dependencies:
     - psycopg2-binary==2.8.6
     - sqlparse==0.4.1
     - whitenoise==5.2.0
-prefix: /home/shafquat/anaconda3/envs/PhytoChem
