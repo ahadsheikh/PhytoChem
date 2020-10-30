@@ -4,7 +4,7 @@ channels:
   - defaults
 dependencies:
   - pip=20.2.4
-  - python=3.7.5
+  - python=3.7.9
   - rdkit=2020.09.1.0
   - pip:
     - django==3.1.2
