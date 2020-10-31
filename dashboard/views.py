@@ -2,14 +2,17 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
 import os
-from rdkit import Chem
 import pandas as pd
+
+from rdkit import Chem
 from rdkit.Chem import PandasTools
 from rdkit.Chem import Crippen
 
 from dashboard.forms import UploadFileForm
 from main.models import Compound
+from utils.QueryHandler import update_sdf
 
 
 @login_required(redirect_field_name='next')
@@ -84,3 +87,4 @@ def handle_file(f):
             TPSA=compound.TPSA,
             ROMol=compound.ROMol
         )
+    update_sdf()
