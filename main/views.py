@@ -25,8 +25,9 @@ def index(request):
 def results(request):
     search = request.GET['search']
     if search.isnumeric():
-        search = 'Phytochem_' + search.zfill(5)
+        search = 'Phytochem_' + search.zfill(6)
     compounds = Compound.objects.filter(Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search))
+    print(search, compounds)
     context = {
         'title': 'Search results',
         'compounds': compounds
@@ -39,7 +40,7 @@ def download_file(request):
         search = request.GET['search']
         filetype = request.GET['filetype']
         if search.isnumeric():
-            search = 'Phytochem_' + search.zfill(5)
+            search = 'Phytochem_' + search.zfill(6)
         compounds = Compound.objects.filter(Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search))
         compounds_df = query_to_df(compounds)
 
