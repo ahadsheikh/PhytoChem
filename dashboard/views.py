@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -11,6 +12,7 @@ from dashboard.forms import UploadFileForm
 from main.models import Compound
 
 
+@login_required(redirect_field_name='next')
 def dash_index(request):
     context = {
         'title': 'Dashboard'
@@ -18,6 +20,7 @@ def dash_index(request):
     return render(request, 'dashboard/dash.html', context=context)
 
 
+@login_required(redirect_field_name='next')
 def upload(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
@@ -27,7 +30,9 @@ def upload(request):
             return redirect('dashboard')
 
     messages.success(request, "Upload File Not Successfully")
-    return redirect('dashboard')
+    return HttpResponse(
+        "<h2>You are not permitted.</h2>"
+    )
 
 
 # Not path view
