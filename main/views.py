@@ -1,17 +1,10 @@
 from django.shortcuts import render
 from django.db.models import Q
-from django.urls import reverse
+from django.http import FileResponse
 
-from main.models import Compound
 import os
 import tempfile
-
-# necessary imports for creating files
-from django.http import FileResponse
-import pandas as pd
-from rdkit import Chem
-from rdkit.Chem import PandasTools
-
+from main.models import Compound
 from utils.QueryHandler import query_to_df, df_to_sdf, df_to_pdb, df_to_mol
 
 
@@ -39,21 +32,26 @@ def download_file(request):
     try:
         search = request.GET['search']
         filetype = request.GET['filetype']
+        # make search term as is in the PID column of database
         if search.isnumeric():
             search = 'Phytochem_' + search.zfill(6)
-        compounds = Compound.objects.filter(Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search))
+        # search in the database columns PID, Smiles and
+        # Molecular_Formula
+        compounds = Compound.objects.filter(Q(PID=search) |
+                                            Q(Smiles=search) |
+                                            Q(Molecular_Formula=search))
         compounds_df = query_to_df(compounds)
 
+        # create a file based on file extension
+        tmp = tempfile.NamedTemporaryFile(suffix=".{}".format(filetype),
+                                          prefix="pc_{}_".format(search),
+                                          delete=False)
         if filetype == 'sdf':
-            tmp = tempfile.NamedTemporaryFile(suffix=".sdf", prefix="pc_{}_".format(search), delete=False)
-            df_to_sdf(compounds_df, tmp)
+            df_to_sdf(compounds_df, tmp.name)
         elif filetype == 'pdb':
-            tmp = tempfile.NamedTemporaryFile(suffix=".pdb", prefix="pc_{}_".format(search), delete=False)
-            df_to_pdb(compounds_df, tmp)
+            df_to_pdb(compounds_df, tmp.name)
         elif filetype == 'mol':
-            tmp = tempfile.NamedTemporaryFile(suffix=".mol", prefix="pc_{}_".format(search), delete=False)
-            df_to_mol(compounds_df, tmp)
-
+            df_to_mol(compounds_df, tmp.name)
         response = FileResponse(open(tmp.name, 'rb'))
         return response
     finally:

@@ -1,36 +1,24 @@
 import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import PandasTools
+from main.models import Compound
 
 
 def query_to_df(queryset):
     # Dataframe to write calculations of each compounds
-    compounds_df = pd.DataFrame(
-        columns=['ID', 'Smiles', 'Molecular_Formula', 'Molecular_Weight', 'H_Bond_Acceptors',
-                 'H_Bond_Donors', 'Molar_Refractivity', 'TPSA'])
-    for compound in queryset:
-        compounds_df = compounds_df.append({
-            'ID': compound.PID,
-            'Smiles': compound.Smiles,
-            'Molecular_Formula': compound.Molecular_Formula,
-            'Molecular_Weight': compound.Molecular_Weight,
-            'H_Bond_Acceptors': compound.H_Bond_Acceptors,
-            'H_Bond_Donors': compound.H_Bond_Donors,
-            'Molar_Refractivity': compound.Molar_Refractivity,
-            'TPSA': compound.TPSA,
-        }, ignore_index=True)
+    compounds_df = pd.DataFrame(list(queryset.values())).drop('id', axis=1)
     PandasTools.AddMoleculeColumnToFrame(compounds_df, 'Smiles', 'ROMol', includeFingerprints=True)
     return compounds_df
 
 
-def df_to_sdf(compounds_df, tmp):
-    with open(tmp.name, 'w') as fi:
-        PandasTools.WriteSDF(compounds_df, fi, molColName='ROMol', idName='ID',
+def df_to_sdf(compounds_df, file):
+    with open(file, 'w') as fi:
+        PandasTools.WriteSDF(compounds_df, fi, molColName='ROMol', idName='PID',
                              properties=list(compounds_df.columns))
 
 
-def df_to_pdb(compounds_df, tmp):
-    with open(tmp.name, 'w') as fi:
+def df_to_pdb(compounds_df, file):
+    with open(file, 'w') as fi:
         pdbwriter = Chem.PDBWriter(fi)
         for _, compound in compounds_df.iterrows():
             mol = Chem.MolFromSmiles(compound.Smiles)
@@ -38,10 +26,16 @@ def df_to_pdb(compounds_df, tmp):
         pdbwriter.close()
 
 
-def df_to_mol(compounds_df, tmp):
-    with open(tmp.name, 'w+') as fi:
+def df_to_mol(compounds_df, file):
+    with open(file, 'w+') as fi:
         for _, compound in compounds_df.iterrows():
             mol = Chem.MolFromSmiles(compound.Smiles)
             molblock = Chem.MolToMolBlock(mol)
             fi.write(molblock)
+
+
+def update_sdf():
+    compounds_df = pd.DataFrame(list(Compound.objects.all().values())).drop('id', axis=1)
+    PandasTools.AddMoleculeColumnToFrame(compounds_df, 'Smiles', 'ROMol', includeFingerprints=True)
+    df_to_sdf(compounds_df, 'media/all_data.sdf')
 
