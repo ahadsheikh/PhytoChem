@@ -20,7 +20,7 @@ def results(request):
     if search.isnumeric():
         search = 'Phytochem_' + search.zfill(6)
     compounds = Compound.objects.filter(Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search))
-    print(search, compounds)
+    # print(search, compounds)
     context = {
         'title': 'Search results',
         'compounds': compounds
