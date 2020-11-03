@@ -1,34 +1,29 @@
 {% extends "main/base.html" %}
+{% load static %}
 
 {% block body %}
-    <div class="container">
-        <div class="row mt-3">
-            <!-- Search form -->
-            <div class="col-sm">
-                <form action="{% url 'results' %}" method="get">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Search"
-                               value="{{ request.GET.search }}" name="search">
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary" type="submit">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+    <main class="site-main">
+      <section class="site-banner">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 col-md-12 site-title">
+              <h3 class="title-text text-uppercase">Find Your Desire</h3>
+              <h2 class="PhytoChemical text-uppercase"><span class="phytochemical-span">PhytoChemical</span> data</h2>
             </div>
+
+            <div class="col-lg-6 col-md-12 site-search-btn">
+              <div class="box-search">
+                  <form action="{% url 'results' %}" method="get">
+                      <div class="wrapper">
+                        <input class="search shadow-lg" name="search" value="{{ request.GET.search }}" type="text" id="search" placeholder="Search Element E.x: CO" />
+                        <input class="submit shadow-lg" type="submit" value=" "/>
+                      </div>
+                  </form>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="row p-5 d-flex justify-content-center">
-            <h2>Welcome to Phytochemical Database</h2>
-            <figure class="figure text-center">
-                {% load static %}
-                <img class="figure-img img-fluid" src="{% static "main/images/chemistry-2938901_640.jpg" %}" alt="phytochem"/>
-                <figcaption class="figure-caption">Image by <a
-                        href="https://pixabay.com/users/colin00b-346653/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2938901">Colin
-                    Behrens</a> from <a
-                        href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2938901">Pixabay</a>
-                </figcaption>
-            </figure>
-        </div>
-    </div>
+      </section>
+    </main>
+
 {% endblock %}
