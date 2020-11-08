@@ -1,0 +1,40 @@
+{% extends "main/base.html" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md d-flex justify-content-center">
+                <p class="bg-info"
+                   style="border-radius: 10px; font-size: 30px; margin: 10px; padding: 10px 20px">{{ plant.name }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+                {% for compound in compounds %}
+                    <div class="card card-body row mb-3">
+
+                        <table class="table">
+                            <tr class="row">
+                                <td class="col-md" align="center"> <img src="{{ compound.ROMol }}" alt=""> </td>
+                                <td class="col-sm">
+                                    <table class="table-striped">
+                                        <tr>
+                                            <td><a href="{% url "compound"  compound.id %}">{{ compound.PID }}</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ compound.Molecular_Formula }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ compound.Smiles }}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
