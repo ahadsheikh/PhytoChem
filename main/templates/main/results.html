@@ -43,6 +43,11 @@ context = {
                         <div class="card-header bg-dark text-white">
                             <em>Phytochem ID:</em> {{ compound.PID }}
                         </div>
+                        <div>
+                            {% for plant in compound.plants.all %}
+                                <button class="btn-info m-1" style="border-radius: 10px">{{ plant.name }}</button>
+                            {% endfor %}
+                        </div>
                         <table class="table">
                             <tr class="row">
                                 <td class="col-sm" align="center"> {{ compound.ROMol|safe }} </td>
@@ -75,6 +80,10 @@ context = {
                                         <tr>
                                             <td>TPSA:</td>
                                             <td>{{ compound.TPSA|floatformat:3 }} Å²</td>
+                                        </tr>
+                                        <tr>
+                                            <td>logP:</td>
+                                            <td>{{ compound.logP|floatformat:3 }}</td>
                                         </tr>
                                     </table>
                                 </td>
