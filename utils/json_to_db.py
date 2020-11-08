@@ -25,6 +25,7 @@ def json_to_db(path):
             if not cur_compound:
                 # save the values in database
                 compound = Compound()
+                i += 1
                 compound.PID = 'Phytochem_{}'.format(str(data_len + i).zfill(6))
                 compound.Smiles = Smiles
                 compound.Molecular_Formula = Molecular_Formula
@@ -37,7 +38,6 @@ def json_to_db(path):
                 compound.ROMol = ROMol
                 compound.save()
                 cur_compound = [compound]
-                i += 1
             cur_compound = cur_compound[0]
             # create plants_object list for new plants of this compound
             plants_object = []
