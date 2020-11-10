@@ -59,6 +59,18 @@ def download_file(request):
     # make search term as is in the PID column of database
     if search.isnumeric():
         search = 'Phytochem_' + search.zfill(6)
+
+    # temporary path for storing download files
+    temppath = os.path.join(settings.MEDIA_ROOT, 'tempDownloadFiles/')
+
+    # Delete all old files
+    oldfiles = os.listdir(temppath)
+    for file in oldfiles:
+        try:
+            os.remove(temppath + file)
+        except FileNotFoundError:
+            pass
+
     # search in the database columns PID, Smiles and
     # Molecular_Formula
     compounds = Compound.objects.filter(Q(PID=search) |
@@ -67,13 +79,13 @@ def download_file(request):
     compounds_df = query_to_df(compounds)
 
     if filetype == 'sdf':
-        dw_file = os.path.join(settings.MEDIA_ROOT, 'tempDownloadFiles/' + search + '.sdf')
+        dw_file = os.path.join(temppath, search + '.sdf')
         df_to_sdf(compounds_df, dw_file)
     elif filetype == 'pdb':
-        dw_file = os.path.join(settings.MEDIA_ROOT, 'tempDownloadFiles/' + search + '.pdb')
+        dw_file = os.path.join(temppath, search + '.pdb')
         df_to_pdb(compounds_df, dw_file)
     elif filetype == 'mol':
-        dw_file = os.path.join(settings.MEDIA_ROOT, 'tempDownloadFiles/' + search + '.mol')
+        dw_file = os.path.join(temppath, search + '.mol')
         df_to_mol(compounds_df, dw_file)
     return prepare_download(dw_file)
 
