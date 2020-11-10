@@ -1,0 +1,98 @@
+{% extends "main/base.html" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md d-flex justify-content-center">
+                <p class="bg-info"
+                   style="border-radius: 10px; font-size: 30px; margin: 10px; padding: 10px 20px">{{ compound.Molecular_Formula }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card card-body row m-3">
+                <div class=" row card-header bg-dark text-white mb-2">
+                    <em>Phytochem ID:</em> {{ compound.PID }}
+                </div>
+                <div class="row mb-3">
+                    {% for plant in compound.plants.all %}
+                        <a class="bg-info p-2 m-1" href="{% url "plant" plant.id %}" style=
+                                "
+                                border-radius: 10px;
+                                color: #000000;
+                                ">{{ plant.name }}</a>
+                    {% endfor %}
+                </div>
+                <div class="row mb-3">
+                    <table class="table">
+                        <tr class="row">
+                            <td class="col-md" align="center">
+                                <img src="{{ compound.ROMol }}" alt="">
+                            </td>
+                            <td class="col-sm">
+                                <table class="table-striped">
+                                    <tr>
+                                        <td>Molecular Formula:</td>
+                                        <td>{{ compound.Molecular_Formula }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Canonical SMILES:</td>
+                                        <td>{{ compound.Smiles }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Molecular Weight:</td>
+                                        <td>{{ compound.Molecular_Weight|floatformat:3 }} g/mol</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hydrogen Bond Acceptor Count:</td>
+                                        <td>{{ compound.H_Bond_Acceptors }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hydrogen Bond Donor Count:</td>
+                                        <td>{{ compound.H_Bond_Donors }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Molar Refractivity:</td>
+                                        <td>{{ compound.Molar_Refractivity|floatformat:3 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TPSA:</td>
+                                        <td>{{ compound.TPSA|floatformat:3 }} Å²</td>
+                                    </tr>
+                                    <tr>
+                                        <td>logP:</td>
+                                        <td>{{ compound.logP|floatformat:3 }}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+                {% for compound in compounds %}
+                    <div class="card card-body row mb-3">
+
+                        <table class="table">
+                            <tr class="row">
+                                <td class="col-md" align="center"> {{ compound.ROMol|safe }} </td>
+                                <td class="col-sm">
+                                    <table class="table-striped">
+                                        <tr>
+                                            <td>{{ compound.Molecular_Formula }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ compound.Smiles }}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

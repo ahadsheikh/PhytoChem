@@ -4,7 +4,7 @@ from django.http import FileResponse
 
 import os
 import tempfile
-from main.models import Compound
+from main.models import Compound, Plant
 from utils.QueryHandler import query_to_df, df_to_sdf, df_to_pdb, df_to_mol
 
 
@@ -26,6 +26,29 @@ def results(request):
         'compounds': compounds
     }
     return render(request, 'main/results.html', context=context)
+
+
+def plant(request, id):
+    plant = Plant.objects.get(id=id)
+    compounds = plant.compound_set.all()
+    context = {
+        'title': 'Plant | Details',
+        'plant': plant,
+        'compounds': compounds
+    }
+    return render(request, 'main/plant.html', context=context)
+
+
+def compound(request, id):
+    compound = Compound.objects.get(id=id)
+    print(Compound)
+    plants = compound.plants.all()
+    context = {
+        'title': 'Compound | Details',
+        'compound': compound,
+        'plants': plants
+    }
+    return render(request, 'main/compound.html', context=context)
 
 
 def download_file(request):
