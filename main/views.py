@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Q
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponse, Http404
+from django.conf import settings
 
 import os
 import tempfile
@@ -51,31 +52,44 @@ def compound(request, id):
     return render(request, 'main/compound.html', context=context)
 
 
+# view for download a query results
 def download_file(request):
-    try:
-        search = request.GET['search']
-        filetype = request.GET['filetype']
-        # make search term as is in the PID column of database
-        if search.isnumeric():
-            search = 'Phytochem_' + search.zfill(6)
-        # search in the database columns PID, Smiles and
-        # Molecular_Formula
-        compounds = Compound.objects.filter(Q(PID=search) |
-                                            Q(Smiles=search) |
-                                            Q(Molecular_Formula=search))
-        compounds_df = query_to_df(compounds)
+    search = request.GET['search']
+    filetype = request.GET['filetype']
+    # make search term as is in the PID column of database
+    if search.isnumeric():
+        search = 'Phytochem_' + search.zfill(6)
+    # search in the database columns PID, Smiles and
+    # Molecular_Formula
+    compounds = Compound.objects.filter(Q(PID=search) |
+                                        Q(Smiles=search) |
+                                        Q(Molecular_Formula=search))
+    compounds_df = query_to_df(compounds)
 
-        # create a file based on file extension
-        tmp = tempfile.NamedTemporaryFile(suffix=".{}".format(filetype),
-                                          prefix="pc_{}_".format(search),
-                                          delete=False)
-        if filetype == 'sdf':
-            df_to_sdf(compounds_df, tmp.name)
-        elif filetype == 'pdb':
-            df_to_pdb(compounds_df, tmp.name)
-        elif filetype == 'mol':
-            df_to_mol(compounds_df, tmp.name)
-        response = FileResponse(open(tmp.name, 'rb'))
-        return response
-    finally:
-        os.remove(tmp.name)
+    if filetype == 'sdf':
+        dw_file = os.path.join(settings.MEDIA_ROOT, 'tempDownloadFiles/' + search + '.sdf')
+        df_to_sdf(compounds_df, dw_file)
+    elif filetype == 'pdb':
+        dw_file = os.path.join(settings.MEDIA_ROOT, 'tempDownloadFiles/' + search + '.pdb')
+        df_to_pdb(compounds_df, dw_file)
+    elif filetype == 'mol':
+        dw_file = os.path.join(settings.MEDIA_ROOT, 'tempDownloadFiles/' + search + '.mol')
+        df_to_mol(compounds_df, dw_file)
+    return prepare_download(dw_file)
+
+
+# View for downloading all file
+def download_all_file(request):
+    name = 'all_data.sdf'
+    file_path = os.path.join(settings.MEDIA_ROOT, name)
+    return prepare_download(file_path)
+
+
+# not view
+def prepare_download(path):
+    if os.path.exists(path):
+        with open(path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type='application/octet-stream')
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(path)
+            return response
+    raise Http404
