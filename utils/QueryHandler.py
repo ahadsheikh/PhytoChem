@@ -39,3 +39,48 @@ def update_sdf():
     PandasTools.AddMoleculeColumnToFrame(compounds_df, 'Smiles', 'ROMol', includeFingerprints=True)
     df_to_sdf(compounds_df, 'media/all_data.sdf')
 
+
+def handle_new_sdf(path):
+    sdf = Chem.SDMolSupplier(path)  # read sdf
+    compounds_df = pd.DataFrame(
+        columns=['Smiles', 'Molecular_Formula', 'Molecular_Weight', 'H_Bond_Acceptors',
+                 'H_Bond_Donors', 'Molar_Refractivity', 'TPSA', 'logP'])
+    for mol in sdf:
+        smiles = Chem.MolToSmiles(mol)  # get smiles
+        if not Compound.objects.filter(Smiles=smiles):
+            molecular_formula = Chem.rdMolDescriptors.CalcMolFormula(mol)  # formula
+            molecular_weight = Chem.rdMolDescriptors.CalcExactMolWt(mol)  # weight
+            hba = Chem.rdMolDescriptors.CalcNumHBA(mol)  # h bond acceptor
+            hbd = Chem.rdMolDescriptors.CalcNumHBD(mol)  # h bond donor
+            molar_refractivity = Chem.Crippen.MolMR(mol)  # molar refractivity
+            tpsa = Chem.rdMolDescriptors.CalcTPSA(mol)  # tpsa
+            logp = Chem.Crippen.MolLogP(mol)
+            compounds_df = compounds_df.append({  # write this row to dataframe
+                'Smiles': smiles,
+                'Molecular_Formula': molecular_formula,
+                'Molecular_Weight': molecular_weight,
+                'H_Bond_Acceptors': hba,
+                'H_Bond_Donors': hbd,
+                'Molar_Refractivity': molar_refractivity,
+                'TPSA': tpsa,
+                'logP': logp
+            }, ignore_index=True)
+    PandasTools.AddMoleculeColumnToFrame(compounds_df, 'Smiles', 'ROMol', includeFingerprints=True)
+    compounds_df.drop_duplicates(subset="Smiles", keep=False, inplace=True)  # drop duplicate by smiles
+    compound_len = Compound.objects.all().count()  # get current compounds in database
+    counter = 0
+    for i, compound in compounds_df.iterrows():
+        counter += 1
+        Compound.objects.create(
+            PID='Phytochem_' + str(compound_len + counter).zfill(6),
+            Smiles=compound.Smiles,
+            Molecular_Formula=compound.Molecular_Formula,
+            Molecular_Weight=compound.Molecular_Weight,
+            H_Bond_Acceptors=compound.H_Bond_Acceptors,
+            H_Bond_Donors=compound.H_Bond_Donors,
+            Molar_Refractivity=compound.Molar_Refractivity,
+            TPSA=compound.TPSA,
+            logP=compound.logP,
+            ROMol=compound.ROMol
+        )
+    update_sdf()
