@@ -21,18 +21,18 @@ def upload(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            handle_file(request.FILES['file'])
+            handle_file(request.FILES['file'], request.POST['plant'])
             messages.success(request, "Upload File Successfully")
             return redirect('dashboard')
 
-    messages.success(request, "Upload File Not Successfully")
+    messages.success(request, "File Upload Failed")
     return HttpResponse(
-        "<h2>You are not permitted.</h2>"
+        "<h2>You are not permitted to view this page.</h2>"
     )
 
 
 # Not path view
-def handle_file(f):
+def handle_file(f, plant=None):
     filename = f.__str__()
 
     if not os.path.isdir('media/upload'):
@@ -43,6 +43,6 @@ def handle_file(f):
             des.write(chunk)
     try:
         sdf_file = 'media/upload/' + filename
-        handle_new_sdf(sdf_file)
+        handle_new_sdf(sdf_file, plant)
     finally:
         os.remove('media/upload/' + filename)
