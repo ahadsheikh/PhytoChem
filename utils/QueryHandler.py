@@ -1,7 +1,7 @@
 import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import PandasTools
-from main.models import Compound
+from main.models import Compound, Plant
 
 
 def query_to_df(queryset):
@@ -40,7 +40,33 @@ def update_sdf():
     df_to_sdf(compounds_df, 'media/all_data.sdf')
 
 
-def handle_new_sdf(path):
+def update_db_from_df(compounds_df, plant=None):
+    compound_len = Compound.objects.all().count()  # get current compounds in database
+    counter = 0
+
+    for i, compound in compounds_df.iterrows():
+        counter += 1
+        cur_compound = Compound.objects.create(
+            PID='Phytochem_' + str(compound_len + counter).zfill(6),
+            Smiles=compound.Smiles,
+            Molecular_Formula=compound.Molecular_Formula,
+            Molecular_Weight=compound.Molecular_Weight,
+            H_Bond_Acceptors=compound.H_Bond_Acceptors,
+            H_Bond_Donors=compound.H_Bond_Donors,
+            Molar_Refractivity=compound.Molar_Refractivity,
+            TPSA=compound.TPSA,
+            logP=compound.logP,
+            ROMol=compound.ROMol
+        )
+        if plant:
+            try:
+                plant = Plant.objects.get(name=plant)
+            except Plant.DoesNotExist:
+                plant = Plant.objects.create(name=plant)
+            cur_compound.plants.add(plant)
+
+
+def handle_new_sdf(path, plant=None):
     sdf = Chem.SDMolSupplier(path)  # read sdf
     compounds_df = pd.DataFrame(
         columns=['Smiles', 'Molecular_Formula', 'Molecular_Weight', 'H_Bond_Acceptors',
@@ -67,20 +93,5 @@ def handle_new_sdf(path):
             }, ignore_index=True)
     PandasTools.AddMoleculeColumnToFrame(compounds_df, 'Smiles', 'ROMol', includeFingerprints=True)
     compounds_df.drop_duplicates(subset="Smiles", keep=False, inplace=True)  # drop duplicate by smiles
-    compound_len = Compound.objects.all().count()  # get current compounds in database
-    counter = 0
-    for i, compound in compounds_df.iterrows():
-        counter += 1
-        Compound.objects.create(
-            PID='Phytochem_' + str(compound_len + counter).zfill(6),
-            Smiles=compound.Smiles,
-            Molecular_Formula=compound.Molecular_Formula,
-            Molecular_Weight=compound.Molecular_Weight,
-            H_Bond_Acceptors=compound.H_Bond_Acceptors,
-            H_Bond_Donors=compound.H_Bond_Donors,
-            Molar_Refractivity=compound.Molar_Refractivity,
-            TPSA=compound.TPSA,
-            logP=compound.logP,
-            ROMol=compound.ROMol
-        )
+    update_db_from_df(compounds_df, plant)
     update_sdf()
