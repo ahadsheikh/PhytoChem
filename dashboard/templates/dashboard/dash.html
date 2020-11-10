@@ -13,10 +13,14 @@
         <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
+                <label for="plant">Plant name:</label>
+                <input type="text" name="plant">
+            </div>
+            <div class="row">
                 <input type="file" name="file">
             </div>
             <div class="row">
-                <button type="submit">Up</button>
+                <button type="submit">Upload</button>
             </div>
         </form>
     </div>
