@@ -39,18 +39,13 @@ def json_to_db(path):
                 compound.save()
                 cur_compound = [compound]
             cur_compound = cur_compound[0]
-            # create plants_object list for new plants of this compound
-            plants_object = []
             for plant in plants:
                 try:
                     # if this plant already exists, just append to the plants_object list
-                    current_plant = Plant.objects.get(name=plant)
-                    plants_object.append(current_plant)
+                    plant = Plant.objects.get(name=plant)
                 except Plant.DoesNotExist:
-                    current_plant = Plant.objects.create(name=plant)
-                    plants_object.append(current_plant)
-            # add all the plants_object
-            cur_compound.plants.add(*plants_object)
+                    plant = Plant.objects.create(name=plant)
+                cur_compound.plants.add(plant)
 
             if i % 100 == 0:
                 print('{} data processed'.format(i))
