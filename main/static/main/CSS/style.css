@@ -1,36 +1,25 @@
-{% extends "main/base.html" %}
-
-.nav_area .main_menu .navbar .navbar-band{
-    padding: 0 2rem 0 5rem;
+.nav-link{
+   font-family: Roboto,cursive;
+   font-weight: 500;
+   text-transform: uppercase;
+   padding: 1rem;
+   color: black;
 }
 
-.nav_area .main_menu .navbar{
-    padding: .75rem 8rem;
-    background-color: #F5F5F5;
+active a{
+   background-color: #65BF02;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
 }
-.nav_area .main_menu .nav-item .nav-link{
-    font-family: Roboto,cursive;
-    font-weight: 500;
-    text-transform: uppercase;
-    padding: 1rem;
-    color: black;
+a:hover{
+   background-color: #65BF02;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
 }
 
-.nav_area .main_menu .navbar-nav active a{
-    background-color: #65BF02;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-.nav_area .main_menu .navbar-nav a:hover{
-    background-color: #65BF02;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-/*header Area or Nav area has Finished*/
-
-.site-main .site-banner .site-title h3{
+.site-main .site-banner .site-title h3 {
     padding-top: 40%;
     padding-left: 10%;
     font-size: 2.5rem;
@@ -39,7 +28,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.site-main .site-banner .site-title h2{
+.site-main .site-banner .site-title h2 {
     padding-top: 5%;
     padding-bottom: 10%;
     padding-left: 10%;
@@ -48,72 +37,91 @@
     color: #9F9F9F;
     font-family: Arial, Helvetica, sans-serif;
 }
-.site-main .site-banner .site-title span{
+
+.navbar, .site-main .site-banner .site-title span {
     color: black;
     font-family: Ubuntu, sans-serif;
 }
 
+
+
+/*
+    result edit
+
+*/
+.input-group-append .submit {
+    cursor: pointer;
+    border:none;
+    background: url("../images/Search-icon.png") no-repeat center center, #1E1E20;
+    padding: 0 40px;
+    height: 38px;
+    background-size: 30% 50%;
+    border-radius: 0 20px 20px 0;
+
+}
+
 /* From Here I write code for box*/
 
-.site-main .site-banner .row .site-search-btn
-{
+.site-main .site-banner .row .site-search-btn {
     padding-top: 12%;
 }
-/* ----------------Result HTML-------------*/
-.container .box-search-in-result .search {
-	padding: 0 32px;
-	font-size: 16px;
-	width: 60%;
-	max-width: 700px;
-	height: 54px;
-	border: 1px solid darken(white, 30%);
-	border-radius: 20px 0 0 20px;
-}
-{% load static %}
 
-.container .box-search-in-result .submit {
-	cursor: pointer;
-	border: none;
-    background:  url("../images/Search-icon.png") no-repeat center center, #1E1E20;
-	background-size: 25px 25px;
-	border-radius: 0 30px 30px 0;
-	padding: 15px 25px;
-	display: inline-block;
-    width: 20%;
-}
-.container .row-in-result
-{
-    padding-top: 1.5%;
-    padding-left:15%;
-}
-/*---------------------------Result HTML END------------------------------*/
-.box-search{
+.box-search {
     padding-left: 10%;
     padding-top: 22%;
     transition: 0.5s;
 }
+
 .search {
-	padding: 0 32px;
-	font-size: 16px;
-	width: 60%;
-	max-width: 400px;
-	height: 54px;
-	border: 1px solid darken(white, 30%);
-	border-radius: 20px 0 0 20px;
+    padding: 0 32px;
+    font-size: 16px;
+    width: 60%;
+    max-width: 400px;
+    height: 54px;
+    border: 2px solid black;
+    border-radius: 20px 0 0 20px;
+    outline: none;
 }
 
 .submit {
-	cursor: pointer;
-	border: none;
-	background:  url("../images/Search-icon.png") no-repeat center center, #1E1E20;
-	border-radius: 0 20px 20px 0;
-	padding: 15px 25px;
+    cursor: pointer;
+    border:none;
+    background: url("../images/Search-icon.png") no-repeat center center, #1E1E20;
+    padding: 0px 40px;
+    height: 54px;
+    border-radius: 0 20px 20px 0;
+    outline: none;
 }
-.search:hover {
-    background-color:#F8F8F8;
 
+.search:hover {
+    background-color: #F8F8F8;
+    border: none;
 }
+
 .submit:hover {
     background-color: black;
     cursor: pointer;
+}
+
+/*                                          Media Query                        */
+@media screen and (max-width: 700px) {
+
+   .site-main .site-banner .site-title h3{
+       padding-top: 40%;
+       padding-left: 10%;
+       font-size: 1.75rem;
+       font-weight: bold;
+       color: #9F9F9F;
+       font-family: Arial, Helvetica, sans-serif;
+   }
+
+   .site-main .site-banner .site-title h2{
+           padding-top: 5%;
+           padding-bottom: 10%;
+           padding-left: 10%;
+           font-size: 1.75rem;
+           font-weight: bold;
+           color: #9F9F9F;
+           font-family: Arial, Helvetica, sans-serif;
+       }
 }
