@@ -22,7 +22,7 @@
                 <h3>Showing {{ compounds|length }} result(s) matching your query</h3>
                 <form method="get" action="{% url 'download_all_results' %}">
                     <input type="hidden" name="search" value="{{ request.GET.search }}"/>
-                    <label for="filetype">Download as</label>
+                    <label for="filetype">Download search results as</label>
                     <select id="filetype" name="filetype">
                         <option value="sdf">SDF</option>
                         <option value="pdb">PDB</option>
