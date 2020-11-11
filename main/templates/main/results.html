@@ -1,12 +1,6 @@
 {% extends "main/base.html" %}
 
-{% comment %}
-context = {
-    title: Title of this page,
-    compounds: Query result of Compound data, it's Compound List
-}
-{% endcomment %}
-
+{% block title %}Search result for {{ request.GET.search }} | Phytochem Database{% endblock %}
 {% block body %}
     <div class="container">
         <div class="row d-flex justify-content-center mt-3">

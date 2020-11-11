@@ -5,11 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        {% if title %}
-            {{ title }}
-        {% else %}
-            Welcome | Home
-        {% endif %}
+        {% block title %}
+        {% endblock %}
     </title>
     <!--Some Font Added-->
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat&family=Staatliches:ital,wght@0,600;0,700;1,600&display=swap"
@@ -18,7 +15,7 @@
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
 
-    <!--bootstarp file added-->
+    <!--bootstrap file added-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -27,7 +24,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="/"><img class="logo-image" src="{% static '/main/images/logoblack.png' %}"
                                               alt="Logo"></a>
@@ -48,46 +45,6 @@
         </div>
     </div>
 </nav>
-{#<header class="container-xl nav_area">#}
-{#    <div class="main_menu">#}
-{#        <nav class="navbar navbar-expand-lg navbar-light shadow-sm">#}
-{##}
-{#            <a href="/">#}
-
-{#            </a>#}
-{#            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"#}
-{#                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
-{#                <span class="navbar-toggler-icon"></span>#}
-{#            </button>#}
-{##}
-{#            <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
-{#                <div class="mr-auto"></div>#}
-{#                <ul class="navbar-nav mr-auto">#}
-{#                    <li class="nav-item active">#}
-{#                        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>#}
-{#                    </li>#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="#">About</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item dropdown">#}
-{#                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"#}
-{#                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-{#                            LINKS#}
-{#                        </a>#}
-{#                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
-{#                            <a class="dropdown-item" href="#">BLOG</a>#}
-{#                            <div class="dropdown-divider"></div>#}
-{#                            <a class="dropdown-item" href="#">SOCIAL MEDIA</a>#}
-{#                        </div>#}
-{#                    </li>#}
-{#                </ul>#}
-{#            </div>#}
-{#        </nav>#}
-{#    </div>#}
-{#</header>#}
 <!--header Area or Nav area has Finished-->
 <br>
 
