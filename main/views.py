@@ -10,7 +10,8 @@ from utils.QueryHandler import query_to_df, df_to_sdf, df_to_pdb, df_to_mol
 
 def index(request):
     context = {
-        'n_elements': Compound.objects.all().count()
+        'n_compounds': Compound.objects.all().count(),
+        'n_plants': Plant.objects.all().count()
     }
     return render(request, 'main/index.html', context=context)
 
@@ -34,7 +35,6 @@ def plant(request, id):
     plant = Plant.objects.get(id=id)
     compounds = plant.compound_set.all()
     context = {
-        'title': 'Plant | Details',
         'plant': plant,
         'compounds': compounds
     }
