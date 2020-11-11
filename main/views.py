@@ -21,8 +21,8 @@ def results(request):
     if len(search) != 0:
         if search.isnumeric():
             search = 'Phytochem_' + search.zfill(6)
-        compounds = Compound.objects.filter(Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search))
-        # print(search, compounds)
+        compounds = Compound.objects.filter(Q(PID=search) |
+                                            Q(Smiles=search) | Q(Molecular_Formula=search))
         context = {
             'title': 'Search results',
             'compounds': compounds
@@ -43,11 +43,20 @@ def plant(request, id):
 
 def compound(request, id):
     compound = Compound.objects.get(id=id)
-    print(Compound)
+    lipinski = 0
+    if compound.H_Bond_Donors > 5:
+        lipinski += 1
+    if compound.H_Bond_Acceptors > 10:
+        lipinski += 1
+    if compound.Molecular_Weight >= 500:
+        lipinski += 1
+    if compound.logP > 5:
+        lipinski += 1
     plants = compound.plants.all()
     context = {
         'compound': compound,
-        'plants': plants
+        'plants': plants,
+        'lipinski': lipinski
     }
     return render(request, 'main/compound.html', context=context)
 
