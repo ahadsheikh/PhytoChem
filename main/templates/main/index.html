@@ -1,29 +1,33 @@
 {% extends "main/base.html" %}
 {% load static %}
 
+{% block title %}Home | Phytochem Database{% endblock %}
 {% block body %}
     <main class="site-main">
-      <section class="site-banner">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6 col-md-12 site-title">
-              <h3 class="title-text text-uppercase">Find Your Desire</h3>
-              <h2 class="PhytoChemical text-uppercase"><span class="phytochemical-span">PhytoChemical</span> data</h2>
+        <section class="site-banner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 site-title">
+                        <h3 class="title-text text-uppercase">Find among {{ n_elements }}</h3>
+                        <h2 class="Phytochemical text-uppercase"><span class="phytochemical-span">PhytoChemical</span>
+                            data</h2>
+                        <h4 class="">Search the database by a unique accession id, e.g., Phytochem_000001 or just 1,
+                            by a molecular formula or its canonical SMILES</h4>
+                        <h4 class="text-muted">You can download all data as a sdf file <a href="{% url "all-file-download" %}">here</a></h4>
+                    </div>
+                    <div class="col-lg-6 col-md-12 site-search-btn">
+                        <div class="box-search">
+                            <form action="{% url 'results' %}" method="get">
+                                <div class="wrapper">
+                                    <input class="search shadow-lg" name="search" value="{{ request.GET.search }}"
+                                           type="text" id="search" placeholder="Search Element E.x: C28H56"/>
+                                    <input class="submit shadow-lg" type="submit" value=" "/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-lg-6 col-md-12 site-search-btn">
-              <div class="box-search">
-                  <form action="{% url 'results' %}" method="get">
-                      <div class="wrapper">
-                        <input class="search shadow-lg" name="search" value="{{ request.GET.search }}" type="text" id="search" placeholder="Search Element E.x: CO" />
-                        <input class="submit shadow-lg" type="submit" value=" "/>
-                      </div>
-                  </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
     </main>
-
 {% endblock %}
