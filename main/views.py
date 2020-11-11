@@ -4,14 +4,13 @@ from django.http import FileResponse, HttpResponse, Http404
 from django.conf import settings
 
 import os
-import tempfile
 from main.models import Compound, Plant
 from utils.QueryHandler import query_to_df, df_to_sdf, df_to_pdb, df_to_mol
 
 
 def index(request):
     context = {
-        'title': "Home"
+        'n_elements': Compound.objects.all().count()
     }
     return render(request, 'main/index.html', context=context)
 
@@ -47,7 +46,6 @@ def compound(request, id):
     print(Compound)
     plants = compound.plants.all()
     context = {
-        'title': 'Compound | Details',
         'compound': compound,
         'plants': plants
     }
@@ -65,13 +63,11 @@ def download_file(request):
     # temporary path for storing download files
     temppath = os.path.join(settings.MEDIA_ROOT, 'tempDownloadFiles/')
 
-    # Delete all old files
-    oldfiles = os.listdir(temppath)
-    for file in oldfiles:
-        try:
-            os.remove(temppath + file)
-        except FileNotFoundError:
-            pass
+    try:
+        os.removedirs(temppath)
+        os.makedirs(temppath, exist_ok=True)
+    except FileNotFoundError:
+        os.makedirs(temppath, exist_ok=True)
 
     # search in the database columns PID, Smiles and
     # Molecular_Formula

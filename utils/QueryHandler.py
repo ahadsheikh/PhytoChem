@@ -1,7 +1,8 @@
 import pandas as pd
 from rdkit import Chem
-from rdkit.Chem import PandasTools
+from rdkit.Chem import PandasTools, Crippen
 from main.models import Compound, Plant
+from bs4 import BeautifulSoup
 
 
 def query_to_df(queryset):
@@ -34,8 +35,13 @@ def df_to_mol(compounds_df, file):
             fi.write(molblock)
 
 
+def get_src_from_image_tag(html):
+    soup = BeautifulSoup(html, "html.parser")
+    return soup.img['src']
+
+
 def update_sdf():
-    compounds_df = pd.DataFrame(list(Compound.objects.all().values())).drop('id', axis=1)
+    compounds_df = pd.DataFrame(list(Compound.objects.all().values())).drop(['id', 'created_at', 'updated_at'], axis=1)
     PandasTools.AddMoleculeColumnToFrame(compounds_df, 'Smiles', 'ROMol', includeFingerprints=True)
     df_to_sdf(compounds_df, 'media/all_data.sdf')
 
@@ -56,7 +62,7 @@ def update_db_from_df(compounds_df, plant=None):
             Molar_Refractivity=compound.Molar_Refractivity,
             TPSA=compound.TPSA,
             logP=compound.logP,
-            ROMol=compound.ROMol
+            ROMol=get_src_from_image_tag(str(compound.ROMol))
         )
         if plant:
             try:
