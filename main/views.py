@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.http import FileResponse, HttpResponse, Http404
 from django.conf import settings
@@ -18,15 +18,17 @@ def index(request):
 
 def results(request):
     search = request.GET['search']
-    if search.isnumeric():
-        search = 'Phytochem_' + search.zfill(6)
-    compounds = Compound.objects.filter(Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search))
-    # print(search, compounds)
-    context = {
-        'title': 'Search results',
-        'compounds': compounds
-    }
-    return render(request, 'main/results.html', context=context)
+    if len(search) != 0:
+        if search.isnumeric():
+            search = 'Phytochem_' + search.zfill(6)
+        compounds = Compound.objects.filter(Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search))
+        # print(search, compounds)
+        context = {
+            'title': 'Search results',
+            'compounds': compounds
+        }
+        return render(request, 'main/results.html', context=context)
+    return redirect('/')
 
 
 def plant(request, id):
