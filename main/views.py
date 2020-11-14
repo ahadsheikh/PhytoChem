@@ -10,7 +10,8 @@ from utils.QueryHandler import query_to_df, df_to_sdf, df_to_pdb, df_to_mol
 
 def index(request):
     context = {
-        'n_elements': Compound.objects.all().count()
+        'n_compounds': Compound.objects.all().count(),
+        'n_plants': Plant.objects.all().count()
     }
     return render(request, 'main/index.html', context=context)
 
@@ -20,8 +21,8 @@ def results(request):
     if len(search) != 0:
         if search.isnumeric():
             search = 'Phytochem_' + search.zfill(6)
-        compounds = Compound.objects.filter(Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search))
-        # print(search, compounds)
+        compounds = Compound.objects.filter(Q(PID=search) |
+                                            Q(Smiles=search) | Q(Molecular_Formula=search))
         context = {
             'title': 'Search results',
             'compounds': compounds
@@ -34,7 +35,6 @@ def plant(request, id):
     plant = Plant.objects.get(id=id)
     compounds = plant.compound_set.all()
     context = {
-        'title': 'Plant | Details',
         'plant': plant,
         'compounds': compounds
     }
@@ -43,11 +43,20 @@ def plant(request, id):
 
 def compound(request, id):
     compound = Compound.objects.get(id=id)
-    print(Compound)
+    lipinski = 0
+    if compound.H_Bond_Donors > 5:
+        lipinski += 1
+    if compound.H_Bond_Acceptors > 10:
+        lipinski += 1
+    if compound.Molecular_Weight >= 500:
+        lipinski += 1
+    if compound.logP > 5:
+        lipinski += 1
     plants = compound.plants.all()
     context = {
         'compound': compound,
-        'plants': plants
+        'plants': plants,
+        'lipinski': lipinski
     }
     return render(request, 'main/compound.html', context=context)
 

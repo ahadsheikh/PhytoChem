@@ -60,8 +60,18 @@
                                         <td>{{ compound.TPSA|floatformat:3 }} Å²</td>
                                     </tr>
                                     <tr>
-                                        <td>logP:</td>
+                                        <td>WlogP:</td>
                                         <td>{{ compound.logP|floatformat:3 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lipinski:</td>
+                                        <td>
+                                            {% if lipinski < 2 %}
+                                                Yes, {{ lipinski }} violation
+                                            {% else %}
+                                                No, {{ lipinski }} violations
+                                            {% endif %}
+                                        </td>
                                     </tr>
                                 </table>
                             </td>
