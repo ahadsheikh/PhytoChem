@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'dashboard.apps.DashboardConfig',
     'userauth.apps.UserauthConfig',
+    'submit_data.apps.SubmitDataConfig',
 ]
 
 MIDDLEWARE = [
