@@ -12,16 +12,17 @@
 
         <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="row">
-                <label for="plant">Plant name:</label>
-                <input type="text" name="plant">
+            <div class="form-group">
+                <label for="plantText" class="text-success font-weight-bold">Plant</label>
+                <input type="text" class="form-control" id="plantText" name="plant" aria-describedby="plantHelp" placeholder="Enter Plant Name">
+                <small id="plantHelp" class="form-text text-muted">If the compounds from a specific plant then put plant name.</small>
             </div>
-            <div class="row">
-                <input type="file" name="file">
+            <div class="form-group">
+                <label for="sdfFile" class="text-success font-weight-bold">Compound file input(sdf format)</label>
+                <input type="file" class="form-control-file" id="sdfFile" name="file">
             </div>
-            <div class="row">
-                <button type="submit">Upload</button>
-            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
         </form>
+
     </div>
 {% endblock %}
