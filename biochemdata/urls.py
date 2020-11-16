@@ -21,6 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('dashboard/', include('dashboard.urls')),
-
+    path('submit-data/', include('submit_data.urls')),
     path('about/', TemplateView.as_view(template_name="main/about.html"), name='about')
 ]
