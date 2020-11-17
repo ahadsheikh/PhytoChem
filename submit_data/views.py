@@ -1,4 +1,9 @@
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import redirect
+
+from submit_data.forms import ContributorForm
 
 
 def index(request):
@@ -6,15 +11,15 @@ def index(request):
 
 
 def upload(request):
-    pass
-    # if request.method == 'POST':
-    #     form = UploadFileForm(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         handle_file(request.FILES['file'], request.POST['plant'])
-    #         messages.success(request, "Upload File Successfully")
-    #         return redirect('dashboard')
-    #
-    # messages.success(request, "File Upload Failed")
-    # return HttpResponse(
-    #     "<h2>You are not permitted to view this page.</h2>"
-    # )
+    if request.method == 'POST':
+        form = ContributorForm(request.POST, request.FILES)
+        if form.is_valid():
+            messages.success(request, "Upload File Successfully")
+            form.save()
+        else:
+            messages.success(request, "File Upload Failed")
+        return redirect('submit_data')
+
+    return HttpResponse(
+        "<h2>You are not permitted to view this page.</h2>"
+    )
