@@ -13,7 +13,7 @@ class Contributor(models.Model):
         return self.name
 
 
-class ContibutorDatabase(models.Model):
+class ContributorDatabase(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)
 
