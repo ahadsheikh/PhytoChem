@@ -29,8 +29,16 @@
                 <h3>Review Contributor Data</h3>
             </div>
             {% for con in contributors %}
-                <div class="row p-2 bg-info d-flex align-content-center">
-                    <strong>{{ con.name }}</strong>
+                <div class="row p-2 bg-success d-flex" style="border-radius: 10px">
+                    <div class="col-md-9">
+                        <strong>{{ con.name }}</strong>
+                    </div>
+                    <div class="col-md-1 mx-1">
+                        <button class="btn btn-danger">Download</button>
+                    </div>
+                    <div class="col-md-1 mx-1">
+                        <button class="btn btn-danger">Accept</button>
+                    </div>
                 </div>
             {% endfor %}
         </div>
