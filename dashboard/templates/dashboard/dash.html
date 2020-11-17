@@ -10,12 +10,12 @@
             {% endfor %}
         {% endif %}
 
-        <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'dash_upload' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
                 <label for="plantText" class="text-success font-weight-bold">Plant</label>
                 <input type="text" class="form-control" id="plantText" name="plant" aria-describedby="plantHelp" placeholder="Enter Plant Name">
-                <small id="plantHelp" class="form-text text-muted">If the compounds from a specific plant then put plant name.</small>
+                <small id="plantHelp" class="form-text text-muted">If the compounds from a specific plant then put plant name or left it blank.</small>
             </div>
             <div class="form-group">
                 <label for="sdfFile" class="text-success font-weight-bold">Compound file input(sdf format)</label>

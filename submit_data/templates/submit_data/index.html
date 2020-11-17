@@ -3,5 +3,40 @@
 
 {% block title %}Submit Data | Phytochem Database{% endblock %}
 {% block body %}
-    <h2>Submit Data to Phytochem Database</h2>
+    <div class="container">
+        <h3>Upload Your File</h3>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form action="{% url 'user_upload' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="inputName" class="text-success font-weight-bold">Name</label>
+                <input type="text" class="form-control" id="inputName"  name="name" placeholder="Enter Name">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="text-success font-weight-bold">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="plantText" class="text-success font-weight-bold">Plant Name</label>
+                <input type="text" class="form-control" id="plantText" name="plant" aria-describedby="plantHelp" placeholder="Enter Plant Name">
+                <small id="plantHelp" class="form-text text-muted">If the compounds from a specific plant then put plant name or left it blank.</small>
+            </div>
+            <div class="form-group">
+                <label for="sdfFile" class="text-success font-weight-bold">Compound file input(sdf format)</label>
+                <input type="file" class="form-control-file" id="sdfFile" name="file">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
 {% endblock %}
