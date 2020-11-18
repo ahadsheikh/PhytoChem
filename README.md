@@ -13,3 +13,5 @@ it-
 conda env create -f environment.yml
 conda activate PhytoChem
 ```
+
+Can be used with `heroku` with this buildpack: [https://github.com/pl31/heroku-buildpack-conda](https://github.com/pl31/heroku-buildpack-conda), but our project is too large after compression, so bad luck :(
