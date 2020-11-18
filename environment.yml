@@ -8,3 +8,4 @@ dependencies:
   - rdkit=2020.09.1.0
   - pip:
     - django==3.1.2
+    - beautifulsoup4==4.9.3
