@@ -22,5 +22,9 @@ urlpatterns = [
     path('', include('main.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('submit-data/', include('submit_data.urls')),
-    path('about/', TemplateView.as_view(template_name="main/about.html"), name='about')
+    path('about/', TemplateView.as_view(template_name="main/about.html"), name='about'),
+
+    # Auth System
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('userauth/', include('userauth.urls'))
 ]
