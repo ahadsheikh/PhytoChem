@@ -20,11 +20,9 @@
             <p>Hey, you can't access the page</p>
         {% endif %}
 
-        <form action="{% url 'login' %}" method="post">
+        <form method="post">
             {% csrf_token %}
-            <p>Username: {{ form.username }}</p>
-            <p>Password: {{ form.password }}</p>
-
+            {{ form.as_p }}
             <input type="submit" value="Login">
             <input type="hidden" name="next" value="{{ next }}">
         </form>
