@@ -49,6 +49,12 @@
                 {% endif %}
                 {% if user.is_authenticated %}
                     <li class="nav-item">
+                        <a class="nav-link" style="border: #65BF02 1px solid;
+                                                   font-size: 15px;
+                                                   border-radius: 10px"
+                           href="{% url 'profile' %}">{{ user }}</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                     </li>
                 {% else %}

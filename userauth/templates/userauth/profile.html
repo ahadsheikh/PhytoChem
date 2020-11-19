@@ -2,7 +2,16 @@
 
 {% block body %}
     <div class="container">
-        Profile
-        <h2>{{ request.user }}</h2>
+        <div class="bg-info font-weight-bold p-3">Profile Information</div>
+        <div>
+            <strong>Username: </strong>{{ user.username }} <br>
+            <strong>Email: </strong>{{ user.email }} <br>
+            <strong>First Name: </strong>{{ user.first_name }} <br>
+            <strong>Last Name: </strong>{{ user.last_name }} <br>
+            <strong>About: </strong>{{ user.profile.about }} <br>
+        </div>
+        <div class="mt-3">
+            <a href="{% url 'profile_edit' %}">Edit Profile</a>
+        </div>
     </div>
 {% endblock %}
