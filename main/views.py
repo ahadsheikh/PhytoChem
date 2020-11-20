@@ -72,10 +72,14 @@ def download_file(request):
     # temporary path for storing download files
     temppath = os.path.join(settings.MEDIA_ROOT, 'tempDownloadFiles/')
 
-    try:
-        os.removedirs(temppath)
-        os.makedirs(temppath, exist_ok=True)
-    except FileNotFoundError:
+    if os.path.isdir(temppath):
+        oldfiles = os.listdir(temppath)
+        for file in oldfiles:
+            try:
+                os.remove(temppath + file)
+            except FileNotFoundError:
+                pass
+    else:
         os.makedirs(temppath, exist_ok=True)
 
     # search in the database columns PID, Smiles and
