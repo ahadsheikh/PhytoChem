@@ -4,8 +4,34 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from userauth.forms import UserForm, UserUpdateForm, ProfileUpdateForm
+from userauth.forms import UserForm, UserUpdateForm, ProfileUpdateForm, LoginUsernameForm, LoginEmailForm
 from .models import Profile
+
+
+def login_page(request):
+    if request.method == 'POST':
+        uform = LoginUsernameForm(request.POST)
+        eform = LoginEmailForm(request.POST)
+        if eform.is_valid():
+            email = eform.cleaned_data['uname']
+            password = eform.cleaned_data['password']
+            user = User.objects.get(email=email)
+            if authenticate(user, password):
+                login(request, user)
+        elif uform:
+            username = uform.cleaned_data['uname']
+            password = uform.cleaned_data['password']
+            user = User.objects.get(username=username)
+            if authenticate(user, password):
+                login(request, user)
+        else:
+            pass
+    context = {
+        'title': 'Login',
+        'next': ''
+    }
+
+    return render(request, 'userauth/login.html', context=context)
 
 
 def register(request):

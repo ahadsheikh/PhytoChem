@@ -27,3 +27,13 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['about']
+
+
+class LoginUsernameForm(forms.Form):
+    uname = forms.CharField(max_length=100)
+    password = forms.PasswordInput()
+
+
+class LoginEmailForm(forms.Form):
+    uname = forms.EmailField(max_length=200)
+    password = forms.PasswordInput()
