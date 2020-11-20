@@ -29,15 +29,25 @@
                 <h3>Review Contributor Data</h3>
             </div>
             {% for con in contributors %}
-                <div class="row p-2 bg-success d-flex" style="border-radius: 10px">
-                    <div class="col-md-9">
-                        <strong>{{ con.name }}</strong>
+                <div class="row p-2 d-flex border border-primary" style="border-radius: 10px">
+                    <div class="col-md-4 bg-info border border-success py-2" style="margin: auto; border-radius: 10px">
+                        <a href="#"><strong>{{ con.name }}</strong></a>
                     </div>
-                    <div class="col-md-1 mx-1">
-                        <button class="btn btn-danger">Download</button>
-                    </div>
-                    <div class="col-md-1 mx-1">
-                        <button class="btn btn-danger">Accept</button>
+                    <div class="col-md-8">
+                        <div class="d-flex justify-content-end">
+                            <div class="ml-1">
+                                <button class="btn btn-info">Show</button>
+                            </div>
+                            <div class="ml-1">
+                                <button class="btn btn-info">Download</button>
+                            </div>
+                            <div class="ml-1">
+                                <button class="btn btn-success">Accept</button>
+                            </div>
+                            <div class="ml-1">
+                                <button class="btn btn-danger">Reject</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             {% endfor %}

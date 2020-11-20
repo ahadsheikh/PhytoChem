@@ -1,9 +1,11 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from userauth.forms import UserForm, UserUpdateForm, ProfileUpdateForm
+from .models import Profile
 
 
 def register(request):
@@ -18,14 +20,20 @@ def register(request):
             form.save()
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('profile')
+            return redirect('profile', username)
     else:
         form = UserForm()
     return render(request, 'userauth/register.html', {'form': form})
 
 
-def profile(request):
-    return render(request, 'userauth/profile.html', {})
+@login_required
+def profile(request, username):
+    user = User.objects.get(username=username)
+    context = {
+        'title': 'Profile | ' + user.username,
+        'user_d': user,
+    }
+    return render(request, 'userauth/profile.html', context=context)
 
 
 @login_required

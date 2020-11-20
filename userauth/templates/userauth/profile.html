@@ -4,14 +4,16 @@
     <div class="container">
         <div class="bg-info font-weight-bold p-3">Profile Information</div>
         <div>
-            <strong>Username: </strong>{{ user.username }} <br>
-            <strong>Email: </strong>{{ user.email }} <br>
-            <strong>First Name: </strong>{{ user.first_name }} <br>
-            <strong>Last Name: </strong>{{ user.last_name }} <br>
-            <strong>About: </strong>{{ user.profile.about }} <br>
+            <strong>Username: </strong>{{ user_d.username }} <br>
+            <strong>Email: </strong>{{ user_d.email }} <br>
+            <strong>First Name: </strong>{{ user_d.first_name }} <br>
+            <strong>Last Name: </strong>{{ user_d.last_name }} <br>
+            <strong>About: </strong>{{ user_d.profile.about }} <br>
         </div>
-        <div class="mt-3">
-            <a href="{% url 'profile_edit' %}">Edit Profile</a>
-        </div>
+        {% if user.username == user_d.username %}
+            <div class="mt-3">
+                <a href="{% url 'profile_edit' %}">Edit Profile</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
