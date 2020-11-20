@@ -31,9 +31,9 @@ class ProfileUpdateForm(forms.ModelForm):
 
 class LoginUsernameForm(forms.Form):
     uname = forms.CharField(max_length=100)
-    password = forms.PasswordInput()
+    password = forms.CharField(widget=forms.PasswordInput)
 
 
 class LoginEmailForm(forms.Form):
     uname = forms.EmailField(max_length=200)
-    password = forms.PasswordInput()
+    password = forms.CharField(widget=forms.PasswordInput)
