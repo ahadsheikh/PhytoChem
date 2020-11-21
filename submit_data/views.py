@@ -1,3 +1,5 @@
+import os
+
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib import messages
@@ -15,6 +17,9 @@ def upload(request):
         form = ContributionForm(request.POST, request.FILES)
         print(request.POST)
         if form.is_valid():
+            upload_path = 'media/submittedFiles'
+            if not os.path.isdir(upload_path):
+                os.makedirs(upload_path)
             messages.success(request, "Upload File Successfully")
             form.save()
         else:
