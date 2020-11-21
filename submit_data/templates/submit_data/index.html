@@ -16,24 +16,29 @@
         <form action="{% url 'user_upload' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <div class="form-group">
-                <label for="inputName" class="text-success font-weight-bold">Name</label>
-                <input type="text" class="form-control" id="inputName"  name="name" placeholder="Enter Name">
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="text-success font-weight-bold">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
 
             <div class="form-group">
                 <label for="plantText" class="text-success font-weight-bold">Plant Name</label>
-                <input type="text" class="form-control" id="plantText" name="plantName" aria-describedby="plantHelp" placeholder="Enter Plant Name">
+                <input type="text" class="form-control" id="plantText" name="plant_name" aria-describedby="plantHelp" placeholder="Enter Plant Name">
                 <small id="plantHelp" class="form-text text-muted">If the compounds from a specific plant then put plant name or left it blank.</small>
             </div>
             <div class="form-group">
-                <label for="sdfFile" class="text-success font-weight-bold">Compound file input(sdf format)</label>
+                <label for="pub_link" class="text-success font-weight-bold">Publication Link <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="pub_link" name="pub_link" aria-describedby="plantHelp" placeholder="Enter Publication Link or DOI Link">
+                <small id="plantHelp" class="form-text text-muted">Your data related publication link or doi link.</small>
+            </div>
+            <div class="form-group">
+                <label for="data_description" class="text-success font-weight-bold">Data Description <span style="color: red;">*</span></label>
+                <textarea class="form-control" id="data_description" name="data_description" cols="40" rows="10" class="vLargeTextField" maxlength="500" aria-describedby="plantHelp" placeholder="Submitted Data Description..">Submitted Data Description..</textarea>
+                <small id="plantHelp" class="form-text text-muted">Describe submitted data(optional).</small>
+            </div>
+            <div class="form-group">
+                <label for="mendeley_data_link" class="text-success font-weight-bold">Mendeley Link</label>
+                <input type="text" class="form-control" id="mendeley_data_link" name="mendeley_data_link" aria-describedby="plantHelp" placeholder="Enter Mendeley Data Link...">
+                <small id="plantHelp" class="form-text text-muted">Publication data mendeley link.</small>
+            </div>
+            <div class="form-group">
+                <label for="sdfFile" class="text-success font-weight-bold">Compound File(sdf format) <span style="color: red;">*</span></label>
                 <input type="file" class="form-control-file" id="sdfFile" name="file">
             </div>
             <button type="submit" class="btn btn-primary">Upload</button>
