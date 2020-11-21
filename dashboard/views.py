@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 import os
@@ -32,6 +32,17 @@ def upload(request):
     return HttpResponse(
         "<h2>You are not permitted to view this page.</h2>"
     )
+
+
+def show_submitted_files(request, cid):
+    contribution = get_object_or_404(Contribution, pk=cid)
+    new_df = handle_new_sdf(contribution.file, change_db=False)
+    context = {
+        'new_data': new_df.values.tolist(),
+        'contributor': contribution.user.first_name + ' ' + contribution.user.last_name,
+        'plant': contribution.plant_name
+    }
+    return render(request, 'dashboard/show_data.html', context=context)
 
 
 # Not path view

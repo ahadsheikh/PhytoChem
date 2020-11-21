@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ contributor }}'s new data | Phytochem Database{% endblock %}
+{% block body %}
+    <h1>{{ contributor }}'s new data</h1>
+    <h2>Plant: {{ plant }}</h2>
+    <table class="table">
+        <thead>
+        <th>
+            <tr>Smiles</tr>
+            <tr>Molecular Formula</tr>
+            <tr>H-bond acceptor</tr>
+            <tr>H-bond donor</tr>
+            <tr>Molar Refractivity</tr>
+            <tr>TPSA</tr>
+            <tr>WlogP</tr>
+            <tr>Molecule</tr>
+        </th>
+        </thead>
+        <tbody>
+        {% for comp in new_data %}
+            <tr>
+                <td>{{ comp.0 }}</td>
+                <td>{{ comp.1 }}</td>
+                <td>{{ comp.2 }}</td>
+                <td>{{ comp.3 }}</td>
+                <td>{{ comp.4 }}</td>
+                <td>{{ comp.5 }}</td>
+                <td>{{ comp.6 }}</td>
+                <td><img src="{{ comp.7 }}"></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

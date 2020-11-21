@@ -13,6 +13,7 @@ def index(request):
 def upload(request):
     if request.method == 'POST':
         form = ContributionForm(request.POST, request.FILES)
+        print(request.POST)
         if form.is_valid():
             messages.success(request, "Upload File Successfully")
             form.save()

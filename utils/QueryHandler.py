@@ -72,7 +72,7 @@ def update_db_from_df(compounds_df, plant=None):
             cur_compound.plants.add(plant)
 
 
-def handle_new_sdf(path, plant=None):
+def handle_new_sdf(path, plant=None, change_db=True):
     sdf = Chem.SDMolSupplier(path)  # read sdf
     compounds_df = pd.DataFrame(
         columns=['Smiles', 'Molecular_Formula', 'Molecular_Weight', 'H_Bond_Acceptors',
@@ -99,5 +99,8 @@ def handle_new_sdf(path, plant=None):
             }, ignore_index=True)
     PandasTools.AddMoleculeColumnToFrame(compounds_df, 'Smiles', 'ROMol', includeFingerprints=True)
     compounds_df.drop_duplicates(subset="Smiles", keep=False, inplace=True)  # drop duplicate by smiles
-    update_db_from_df(compounds_df, plant)
-    update_sdf()
+    if change_db:
+        update_db_from_df(compounds_df, plant)
+        update_sdf()
+    else:
+        return compounds_df
