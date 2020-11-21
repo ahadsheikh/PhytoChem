@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Contributor, ContributorDatabase
+from .models import Contribution
 
-admin.site.register(Contributor)
-admin.site.register(ContributorDatabase)
+admin.site.register(Contribution)

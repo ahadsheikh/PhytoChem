@@ -1,10 +1,10 @@
 from django import forms
 
-from submit_data.models import Contributor
+from submit_data.models import Contribution
 
 
-class ContributorForm(forms.ModelForm):
+class ContributionForm(forms.ModelForm):
 
     class Meta:
-        model = Contributor
-        fields = ['name', 'email', 'plantName', 'file']
+        model = Contribution
+        fields = ['plant_name', 'pub_link', 'data_description', 'mendeley_data_link', 'file']

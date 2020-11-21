@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.shortcuts import redirect
 
-from submit_data.forms import ContributorForm
+from submit_data.forms import ContributionForm
 
 
 def index(request):
@@ -12,7 +12,7 @@ def index(request):
 
 def upload(request):
     if request.method == 'POST':
-        form = ContributorForm(request.POST, request.FILES)
+        form = ContributionForm(request.POST, request.FILES)
         if form.is_valid():
             messages.success(request, "Upload File Successfully")
             form.save()
