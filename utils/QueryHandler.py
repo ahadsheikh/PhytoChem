@@ -51,25 +51,26 @@ def update_db_from_df(compounds_df, plant=None):
     counter = 0
 
     for i, compound in compounds_df.iterrows():
-        counter += 1
-        cur_compound = Compound.objects.create(
-            PID='Phytochem_' + str(compound_len + counter).zfill(6),
-            Smiles=compound.Smiles,
-            Molecular_Formula=compound.Molecular_Formula,
-            Molecular_Weight=compound.Molecular_Weight,
-            H_Bond_Acceptors=compound.H_Bond_Acceptors,
-            H_Bond_Donors=compound.H_Bond_Donors,
-            Molar_Refractivity=compound.Molar_Refractivity,
-            TPSA=compound.TPSA,
-            logP=compound.logP,
-            ROMol=get_src_from_image_tag(str(compound.ROMol))
-        )
-        if plant:
-            try:
-                plant = Plant.objects.get(name=plant)
-            except Plant.DoesNotExist:
-                plant = Plant.objects.create(name=plant)
-            cur_compound.plants.add(plant)
+        if Compound.objects.filter(Smiles=compound.Smiles):
+            counter += 1
+            cur_compound = Compound.objects.create(
+                PID='Phytochem_' + str(compound_len + counter).zfill(6),
+                Smiles=compound.Smiles,
+                Molecular_Formula=compound.Molecular_Formula,
+                Molecular_Weight=compound.Molecular_Weight,
+                H_Bond_Acceptors=compound.H_Bond_Acceptors,
+                H_Bond_Donors=compound.H_Bond_Donors,
+                Molar_Refractivity=compound.Molar_Refractivity,
+                TPSA=compound.TPSA,
+                logP=compound.logP,
+                ROMol=get_src_from_image_tag(str(compound.ROMol))
+            )
+            if plant:
+                try:
+                    plant = Plant.objects.get(name=plant)
+                except Plant.DoesNotExist:
+                    plant = Plant.objects.create(name=plant)
+                cur_compound.plants.add(plant)
 
 
 def handle_new_sdf(path, plant=None, change_db=True):
@@ -79,24 +80,23 @@ def handle_new_sdf(path, plant=None, change_db=True):
                  'H_Bond_Donors', 'Molar_Refractivity', 'TPSA', 'logP'])
     for mol in sdf:
         smiles = Chem.MolToSmiles(mol)  # get smiles
-        if not Compound.objects.filter(Smiles=smiles):
-            molecular_formula = Chem.rdMolDescriptors.CalcMolFormula(mol)  # formula
-            molecular_weight = Chem.rdMolDescriptors.CalcExactMolWt(mol)  # weight
-            hba = Chem.rdMolDescriptors.CalcNumHBA(mol)  # h bond acceptor
-            hbd = Chem.rdMolDescriptors.CalcNumHBD(mol)  # h bond donor
-            molar_refractivity = Chem.Crippen.MolMR(mol)  # molar refractivity
-            tpsa = Chem.rdMolDescriptors.CalcTPSA(mol)  # tpsa
-            logp = Chem.Crippen.MolLogP(mol)
-            compounds_df = compounds_df.append({  # write this row to dataframe
-                'Smiles': smiles,
-                'Molecular_Formula': molecular_formula,
-                'Molecular_Weight': molecular_weight,
-                'H_Bond_Acceptors': hba,
-                'H_Bond_Donors': hbd,
-                'Molar_Refractivity': molar_refractivity,
-                'TPSA': tpsa,
-                'logP': logp
-            }, ignore_index=True)
+        molecular_formula = Chem.rdMolDescriptors.CalcMolFormula(mol)  # formula
+        molecular_weight = Chem.rdMolDescriptors.CalcExactMolWt(mol)  # weight
+        hba = Chem.rdMolDescriptors.CalcNumHBA(mol)  # h bond acceptor
+        hbd = Chem.rdMolDescriptors.CalcNumHBD(mol)  # h bond donor
+        molar_refractivity = Chem.Crippen.MolMR(mol)  # molar refractivity
+        tpsa = Chem.rdMolDescriptors.CalcTPSA(mol)  # tpsa
+        logp = Chem.Crippen.MolLogP(mol)
+        compounds_df = compounds_df.append({  # write this row to dataframe
+            'Smiles': smiles,
+            'Molecular_Formula': molecular_formula,
+            'Molecular_Weight': molecular_weight,
+            'H_Bond_Acceptors': hba,
+            'H_Bond_Donors': hbd,
+            'Molar_Refractivity': molar_refractivity,
+            'TPSA': tpsa,
+            'logP': logp
+        }, ignore_index=True)
     PandasTools.AddMoleculeColumnToFrame(compounds_df, 'Smiles', 'ROMol', includeFingerprints=True)
     compounds_df.drop_duplicates(subset="Smiles", keep=False, inplace=True)  # drop duplicate by smiles
     if change_db:

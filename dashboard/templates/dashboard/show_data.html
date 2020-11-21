@@ -6,16 +6,17 @@
     <h2>Plant: {{ plant }}</h2>
     <table class="table">
         <thead>
-        <th>
-            <tr>Smiles</tr>
-            <tr>Molecular Formula</tr>
-            <tr>H-bond acceptor</tr>
-            <tr>H-bond donor</tr>
-            <tr>Molar Refractivity</tr>
-            <tr>TPSA</tr>
-            <tr>WlogP</tr>
-            <tr>Molecule</tr>
-        </th>
+        <tr>
+            <th>Smiles</th>
+            <th>Molecular Formula</th>
+            <th>Molecular Weight</th>
+            <th>H-bond acceptor</th>
+            <th>H-bond donor</th>
+            <th>Molar Refractivity</th>
+            <th>TPSA</th>
+            <th>WlogP</th>
+            <th>Molecule</th>
+        </tr>
         </thead>
         <tbody>
         {% for comp in new_data %}
@@ -27,7 +28,8 @@
                 <td>{{ comp.4 }}</td>
                 <td>{{ comp.5 }}</td>
                 <td>{{ comp.6 }}</td>
-                <td><img src="{{ comp.7 }}"></td>
+                <td>{{ comp.7 }}</td>
+                <td>{{ comp.8|safe }}</td>
             </tr>
         {% endfor %}
         </tbody>

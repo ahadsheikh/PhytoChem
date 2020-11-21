@@ -31,15 +31,15 @@
             {% for con in contributors %}
                 <div class="row p-2 d-flex border border-primary" style="border-radius: 10px">
                     <div class="col-md-4 bg-info border border-success py-2" style="margin: auto; border-radius: 10px">
-                        <a href="#"><strong>{{ con.name }}</strong></a>
+                        <a href="#"><strong>{{ con.user.first_name }} {{ con.user.last_name }}</strong></a>
                     </div>
                     <div class="col-md-8">
                         <div class="d-flex justify-content-end">
                             <div class="ml-1">
-                                <button class="btn btn-info">Show</button>
+                                <button class="btn btn-info"><a href="{% url "show_data" con.id %}">Show</a></button>
                             </div>
                             <div class="ml-1">
-                                <button class="btn btn-info">Download</button>
+                                <button class="btn btn-info"><a href="{% url "download_new_file" con.id %}">Download</a></button>
                             </div>
                             <div class="ml-1">
                                 <button class="btn btn-success">Accept</button>
