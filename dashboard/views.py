@@ -5,13 +5,13 @@ from django.contrib import messages
 
 import os
 from dashboard.forms import UploadFileForm
-from submit_data.models import Contributor
+from submit_data.models import Contribution
 from utils.QueryHandler import handle_new_sdf
 
 
 @login_required(redirect_field_name='next')
 def dash_index(request):
-    contributors = Contributor.objects.all()
+    contributors = Contribution.objects.all()
     context = {
         'title': 'Dashboard',
         'contributors': contributors
