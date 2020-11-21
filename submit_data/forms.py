@@ -7,4 +7,4 @@ class ContributionForm(forms.ModelForm):
 
     class Meta:
         model = Contribution
-        fields = ['plant_name', 'pub_link', 'data_description', 'mendeley_data_link', 'file']
+        fields = ['user', 'plant_name', 'pub_link', 'data_description', 'mendeley_data_link', 'file']
