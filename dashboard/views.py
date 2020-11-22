@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
@@ -12,17 +12,19 @@ from utils.QueryHandler import handle_new_sdf
 
 @login_required(redirect_field_name='next')
 def dash_index(request):
-    contributors = Contribution.objects.all()
-    context = {
-        'title': 'Dashboard',
-        'contributors': contributors
-    }
-    return render(request, 'dashboard/dash.html', context=context)
+    if request.user.is_superuser:
+        contributors = Contribution.objects.all()
+        context = {
+            'title': 'Dashboard',
+            'contributors': contributors
+        }
+        return render(request, 'dashboard/dash.html', context=context)
+    return HttpResponseNotFound('You are not permitted')
 
 
 @login_required(redirect_field_name='next')
 def upload(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_superuser:
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             handle_file(request.FILES['file'], request.POST['plant'])
@@ -35,6 +37,7 @@ def upload(request):
     )
 
 
+@login_required()
 def show_submitted_files(request, cid):
     contribution = get_object_or_404(Contribution, pk=cid)
     new_df = handle_new_sdf(contribution.file.path, change_db=False)
@@ -47,9 +50,28 @@ def show_submitted_files(request, cid):
     return render(request, 'dashboard/show_data.html', context=context)
 
 
+@login_required()
 def download_new_file(request, cid):
     contribution = get_object_or_404(Contribution, pk=cid)
     return prepare_download(contribution.file.path)
+
+
+@login_required()
+def reject_contribution(request, cid):
+    contribution = get_object_or_404(Contribution, pk=cid)
+    if request.method == 'POST' and request.user.is_superuser:
+        contribution.status = 2
+        contribution.save()
+        path = contribution.file.path
+        try:
+            os.remove(path)
+        except FileNotFoundError:
+            pass
+
+        return redirect('dashboard')
+    return HttpResponse(
+        'You are not permitted to do that'
+    )
 
 
 # Not path view
