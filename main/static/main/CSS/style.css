@@ -110,7 +110,7 @@
     text-transform: capitalize;
     font-family: 'Titillium Web', sans-serif;
     padding:5px 0;
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 600;
     color: #1f1f1f;
 }
@@ -130,4 +130,38 @@
     color: #fcfcfc;
     text-decoration: none;
 }
+.download-as-option{
+    text-transform: capitalize;
+    font-family: 'ubuntu', sans-serif;
+    font-size: 20px;
+}
+.download-btn{
+    background-color:#dae3e7;
+    border-radius: 5px;
+    border: none;
+}
+.download-btn:hover{
+    background-color:#7cc4e6;
+}
+.download-type{
+    background-color:#dae3e7;
+    font-size: 18px;
+    font-family: 'Titillium Web', sans-serif;
+    border-radius: 5px;
+    border: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*           ------ End plant and Chemical Comound code --------*/

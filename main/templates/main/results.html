@@ -1,4 +1,5 @@
 {% extends "main/base.html" %}
+{% load static %}
 
 {% block title %}Search result for {{ request.GET.search }} | Phytochem Database{% endblock %}
 {% block body %}
@@ -18,31 +19,35 @@
             </div>
         </div>
         <div class="pt-5">
+            <!--  Download panel -->
             {% if compounds %}
-                <h3>Showing {{ compounds|length }} result(s) matching your query</h3>
-                <form method="get" action="{% url 'download_all_results' %}">
+                <div class="chemical-about" >Showing {{ compounds|length }} result(s) matching your query</div>
+                <div>
+                    <form method="get" action="{% url 'download_all_results' %}">
                     <input type="hidden" name="search" value="{{ request.GET.search }}"/>
-                    <label for="filetype">Download search results as</label>
-                    <select id="filetype" name="filetype">
+                    <label class="mt-2 mr-2 mb-3 download-as-option" for="filetype">Download search results as</label>
+                    <select class="download-type mb-1 mr-2 pl-4 pr-4 pt-2 pb-2" id="filetype" name="filetype">
                         <option value="sdf">SDF</option>
                         <option value="pdb">PDB</option>
                         <option value="mol">MOL</option>
                     </select>
-                    <button type="submit">Download</button>
+                    <button type="submit" class="download-btn pl-4 pr-4 pt-2 pb-1">
+                        <img class="download-image" src="{% static '/main/images/download-image-black.png' %}" alt="Logo">
+                    </button>
                 </form>
-                {% for compound in compounds %}
-                    <div class="card card-body row mb-3">
+                </div>
+                    <div class="chemical-about mt-4 mb-2">The Chemical is Found in These Plant </div>
+                    {% for compound in compounds %}
+                        <div class="row mb-3 ml-2 mt-2 chemical-recomand-parent justify-content-start ">
+                             {% for plant in compound.plants.all %}
+                               <a class="chemical-recomand" href="{% url 'plant' plant.id %}">
+                                   {{ plant.name }}
+                               </a>
+                             {% endfor %}
+                         </div>
+                        <div class="card card-body row mb-3">
                         <div class=" row card-header bg-dark text-white mb-2">
                             <em>Phytochem ID:</em> {{ compound.PID }}
-                        </div>
-                        <div class="row mb-3">
-                            {% for plant in compound.plants.all %}
-                                <a class="bg-info p-2 m-1" href="{% url "plant" plant.id %}" style=
-                                        "
-                                border-radius: 10px;
-                                color: #000000;
-                                ">{{ plant.name }}</a>
-                            {% endfor %}
                         </div>
                         <div class="row mb-3">
                             <table class="table">
@@ -53,7 +58,7 @@
                                     <td class="col-sm">
                                         <table class="table-striped">
                                             <tr>
-                                                <td><a href="{% url "compound"  compound.id %}">{{ compound.PID }}</a>
+                                                <td><a href="{% url 'compound' compound.id %}">{{ compound.PID }}</a>
                                                 </td>
                                             </tr>
                                             <tr>
