@@ -5,7 +5,7 @@ from django.conf import settings
 
 import os
 from main.models import Compound, Plant
-from utils.QueryHandler import query_to_df, df_to_sdf, df_to_pdb, df_to_mol
+from utils.QueryHandler import query_to_df, df_to_sdf
 
 
 def index(request):

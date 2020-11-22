@@ -1,4 +1,5 @@
 import pandas as pd
+from django.core.exceptions import ValidationError
 from rdkit import Chem
 from rdkit.Chem import PandasTools, Crippen
 from main.models import Compound, Plant
@@ -27,14 +28,6 @@ def df_to_pdb(compounds_df, file):
         pdbwriter.close()
 
 
-def df_to_mol(compounds_df, file):
-    with open(file, 'w+') as fi:
-        for _, compound in compounds_df.iterrows():
-            mol = Chem.MolFromSmiles(compound.Smiles)
-            molblock = Chem.MolToMolBlock(mol)
-            fi.write(molblock)
-
-
 def get_src_from_image_tag(html):
     soup = BeautifulSoup(html, "html.parser")
     return soup.img['src']
@@ -51,7 +44,7 @@ def update_db_from_df(compounds_df, plant=None):
     counter = 0
 
     for i, compound in compounds_df.iterrows():
-        if Compound.objects.filter(Smiles=compound.Smiles):
+        if not Compound.objects.filter(Smiles=compound.Smiles):
             counter += 1
             cur_compound = Compound.objects.create(
                 PID='Phytochem_' + str(compound_len + counter).zfill(6),
@@ -63,14 +56,13 @@ def update_db_from_df(compounds_df, plant=None):
                 Molar_Refractivity=compound.Molar_Refractivity,
                 TPSA=compound.TPSA,
                 logP=compound.logP,
-                ROMol=get_src_from_image_tag(str(compound.ROMol))
+                ROMol=compound.ROMol
             )
-            if plant:
-                try:
-                    plant = Plant.objects.get(name=plant)
-                except Plant.DoesNotExist:
-                    plant = Plant.objects.create(name=plant)
-                cur_compound.plants.add(plant)
+        else:
+            cur_compound = Compound.objects.get(Smiles=compound.Smiles)
+        if plant:
+            plant, _ = Plant.objects.get_or_create(name=plant)
+            cur_compound.plants.add(plant)
 
 
 def handle_new_sdf(path, plant=None, change_db=True):
@@ -98,9 +90,19 @@ def handle_new_sdf(path, plant=None, change_db=True):
             'logP': logp
         }, ignore_index=True)
     PandasTools.AddMoleculeColumnToFrame(compounds_df, 'Smiles', 'ROMol', includeFingerprints=True)
+    compounds_df.ROMol = get_src_from_image_tag(str(compounds_df.ROMol))
     compounds_df.drop_duplicates(subset="Smiles", keep=False, inplace=True)  # drop duplicate by smiles
     if change_db:
         update_db_from_df(compounds_df, plant)
         update_sdf()
     else:
         return compounds_df
+
+
+def validate_sdf(path):
+    df = PandasTools.LoadSDF(path)
+    if df.empty:
+        raise ValidationError(
+            'File is empty',
+            params={'file': path},
+        )
