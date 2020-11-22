@@ -1,27 +1,27 @@
 {% extends "main/base.html" %}
+{% load static %}
 
 {% block title %}{{ compound.PID }} | Phytochem Database{% endblock %}
 {% block body %}
     <div class="container">
-        <div class="row">
+        <div class="row mb-2 p-3 rounded plant-title">
             <div class="col-md d-flex justify-content-center">
-                <p class="bg-info"
-                   style="border-radius: 10px; font-size: 30px; margin: 10px; padding: 10px 20px">{{ compound.Molecular_Formula }}</p>
+                <img class="ml-2 mr-2 plant-image" src="{% static '/main/images/chemical-white.png' %}" alt="Logo">
+                <p class="chemical-title">{{ compound.Molecular_Formula }}</p>
             </div>
         </div>
+        <div class="chemical-about mt-4 mb-2">The Chemical is Found in These Plant </div>
+         <div class="row mb-3 ml-2 mt-2 chemical-recomand-parent justify-content-start ">
+                    {% for plant in compound.plants.all %}
+                        <a class="chemical-recomand" href="{% url "plant" plant.id %}">
+                            {{ plant.name }}
+                        </a>
+                    {% endfor %}
+         </div>
         <div class="row">
             <div class="card card-body row m-3">
                 <div class=" row card-header bg-dark text-white mb-2">
                     <em>Phytochem ID:</em> {{ compound.PID }}
-                </div>
-                <div class="row mb-3">
-                    {% for plant in compound.plants.all %}
-                        <a class="bg-info p-2 m-1" href="{% url "plant" plant.id %}" style=
-                                "
-                                border-radius: 10px;
-                                color: #000000;
-                                ">{{ plant.name }}</a>
-                    {% endfor %}
                 </div>
                 <div class="row mb-3">
                     <table class="table">
@@ -29,7 +29,7 @@
                             <td class="col-md" align="center">
                                 <img src="{{ compound.ROMol }}" alt="">
                             </td>
-                            <td class="col-sm">
+                            <td class="col-sm text-break">
                                 <table class="table-striped">
                                     <tr>
                                         <td>Molecular Formula:</td>
