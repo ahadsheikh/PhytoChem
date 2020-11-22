@@ -3,19 +3,14 @@
 {% block title %}Search results for {{ request.GET.search }} | Phytochem Database{% endblock %}
 {% block body %}
     <div class="container">
-        <div class="row d-flex justify-content-center mt-3">
-            <!-- Search form -->
-            <div class="col-sm">
-                <form action="{% url 'results' %}" method="get">
-                    <div class="input-group">
-                        <input type="text" class="search" placeholder="Search" aria-label="Search"
-                               value="{{ request.GET.search }}" name="search">
-                        <div class="input-group-append">
-                            <input class="submit shadow-lg" type="submit" value=" "/>
-                        </div>
-                    </div>
-                </form>
-            </div>
+        <div class="justify-content-center mb-3">
+            <form class="input-group" action="{% url 'results' %}" method="get">
+                <input type="text" class="search form-control" placeholder="Search" aria-label="Search"
+                       value="{{ request.GET.search }}" name="search">
+                <div class="input-group-append">
+                    <input class="submit shadow-lg" type="submit" value=" "/>
+                </div>
+            </form>
         </div>
         <div class="pt-5">
             {% if compounds %}
@@ -38,29 +33,23 @@
                                    href="{% url "plant" plant.id %}">{{ plant.name }}</a>
                             {% endfor %}
                         </div>
-                        <div>
-                            <table class="table table-responsive">
-                                <tr>
-                                    <td rowspan="3" class="col-lg-6">
-                                        <img src="{{ compound.ROMol }}" alt="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Molecular Formula:</td>
-                                    <td>{{ compound.Molecular_Formula }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Canonical SMILES:</td>
-                                    <td class="smile">{{ compound.Smiles }}</td>
-                                </tr>
-                            </table>
-                            </td>
-                            </tr>
-                            </table>
+                        <div class="row justify-contents-center align-item-center w-100">
+                            <div class="col-sm">
+                                <img src="{{ compound.ROMol }}" class="img-responsive center-block d-block mx-auto">
+                            </div>
+                            <div class="col-sm">
+                                <div>
+                                    <span class="pull-left">Molecular Formula:</span>
+                                    <span class="pull-right">{{ compound.Molecular_Formula }}</span>
+                                </div>
+                                <div>
+                                    <span class="pull-left">Canonical SMILES:</span>
+                                    <span class="pull-right text-wrap text-break">{{ compound.Smiles }}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
-
             {% else %}
                 <h3>Not Found</h3>
             {% endif %}

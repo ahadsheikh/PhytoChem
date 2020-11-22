@@ -5,7 +5,7 @@
 {% block body %}
     <main class="site-main">
         <div class="container row justify-content-center align-items-center">
-            <div class="site-title col-md-7 justify-content-center align-items-center">
+            <div class="site-title col-lg-7 justify-content-center align-items-center">
                 <div class="intro text-uppercase">Find among {{ n_compounds }}</div>
                 <div class="intro text-uppercase"><span class="phytochem">Phytochemical</span>
                     data
@@ -19,9 +19,9 @@
                 <div class="details">You can contribute to this dataset too, visit <a href="{% url "submit_data" %}">this
                     link</a></div>
             </div>
-            <div class="col-lg-6 col-md-4 ml-auto p-2">
-                <form action="{% url 'results' %}" method="get">
-                    <input class="search shadow-lg" name="search" value="{{ request.GET.search }}"
+            <div class="col-lg-5 ml-auto p-2">
+                <form class="input-group" action="{% url 'results' %}" method="get">
+                    <input class="search shadow-lg form-control" name="search" value="{{ request.GET.search }}"
                            type="text" id="search" placeholder="Search Element E.x: C28H56"/>
                     <input class="submit shadow-lg" type="submit" value=" "/>
                 </form>
