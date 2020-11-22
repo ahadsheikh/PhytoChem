@@ -1,16 +1,18 @@
 {% extends "main/base.html" %}
+{% load static %}
 
 {% block title %}{{ plant.name }} | Phytochem Database{% endblock %}
 {% block body %}
     <div class="container">
-        <div class="row">
-            <div class="col-md d-flex justify-content-center">
-                <p class="bg-info"
-                   style="border-radius: 10px; font-size: 30px; margin: 10px; padding: 10px 20px">{{ plant.name }}</p>
+         <div class="row mb-2 p-3 rounded plant-title">
+            <div class="col-md d-flex justify-content-end">
+                <img class="ml-2 mr-2 plant-image" src="{% static '/main/images/plant-icon.png' %}" alt="Logo">
+                <p class="chemical-title">{{ plant.name }}</p>
             </div>
         </div>
-        <div class="row">
+        <div class="row content">
             <div class="col-md">
+                <div class="plant-about mt-4 mb-2">From this plant we found these Chemical</div>
                 {% for compound in compounds %}
                     <div class="card card-body row mb-3">
 
