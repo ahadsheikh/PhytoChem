@@ -18,15 +18,16 @@
                         </a>
                     {% endfor %}
          </div>
-        <div class="row">
-            <div class="card card-body row m-3">
-                <div class=" row card-header bg-dark text-white mb-2">
-                    <em>Phytochem ID:</em> {{ compound.PID }}
+        <div>
+            <div>
+                <div class="w-100 p-3 bg-dark text-white text-center">
+                    <span class="pull-left">Phytochem ID:</span>
+                    <span class="pull-right">{{ compound.PID }}</span>
                 </div>
                 <div class="row mb-3">
                     <table class="table">
                         <tr class="row">
-                            <td class="col-md" align="center">
+                            <td class="col-md">
                                 <img src="{{ compound.ROMol }}" alt="">
                             </td>
                             <td class="col-sm text-break">
