@@ -21,12 +21,8 @@ def results(request):
     if len(search) != 0:
         if search.isnumeric():
             search = 'Phytochem_' + search.zfill(6)
-        compounds = Compound.objects.filter(Q(PID=search) |
-                                            Q(Smiles=search) | Q(Molecular_Formula=search))
-        context = {
-            'title': 'Search results',
-            'compounds': compounds
-        }
+        compounds = Compound.objects.filter(Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search))
+        context = {'compounds': compounds}
         return render(request, 'main/results.html', context=context)
     return redirect('/')
 
@@ -43,15 +39,8 @@ def plant(request, id):
 
 def compound(request, id):
     compound = Compound.objects.get(id=id)
-    lipinski = 0
-    if compound.H_Bond_Donors > 5:
-        lipinski += 1
-    if compound.H_Bond_Acceptors > 10:
-        lipinski += 1
-    if compound.Molecular_Weight >= 500:
-        lipinski += 1
-    if compound.logP > 5:
-        lipinski += 1
+    lipinski = (compound.H_Bond_Donors > 5) + (compound.H_Bond_Acceptors > 10) + \
+               (compound.Molecular_Weight >= 500) + (compound.logP > 5)
     plants = compound.plants.all()
     context = {
         'compound': compound,
@@ -64,7 +53,6 @@ def compound(request, id):
 # view for download a query results
 def download_file(request):
     search = request.GET['search']
-    filetype = request.GET['filetype']
     # make search term as is in the PID column of database
     if search.isnumeric():
         search = 'Phytochem_' + search.zfill(6)
@@ -84,20 +72,10 @@ def download_file(request):
 
     # search in the database columns PID, Smiles and
     # Molecular_Formula
-    compounds = Compound.objects.filter(Q(PID=search) |
-                                        Q(Smiles=search) |
-                                        Q(Molecular_Formula=search))
+    compounds = Compound.objects.filter(Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search))
     compounds_df = query_to_df(compounds)
-
-    if filetype == 'sdf':
-        dw_file = os.path.join(temppath, search + '.sdf')
-        df_to_sdf(compounds_df, dw_file)
-    elif filetype == 'pdb':
-        dw_file = os.path.join(temppath, search + '.pdb')
-        df_to_pdb(compounds_df, dw_file)
-    elif filetype == 'mol':
-        dw_file = os.path.join(temppath, search + '.mol')
-        df_to_mol(compounds_df, dw_file)
+    dw_file = os.path.join(temppath, search + '.sdf')
+    df_to_sdf(compounds_df, dw_file)
     return prepare_download(dw_file)
 
 

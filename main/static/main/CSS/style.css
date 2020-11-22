@@ -131,3 +131,10 @@
     text-decoration: none;
 }
 /*           ------ End plant and Chemical Comound code --------*/
+
+.smile {
+    min-width: 160px;
+    max-width: 160px;
+    white-space: normal;
+    word-wrap: break-word;
+}

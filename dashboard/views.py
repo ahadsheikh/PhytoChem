@@ -41,10 +41,12 @@ def upload(request):
 def show_submitted_files(request, cid):
     contribution = get_object_or_404(Contribution, pk=cid)
     new_df = handle_new_sdf(contribution.file.path, change_db=False)
-    print(new_df)
     context = {
         'new_data': new_df.values.tolist(),
         'contributor': contribution.user.first_name + ' ' + contribution.user.last_name,
+        'pub_link': contribution.pub_link,
+        'data_desc': contribution.data_description,
+        'mendeley_data': contribution.mendeley_data_link,
         'plant': contribution.plant_name
     }
     return render(request, 'dashboard/show_data.html', context=context)

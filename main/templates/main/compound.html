@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="chemical-about mt-4 mb-2">The Chemical is Found in These Plant </div>
-         <div class="row mb-3 ml-2 mt-2 chemical-recomand-parent justify-content-start ">
+         <div class="row mb-3 ml-2 mt-2 chemical-recomand-parent justify-content-start">
                     {% for plant in compound.plants.all %}
                         <a class="chemical-recomand" href="{% url "plant" plant.id %}">
                             {{ plant.name }}

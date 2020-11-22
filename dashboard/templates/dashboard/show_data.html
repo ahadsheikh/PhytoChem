@@ -3,35 +3,46 @@
 {% block title %}{{ contributor }}'s new data | Phytochem Database{% endblock %}
 {% block body %}
     <h1>{{ contributor }}'s new data</h1>
-    <h2>Plant: {{ plant }}</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Smiles</th>
-            <th>Molecular Formula</th>
-            <th>Molecular Weight</th>
-            <th>H-bond acceptor</th>
-            <th>H-bond donor</th>
-            <th>Molar Refractivity</th>
-            <th>TPSA</th>
-            <th>WlogP</th>
-            <th>Molecule</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for comp in new_data %}
+    <h3>Plant: {{ plant }}</h3>
+    <h3>Publication link: <a href="{{ pub_link }}">{{ pub_link }}</a></h3>
+    {% if data_desc %}
+        <h3>Data description: </h3>
+        <p>{{ data_desc }}</p>
+    {% endif %}
+    {% if mendeley_data %}
+        <h3>Mendeley data link: <a href="{{ mendeley_data }}">{{ mendeley_data }}</a></h3>
+    {% endif %}
+
+    <div class="table-responsive-md">
+        <table class="table table-striped">
+            <thead class="thead-dark">
             <tr>
-                <td>{{ comp.0 }}</td>
-                <td>{{ comp.1 }}</td>
-                <td>{{ comp.2 }}</td>
-                <td>{{ comp.3 }}</td>
-                <td>{{ comp.4 }}</td>
-                <td>{{ comp.5 }}</td>
-                <td>{{ comp.6 }}</td>
-                <td>{{ comp.7 }}</td>
-                <td>{{ comp.8|safe }}</td>
+                <th>Smiles</th>
+                <th>Molecular Formula</th>
+                <th>Molecular Weight</th>
+                <th>H-bond acceptor</th>
+                <th>H-bond donor</th>
+                <th>Molar Refractivity</th>
+                <th>TPSA</th>
+                <th>WlogP</th>
+                <th>Molecule</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for comp in new_data %}
+                <tr>
+                    <td class="smile">{{ comp.0 }}</td>
+                    <td>{{ comp.1 }}</td>
+                    <td>{{ comp.2|floatformat:2 }}</td>
+                    <td>{{ comp.3 }}</td>
+                    <td>{{ comp.4 }}</td>
+                    <td>{{ comp.5|floatformat:2 }}</td>
+                    <td>{{ comp.6|floatformat:2 }}</td>
+                    <td>{{ comp.7|floatformat:2 }}</td>
+                    <td>{{ comp.8|safe }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
