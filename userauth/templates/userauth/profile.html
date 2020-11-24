@@ -15,5 +15,21 @@
                 <a href="{% url 'profile_edit' %}">Edit Profile</a>
             </div>
         {% endif %}
+        <div>
+            {% for con in contributions %}
+                    <div class="row p-2 d-flex border border-primary" style="border-radius: 10px">
+                        <div class="col-md-4 bg-info border border-success py-2" style="margin: auto; border-radius: 10px">
+                            <a href="#"><strong>{{ con.user.first_name }} {{ con.user.last_name }}</strong></a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="d-flex justify-content-end">
+                                <div class="ml-1">
+                                    <button class="btn btn-info">{{ con.status }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

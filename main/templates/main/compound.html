@@ -9,101 +9,69 @@
                 <img class="ml-2 mr-2 plant-image" src="{% static '/main/images/chemical-white.png' %}" alt="Logo">
                 <p class="chemical-title">{{ compound.Molecular_Formula }}</p>
             </div>
-        </div>
-        <div class="chemical-about mt-4 mb-2">The Chemical is Found in These Plant </div>
-         <div class="row mb-3 ml-2 mt-2 chemical-recomand-parent justify-content-start ">
-                    {% for plant in compound.plants.all %}
-                        <a class="chemical-recomand" href="{% url 'plant' plant.id %}">
-                            {{ plant.name }}
-                        </a>
-                    {% endfor %}
-         </div>
-        <div class="row">
-            <div class="card card-body row m-3">
-                <div class=" row card-header bg-dark text-white mb-2">
-                    <em>Phytochem ID:</em> {{ compound.PID }}
-                </div>
-                <div class="row mb-3">
-                    <table class="table">
-                        <tr class="row">
-                            <td class="col-md" align="center">
-                                <img src="{{ compound.ROMol }}" alt="">
-                            </td>
-                            <td class="col-sm text-break">
-                                <table class="table-striped">
-                                    <tr>
-                                        <td>Molecular Formula:</td>
-                                        <td>{{ compound.Molecular_Formula }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Canonical SMILES:</td>
-                                        <td>{{ compound.Smiles }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Molecular Weight:</td>
-                                        <td>{{ compound.Molecular_Weight|floatformat:3 }} g/mol</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Hydrogen Bond Acceptor Count:</td>
-                                        <td>{{ compound.H_Bond_Acceptors }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Hydrogen Bond Donor Count:</td>
-                                        <td>{{ compound.H_Bond_Donors }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Molar Refractivity:</td>
-                                        <td>{{ compound.Molar_Refractivity|floatformat:3 }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>TPSA:</td>
-                                        <td>{{ compound.TPSA|floatformat:3 }} Å²</td>
-                                    </tr>
-                                    <tr>
-                                        <td>WlogP:</td>
-                                        <td>{{ compound.logP|floatformat:3 }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Lipinski:</td>
-                                        <td>
-                                            {% if lipinski < 2 %}
-                                                Yes, {{ lipinski }} violation
-                                            {% else %}
-                                                No, {{ lipinski }} violations
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+            <div class="w-100 p-3 bg-dark text-white text-center">
+                <span class="pull-left">Phytochem ID:</span>
+                <span class="pull-right">{{ compound.PID }}</span>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md">
-                {% for compound in compounds %}
-                    <div class="card card-body row mb-3">
-
-                        <table class="table">
-                            <tr class="row">
-                                <td class="col-md" align="center"> {{ compound.ROMol|safe }} </td>
-                                <td class="col-sm">
-                                    <table class="table-striped">
-                                        <tr>
-                                            <td>{{ compound.Molecular_Formula }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ compound.Smiles }}</td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-
-                    </div>
-                {% endfor %}
-            </div>
+        <div class="chemical-about mt-4 mb-2">The phytochem is found in these plants</div>
+        <div class="row mb-3 ml-2 mt-2 chemical-recomand-parent justify-content-start">
+            {% for plant in compound.plants.all %}
+                <a class="chemical-recomand" href="{% url "plant" plant.id %}">
+                    {{ plant.name }}
+                </a>
+            {% endfor %}
+        </div>
+        <div class="row mb-3">
+            <table class="table">
+                <tr>
+                    <td colspan="2">
+                        <img src="{{ compound.ROMol }}" alt="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Molecular Formula:</td>
+                    <td>{{ compound.Molecular_Formula }}</td>
+                </tr>
+                <tr>
+                    <td>Canonical SMILES:</td>
+                    <td class="smile">{{ compound.Smiles }}</td>
+                </tr>
+                <tr>
+                    <td>Molecular Weight:</td>
+                    <td>{{ compound.Molecular_Weight|floatformat:3 }} g/mol</td>
+                </tr>
+                <tr>
+                    <td>Hydrogen Bond Acceptor Count:</td>
+                    <td>{{ compound.H_Bond_Acceptors }}</td>
+                </tr>
+                <tr>
+                    <td>Hydrogen Bond Donor Count:</td>
+                    <td>{{ compound.H_Bond_Donors }}</td>
+                </tr>
+                <tr>
+                    <td>Molar Refractivity:</td>
+                    <td>{{ compound.Molar_Refractivity|floatformat:3 }}</td>
+                </tr>
+                <tr>
+                    <td>TPSA:</td>
+                    <td>{{ compound.TPSA|floatformat:3 }} Å²</td>
+                </tr>
+                <tr>
+                    <td>WlogP:</td>
+                    <td>{{ compound.logP|floatformat:3 }}</td>
+                </tr>
+                <tr>
+                    <td>Lipinski:</td>
+                    <td>
+                        {% if lipinski < 2 %}
+                            Yes, {{ lipinski }} violation
+                        {% else %}
+                            No, {{ lipinski }} violations
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 {% endblock %}

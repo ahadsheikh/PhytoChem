@@ -27,12 +27,13 @@
 
 .intro {
     padding-left: 10%;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: bold;
     color: #9c9797;
     font-family: Arial, Helvetica, sans-serif;
     text-shadow: #1E1E20;
 }
+
 /* the colored phytochem text in homepage */
 .phytochem {
     color: black;
@@ -41,6 +42,7 @@
 
 /* texts in homepage */
 .site-title {
+    text-wrap: normal;
     background-color: #f3f3f3;
     opacity: 0.7;
 }
@@ -62,8 +64,6 @@
 .search {
     padding: 0 10px;
     font-size: 16px;
-    width: 60%;
-    max-width: 400px;
     height: 54px;
     border: 2px solid black;
     border-radius: 20px 0 0 20px;
@@ -81,40 +81,41 @@
     border-radius: 0 20px 20px 0;
     outline: none;
 }
+
 /*           ------ writting for plant and Chemical Comound code --------*/
-.plant-about
-{
+.plant-about {
     text-transform: capitalize;
     font-family: 'Titillium Web', sans-serif;
-    padding:5px 0;
+    padding: 5px 0;
     font-size: 30px;
     font-weight: 600;
     color: #1f1f1f;
 }
-.plant-title{
+
+.plant-title {
     background-color: #2c2c2c;
 }
 
-.chemical-title{
+.chemical-title {
     text-transform: capitalize;
     font-family: 'ubuntu', sans-serif;
     border-radius: 3px;
     font-size: 25px;
     margin: 20px 0;
     padding: 10px 20px;
-    color:#cccccc;
+    color: #cccccc;
     font-weight: 500;;
 }
-.chemical-about
-{
-    text-transform: capitalize;
+
+.chemical-about {
     font-family: 'Titillium Web', sans-serif;
     padding:5px 0;
     font-size: 32px;
     font-weight: 600;
     color: #1f1f1f;
 }
-.chemical-recomand{
+
+.chemical-recomand {
     text-transform: capitalize;
     font-family: 'Titillium Web', sans-serif;
     font-size: 17px;
@@ -125,7 +126,8 @@
 
     color: #161616;
 }
-.chemical-recomand:hover{
+
+.chemical-recomand:hover {
     background-color: #35647a;
     color: #fcfcfc;
     text-decoration: none;
@@ -150,18 +152,16 @@
     border-radius: 5px;
     border: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*           ------ End plant and Chemical Comound code --------*/
+.smile {
+    min-width: 160px;
+    max-width: 160px;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.card {
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+}

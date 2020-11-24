@@ -1,5 +1,8 @@
+from django.core.validators import MaxValueValidator, MinValueValidator, FileExtensionValidator
 from django.db import models
 from django.contrib.auth.models import User
+
+from utils.QueryHandler import validate_sdf
 
 
 class Contribution(models.Model):
@@ -8,7 +11,10 @@ class Contribution(models.Model):
     pub_link = models.URLField(max_length=200)
     data_description = models.TextField(max_length=500, blank=True)
     mendeley_data_link = models.URLField(max_length=200, blank=True)
-    file = models.FileField(upload_to='submittedFiles')
+    status = models.SmallIntegerField(default=0)
+    file = models.FileField(upload_to='submittedFiles',
+                            validators=[FileExtensionValidator(allowed_extensions=['sdf']),
+                                        validate_sdf])
 
     created_at = models.DateTimeField(auto_now_add=True)
 

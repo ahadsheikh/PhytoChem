@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
+from submit_data.models import Contribution
 from userauth.forms import UserForm, UserUpdateForm, ProfileUpdateForm, LoginUsernameForm, LoginEmailForm
 from .models import Profile
 
@@ -29,9 +30,11 @@ def register(request):
 @login_required
 def profile(request, username):
     user = User.objects.get(username=username)
+    contributions = Contribution.objects.filter(user=user)
     context = {
         'title': 'Profile | ' + user.username,
         'user_d': user,
+        'contributions': contributions
     }
     return render(request, 'userauth/profile.html', context=context)
 

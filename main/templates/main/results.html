@@ -1,22 +1,17 @@
 {% extends "main/base.html" %}
 {% load static %}
 
-{% block title %}Search result for {{ request.GET.search }} | Phytochem Database{% endblock %}
+{% block title %}Search results for {{ request.GET.search }} | Phytochem Database{% endblock %}
 {% block body %}
     <div class="container">
-        <div class="row d-flex justify-content-center mt-3">
-            <!-- Search form -->
-            <div class="col-sm">
-                <form action="{% url 'results' %}" method="get">
-                    <div class="input-group">
-                        <input type="text" class="search" placeholder="Search" aria-label="Search"
-                               value="{{ request.GET.search }}" name="search">
-                        <div class="input-group-append">
-                            <input class="submit shadow-lg" type="submit" value=" "/>
-                        </div>
-                    </div>
-                </form>
-            </div>
+        <div class="justify-content-center mb-3">
+            <form class="input-group" action="{% url 'results' %}" method="get">
+                <input type="text" class="search form-control" placeholder="Search" aria-label="Search"
+                       value="{{ request.GET.search }}" name="search">
+                <div class="input-group-append">
+                    <input class="submit shadow-lg" type="submit" value=" "/>
+                </div>
+            </form>
         </div>
         <div class="pt-5">
             <!--  Download panel -->
@@ -25,58 +20,39 @@
                 <div>
                     <form method="get" action="{% url 'download_all_results' %}">
                     <input type="hidden" name="search" value="{{ request.GET.search }}"/>
-                    <label class="mt-2 mr-2 mb-3 download-as-option" for="filetype">Download search results as</label>
-                    <select class="download-type mb-1 mr-2 pl-4 pr-4 pt-2 pb-2" id="filetype" name="filetype">
-                        <option value="sdf">SDF</option>
-                        <option value="pdb">PDB</option>
-                        <option value="mol">MOL</option>
-                    </select>
-                    <button type="submit" class="download-btn pl-4 pr-4 pt-2 pb-1">
-                        <img class="download-image" src="{% static '/main/images/download-image-black.png' %}" alt="Logo">
-                    </button>
+                    <button class="download-as-option" type="submit">Download search results</button>
                 </form>
-                </div>
-                    <div class="chemical-about mt-4 mb-2">The Chemical is Found in These Plant </div>
-                    {% for compound in compounds %}
-                        <div class="row mb-3 ml-2 mt-2 chemical-recomand-parent justify-content-start ">
-                             {% for plant in compound.plants.all %}
-                               <a class="chemical-recomand" href="{% url 'plant' plant.id %}">
-                                   {{ plant.name }}
-                               </a>
-                             {% endfor %}
-                         </div>
-                        <div class="card card-body row mb-3">
-                        <div class=" row card-header bg-dark text-white mb-2">
-                            <em>Phytochem ID:</em> {{ compound.PID }}
+                {% for compound in compounds %}
+                    <div class="row mb-3">
+                        <div class="w-100 p-3 bg-dark text-white text-center">
+                            <span class="pull-left">Phytochem ID:</span>
+                            <span class="pull-right"><a href="{% url "compound"  compound.id %}">{{ compound.PID }}</a></span>
                         </div>
-                        <div class="row mb-3">
-                            <table class="table">
-                                <tr class="row">
-                                    <td class="col-md" align="center">
-                                        <img src="{{ compound.ROMol }}" alt="">
-                                    </td>
-                                    <td class="col-sm">
-                                        <table class="table-striped">
-                                            <tr>
-                                                <td><a href="{% url 'compound' compound.id %}">{{ compound.PID }}</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Molecular Formula:</td>
-                                                <td>{{ compound.Molecular_Formula }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Canonical SMILES:</td>
-                                                <td>{{ compound.Smiles }}</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
+                        <div class="row mb-3 ml-2 mt-2 chemical-recomand-parent justify-content-start">
+                            <em>Plants:</em>
+                            <br>
+                            {% for plant in compound.plants.all %}
+                                <a class="chemical-recomand"
+                                   href="{% url "plant" plant.id %}">{{ plant.name }}</a>
+                            {% endfor %}
+                        </div>
+                        <div class="row justify-contents-center align-item-center w-100">
+                            <div class="col-sm">
+                                <img src="{{ compound.ROMol }}" class="img-responsive center-block d-block mx-auto">
+                            </div>
+                            <div class="col-sm">
+                                <div>
+                                    <span class="pull-left">Molecular Formula:</span>
+                                    <span class="pull-right">{{ compound.Molecular_Formula }}</span>
+                                </div>
+                                <div>
+                                    <span class="pull-left">Canonical SMILES:</span>
+                                    <span class="pull-right text-wrap text-break">{{ compound.Smiles }}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
-
             {% else %}
                 <h3>Not Found</h3>
             {% endif %}
