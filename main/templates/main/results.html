@@ -1,4 +1,5 @@
 {% extends "main/base.html" %}
+{% load static %}
 
 {% block title %}Search results for {{ request.GET.search }} | Phytochem Database{% endblock %}
 {% block body %}
@@ -13,11 +14,13 @@
             </form>
         </div>
         <div class="pt-5">
+            <!--  Download panel -->
             {% if compounds %}
-                <h3>Showing {{ compounds|length }} result(s) matching your query</h3>
-                <form method="get" action="{% url 'download_all_results' %}">
+                <div class="chemical-about" >Showing {{ compounds|length }} result(s) matching your query</div>
+                <div>
+                    <form method="get" action="{% url 'download_all_results' %}">
                     <input type="hidden" name="search" value="{{ request.GET.search }}"/>
-                    <button type="submit">Download search results</button>
+                    <button class="download-as-option" type="submit">Download search results</button>
                 </form>
                 {% for compound in compounds %}
                     <div class="row mb-3">
