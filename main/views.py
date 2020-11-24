@@ -22,7 +22,7 @@ def results(request):
         if search.isnumeric():
             search = 'Phytochem_' + search.zfill(6)
         compounds = Compound.objects.filter(
-            Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search) | Q(plants__name=search))
+            Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search) | Q(plants__name__iexact=search)).distinct()
         context = {'compounds': compounds}
         return render(request, 'main/results.html', context=context)
     return redirect('/')
@@ -52,13 +52,10 @@ def compound(request, id):
 
 
 # view for download a query results
-def download_file(request, search=None):
-    if not search:
-        search = request.GET['search']
-        # make search term as is in the PID column of database
-        if search.isnumeric():
-            search = 'Phytochem_' + search.zfill(6)
-
+def download_file(request, search):
+    # make search term as is in the PID column of database
+    if search.isnumeric():
+        search = 'Phytochem_' + search.zfill(6)
     # temporary path for storing download files
     temppath = os.path.join(settings.MEDIA_ROOT, 'tempDownloadFiles/')
 
@@ -75,7 +72,7 @@ def download_file(request, search=None):
     # search in the database columns PID, Smiles and
     # Molecular_Formula
     compounds = Compound.objects.filter(
-        Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search) | Q(Plant__name=search))
+        Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search) | Q(plants__name__iexact=search))
     compounds_df = query_to_df(compounds)
     dw_file = os.path.join(temppath, search + '.sdf')
     df_to_sdf(compounds_df, dw_file)
