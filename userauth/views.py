@@ -21,7 +21,7 @@ def register(request):
             form.save()
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('profile', username)
+            return redirect('user:profile', username)
     else:
         form = UserForm()
     return render(request, 'userauth/register.html', {'form': form})
@@ -49,7 +49,7 @@ def profile_edit(request):
             userUpdateForm.save()
             profileUpdateForm.save()
             messages.success(request, "Successfully Edit Done")
-            return redirect('profile_edit')
+            return redirect('user:profile_edit')
 
     userUpdateForm = UserUpdateForm(instance=request.user)
     profileUpdateForm = ProfileUpdateForm(instance=request.user.profile)

@@ -3,6 +3,9 @@ from django.views.generic import TemplateView
 
 from . import views
 
+
+app_name = "main"
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('contact/', TemplateView.as_view(template_name='main/contact.html'), name='contact'),
@@ -12,7 +15,4 @@ urlpatterns = [
     path('main/plant/<int:id>/', views.plant, name='plant'),
     path('main/compound/<int:id>/', views.compound, name='compound'),
     path('main/download_all/', views.download_all_file, name='all-file-download'),
-
-    # Test
-
 ]

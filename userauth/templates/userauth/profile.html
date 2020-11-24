@@ -12,7 +12,7 @@
         </div>
         {% if user.username == user_d.username %}
             <div class="mt-3">
-                <a href="{% url 'profile_edit' %}">Edit Profile</a>
+                <a href="{% url 'user:profile_edit' %}">Edit Profile</a>
             </div>
         {% endif %}
         <div>

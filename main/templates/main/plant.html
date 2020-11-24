@@ -13,14 +13,14 @@
         <div class="row content">
             <div class="col-md">
                 <div class="plant-about mt-4 mb-2">This plant contains these phytochems:</div>
-                <a class="download-as-option" href="{% url 'download_compound' plant.name %}">Download all</a>
+                <a class="download-as-option" href="{% url 'main:download_compound' plant.name %}">Download all</a>
                 {% for compound in compounds %}
                     <div class="row mb-3">
                         <div class="w-100 p-3 bg-dark text-white">
                             <span class="float-left"><a
-                                    href="{% url "compound"  compound.id %}">{{ compound.PID }}</a></span>
+                                    href="{% url "main:compound"  compound.id %}">{{ compound.PID }}</a></span>
                             <span class="float-right">
-                                <a class="download-as-option" href="{% url 'download_compound' compound.PID %}">Download</a>
+                                <a class="download-as-option" href="{% url 'main:download_compound' compound.PID %}">Download</a>
                             </span>
                         </div>
                         <div class="row mb-3 ml-2 mt-2 chemical-recomand-parent justify-content-start">
@@ -28,7 +28,7 @@
                             <br>
                             {% for plant in compound.plants.all %}
                                 <a class="chemical-recomand"
-                                   href="{% url "plant" plant.id %}">{{ plant.name }}</a>
+                                   href="{% url "main:plant" plant.id %}">{{ plant.name }}</a>
                             {% endfor %}
                         </div>
                         <div class="row justify-contents-center align-item-center w-100">

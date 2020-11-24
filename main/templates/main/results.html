@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container">
         <div class="justify-content-center mb-3">
-            <form class="input-group" action="{% url 'results' %}" method="get">
+            <form class="input-group" action="{% url 'main:results' %}" method="get">
                 <input type="text" class="search form-control" placeholder="Search" aria-label="Search"
                        value="{{ request.GET.search }}" name="search">
                 <div class="input-group-append">
@@ -18,15 +18,15 @@
             {% if compounds %}
                 <div class="chemical-about">Showing {{ compounds|length }} result(s) matching your query</div>
                 <div>
-                    <a class="download-as-option" href="{% url 'download_compound' request.GET.search %}">Download all search results</a>
+                    <a class="download-as-option" href="{% url 'main:download_compound' request.GET.search %}">Download all search results</a>
                 </div>
                 {% for compound in compounds %}
                     <div class="row mb-3">
                         <div class="w-100 p-3 bg-dark text-white">
                             <span class="float-left"><a
-                                    href="{% url "compound"  compound.id %}">{{ compound.PID }}</a></span>
+                                    href="{% url "main:compound"  compound.id %}">{{ compound.PID }}</a></span>
                             <span class="float-right">
-                                <a class="download-as-option" href="{% url 'download_compound' compound.PID %}">Download</a>
+                                <a class="download-as-option" href="{% url 'main:download_compound' compound.PID %}">Download</a>
                             </span>
                         </div>
                         <div class="row mb-3 ml-2 mt-2 chemical-recomand-parent justify-content-start">
@@ -34,7 +34,7 @@
                             <br>
                             {% for plant in compound.plants.all %}
                                 <a class="chemical-recomand"
-                                   href="{% url "plant" plant.id %}">{{ plant.name }}</a>
+                                   href="{% url "main:plant" plant.id %}">{{ plant.name }}</a>
                             {% endfor %}
                         </div>
                         <div class="row justify-contents-center align-item-center w-100">

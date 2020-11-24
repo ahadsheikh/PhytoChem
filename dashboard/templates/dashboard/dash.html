@@ -10,7 +10,7 @@
             {% endfor %}
         {% endif %}
 
-        <form action="{% url 'dash_upload' %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'dash:dash_upload' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
                 <label for="plantText" class="text-success font-weight-bold">Plant</label>

@@ -4,6 +4,8 @@ from django.views.generic import TemplateView
 
 from . import views
 
+app_name = "user"
+
 urlpatterns = [
     path('register/', views.register, name='register'),
     path('profile/<str:username>/', views.profile, name='profile'),
