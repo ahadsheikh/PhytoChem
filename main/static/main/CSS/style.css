@@ -84,7 +84,6 @@
 
 /*           ------ writting for plant and Chemical Comound code --------*/
 .plant-about {
-    text-transform: capitalize;
     font-family: 'Titillium Web', sans-serif;
     padding: 5px 0;
     font-size: 30px;
@@ -97,7 +96,6 @@
 }
 
 .chemical-title {
-    text-transform: capitalize;
     font-family: 'ubuntu', sans-serif;
     border-radius: 3px;
     font-size: 25px;
@@ -116,7 +114,6 @@
 }
 
 .chemical-recomand {
-    text-transform: capitalize;
     font-family: 'Titillium Web', sans-serif;
     font-size: 17px;
     border-radius: 10px;

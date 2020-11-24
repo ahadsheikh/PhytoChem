@@ -9,9 +9,11 @@
                 <img class="ml-2 mr-2 plant-image" src="{% static '/main/images/chemical-white.png' %}" alt="Logo">
                 <p class="chemical-title">{{ compound.Molecular_Formula }}</p>
             </div>
-            <div class="w-100 p-3 bg-dark text-white text-center">
-                <span class="pull-left">Phytochem ID:</span>
-                <span class="pull-right">{{ compound.PID }}</span>
+            <div class="w-100 m-3 p-3 bg-dark text-white text-center">
+                <span class="float-left">{{ compound.PID }}</span>
+                <span class="float-right">
+                    <a class="download-as-option" href="{% url 'download_compound' compound.PID %}">Download</a>
+                </span>
             </div>
         </div>
         <div class="chemical-about mt-4 mb-2">The phytochem is found in these plants</div>

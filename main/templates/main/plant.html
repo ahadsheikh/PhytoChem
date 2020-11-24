@@ -4,7 +4,7 @@
 {% block title %}{{ plant.name }} | Phytochem Database{% endblock %}
 {% block body %}
     <div class="container">
-         <div class="row mb-2 p-3 rounded plant-title">
+        <div class="row mb-2 p-3 rounded plant-title">
             <div class="col-md d-flex justify-content-end">
                 <img class="ml-2 mr-2 plant-image" src="{% static '/main/images/plant-icon.png' %}" alt="Logo">
                 <p class="chemical-title">{{ plant.name }}</p>
@@ -12,27 +12,31 @@
         </div>
         <div class="row content">
             <div class="col-md">
-                <div class="plant-about mt-4 mb-2">From this plant we found these Chemical</div>
+                <div class="plant-about mt-4 mb-2">This plant contains these phytochems:</div>
+                <a class="download-as-option" href="{% url 'download_compound' plant.name %}">Download all</a>
                 {% for compound in compounds %}
-                    <div class="card card-body row mb-3">
-
-                        <table class="table">
-                            <tr class="row">
-                                <td class="col-md" align="center"> <img src="{{ compound.ROMol }}" alt=""> </td>
-                                <td class="col-sm text-break">
-                                    <table class="table-striped">
-                                        <tr>
-                                            <td><a href="{% url "compound"  compound.id %}">{{ compound.PID }}</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ compound.Molecular_Formula }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ compound.Smiles }}</td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
+                    <div class="row mb-3">
+                        <div class="row border m-3 p-3 justify-contents-center align-item-center w-100">
+                            <div class="col-sm">
+                                <img src="{{ compound.ROMol }}" class="img-responsive center-block d-block mx-auto">
+                            </div>
+                            <div class="col-sm">
+                                <div>
+                                    <span class="pull-left">Phytochem ID:</span>
+                                    <span class="pull-right"><a href="{% url 'compound' compound.id %}">{{ compound.PID }}</a></span>
+                                </div>
+                                <div>
+                                    <span class="pull-left">Molecular Formula:</span>
+                                    <span class="pull-right">{{ compound.Molecular_Formula }}</span>
+                                </div>
+                                <div>
+                                    <span class="pull-left">Canonical SMILES:</span>
+                                    <span class="pull-right text-wrap text-break">{{ compound.Smiles }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        </td>
+                        </tr>
                         </table>
 
                     </div>
