@@ -34,6 +34,10 @@ ALLOWED_HOSTS = [
     '*',
 ]
 
+# Include to Middleware
+INCLUDE_TO_ADMINLOGINMIDDLEWARE = [
+    'dashboard.views.dash_index'
+]
 
 # Application definition
 
@@ -60,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Custom Middleware
+    'core.middlewares.AdminLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'biochemdata.urls'

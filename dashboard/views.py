@@ -15,14 +15,14 @@ from core.utils.QueryHandler import handle_new_sdf
 
 
 @login_required(redirect_field_name='next')
-@decorator_from_middleware(AdminLoginMiddleware)
 def dash_index(request):
-    contributors = Contribution.objects.all()
-    context = {
-        'title': 'Dashboard',
-        'contributors': contributors
-    }
-    return render(request, 'dashboard/dash.html', context=context)
+
+        contributors = Contribution.objects.all()
+        context = {
+            'title': 'Dashboard',
+            'contributors': contributors
+        }
+        return render(request, 'dashboard/dash.html', context=context)
 
 
 @login_required(redirect_field_name='next')
