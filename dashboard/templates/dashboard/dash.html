@@ -37,16 +37,16 @@
                         <div class="col-md-8">
                             <div class="d-flex justify-content-end">
                                 <div class="ml-1">
-                                    <button class="btn btn-info"><a href="{% url "show_data" con.id %}">Show</a></button>
+                                    <button class="btn btn-info"><a href="{% url "dash:show_data" con.id %}">Show</a></button>
                                 </div>
                                 <div class="ml-1">
-                                    <button class="btn btn-info"><a href="{% url "download_new_file" con.id %}">Download</a></button>
+                                    <button class="btn btn-info"><a href="{% url "dash:download_new_file" con.id %}">Download</a></button>
                                 </div>
                                 <div class="ml-1">
                                     <button class="btn btn-success">Accept</button>
                                 </div>
                                 <div class="ml-1">
-                                    <form action="{% url 'reject_contribution_data' con.id %}" method="post">
+                                    <form action="{% url 'dash:reject_contribution_data' con.id %}" method="post">
                                         {% csrf_token %}
                                         <button type="submit" class="btn btn-danger">Reject</button>
                                     </form>

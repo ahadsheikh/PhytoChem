@@ -16,7 +16,6 @@ from core.utils.QueryHandler import handle_new_sdf
 
 @login_required(redirect_field_name='next')
 def dash_index(request):
-
         contributors = Contribution.objects.all()
         context = {
             'title': 'Dashboard',
