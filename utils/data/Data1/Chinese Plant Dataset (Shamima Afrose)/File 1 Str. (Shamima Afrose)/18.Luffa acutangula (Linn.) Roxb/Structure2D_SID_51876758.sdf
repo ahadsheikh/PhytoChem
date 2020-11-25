@@ -1,0 +1,40 @@
+51876758
+  -OEChem-09032015182D
+
+  0  0  0     0  0  0  0  0  0999 V2000
+M  END
+> <PUBCHEM_COMPOUND_ID_TYPE>
+0
+
+> <PUBCHEM_SUBS_AUTO_STRUCTURE>
+Deposited Substance chemical structure was generated via Synonym "CID543575" to be CID 543575
+
+> <PUBCHEM_SUBSTANCE_ID>
+51876758
+
+> <PUBCHEM_SUBSTANCE_VERSION>
+2
+
+> <PUBCHEM_EXT_DATASOURCE_NAME>
+NextBio
+
+> <PUBCHEM_EXT_DATASOURCE_REGID>
+543575
+
+> <PUBCHEM_SUBSTANCE_SYNONYM>
+CID543575
+Diazoprogesterone
+
+> <PUBCHEM_XREF_EXT_ID>
+543575
+
+> <PUBCHEM_EXT_DATASOURCE_URL>
+http://www.nextbio.com/
+
+> <PUBCHEM_EXT_SUBSTANCE_URL>
+http://www.nextbio.com/b/search/ov/Diazoprogesterone?id=2050285&type=compound&synonym=Diazoprogesterone
+
+> <PUBCHEM_CID_ASSOCIATIONS>
+543575  1
+
+$$$$

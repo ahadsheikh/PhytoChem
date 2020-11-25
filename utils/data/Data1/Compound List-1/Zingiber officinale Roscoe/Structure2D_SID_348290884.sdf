@@ -1,0 +1,92 @@
+348290884
+  -OEChem-11232013512D
+
+ 12 13  0     1  0  0  0  0  0999 V2000
+   -0.3347    0.4182    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+   -1.1713    0.1671    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    0.4599    0.0416    0.0000 C   0  0  3  0  0  0  0  0  0  0  0  0
+   -1.1713   -0.6275    0.0000 C   0  0  3  0  0  0  0  0  0  0  0  0
+   -0.1254   -0.2926    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    0.3764   -0.8365    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+   -0.5437   -0.9203    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+   -0.4182   -1.2130    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    1.1710    0.3764    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+   -1.8824   -1.0458    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    1.8824   -0.0002    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    1.2130    1.2130    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+  1  2  1  0  0  0  0
+  1  3  1  0  0  0  0
+  2  4  1  0  0  0  0
+  3  5  1  0  0  0  0
+  3  6  1  0  0  0  0
+  3  9  1  0  0  0  0
+  4  7  1  0  0  0  0
+  4  8  1  0  0  0  0
+  4 10  1  0  0  0  0
+  5  7  2  0  0  0  0
+  6  8  1  0  0  0  0
+  9 11  1  0  0  0  0
+  9 12  1  0  0  0  0
+M  END
+> <PUBCHEM_COMPOUND_ID_TYPE>
+0
+
+> <PUBCHEM_TOTAL_CHARGE>
+0
+
+> <PUBCHEM_SUBSTANCE_ID>
+348290884
+
+> <PUBCHEM_SUBSTANCE_VERSION>
+1
+
+> <PUBCHEM_EXT_DATASOURCE_NAME>
+811
+
+> <PUBCHEM_EXT_DATASOURCE_REGID>
+HMDB0035766
+
+> <PUBCHEM_SUBSTANCE_SYNONYM>
+1, 4-Epidioxy-p-menth-2-ene
+1, 4-Peroxy-p-menth-2-ene
+1,4-Epidioxy-2-p-menthene
+1,4-Epidioxy-p-Menth-2-ene
+1,4-Peroxido-p-menthene-2
+1,4-Peroxy-p-menth-2-ene
+1-Isopropyl-4-methyl-2,3-Dioxabicyclo(2.2.2)oct-5-ene
+1-Isopropyl-4-methyl-2,3-Dioxabicyclo[2.2.2]oct-5-ene
+1-Isopropyl-4-methyl-7-oxabicyclo[2.2.1]hept-2-ene
+1-Methyl-4-(1-methylethyl)-2,3-dioxabicyclo(2.2.2)oct-5-ene
+1-Methyl-4-(1-methylethyl)-2,3-dioxabicyclo[2.2.2]oct-5-ene
+1-Methyl-4-(1-methylethyl)-2,3-dioxabicyclo[2.2.2]oct-5-ene, 9CI
+4-Methyl-1-(propan-2-yl)-2,3-dioxabicyclo[2.2.2]oct-5-ene
+Ascapurin
+Ascaricum
+Ascaridiol
+Ascaridol
+Ascaridole
+Ascaridole (organic peroxide) [forbidden]
+Ascaridole epoxide
+Ascarisin
+Askaridol
+Cis-ascaridole
+Kebal II
+Uncinacina
+
+> <PUBCHEM_XREF_EXT_ID>
+HMDB0035766
+
+> <PUBCHEM_EXT_DATASOURCE_URL>
+http://www.hmdb.ca
+
+> <PUBCHEM_EXT_SUBSTANCE_URL>
+http://www.hmdb.ca/metabolites/HMDB0035766
+
+> <PUBCHEM_CID_ASSOCIATIONS>
+10545  1
+
+> <PUBCHEM_COORDINATE_TYPE>
+1
+3
+
+$$$$

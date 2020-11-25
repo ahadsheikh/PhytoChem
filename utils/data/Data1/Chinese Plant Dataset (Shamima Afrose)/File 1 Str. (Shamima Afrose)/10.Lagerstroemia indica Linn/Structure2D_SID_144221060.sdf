@@ -1,0 +1,74 @@
+144221060
+  -OEChem-08262016542D
+
+  0  0  0     0  0  0  0  0  0999 V2000
+M  END
+> <PUBCHEM_COMPOUND_ID_TYPE>
+0
+
+> <PUBCHEM_SUBS_AUTO_STRUCTURE>
+Deposited Substance chemical structure was generated via Synonym(s) "homoorientin", "4H-1-benzopyran-4-one, 2-(3,4-dihydroxyphenyl)-6-beta-D-glucopyranosyl-5,7-dihydroxy-", "isoorientin", "luteolin-6-C-glucoside" and Synonym Consistency to be CID 114776
+
+> <PUBCHEM_SUBSTANCE_ID>
+144221060
+
+> <PUBCHEM_SUBSTANCE_VERSION>
+22
+
+> <PUBCHEM_EXT_DATASOURCE_NAME>
+Comparative Toxicogenomics Database
+
+> <PUBCHEM_EXT_DATASOURCE_REGID>
+C057912
+
+> <PUBCHEM_SUBSTANCE_COMMENT>
+The Comparative Toxicogenomics Database (CTD) promotes understanding about the effects of environmental chemicals
+on human health by curating chemical-gene/protein interactions and chemical- and gene-disease relationships from
+the literature.  Click on these links to find specific, curated data for this chemical at CTD:
+Genes and Proteins http://ctdbase.org/detail.go?view=gene&type=chem&acc=C057912
+Chemical-Gene Interactions http://ctdbase.org/detail.go?view=ixn&type=chem&acc=C057912
+Diseases http://ctdbase.org/detail.go?view=disease&type=chem&acc=C057912
+Pathways http://ctdbase.org/detail.go?view=pathway&type=chem&acc=C057912
+Depositor-supplied synonyms are taken from MeSH (Medical Subject Headings).
+
+> <PUBCHEM_SUBSTANCE_SYNONYM>
+homoorientin
+4H-1-benzopyran-4-one, 2-(3,4-dihydroxyphenyl)-6-beta-D-glucopyranosyl-5,7-dihydroxy-
+6-Glc-luteolin
+isoorientin
+luteolin-6-C-glucoside
+iso-orientin
+C057912
+
+> <PUBCHEM_XREF_EXT_ID>
+C057912
+
+> <PUBCHEM_NCBI_TAXONOMY_ID>
+9606
+10116
+
+> <PUBCHEM_NCBI_GENE_ID>
+24498
+5594
+24224
+5595
+207
+59086
+303413
+24835
+81633
+
+> <PUBCHEM_PUBMED_ID>
+24374571
+22446813
+
+> <PUBCHEM_EXT_DATASOURCE_URL>
+http://ctdbase.org/
+
+> <PUBCHEM_EXT_SUBSTANCE_URL>
+http://ctdbase.org/detail.go?type=chem&acc=C057912
+
+> <PUBCHEM_CID_ASSOCIATIONS>
+114776  1
+
+$$$$

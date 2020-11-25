@@ -1,0 +1,40 @@
+51014580
+  -OEChem-08292014202D
+
+  0  0  0     0  0  0  0  0  0999 V2000
+M  END
+> <PUBCHEM_COMPOUND_ID_TYPE>
+0
+
+> <PUBCHEM_SUBS_AUTO_STRUCTURE>
+Deposited Substance chemical structure was generated via Synonym "CID11968428" to be CID 11968428
+
+> <PUBCHEM_SUBSTANCE_ID>
+51014580
+
+> <PUBCHEM_SUBSTANCE_VERSION>
+2
+
+> <PUBCHEM_EXT_DATASOURCE_NAME>
+NextBio
+
+> <PUBCHEM_EXT_DATASOURCE_REGID>
+11968428
+
+> <PUBCHEM_SUBSTANCE_SYNONYM>
+Agastachin
+CID11968428
+
+> <PUBCHEM_XREF_EXT_ID>
+11968428
+
+> <PUBCHEM_EXT_DATASOURCE_URL>
+http://www.nextbio.com/
+
+> <PUBCHEM_EXT_SUBSTANCE_URL>
+http://www.nextbio.com/b/search/ov/Agastachin?id=7529065&type=compound&synonym=Agastachin
+
+> <PUBCHEM_CID_ASSOCIATIONS>
+11968428  1
+
+$$$$

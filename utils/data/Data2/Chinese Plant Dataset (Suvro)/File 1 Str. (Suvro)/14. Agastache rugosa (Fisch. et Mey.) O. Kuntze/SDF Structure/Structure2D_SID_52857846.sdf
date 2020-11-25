@@ -1,0 +1,40 @@
+52857846
+  -OEChem-08292014172D
+
+  0  0  0     0  0  0  0  0  0999 V2000
+M  END
+> <PUBCHEM_COMPOUND_ID_TYPE>
+0
+
+> <PUBCHEM_SUBS_AUTO_STRUCTURE>
+Deposited Substance chemical structure was generated via Synonym "CID5316761" to be CID 5316761
+
+> <PUBCHEM_SUBSTANCE_ID>
+52857846
+
+> <PUBCHEM_SUBSTANCE_VERSION>
+2
+
+> <PUBCHEM_EXT_DATASOURCE_NAME>
+NextBio
+
+> <PUBCHEM_EXT_DATASOURCE_REGID>
+5316761
+
+> <PUBCHEM_SUBSTANCE_SYNONYM>
+Agastachoside
+CID5316761
+
+> <PUBCHEM_XREF_EXT_ID>
+5316761
+
+> <PUBCHEM_EXT_DATASOURCE_URL>
+http://www.nextbio.com/
+
+> <PUBCHEM_EXT_SUBSTANCE_URL>
+http://www.nextbio.com/b/search/ov/Agastachoside?id=2038066&type=compound&synonym=Agastachoside
+
+> <PUBCHEM_CID_ASSOCIATIONS>
+5316761  1
+
+$$$$
