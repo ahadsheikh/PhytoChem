@@ -3,7 +3,7 @@ static/
 
 # dev ignore
 media/
-utils/data/
+core/utils/data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

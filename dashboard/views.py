@@ -7,7 +7,7 @@ import os
 from dashboard.forms import UploadFileForm
 from main.views import prepare_download
 from submit_data.models import Contribution
-from utils.QueryHandler import handle_new_sdf
+from core.utils.QueryHandler import handle_new_sdf
 
 
 @login_required(redirect_field_name='next')

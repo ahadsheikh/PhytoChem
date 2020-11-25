@@ -1,8 +1,8 @@
-from django.core.validators import MaxValueValidator, MinValueValidator, FileExtensionValidator
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.contrib.auth.models import User
 
-from utils.QueryHandler import validate_sdf
+from core.utils.QueryHandler import validate_sdf
 
 
 class Contribution(models.Model):

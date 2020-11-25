@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
-from django.http import FileResponse, HttpResponse, Http404
+from django.http import HttpResponse, Http404
 from django.conf import settings
 
 import os
 from main.models import Compound, Plant
-from utils.QueryHandler import query_to_df, df_to_sdf
+from core.utils.QueryHandler import query_to_df, df_to_sdf
 
 
 def index(request):
