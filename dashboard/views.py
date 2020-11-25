@@ -32,7 +32,7 @@ def upload(request):
         if form.is_valid():
             handle_file(request.FILES['file'], request.POST['plant'])
             messages.success(request, "Upload File Successfully")
-            return redirect('dashboard')
+            return redirect('dash:dashboard')
 
     messages.success(request, "File Upload Failed")
     return HttpResponse(
@@ -65,15 +65,19 @@ def download_new_file(request, cid):
 @decorator_from_middleware(AdminLoginMiddleware)
 def reject_contribution(request, cid):
     contribution = get_object_or_404(Contribution, pk=cid)
-    contribution.status = 2
-    contribution.save()
-    path = contribution.file.path
-    try:
-        os.remove(path)
-    except FileNotFoundError:
-        pass
+    if request.method == 'POST' and request.user.is_superuser:
+        contribution.status = 2
+        contribution.save()
+        path = contribution.file.path
+        try:
+            os.remove(path)
+        except FileNotFoundError:
+            pass
 
-    return redirect('dashboard')
+        return redirect('dash:dashboard')
+    return HttpResponse(
+        'You are not permitted to do that'
+    )
 
 
 # Not path view
