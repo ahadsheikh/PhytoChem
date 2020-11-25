@@ -18,6 +18,6 @@ urlpatterns = [
         'logout/',
         LogoutView.as_view(template_name='userauth/logout.html'),
         name='logout'),
-    path('profile/edit', views.profile_edit, name='profile_edit'),
+    path('profile-edit/', views.profile_edit, name='profile_edit'),
     # Test
 ]

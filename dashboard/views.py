@@ -62,7 +62,6 @@ def download_new_file(request, cid):
 
 
 @login_required()
-@decorator_from_middleware(AdminLoginMiddleware)
 def reject_contribution(request, cid):
     contribution = get_object_or_404(Contribution, pk=cid)
     if request.method == 'POST' and request.user.is_superuser:

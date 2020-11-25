@@ -12,7 +12,7 @@ class AdminLoginMiddleware(object):
 
     def process_view(self, request, view_func, *view_args, **view_kargs):
         # Get the view name as a string
-        view_name = '.'.join((view_func.__module__, view_func.__name__))
+        view_name = view_func.__module__ # '.'.join((view_func.__module__, view_func.__name__))
 
         # If the view name is in our exclusion list, exit early
         inclusion_set = getattr(settings, 'INCLUDE_TO_ADMINLOGINMIDDLEWARE', [])

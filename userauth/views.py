@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from submit_data.models import Contribution
@@ -10,9 +10,6 @@ from .models import Profile
 
 
 def register(request):
-    context = {
-        'title': 'Register',
-    }
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
@@ -29,10 +26,9 @@ def register(request):
 
 @login_required
 def profile(request, username):
-    user = User.objects.get(username=username)
+    user = get_object_or_404(User, username=username)
     contributions = Contribution.objects.filter(user=user)
     context = {
-        'title': 'Profile | ' + user.username,
         'user_d': user,
         'contributions': contributions
     }
@@ -55,7 +51,6 @@ def profile_edit(request):
     profileUpdateForm = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
-        'title': 'Profile | Edit',
         'u_form': userUpdateForm,
         'p_form': profileUpdateForm
     }

@@ -34,9 +34,9 @@ ALLOWED_HOSTS = [
     '*',
 ]
 
-# Include to Middleware
+# Include App to Middleware
 INCLUDE_TO_ADMINLOGINMIDDLEWARE = [
-    'dashboard.views.dash_index'
+    'dashboard.views'
 ]
 
 # Application definition
