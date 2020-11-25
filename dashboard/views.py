@@ -4,6 +4,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 import os
+
+from django.utils.decorators import decorator_from_middleware
+
+from core.middlewares import AdminLoginMiddleware
 from dashboard.forms import UploadFileForm
 from main.views import prepare_download
 from submit_data.models import Contribution
@@ -11,15 +15,14 @@ from core.utils.QueryHandler import handle_new_sdf
 
 
 @login_required(redirect_field_name='next')
+@decorator_from_middleware(AdminLoginMiddleware)
 def dash_index(request):
-    if request.user.is_superuser:
-        contributors = Contribution.objects.all()
-        context = {
-            'title': 'Dashboard',
-            'contributors': contributors
-        }
-        return render(request, 'dashboard/dash.html', context=context)
-    return HttpResponseNotFound('You are not permitted')
+    contributors = Contribution.objects.all()
+    context = {
+        'title': 'Dashboard',
+        'contributors': contributors
+    }
+    return render(request, 'dashboard/dash.html', context=context)
 
 
 @login_required(redirect_field_name='next')
@@ -59,21 +62,18 @@ def download_new_file(request, cid):
 
 
 @login_required()
+@decorator_from_middleware(AdminLoginMiddleware)
 def reject_contribution(request, cid):
     contribution = get_object_or_404(Contribution, pk=cid)
-    if request.method == 'POST' and request.user.is_superuser:
-        contribution.status = 2
-        contribution.save()
-        path = contribution.file.path
-        try:
-            os.remove(path)
-        except FileNotFoundError:
-            pass
+    contribution.status = 2
+    contribution.save()
+    path = contribution.file.path
+    try:
+        os.remove(path)
+    except FileNotFoundError:
+        pass
 
-        return redirect('dashboard')
-    return HttpResponse(
-        'You are not permitted to do that'
-    )
+    return redirect('dashboard')
 
 
 # Not path view
