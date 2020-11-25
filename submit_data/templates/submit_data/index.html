@@ -13,7 +13,7 @@
             {% endfor %}
         {% endif %}
 
-        <form action="{% url 'user_upload' %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'contribute:user_upload' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             <input type="hidden" name="user" value="{{ user.id }}">
