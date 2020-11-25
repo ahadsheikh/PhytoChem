@@ -29,7 +29,7 @@ def upload(request):
         if form.is_valid():
             handle_file(request.FILES['file'], request.POST['plant'])
             messages.success(request, "Upload File Successfully")
-            return redirect('dashboard')
+            return redirect('dash:dashboard')
 
     messages.success(request, "File Upload Failed")
     return HttpResponse(
@@ -70,7 +70,7 @@ def reject_contribution(request, cid):
         except FileNotFoundError:
             pass
 
-        return redirect('dashboard')
+        return redirect('dash:dashboard')
     return HttpResponse(
         'You are not permitted to do that'
     )
