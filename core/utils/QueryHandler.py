@@ -29,7 +29,7 @@ def df_to_pdb(compounds_df, file):
 
 
 def get_src_from_image_tag(html):
-    soup = BeautifulSoup(html, "html.parser")
+    soup = BeautifulSoup(str(html), "html.parser")
     return soup.img['src']
 
 
@@ -90,8 +90,7 @@ def handle_new_sdf(path, plant=None, change_db=True):
             'logP': logp
         }, ignore_index=True)
     PandasTools.AddMoleculeColumnToFrame(compounds_df, 'Smiles', 'ROMol', includeFingerprints=True)
-    compounds_df.ROMol = get_src_from_image_tag(str(compounds_df.ROMol))
-    compounds_df.drop_duplicates(subset="Smiles", keep=False, inplace=True)  # drop duplicate by smiles
+    compounds_df.ROMol = compounds_df.ROMol.apply(get_src_from_image_tag)
     if change_db:
         update_db_from_df(compounds_df, plant)
         update_sdf()

@@ -43,9 +43,11 @@ def upload(request):
 def show_submitted_files(request, cid):
     contribution = get_object_or_404(Contribution, pk=cid)
     new_df = handle_new_sdf(contribution.file.path, change_db=False)
+    print(new_df)
     context = {
         'new_data': new_df.values.tolist(),
         'contributor': contribution.user.first_name + ' ' + contribution.user.last_name,
+        'contributor_id': contribution.id,
         'pub_link': contribution.pub_link,
         'data_desc': contribution.data_description,
         'mendeley_data': contribution.mendeley_data_link,
@@ -67,6 +69,25 @@ def reject_contribution(request, cid):
         contribution.status = 2
         contribution.save()
         path = contribution.file.path
+        try:
+            os.remove(path)
+        except FileNotFoundError:
+            pass
+
+        return redirect('dash:dashboard')
+    return HttpResponse(
+        'You are not permitted to do that'
+    )
+
+
+@login_required()
+def accept_contribution(request, cid):
+    contribution = get_object_or_404(Contribution, pk=cid)
+    if request.method == 'POST' and request.user.is_superuser:
+        contribution.status = 1
+        contribution.save()
+        path = contribution.file.path
+        handle_new_sdf(path, plant=contribution.plant_name)
         try:
             os.remove(path)
         except FileNotFoundError:

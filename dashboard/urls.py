@@ -8,5 +8,6 @@ urlpatterns = [
     path('upload/', views.upload, name='dash_upload'),
     path('show_data/<int:cid>/', views.show_submitted_files, name='show_data'),
     path('download_new/<int:cid>/', views.download_new_file, name='download_new_file'),
-    path('reject-contribution/<int:cid>/', views.reject_contribution, name='reject_contribution_data')
+    path('reject-contribution/<int:cid>/', views.reject_contribution, name='reject_contribution_data'),
+    path('accept-contribution/<int:cid>/', views.accept_contribution, name='accept_contribution_data')
 ]
