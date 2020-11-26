@@ -14,11 +14,12 @@ header{
     letter-spacing: 0.07em;
 }
 nav .navbar-nav li a{
+    text-transform: capitalize;
     font-family: 'Titillium Web', sans-serif;
     font-size: 20px;
 }
 nav .navbar-nav li img{
-    padding: 12px 0;
+    padding: 20px 0;
 }
 .nav-link:hover{
     color: #cecece !important;
