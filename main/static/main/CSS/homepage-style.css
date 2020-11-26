@@ -43,3 +43,8 @@ nav .navbar-nav li img{
         font-size: 27px;
     }
 }
+
+.nav-scroll.scrolled{
+    background-image: linear-gradient(to right,#1a005e, #060009,#330148);
+    transition: ease-in-out 0.5s;
+}

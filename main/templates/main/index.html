@@ -3,29 +3,24 @@
 
 {% block title %}Home | Phytochem Database{% endblock %}
 {% block body %}
-    <main class="site-main">
-        <div class="container row justify-content-center align-items-center">
-            <div class="site-title col-lg-7 justify-content-center align-items-center">
-                <div class="intro text-uppercase">Find among {{ n_compounds }}</div>
-                <div class="intro text-uppercase"><span class="phytochem">Phytochemical</span>
-                    data
-                </div>
-                <div class="intro text-uppercase">From {{ n_plants }} plants</div>
-                <div class="details">Search the database by a unique accession id, e.g., Phytochem_000001 or
-                    just 1,
-                    by a molecular formula or its canonical SMILES.<br>Download all data as an <a
-                            href="{% url "all-file-download" %}" class="sdf">sdf</a> file
-                </div>
-                <div class="details">You can contribute to this dataset too, visit <a href="{% url "submit_data" %}">this
+        <header>
+            <div class="container">
+                <div class="row d-flex align-items-start justify-content-center flex-column col-md-6" style="height: 100vh;">
+                    <div class="text-item mb-1 p-1">FIND AMONG {{ n_compounds }}</div>
+                    <div class="text-item mb-1 p-1 phytochem"><span>PHYTOCHEMICAL</span> DATA</div>
+                    <div class="text-item mb-1 p-1">FROM {{ n_plants }} PLANTS</div>
+                    <div class="details">You can contribute to this dataset too, visit <a href="{% url "submit_data" %}">this
                     link</a></div>
+                    <!-- Search form -->
+                    <form class="container shadow-lg d-flex p-0" action="{% url 'results' %}" method="get">
+                        <input class="form-control mt-3 mr-1 p-4 search-input"
+                               name="search" value="{{ request.GET.search }}"
+                               type="text" placeholder="Search phytochems E.x: C28H56" aria-label="Search">
+                        <button class="btn mt-3 mr-1 p-1 submit-btn" type="submit" value=" "></button>
+                    </form>
+                </div>
             </div>
-            <div class="col-lg-5 ml-auto p-2">
-                <form class="input-group" action="{% url 'results' %}" method="get">
-                    <input class="search shadow-lg form-control" name="search" value="{{ request.GET.search }}"
-                           type="text" id="search" placeholder="Search Element E.x: C28H56"/>
-                    <input class="submit shadow-lg" type="submit" value=" "/>
-                </form>
-            </div>
-        </div>
-    </main>
+        </header>
+    <!--header Area or Nav area has Finished-->
+
 {% endblock %}
