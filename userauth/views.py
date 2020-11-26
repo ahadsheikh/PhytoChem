@@ -21,6 +21,11 @@ def register(request):
             return redirect('user:profile', username)
     else:
         form = UserForm()
+        # for f in form:
+        #     print(dir(f))
+        # object_methods = [method_name for method_name in dir(form) if callable(getattr(form, method_name))]
+        # for a in object_methods:
+        #     print(a)
     return render(request, 'userauth/register.html', {'form': form})
 
 
