@@ -11,7 +11,7 @@ class Contribution(models.Model):
     pub_link = models.URLField(max_length=200)
     data_description = models.TextField(max_length=500, blank=True)
     mendeley_data_link = models.URLField(max_length=200, blank=True)
-    status = models.SmallIntegerField(default=0)
+    status = models.SmallIntegerField(default=0) # 0 -> Not reviewed, 1 -> Accepted, 2 -> Rejected
     file = models.FileField(upload_to='submittedFiles',
                             validators=[FileExtensionValidator(allowed_extensions=['sdf']),
                                         validate_sdf])

@@ -32,10 +32,10 @@
             </div>
             {% for con in contributors %}
                 {% if con.status == 0 %}
-                    <div class="row p-2 d-flex border border-primary" style="border-radius: 10px">
-                        <div class="col-md-4 bg-info border border-success py-2"
-                             style="margin: auto; border-radius: 10px">
-                            <a href="#"><strong>{{ con.user.first_name }} {{ con.user.last_name }}</strong></a>
+                    <div class="row p-2 d-flex mb-2" style="border-radius: 10px; background: #DBEABF">
+                        <div class="col-md-4 py-2" style="margin: auto; border-radius: 10px">
+                            <a href="#"><strong>{{ con.user.first_name }} {{ con.user.last_name }} : <span style="color: #65BF02">{{ con.plant_name }}</span></strong></a>
+                            <small>{{ con.created_at }}</small>
                         </div>
                         <div class="col-md-8">
                             <div class="d-flex justify-content-end">
