@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from django.http import HttpResponse, Http404
 from django.conf import settings
@@ -29,7 +29,7 @@ def results(request):
 
 
 def plant(request, id):
-    plant = Plant.objects.get(id=id)
+    plant = get_object_or_404(Plant, id=id)
     compounds = plant.compound_set.all()
     context = {
         'plant': plant,
@@ -39,7 +39,7 @@ def plant(request, id):
 
 
 def compound(request, id):
-    compound = Compound.objects.get(id=id)
+    compound = get_object_or_404(Compound,id=id)
     lipinski = (compound.H_Bond_Donors > 5) + (compound.H_Bond_Acceptors > 10) + \
                (compound.Molecular_Weight >= 500) + (compound.logP > 5)
     plants = compound.plants.all()
