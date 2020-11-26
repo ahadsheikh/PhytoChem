@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from submit_data.models import Contribution
@@ -10,9 +10,6 @@ from .models import Profile
 
 
 def register(request):
-    context = {
-        'title': 'Register',
-    }
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
@@ -21,18 +18,22 @@ def register(request):
             form.save()
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('profile', username)
+            return redirect('user:profile', username)
     else:
         form = UserForm()
+        # for f in form:
+        #     print(dir(f))
+        # object_methods = [method_name for method_name in dir(form) if callable(getattr(form, method_name))]
+        # for a in object_methods:
+        #     print(a)
     return render(request, 'userauth/register.html', {'form': form})
 
 
 @login_required
 def profile(request, username):
-    user = User.objects.get(username=username)
+    user = get_object_or_404(User, username=username)
     contributions = Contribution.objects.filter(user=user)
     context = {
-        'title': 'Profile | ' + user.username,
         'user_d': user,
         'contributions': contributions
     }
@@ -49,13 +50,12 @@ def profile_edit(request):
             userUpdateForm.save()
             profileUpdateForm.save()
             messages.success(request, "Successfully Edit Done")
-            return redirect('profile_edit')
+            return redirect('user:profile_edit')
 
     userUpdateForm = UserUpdateForm(instance=request.user)
     profileUpdateForm = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
-        'title': 'Profile | Edit',
         'u_form': userUpdateForm,
         'p_form': profileUpdateForm
     }

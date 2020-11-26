@@ -4,22 +4,24 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 import os
+
+from django.utils.decorators import decorator_from_middleware
+
+from core.middlewares import AdminLoginMiddleware
 from dashboard.forms import UploadFileForm
 from main.views import prepare_download
 from submit_data.models import Contribution
-from utils.QueryHandler import handle_new_sdf
+from core.utils.QueryHandler import handle_new_sdf
 
 
 @login_required(redirect_field_name='next')
 def dash_index(request):
-    if request.user.is_superuser:
         contributors = Contribution.objects.all()
         context = {
             'title': 'Dashboard',
             'contributors': contributors
         }
         return render(request, 'dashboard/dash.html', context=context)
-    return HttpResponseNotFound('You are not permitted')
 
 
 @login_required(redirect_field_name='next')
@@ -29,7 +31,7 @@ def upload(request):
         if form.is_valid():
             handle_file(request.FILES['file'], request.POST['plant'])
             messages.success(request, "Upload File Successfully")
-            return redirect('dashboard')
+            return redirect('dash:dashboard')
 
     messages.success(request, "File Upload Failed")
     return HttpResponse(
@@ -41,9 +43,11 @@ def upload(request):
 def show_submitted_files(request, cid):
     contribution = get_object_or_404(Contribution, pk=cid)
     new_df = handle_new_sdf(contribution.file.path, change_db=False)
+    print(new_df)
     context = {
         'new_data': new_df.values.tolist(),
         'contributor': contribution.user.first_name + ' ' + contribution.user.last_name,
+        'contributor_id': contribution.id,
         'pub_link': contribution.pub_link,
         'data_desc': contribution.data_description,
         'mendeley_data': contribution.mendeley_data_link,
@@ -70,7 +74,26 @@ def reject_contribution(request, cid):
         except FileNotFoundError:
             pass
 
-        return redirect('dashboard')
+        return redirect('dash:dashboard')
+    return HttpResponse(
+        'You are not permitted to do that'
+    )
+
+
+@login_required()
+def accept_contribution(request, cid):
+    contribution = get_object_or_404(Contribution, pk=cid)
+    if request.method == 'POST' and request.user.is_superuser:
+        contribution.status = 1
+        contribution.save()
+        path = contribution.file.path
+        handle_new_sdf(path, plant=contribution.plant_name)
+        try:
+            os.remove(path)
+        except FileNotFoundError:
+            pass
+
+        return redirect('dash:dashboard')
     return HttpResponse(
         'You are not permitted to do that'
     )

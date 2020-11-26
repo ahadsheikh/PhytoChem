@@ -28,12 +28,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+DEBUG = os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = [
     '*',
 ]
 
+# Include App to Middleware
+INCLUDE_TO_ADMINLOGINMIDDLEWARE = [
+    'dashboard.views'
+]
 
 # Application definition
 
@@ -60,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Custom Middleware
+    'core.middlewares.AdminLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'biochemdata.urls'
@@ -136,7 +142,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'user:login'
 LOGIN_REDIRECT_URL = '/'
 
 

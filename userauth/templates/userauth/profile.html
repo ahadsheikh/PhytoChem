@@ -12,19 +12,26 @@
         </div>
         {% if user.username == user_d.username %}
             <div class="mt-3">
-                <a href="{% url 'profile_edit' %}">Edit Profile</a>
+                <a class="btn btn-info mb-2" href="{% url 'user:profile_edit'%}">Edit Profile</a>
             </div>
         {% endif %}
         <div>
             {% for con in contributions %}
-                    <div class="row p-2 d-flex border border-primary" style="border-radius: 10px">
-                        <div class="col-md-4 bg-info border border-success py-2" style="margin: auto; border-radius: 10px">
-                            <a href="#"><strong>{{ con.user.first_name }} {{ con.user.last_name }}</strong></a>
+                    <div class="row d-flex mb-2 p-2" style="border-radius: 10px; background: #dbeabf">
+                        <div class="col-md-4 py-2" style="margin: auto; border-radius: 10px">
+                            <a href="#"><strong>{{ con.plant_name }}</strong></a>
+                            <small>{{ con.created_at }}</small>
                         </div>
                         <div class="col-md-8">
                             <div class="d-flex justify-content-end">
                                 <div class="ml-1">
-                                    <button class="btn btn-info">{{ con.status }}</button>
+                                    {% if con.status == 0%}
+                                        <span class="btn btn-info" >Reviewing</span>
+                                    {% elif con.status == 1%}
+                                        <span class="btn btn-success">Accepted</span>
+                                    {% else %}
+                                        <span class="btn btn-danger">Rejected</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

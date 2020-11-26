@@ -2,7 +2,7 @@
 
 import django.core.validators
 from django.db import migrations, models
-import utils.QueryHandler
+import core.utils.QueryHandler
 
 
 class Migration(migrations.Migration):
@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='contribution',
             name='file',
-            field=models.FileField(upload_to='submittedFiles', validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['sdf']), utils.QueryHandler.validate_sdf]),
+            field=models.FileField(upload_to='submittedFiles', validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['sdf']), core.utils.QueryHandler.validate_sdf]),
         ),
     ]

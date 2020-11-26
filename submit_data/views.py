@@ -26,7 +26,7 @@ def upload(request):
             form.save()
         else:
             messages.success(request, "File Upload Failed")
-        return redirect('submit_data')
+        return redirect('contribute:submit_data')
 
     return HttpResponse(
         "<h2>You are not permitted to view this page.</h2>"

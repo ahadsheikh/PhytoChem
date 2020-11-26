@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
-from django.http import FileResponse, HttpResponse, Http404
+from django.http import HttpResponse, Http404
 from django.conf import settings
 
 import os
 from main.models import Compound, Plant
-from utils.QueryHandler import query_to_df, df_to_sdf
+from core.utils.QueryHandler import query_to_df, df_to_sdf
 
 
 def index(request):
@@ -21,14 +21,15 @@ def results(request):
     if len(search) != 0:
         if search.isnumeric():
             search = 'Phytochem_' + search.zfill(6)
-        compounds = Compound.objects.filter(Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search))
+        compounds = Compound.objects.filter(
+            Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search) | Q(plants__name__iexact=search)).distinct()
         context = {'compounds': compounds}
         return render(request, 'main/results.html', context=context)
     return redirect('/')
 
 
 def plant(request, id):
-    plant = Plant.objects.get(id=id)
+    plant = get_object_or_404(Plant, id=id)
     compounds = plant.compound_set.all()
     context = {
         'plant': plant,
@@ -38,7 +39,7 @@ def plant(request, id):
 
 
 def compound(request, id):
-    compound = Compound.objects.get(id=id)
+    compound = get_object_or_404(Compound,id=id)
     lipinski = (compound.H_Bond_Donors > 5) + (compound.H_Bond_Acceptors > 10) + \
                (compound.Molecular_Weight >= 500) + (compound.logP > 5)
     plants = compound.plants.all()
@@ -51,12 +52,10 @@ def compound(request, id):
 
 
 # view for download a query results
-def download_file(request):
-    search = request.GET['search']
+def download_file(request, search):
     # make search term as is in the PID column of database
     if search.isnumeric():
         search = 'Phytochem_' + search.zfill(6)
-
     # temporary path for storing download files
     temppath = os.path.join(settings.MEDIA_ROOT, 'tempDownloadFiles/')
 
@@ -72,7 +71,8 @@ def download_file(request):
 
     # search in the database columns PID, Smiles and
     # Molecular_Formula
-    compounds = Compound.objects.filter(Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search))
+    compounds = Compound.objects.filter(
+        Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search) | Q(plants__name__iexact=search))
     compounds_df = query_to_df(compounds)
     dw_file = os.path.join(temppath, search + '.sdf')
     df_to_sdf(compounds_df, dw_file)

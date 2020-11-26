@@ -19,11 +19,11 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main.urls')),
-    path('dashboard/', include('dashboard.urls')),
-    path('submit-data/', include('submit_data.urls')),
+    path('', include('main.urls', namespace='main')),
+    path('dashboard/', include('dashboard.urls', namespace='dash')),
+    path('submit-data/', include('submit_data.urls', namespace='contribute')),
     path('about/', TemplateView.as_view(template_name="main/about.html"), name='about'),
 
     # Auth System
-    path('accounts/', include('userauth.urls')),
+    path('accounts/', include('userauth.urls', namespace='user')),
 ]
