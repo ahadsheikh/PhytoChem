@@ -14,8 +14,10 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="plantText" class="text-success font-weight-bold">Plant</label>
-                <input type="text" class="form-control" id="plantText" name="plant" aria-describedby="plantHelp" placeholder="Enter Plant Name">
-                <small id="plantHelp" class="form-text text-muted">If the compounds from a specific plant then put plant name or left it blank.</small>
+                <input type="text" class="form-control" id="plantText" name="plant" aria-describedby="plantHelp"
+                       placeholder="Enter Plant Name">
+                <small id="plantHelp" class="form-text text-muted">If the compounds from a specific plant then put plant
+                    name or left it blank.</small>
             </div>
             <div class="form-group">
                 <label for="sdfFile" class="text-success font-weight-bold">Compound file input(sdf format)</label>
@@ -31,19 +33,25 @@
             {% for con in contributors %}
                 {% if con.status == 0 %}
                     <div class="row p-2 d-flex border border-primary" style="border-radius: 10px">
-                        <div class="col-md-4 bg-info border border-success py-2" style="margin: auto; border-radius: 10px">
+                        <div class="col-md-4 bg-info border border-success py-2"
+                             style="margin: auto; border-radius: 10px">
                             <a href="#"><strong>{{ con.user.first_name }} {{ con.user.last_name }}</strong></a>
                         </div>
                         <div class="col-md-8">
                             <div class="d-flex justify-content-end">
                                 <div class="ml-1">
-                                    <button class="btn btn-info"><a href="{% url "dash:show_data" con.id %}">Show</a></button>
+                                    <button class="btn btn-info"><a href="{% url "dash:show_data" con.id %}">Show</a>
+                                    </button>
                                 </div>
                                 <div class="ml-1">
-                                    <button class="btn btn-info"><a href="{% url "dash:download_new_file" con.id %}">Download</a></button>
+                                    <button class="btn btn-info"><a href="{% url "dash:download_new_file" con.id %}">Download</a>
+                                    </button>
                                 </div>
                                 <div class="ml-1">
-                                    <button class="btn btn-success">Accept</button>
+                                    <form action="{% url 'dash:accept_contribution_data' con.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button class="btn btn-success">Accept</button>
+                                    </form>
                                 </div>
                                 <div class="ml-1">
                                     <form action="{% url 'dash:reject_contribution_data' con.id %}" method="post">
