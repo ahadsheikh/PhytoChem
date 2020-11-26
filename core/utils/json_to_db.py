@@ -1,4 +1,6 @@
 import json
+
+from core.utils.QueryHandler import update_sdf
 from main.models import Compound, Plant
 
 
@@ -49,3 +51,5 @@ def json_to_db(path):
 
             if i % 100 == 0:
                 print('{} data processed'.format(i))
+
+    update_sdf()
