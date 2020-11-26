@@ -1,0 +1,45 @@
+
+header{
+    background-image: linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,0.2)), url(../images/background-image.png);
+    height: 100vh;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+}
+
+.navbar-brand{
+    text-transform: lowercase;
+    font-family: 'Offside', cursive;
+    font-size: 1.88em;
+    letter-spacing: 0.07em;
+}
+nav .navbar-nav li a{
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 20px;
+}
+nav .navbar-nav li img{
+    padding: 12px 0;
+}
+.nav-link:hover{
+    color: #cecece !important;
+}
+
+.text-item{
+    font-family: 'ubuntu',sans-serif;
+    color: #dbdbdb !important;
+    font-size: 36px;
+    letter-spacing: 0.05em;
+}
+.submit-btn{
+    height: 78%;
+    width: 25%;
+    background: url(../images/search-icon-sm.png) no-repeat center center,#B8009D ;
+}
+.submit-btn:hover{
+    background-color: #990683;
+}
+@media only screen and (max-width: 500px) {
+    .text-item{
+        font-size: 27px;
+    }
+}
