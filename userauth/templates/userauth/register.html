@@ -3,10 +3,22 @@
 {% block body %}
     <div class="container">
         <h1>Register</h1>
+        <div>
+            {% for error in form.non_field_errors %}
+                <p class="text text-danger">{{ error }}</p>
+            {% endfor %}
+        </div>
         <form action="{% url 'user:register' %}" method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            <table>
+                {{ form.as_p }}
+            </table>
             <input type="submit" value="Sign Up">
+            {% for field in form.fields %}
+                {% for error in field.errors %}
+                    <p class="text text-danger">{{ error }}</p>
+                {% endfor %}
+            {% endfor %}
         </form>
     </div>
 {% endblock %}

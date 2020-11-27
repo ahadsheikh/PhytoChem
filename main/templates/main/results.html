@@ -4,7 +4,7 @@
 {% block title %}Search results for {{ request.GET.search }} | Phytochem Database{% endblock %}
 {% block body %}
     <div class="container">
-        <div class="justify-content-center mb-3">
+        <div class="justify-content-center mt-4 ">
             <form class="input-group" action="{% url 'main:results' %}" method="get">
                 <input type="text" class="search form-control" placeholder="Search" aria-label="Search"
                        value="{{ request.GET.search }}" name="search">
@@ -13,7 +13,7 @@
                 </div>
             </form>
         </div>
-        <div class="pt-5">
+        <div class="pt-4">
             <!--  Download panel -->
             {% if compounds %}
                 <div class="chemical-about">Showing {{ compounds|length }} result(s) matching your query</div>
