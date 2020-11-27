@@ -24,10 +24,14 @@ def upload(request):
                 os.makedirs(upload_path)
             messages.success(request, "Upload File Successfully")
             form.save()
+            return redirect('contribute:submit_data')
+
         else:
-            messages.success(request, "File Upload Failed")
+            messages.success(request, "File Validation Failed, You need to upload SDF file")
+
         return redirect('contribute:submit_data')
 
-    return HttpResponse(
-        "<h2>You are not permitted to view this page.</h2>"
-    )
+    else:
+        form = ContributionForm()
+
+    return render(request, 'submit_data/index.html', {'form': form})

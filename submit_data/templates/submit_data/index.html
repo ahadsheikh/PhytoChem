@@ -13,6 +13,12 @@
             {% endfor %}
         {% endif %}
 
+        <div>
+            {% for error in form.non_field_errors %}
+                <p class="text text-danger">{{ error }}</p>
+            {% endfor %}
+        </div>
+
         <form action="{% url 'contribute:user_upload' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
@@ -40,6 +46,13 @@
             <div class="form-group">
                 <label for="sdfFile" class="text-success font-weight-bold">Compound File(sdf format) <span style="color: red;">*</span></label>
                 <input type="file" class="form-control-file" id="sdfFile" name="file">
+            </div>
+            <div>
+                {% for field in form.fields %}
+                    {% for error in field.errors %}
+                        <p class="text text-danger">{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
             </div>
             <button type="submit" class="btn btn-primary">Upload</button>
         </form>
