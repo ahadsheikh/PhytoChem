@@ -19,6 +19,8 @@ def register(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             return redirect('user:profile', username)
+        else:
+            return render(request, 'userauth/register.html', {'form': form})
     else:
         form = UserForm()
         # for f in form:
