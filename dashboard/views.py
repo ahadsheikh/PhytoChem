@@ -32,11 +32,14 @@ def upload(request):
             handle_file(request.FILES['file'], request.POST['plant'])
             messages.success(request, "Upload File Successfully")
             return redirect('dash:dashboard')
+        else:
+            return render(request, 'dashboard/dash.html', {'form': form})
 
-    messages.success(request, "File Upload Failed")
-    return HttpResponse(
-        "<h2>You are not permitted to view this page.</h2>"
-    )
+    elif request.user.is_superuser:
+        form = UploadFileForm()
+        return render(request, 'dashboard/dash.html', {'form': form})
+    else:
+        return HttpResponseNotFound('You are not permitted.')
 
 
 @login_required()

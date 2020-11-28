@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 from django.core.exceptions import ValidationError
 from rdkit import Chem
@@ -102,6 +104,6 @@ def validate_sdf(path):
     df = PandasTools.LoadSDF(path)
     if df.empty:
         raise ValidationError(
-            'File is empty',
+            'File Validation Failed',
             params={'file': path},
         )

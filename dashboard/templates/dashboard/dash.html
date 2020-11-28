@@ -22,6 +22,13 @@
             <div class="form-group">
                 <label for="sdfFile" class="text-success font-weight-bold">Compound file input(sdf format)</label>
                 <input type="file" class="form-control-file" id="sdfFile" name="file">
+                {% for field in form %}
+                    {% if field.html_name == 'file' %}
+                        {% for error in field.errors %}
+                            <p class="text text-danger">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
             </div>
             <button type="submit" class="btn btn-primary">Upload</button>
         </form>

@@ -27,10 +27,8 @@ def upload(request):
             return redirect('contribute:submit_data')
 
         else:
-            messages.success(request, "File Validation Failed, You need to upload SDF file")
-
-        return redirect('contribute:submit_data')
-
+            # messages.success(request, "File Validation Failed, You need to upload SDF file")
+            return render(request, 'submit_data/index.html', {'form': form})
     else:
         form = ContributionForm()
 
