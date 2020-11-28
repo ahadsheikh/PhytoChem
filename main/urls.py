@@ -9,6 +9,7 @@ app_name = "main"
 urlpatterns = [
     path('', views.index, name='index'),
     path('contact/', TemplateView.as_view(template_name='main/contact.html'), name='contact'),
+    path('about/', TemplateView.as_view(template_name='main/about.html'), name='about'),
     path('results/', views.results, name='results'),
     path('download/', views.download_file, name='download_all_results'),
     path('download_compound/<str:search>', views.download_file, name='download_compound'),
