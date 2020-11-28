@@ -34,7 +34,7 @@ def register(request):
 @login_required
 def profile(request, username):
     user = get_object_or_404(User, username=username)
-    contributions = Contribution.objects.filter(user=user)
+    contributions = Contribution.objects.filter(user=user).order_by('-created_at')
     context = {
         'user_d': user,
         'contributions': contributions
