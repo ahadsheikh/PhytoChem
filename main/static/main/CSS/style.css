@@ -69,6 +69,16 @@
     border-radius: 5px;
     border: none;
 }
+
+.submit-btn{
+    height: 78%;
+    width: 25%;
+    background: url(../images/search-icon-sm.png) no-repeat center center,#B8009D ;
+}
+.submit-btn:hover{
+    background-color: #990683;
+}
+
 /*           ------ End plant and Chemical Comound code --------*/
 .smile {
     min-width: 160px;
