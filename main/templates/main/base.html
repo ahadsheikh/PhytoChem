@@ -8,7 +8,7 @@
         {% block title %}
         {% endblock %}
     </title>
-    <link rel="shortcut icon" href="{% static '/main/images/title-image.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static '/main/images/title-icon.png' %}" type="image/x-icon">
     <!--Some Font Added-->
      <link href="https://fonts.googleapis.com/css2?family=Offside&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
@@ -66,10 +66,10 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'user:login' %}">Login</a>
+                        <a class="nav-link" href="{% url 'user:register' %}">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'user:register' %}">Register</a>
+                        <a class="nav-link" href="{% url 'user:login' %}">Login</a>
                     </li>
                 {% endif %}
                 <li class="nav-item active">

@@ -28,23 +28,73 @@ nav .navbar-nav li img{
 }
 
 .text-item{
+    text-transform: none;
+    font-family: 'roboto',sans-serif;
+    color: #ededed !important;
+    font-size: 1.75em;
+}
+.homepage-text-2{
+     font-size: 1.40em;
+     color: #a8a8a8 !important;
+}
+.homepage-important-text{
+    text-transform: uppercase;
+    color: #ffffff !important;
+}
+.search-suggession{
     font-family: 'ubuntu',sans-serif;
-    color: #dbdbdb !important;
-    font-size: 36px;
-    letter-spacing: 0.05em;
+    font-size: 1.20em;
+    color: #ffffff !important;
 }
 .submit-btn{
     height: 78%;
     width: 25%;
+    border:none;
     background: url(../images/search-icon-sm.png) no-repeat center center,#B8009D ;
 }
 .submit-btn:hover{
     background-color: #990683;
 }
+
 @media only screen and (max-width: 500px) {
     .text-item{
-        font-size: 27px;
+        font-size: 1.40em;
     }
+    .homepage-text-2{
+        font-size: 1.20em;
+    }
+    .navbar-brand{
+        font-size: 1.60em;
+        letter-spacing: 0.05em;
+    }
+}
+@media only screen and (max-height: 680px) {
+    .text-item{
+        font-size: 1.45em;
+    }
+     .homepage-text-2{
+        font-size: 1.1em;
+    }
+    .search-suggession{
+        font-size: 1em;
+    }
+    .navbar-brand{
+        font-size: 1.30em;
+        letter-spacing: 0.05em;
+    }
+}
+@media only screen and (max-width: 400px) {
+      @media (max-height: 700px) {
+        .text-item{
+             font-size: 1.1em;
+        }
+        .homepage-text-2{
+            font-size: 0.80em;
+        }
+        .search-suggession{
+            font-size: 0.80em;
+        }
+      }
 }
 
 .nav-scroll{
