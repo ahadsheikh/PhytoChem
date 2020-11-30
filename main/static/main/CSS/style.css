@@ -2,58 +2,84 @@
 /*           ------ writting for plant and Chemical Comound code --------*/
 .plant-about {
     text-transform: capitalize;
-    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Roboto', sans-serif;
     padding: 5px 0;
-    font-size: 30px;
-    font-weight: 600;
+    font-size: 1.70em;
+    font-weight: 500;
     color: #1f1f1f;
 }
 
-.plant-title {
-    background-color: #2c2c2c;
-}
-
 .chemical-title {
-    text-transform: capitalize;
-    font-family: 'ubuntu', sans-serif;
+    font-family: 'Roboto', sans-serif;
     border-radius: 3px;
     font-size: 25px;
     margin: 20px 0;
     padding: 10px 20px;
-    color: #cccccc;
-    font-weight: 500;;
+    color: #050000;
+    font-weight: 500;
 }
 
 .chemical-about {
-    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Roboto', sans-serif;
     padding:5px 0;
-    font-size: 32px;
-    font-weight: 600;
+    font-size: 1.70em;
+    font-weight: 500;
     color: #1f1f1f;
 }
 
 .chemical-recomand {
-    text-transform: capitalize;
     font-family: 'Titillium Web', sans-serif;
     font-size: 17px;
     border-radius: 10px;
     background-color: #dae3e7;
     margin: 0 15px 15px 0;
     padding: 4px 16px;
-
     color: #161616;
 }
-
 .chemical-recomand:hover {
-    background-color: #35647a;
-    color: #fcfcfc;
+    background-color: #bbd6db;
+    color: #0f002f;
     text-decoration: none;
 }
-.download-as-option{
-    text-transform: capitalize;
-    font-family: 'ubuntu', sans-serif;
-    font-size: 20px;
+.phytochem-found{
+    font-size: larger;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500; 
 }
+em.plants-l{
+    font-size: large;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500; 
+}
+.chemical-recomand-parent{
+    overflow-y:auto;
+    overflow-x:hidden;
+    height: 3em;
+}
+.chemical-id-top a{
+    text-decoration : none;
+    font-family: 'Roboto', sans-serif;
+    /* background-color: #2f0142; */
+    background-color: #0f002f;
+    color:white;
+}
+.chemical-id-top a:hover{
+    background-color: #5c0681;
+    color:white;
+}
+a.download-all-option{
+    text-decoration : none;
+    font-family: 'Roboto', sans-serif;
+    background-color: #ebd6e8;
+    color:black;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+}
+a.download-all-option:hover{
+    background-color: #e7b9e0;
+    color:black;
+}
+
 .download-btn{
     background-color:#dae3e7;
     border-radius: 5px;
@@ -68,15 +94,6 @@
     font-family: 'Titillium Web', sans-serif;
     border-radius: 5px;
     border: none;
-}
-
-.submit-btn{
-    height: 78%;
-    width: 25%;
-    background: url(../images/search-icon-sm.png) no-repeat center center,#B8009D ;
-}
-.submit-btn:hover{
-    background-color: #990683;
 }
 
 /*           ------ End plant and Chemical Comound code --------*/
