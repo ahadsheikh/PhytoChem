@@ -5,7 +5,7 @@
 {% block body %}
     <header>
         <div class="container">
-            <div class="row d-flex align-items-start justify-content-center flex-column col-md-8" style="height: 100vh;">
+            <div class="row d-flex align-items-start justify-content-center flex-column col-md-8 con-hei">
                 <p class="text-item homepage-text-1 m-1">A Large and Scientific Rigorous <span class="homepage-important-text">phytochemical database</span> dedicated to
                     Computer-Aided Drug Designing,
                     Lead Optimization, Visual Screening and Molecular Docking.</p>
@@ -16,7 +16,7 @@
                     <input class="form-control mt-3 mr-1 p-4 search-input"
                            name="search" value="{{ request.GET.search }}"
                            type="text" placeholder="Search Phytochems" aria-label="Search">
-                    <button class="mt-3 mr-1 p-1 submit-btn" type="submit" value=" "></button>
+                    <button class="btn mt-3 mr-1 p-1 submit-btn" type="submit" value=" "></button>
                 </form>
                  <div class="search-suggession mt-2">Search Phytochems by ID, Canonical SMILES, Molecular Formula or Plant Name</div>
                 <div class="text-item">You can <a href="{% url 'contribute:submit_data' %}">CONTRIBUTE</a> too to this database</div>
