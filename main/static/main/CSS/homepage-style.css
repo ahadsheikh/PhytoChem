@@ -29,9 +29,10 @@ nav .navbar-nav li img{
 
 .text-item{
     text-transform: none;
-    font-family: 'roboto',sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: #ededed !important;
     font-size: 1.75em;
+    letter-spacing:0.05em;
 }
 .homepage-text-2{
      font-size: 1.40em;
@@ -55,7 +56,9 @@ nav .navbar-nav li img{
 .submit-btn:hover{
     background-color: #990683;
 }
-
+.con-hei{
+    height:100vh;
+}
 @media only screen and (max-width: 500px) {
     .text-item{
         font-size: 1.40em;
@@ -70,16 +73,16 @@ nav .navbar-nav li img{
 }
 @media only screen and (max-height: 680px) {
     .text-item{
-        font-size: 1.45em;
+        font-size: 1.50em;
     }
      .homepage-text-2{
-        font-size: 1.1em;
+        font-size: 1.20em;
     }
     .search-suggession{
         font-size: 1em;
     }
     .navbar-brand{
-        font-size: 1.30em;
+        font-size: 1.35em;
         letter-spacing: 0.05em;
     }
 }
