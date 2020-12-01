@@ -12,7 +12,7 @@
                 <button class="rounded mt-3 mr-1 p-1 submit-btn" type="submit" value=" "></button>
             </form>
         </div>
-        <div class="p-4 mt-5 ">
+        <div class="py-4 mt-5 ">
             <!--  Download panel -->
             {% if compounds %}
                 <div class="chemical-about">Showing {{ compounds|length }} result(s) matching your query</div>
@@ -24,14 +24,14 @@
                  </div>
             {% for compound in compounds %}
                     <div class="row mb-3 p-3 mt-5 shadow-sm bg-white">
-                        <div class="w-100 p-3 chemical-id-top">
+                        <div class="w-100 py-2 chemical-id-top">
                             <span class="float-left">
-                                <a class="p-2 rounded" href="{% url "main:compound"  compound.id %}">{{ compound.PID }}</a></span>
+                                <a class="download-as-option p-2 rounded" href="{% url "main:compound"  compound.id %}">{{ compound.PID }}</a></span>
                             <span class="float-right">
                                 <a class="download-as-option p-2 rounded" href="{% url 'main:download_compound' compound.PID %}">Download</a>
                             </span>
                         </div>
-                        <div class="row mb-3 ml-3 mt-2 chemical-recomand-parent justify-content-start">
+                        <div class="row px-3 my-2 chemical-recomand-parent justify-content-start">
                             <br>
                             {% for plant in compound.plants.all %}
                                 <a class="chemical-recomand"
