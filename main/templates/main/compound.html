@@ -3,20 +3,21 @@
 
 {% block title %}{{ compound.PID }} | Phytochem Database{% endblock %}
 {% block body %}
-    <div class="container">
-        <div class="row mb-2 p-3 rounded plant-title">
+    <div class="container shadow-sm">
+        <div class="row p-2 rounded plant-title ">
             <div class="col-md d-flex justify-content-center">
-                <img class="ml-2 mr-2 plant-image" src="{% static '/main/images/chemical-white.png' %}" alt="Logo">
+                <img class="ml-2 mr-2 plant-image" src="{% static '/main/images/chemical.png' %}" alt="Logo">
                 <p class="chemical-title">{{ compound.Molecular_Formula }}</p>
             </div>
-            <div class="w-100 m-3 p-3 bg-dark text-white text-center">
-                <span class="float-left">{{ compound.PID }}</span>
+            <div class="w-100 p-2 chemical-id-top">
+                <span class="float-left">
+                    <a href="#" class="p-2 rounded">{{ compound.PID }}</a></span>
                 <span class="float-right">
-                    <a class="download-as-option" href="{% url 'main:download_compound' compound.PID %}">Download</a>
+                    <a class="p-2 rounded download-as-option" href="{% url 'main:download_compound' compound.PID %}">Download</a>
                 </span>
             </div>
         </div>
-        <div class="chemical-about mt-4 mb-2">The phytochem is found in these plants</div>
+        <div class="chemical-about mt-2 mb-2">The phytochem is found in these plants</div>
         <div class="row mb-3 ml-2 mt-2 chemical-recomand-parent justify-content-start">
             {% for plant in compound.plants.all %}
                 <a class="chemical-recomand" href="{% url "main:plant" plant.id %}">
