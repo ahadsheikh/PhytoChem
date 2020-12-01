@@ -5,7 +5,6 @@ body{
 .plant-about {
     text-transform: capitalize;
     font-family: 'Roboto', sans-serif;
-    padding: 5px 0;
     font-size: 1.70em;
     font-weight: 500;
     color: #1f1f1f;
@@ -102,6 +101,21 @@ a.download-all-option:hover{
 a.stop-highlight{
     text-decoration: none;
     color: black;
+}
+    /* Added media Query for some page  */
+@media screen and (max-width: 540px) {
+  .chemical-about {
+    font-size: 6vw;
+  }
+  .download-as-option{
+      font-size: .90em;
+  }
+  a.download-all-option{
+      font-size: 0.9em;
+    }
+    .plant-about {
+        font-size: 1.30em;
+    }
 }
 
 /*           ------ End plant and Chemical Comound code --------*/
