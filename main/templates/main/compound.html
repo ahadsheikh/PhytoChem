@@ -3,7 +3,7 @@
 
 {% block title %}{{ compound.PID }} | Phytochem Database{% endblock %}
 {% block body %}
-    <div class="container shadow-sm">
+    <div class="container shadow-sm bg-white">
         <div class="row p-2 rounded plant-title ">
             <div class="col-md d-flex justify-content-center">
                 <img class="ml-2 mr-2 plant-image" src="{% static '/main/images/chemical.png' %}" alt="Logo">
@@ -29,43 +29,43 @@
             <table class="table">
                 <tr>
                     <td colspan="2">
-                        <img src="{{ compound.ROMol }}" alt="">
+                        <img class="img-responsive mx-auto d-block" src="{{ compound.ROMol }}" alt="">
                     </td>
                 </tr>
                 <tr>
-                    <td>Molecular Formula:</td>
+                    <td class="font-weight-bold">Molecular Formula:</td>
                     <td>{{ compound.Molecular_Formula }}</td>
                 </tr>
                 <tr>
-                    <td>Canonical SMILES:</td>
+                    <td class="font-weight-bold">Canonical SMILES:</td>
                     <td class="smile">{{ compound.Smiles }}</td>
                 </tr>
                 <tr>
-                    <td>Molecular Weight:</td>
+                    <td class="font-weight-bold">Molecular Weight:</td>
                     <td>{{ compound.Molecular_Weight|floatformat:3 }} g/mol</td>
                 </tr>
                 <tr>
-                    <td>Hydrogen Bond Acceptor Count:</td>
+                    <td class="font-weight-bold">Hydrogen Bond Acceptor Count:</td>
                     <td>{{ compound.H_Bond_Acceptors }}</td>
                 </tr>
                 <tr>
-                    <td>Hydrogen Bond Donor Count:</td>
+                    <td class="font-weight-bold">Hydrogen Bond Donor Count:</td>
                     <td>{{ compound.H_Bond_Donors }}</td>
                 </tr>
                 <tr>
-                    <td>Molar Refractivity:</td>
+                    <td class="font-weight-bold">Molar Refractivity:</td>
                     <td>{{ compound.Molar_Refractivity|floatformat:3 }}</td>
                 </tr>
                 <tr>
-                    <td>TPSA:</td>
+                    <td class="font-weight-bold">TPSA:</td>
                     <td>{{ compound.TPSA|floatformat:3 }} Å²</td>
                 </tr>
                 <tr>
-                    <td>WlogP:</td>
+                    <td class="font-weight-bold">WlogP:</td>
                     <td>{{ compound.logP|floatformat:3 }}</td>
                 </tr>
                 <tr>
-                    <td>Lipinski:</td>
+                    <td class="font-weight-bold">Lipinski:</td>
                     <td>
                         {% if lipinski < 2 %}
                             Yes, {{ lipinski }} violation

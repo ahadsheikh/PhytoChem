@@ -10,12 +10,12 @@
                 <p class="chemical-title">{{ plant.name }}</p>
             </div>
         </div>
-        <div class="row content shadow-sm">
+        <div class="row content shadow-sm bg-light">
             <div class="col-md">
                 <div class="plant-about mt-4 mb-2">This plant contains these phytochems</div>
-                <a class="download-all-option rounded p-2" href="{% url 'main:download_compound' plant.name %}">Download all Result</a>
+                <a class="download-all-option rounded p-2" href="{% url 'main:download_compound' plant.name %}">Download Results (SDF)</a>
                 {% for compound in compounds %}
-                    <div class="row mb-3 mt-3 shadow">
+                    <div class="row mb-3 mt-5 shadow-sm bg-white">
                         <div class="w-100 p-3 chemical-id-top">
                             <span class="float-left">
                                 <a class="p-2 rounded" href="{% url "main:compound"  compound.id %}">{{ compound.PID }}</a></span>
@@ -23,11 +23,7 @@
                                 <a class="p-2 rounded download-as-option" href="{% url 'main:download_compound' compound.PID %}">Download</a>
                             </span>
                         </div>
-                        <div class="phytochem-found ml-3">
-                            The phytochem is found in these plants:
-                        </div>
-                        <div class="row mb-3 ml-2 mr-3 mt-2 chemical-recomand-parent justify-content-start">
-                            <em class="m-2 plants-l">Plants:</em>
+                        <div class="row mb-3 ml-3 mr-3 mt-2 chemical-recomand-parent justify-content-start">
                             <br>
                             {% for plant in compound.plants.all %}
                                 <a class="chemical-recomand"
@@ -36,16 +32,22 @@
                         </div>
                         <div class="row justify-contents-center align-item-center w-100">
                             <div class="col-sm">
-                                <img src="{{ compound.ROMol }}" class="img-responsive center-block d-block mx-auto">
+                               <a href="{% url "main:compound"  compound.id %}"><img src="{{ compound.ROMol }}" class="img-responsive center-block d-block mx-auto"></a>
                             </div>
-                            <div class="col-sm m-2">
-                                <div>
-                                    <span class="pull-left">Molecular Formula:</span>
-                                    <span class="pull-right">{{ compound.Molecular_Formula }}</span>
-                                </div>
-                                <div>
-                                    <span class="pull-left">Canonical SMILES:</span>
-                                    <span class="pull-right text-wrap text-break">{{ compound.Smiles }}</span>
+                            <div class="row col-sm">
+                                <div class="d-flex flex-column justify-content-center align-items-start ">
+                                    <a class="stop-highlight" href="{% url "main:compound"  compound.id %}">
+                                        <div class="stop-highlight">
+                                             <span class="font-weight-bold pull-left">Molecular Formula:</span>
+                                             <span class="pull-right">{{ compound.Molecular_Formula }}</span>
+                                         </div>
+                                    </a>
+                                     <a class="stop-highlight" href="{% url "main:compound"  compound.id %}">
+                                        <div>
+                                             <span class="font-weight-bold pull-left">Canonical SMILES:</span>
+                                             <span class="pull-right text-wrap text-break">{{ compound.Smiles }}</span>
+                                         </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
