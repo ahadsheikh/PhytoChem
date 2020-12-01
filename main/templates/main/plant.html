@@ -4,26 +4,28 @@
 {% block title %}{{ plant.name }} | Phytochem Database{% endblock %}
 {% block body %}
     <div class="container">
-        <div class="row mb-2 p-3 mt-2 rounded plant-title">
-            <div class="col-md d-flex justify-content-center">
+        <div class="row rounded plant-title">
+            <div class="col-md my-4 d-flex justify-content-center">
                 <img class="ml-2 mr-2 plant-image" src="{% static '/main/images/plant-icon.png' %}" alt="Logo">
                 <p class="chemical-title">{{ plant.name }}</p>
             </div>
         </div>
         <div class="row content shadow-sm bg-light">
             <div class="col-md">
-                <div class="plant-about mt-4 mb-2">This plant contains these phytochems</div>
-                <a class="download-all-option rounded p-2" href="{% url 'main:download_compound' plant.name %}">Download Results (SDF)</a>
+                <div>
+                    <div class="plant-about my-4">This plant contains these phytochems</div>
+                    <a class="download-all-option rounded p-2" href="{% url 'main:download_compound' plant.name %}">Download Results (SDF)</a>
+                </div>
                 {% for compound in compounds %}
-                    <div class="row mb-3 mt-5 shadow-sm bg-white">
-                        <div class="w-100 p-3 chemical-id-top">
+                    <div class="row my-4 py-2 shadow-sm bg-white">
+                        <div class="w-100 py-2 mx-3 chemical-id-top">
                             <span class="float-left">
                                 <a class="p-2 rounded" href="{% url "main:compound"  compound.id %}">{{ compound.PID }}</a></span>
                             <span class="float-right">
                                 <a class="p-2 rounded download-as-option" href="{% url 'main:download_compound' compound.PID %}">Download</a>
                             </span>
                         </div>
-                        <div class="row mb-3 ml-3 mr-3 mt-2 chemical-recomand-parent justify-content-start">
+                        <div class="row my-3 mx-3 chemical-recomand-parent justify-content-start">
                             <br>
                             {% for plant in compound.plants.all %}
                                 <a class="chemical-recomand"
@@ -34,8 +36,8 @@
                             <div class="col-sm">
                                <a href="{% url "main:compound"  compound.id %}"><img src="{{ compound.ROMol }}" class="img-responsive center-block d-block mx-auto"></a>
                             </div>
-                            <div class="row col-sm">
-                                <div class="d-flex flex-column justify-content-center align-items-start ">
+                            <div class="row col-sm mx-2">
+                                <div class="d-flex flex-column mx-2 my-4 justify-content-center align-items-start ">
                                     <a class="stop-highlight" href="{% url "main:compound"  compound.id %}">
                                         <div class="stop-highlight">
                                              <span class="font-weight-bold pull-left">Molecular Formula:</span>
