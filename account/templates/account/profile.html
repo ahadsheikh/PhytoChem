@@ -8,8 +8,8 @@
             <strong>First Name: </strong>{{ user_d.first_name }} <br>
             <strong>Last Name: </strong>{{ user_d.last_name }} <br>
             <strong>Location: </strong>{{ user_d.location }} <br>
-            <strong>LinkedIn: </strong><a href="{{ user_d.linkedin }}">{{ user_d.linkedin }}</a> <br>
-            <strong>ResearchGate: </strong><a href="{{ user_d.researchgate }}">{{ user_d.researchgate }}</a> <br>
+            <strong>LinkedIn: </strong><a href="{{ user_d.linkedin }}" target="_blank">{{ user_d.linkedin }}</a> <br>
+            <strong>ResearchGate: </strong><a href="{{ user_d.researchgate }}" target="_blank">{{ user_d.researchgate }}</a> <br>
             <strong>About: </strong>{{ user_d.about }} <br>
         </div>
         {% if user.username == user_d.username %}
