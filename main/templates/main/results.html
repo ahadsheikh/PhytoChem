@@ -9,43 +9,52 @@
                 <input class="form-control mt-3 mr-1 p-4 search-input"
                        name="search" value="{{ request.GET.search }}"
                        type="text" placeholder="Search phytochems E.x: C28H56" aria-label="Search">
-                <button class="mt-3 mr-1 p-1 submit-btn" type="submit" value=" "></button>
+                <button class="rounded mt-3 mr-1 p-1 submit-btn" type="submit" value=" "></button>
             </form>
         </div>
-        <div class="p-4 shadow">
+        <div class="py-4 mt-5 ">
             <!--  Download panel -->
             {% if compounds %}
                 <div class="chemical-about">Showing {{ compounds|length }} result(s) matching your query</div>
-                 <a class="download-all-option p-2 rounded" href="{% url 'main:download_compound' request.GET.search %}">Download results as sdf</a>
-            {% for compound in compounds %}
-                    <div class="row mb-3 mt-2">
-                        <div class="w-100 p-3 chemical-id-top">
+                <a class="download-all-option p-2 rounded" href="{% url 'main:download_compound' request.GET.search %}">Download
+                    results as sdf</a>
+                {% for compound in compounds %}
+                    <div class="row mb-3 p-3 mt-5 shadow-sm bg-white">
+                        <div class="w-100 py-2 chemical-id-top">
                             <span class="float-left">
-                                <a class="p-2 rounded" href="{% url "main:compound"  compound.id %}">{{ compound.PID }}</a></span>
+                                <a class="download-as-option p-2 rounded"
+                                   href="{% url "main:compound"  compound.id %}">{{ compound.PID }}</a></span>
                             <span class="float-right">
-                                <a class="download-as-option p-2 rounded" href="{% url 'main:download_compound' compound.PID %}">Download</a>
+                                <a class="download-as-option p-2 rounded"
+                                   href="{% url 'main:download_compound' compound.PID %}">Download</a>
                             </span>
                         </div>
-                        <div class="row mb-3 ml-2 mt-2 chemical-recomand-parent justify-content-start">
-                            <em class="m-2 plants-l">Plants:</em>
+                        <div class="row px-3 my-2 chemical-recomand-parent justify-content-start">
                             <br>
                             {% for plant in compound.plants.all %}
                                 <a class="chemical-recomand"
                                    href="{% url "main:plant" plant.id %}">{{ plant.name }}</a>
                             {% endfor %}
                         </div>
-                        <div class="row justify-contents-center align-item-center w-100">
+                        <div class="row justify-content-center align-item-center w-100">
                             <div class="col-sm">
-                                <img src="{{ compound.ROMol }}" class="img-responsive center-block d-block mx-auto">
+                                <a href="{% url "main:compound"  compound.id %}"><img src="{{ compound.ROMol }}"
+                                                                                      class="img-responsive center-block d-block mx-auto"></a>
                             </div>
-                            <div class="col-sm">
-                                <div>
-                                    <span class="pull-left">Molecular Formula:</span>
-                                    <span class="pull-right">{{ compound.Molecular_Formula }}</span>
-                                </div>
-                                <div>
-                                    <span class="pull-left">Canonical SMILES:</span>
-                                    <span class="pull-right text-wrap text-break">{{ compound.Smiles }}</span>
+                            <div class="row col-sm">
+                                <div class="d-flex flex-column justify-content-center align-items-start ">
+                                    <a class="stop-highlight" href="{% url "main:compound"  compound.id %}">
+                                        <div class="stop-highlight">
+                                            <span class="font-weight-bold pull-left">Molecular Formula:</span>
+                                            <span class="pull-right">{{ compound.Molecular_Formula }}</span>
+                                        </div>
+                                    </a>
+                                    <a class="stop-highlight" href="{% url "main:compound"  compound.id %}">
+                                        <div>
+                                            <span class="font-weight-bold pull-left">Canonical SMILES:</span>
+                                            <span class="pull-right text-wrap text-break">{{ compound.Smiles }}</span>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
