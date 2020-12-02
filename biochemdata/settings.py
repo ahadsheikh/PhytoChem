@@ -52,8 +52,8 @@ INSTALLED_APPS = [
     # Apps
     'main.apps.MainConfig',
     'dashboard.apps.DashboardConfig',
-    'userauth.apps.UserauthConfig',
     'submit_data.apps.SubmitDataConfig',
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
@@ -146,7 +146,9 @@ LOGIN_URL = 'user:login'
 LOGIN_REDIRECT_URL = '/'
 
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'userauth.backends.EmailBackend'
-]
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'userauth.backends.EmailBackend'
+# ]
+
+AUTH_USER_MODEL = 'account.Account'

@@ -13,12 +13,13 @@
             <table>
                 {{ form.as_p }}
             </table>
-            <input type="submit" value="Sign Up">
-            {% for field in form.fields %}
+            {% for field in form %}
                 {% for error in field.errors %}
                     <p class="text text-danger">{{ error }}</p>
                 {% endfor %}
             {% endfor %}
+            <input type="submit" value="Sign Up">
+
         </form>
     </div>
 {% endblock %}
