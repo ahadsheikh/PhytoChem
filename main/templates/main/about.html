@@ -3,8 +3,11 @@
 {% block title %}Contact | Phytochem Database{% endblock %}
 {% block body %}
     <div class="container">
-    <a href="{% url 'main:about-research-team' %}">Research team</a>
-    <a href="{% url 'main:about-dev-team' %}">Developer team</a>
-    <a href="{% url 'main:about-supervisors' %}">Supervisors</a>
+    <div class="py-3">
+        The database contains {{ n_compounds }} phytochems from {{ n_plants }} plants.
+    </div>
+        <a href="{% url 'main:about-research-team' %}">Research team</a><br>
+        <a href="{% url 'main:about-dev-team' %}">Developer team</a><br>
+        <a href="{% url 'main:about-supervisors' %}">Supervisors</a><br>
     </div>
 {% endblock %}

@@ -9,11 +9,15 @@ from core.utils.QueryHandler import query_to_df, df_to_sdf
 
 
 def index(request):
+    return render(request, 'main/index.html')
+
+
+def about(request):
     context = {
         'n_compounds': Compound.objects.all().count(),
         'n_plants': Plant.objects.all().count()
     }
-    return render(request, 'main/index.html', context=context)
+    return render(request, 'main/about.html', context=context)
 
 
 def results(request):
