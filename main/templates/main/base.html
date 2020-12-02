@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
+    {% if not title %}
         {% block title %}
         {% endblock %}
+    {% else %}
+        {{ title }}
+    {% endif %}
     </title>
     <link rel="shortcut icon" href="{% static '/main/images/title-icon.png' %}" type="image/x-icon">
     <!--Some Font Added-->
@@ -32,70 +36,87 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top nav-scroll">
-        <div class="container">
-            <a class="navbar-brand" href="/">phytochemdb<span>.</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'main:contact' %}">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'main:about' %}">About</a>
-                </li>
-                {% if request.user.is_superuser %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'dash:dashboard' %}">Dashboard</a>
-                    </li>
-                {% endif %}
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="{% url 'contribute:submit_data' %}">Submit</a>
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top nav-scroll">
+    <div class="container">
+        <a class="navbar-brand" href="/">phytochemdb<span>.</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        {% with request.resolver_match.view_name as view_name %}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item {% if view_name == 'main:index' %}active{% endif %}">
+                        <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="border: #65BF02 1px solid;
-                                                   font-size: 15px;
-                                                   border-radius: 10px"
-                           href="{% url 'user:profile' user.username %}">{{ user }}</a>
+                        <a class="nav-link {% if view_name == 'main:contact' %}active{% endif %}"
+                           href="{% url 'main:contact' %}">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'user:logout' %}">Log Out</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {% if 'main:about' in view_name %}active{% endif %}"
+                           id="about" href="{% url 'main:about' %}" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+                        <div class="dropdown-menu" aria-labelledby="about">
+                            <a class="nav-dropdown dropdown-item {% if view_name == 'main:about-research-team' %}active{% endif %}"
+                               href="{% url 'main:about-research-team' %}">Research
+                                Team</a>
+                            <a class="nav-dropdown dropdown-item {% if view_name == 'main:about-dev-team' %}active{% endif %}"
+                               href="{% url 'main:about-dev-team' %}">Developer
+                                Team</a>
+                            <a class="nav-dropdown dropdown-item {% if view_name == 'main:about-supervisors' %}active{% endif %}"
+                               href="{% url 'main:about-supervisors' %}">Supervisors</a>
+                        </div>
                     </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'user:register' %}">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'user:login' %}">Login</a>
-                    </li>
-                {% endif %}
-                <li class="nav-item active">
+                    {% if request.user.is_superuser %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if view_name == 'dash:dashboard' %}active{% endif %}"
+                               href="{% url 'dash:dashboard' %}">Dashboard</a>
+                        </li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if view_name == 'contribute:submit-data' %}active{% endif %}"
+                               href="{% url 'contribute:submit_data' %}">Submit</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if view_name == 'user:profile' %}active{% endif %}"
+                               href="{% url 'user:profile' user.username %}">{{ user }}</a>
+                        </li>
+                        <li class="nav-item {% if view_name == 'user:logout' %}active{% endif %}">
+                            <a class="nav-link" href="{% url 'user:logout' %}">Log Out</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if view_name == 'user:login' %}active{% endif %}"
+                               href="{% url 'user:login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if view_name == 'user:register' %}active{% endif %}"
+                               href="{% url 'user:register' %}">Register</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item active">
                         <img src="{% static '/main/images/login.png' %}" alt="login">
-                </li>
-            </ul>
-        </div>
+                    </li>
+                </ul>
+            </div>
+        {% endwith %}
     </div>
 </nav>
 <!--header Area or Nav area has Finished-->
 
 {% block body %}
 {% endblock %}
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="{% static 'main/dropdown.js' %}"></script>
 </body>
 </html>

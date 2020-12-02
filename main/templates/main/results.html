@@ -16,17 +16,7 @@
             <!--  Download panel -->
             {% if compounds %}
                 <div class="chemical-about">Showing {{ compounds|length }} result(s) matching your query</div>
-                 <div>
-                    <form method="get" action="{% url 'main:download_all_results' %}">
-                        <select class="download-all-option p-1 rounded" id="filetype" name="filetype">
-                            <option value="sdf">SDF</option>
-                            <option value="pdb">PDB</option>
-                            <option value="mol">MOL</option>
-                        </select>
-                            <a class="download-all-option p-2 rounded" href="{% url 'main:download_compound' request.GET.search %}">Download results</a>
-                    </form>
-
-                 </div>
+                 <a class="download-all-option p-2 rounded" href="{% url 'main:download_compound' request.GET.search %}">Download results as sdf</a>
             {% for compound in compounds %}
                     <div class="row mb-3 mt-2">
                         <div class="w-100 p-3 chemical-id-top">

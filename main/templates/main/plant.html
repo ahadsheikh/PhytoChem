@@ -13,7 +13,7 @@
         <div class="row content shadow-sm">
             <div class="col-md">
                 <div class="plant-about mt-4 mb-2">This plant contains these phytochems</div>
-                <a class="download-all-option rounded p-2" href="{% url 'main:download_compound' plant.name %}">Download all Result</a>
+                <a class="download-all-option rounded p-2" href="{% url 'main:download_compound' plant.name %}">Download results as sdf</a>
                 {% for compound in compounds %}
                     <div class="row mb-3 mt-3 shadow">
                         <div class="w-100 p-3 chemical-id-top">
