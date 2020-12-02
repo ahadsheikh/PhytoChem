@@ -9,9 +9,8 @@
         <div>
             <form method="post">
                 {% csrf_token %}
-                {{ u_form.as_p }}
-                {{ p_form.as_p }}
-                <button class="btn btn-info">Edit</button>
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-info">Edit</button>
             </form>
         </div>
     </div>

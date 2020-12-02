@@ -25,5 +25,5 @@ urlpatterns = [
     path('about/', TemplateView.as_view(template_name="main/about.html"), name='about'),
 
     # Auth System
-    path('accounts/', include('userauth.urls', namespace='user')),
+    path('accounts/', include('account.urls', namespace='user')),
 ]
