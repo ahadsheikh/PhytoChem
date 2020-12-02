@@ -13,6 +13,7 @@
     {% endif %}
     </title>
     <link rel="shortcut icon" href="{% static '/main/images/title-icon.png' %}" type="image/x-icon">
+
     <!--Some Font Added-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@600;700&display=swap" rel="stylesheet">
@@ -25,14 +26,19 @@
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap">
 
     <!--bootstrap file added-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap">
+    <!-- Project Statics-->
     <link rel="stylesheet" href="{% static '/main/CSS/style.css' %}">
     <link rel="stylesheet" href="{% static '/main/CSS/homepage-style.css' %}">
+
+    <!-- Project App Statics-->
+    {% block link %}
+    {% endblock %}
 
 </head>
 <body>

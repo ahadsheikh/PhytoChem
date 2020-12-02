@@ -1,25 +1,110 @@
 {% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static '/account/css/style.css' %}">
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1>Register</h1>
-        <div>
-            {% for error in form.non_field_errors %}
-                <p class="text text-danger">{{ error }}</p>
-            {% endfor %}
-        </div>
-        <form action="{% url 'user:register' %}" method="post">
-            {% csrf_token %}
-            <table>
-                {{ form.as_p }}
-            </table>
-            {% for field in form %}
-                {% for error in field.errors %}
+    <main class="my-form">
+        <div class="cotainer">
+            <div>
+                {% for error in form.non_field_errors %}
                     <p class="text text-danger">{{ error }}</p>
                 {% endfor %}
-            {% endfor %}
-            <input type="submit" value="Sign Up">
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Register</div>
+                        <div class="card-body">
+                            <form name="my-form" onsubmit="return validform()" method="post">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="email" class="form-control" name="email">
+                                        {% for field in form %}
+                                            {% if field.name == 'email' %}
+                                                {% for error in field.errors %}
+                                                    <p class="text text-danger">{{ error }}</p>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="first_name" class="col-md-4 col-form-label text-md-right">First
+                                        Name</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="first_name" class="form-control" name="first_name">
+                                        {% for field in form %}
+                                            {% if field.name == 'first_name' %}
+                                                {% for error in field.errors %}
+                                                    <p class="text text-danger">{{ error }}</p>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="last_name" class="col-md-4 col-form-label text-md-right">Last
+                                        Name</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="last_name" class="form-control" name="last_name">
+                                        {% for field in form %}
+                                            {% if field.name == 'last_name' %}
+                                                {% for error in field.errors %}
+                                                    <p class="text text-danger">{{ error }}</p>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
 
-        </form>
-    </div>
+
+                                <div class="form-group row">
+                                    <label for="password1" class="col-md-4 col-form-label text-md-right">Password</label>
+                                    <div class="col-md-6">
+                                        <input type="password" id="password1" class="form-control" name="password1">
+                                        {% for field in form %}
+                                            {% if field.name == 'password1' %}
+                                                {% for error in field.errors %}
+                                                    <p class="text text-danger">{{ error }}</p>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="password2" class="col-md-4 col-form-label text-md-right">Confirm
+                                        Password</label>
+                                    <div class="col-md-6">
+                                        <input type="password" id="password2" class="form-control" name="password2">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Register
+                                    </button>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </main>
 {% endblock %}
