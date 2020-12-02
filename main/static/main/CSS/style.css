@@ -1,9 +1,10 @@
-
+body{
+    background-color:#f4f3f5;
+}
 /*           ------ writting for plant and Chemical Comound code --------*/
 .plant-about {
     text-transform: capitalize;
     font-family: 'Roboto', sans-serif;
-    padding: 5px 0;
     font-size: 1.70em;
     font-weight: 500;
     color: #1f1f1f;
@@ -67,17 +68,18 @@ em.plants-l{
     background-color: #5c0681;
     color:white;
 }
+
 a.download-all-option{
     text-decoration : none;
     font-family: 'Roboto', sans-serif;
-    background-color: #ebd6e8;
-    color:black;
+    background-color: #0f002f;
+    color:white;
     letter-spacing: 0.05em;
     font-weight: 500;
 }
 a.download-all-option:hover{
-    background-color: #e7b9e0;
-    color:black;
+    background-color: #5c0681;
+    color:white;
 }
 
 .download-btn{
@@ -94,6 +96,26 @@ a.download-all-option:hover{
     font-family: 'Titillium Web', sans-serif;
     border-radius: 5px;
     border: none;
+}
+
+a.stop-highlight{
+    text-decoration: none;
+    color: black;
+}
+    /* Added media Query for some page  */
+@media screen and (max-width: 540px) {
+  .chemical-about {
+    font-size: 6vw;
+  }
+  .download-as-option{
+      font-size: .90em;
+  }
+  a.download-all-option{
+      font-size: 0.9em;
+    }
+    .plant-about {
+        font-size: 1.30em;
+    }
 }
 
 /*           ------ End plant and Chemical Comound code --------*/
