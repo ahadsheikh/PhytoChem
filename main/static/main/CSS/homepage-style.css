@@ -1,106 +1,136 @@
 
-header{
-    background-image: linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,0.2)), url(../images/background-image.png);
+header {
+    background-image: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, 0.2)), url(../images/background-image.png);
     height: 100vh;
     -webkit-background-size: cover;
     background-size: cover;
     background-position: center center;
 }
 
-.navbar-brand{
+.navbar-brand {
     text-transform: lowercase;
     font-family: 'Offside', cursive;
     font-size: 1.88em;
     letter-spacing: 0.07em;
 }
-nav .navbar-nav li a{
+
+nav .navbar-nav li a {
     text-transform: capitalize;
     font-family: 'Titillium Web', sans-serif;
     font-size: 20px;
-    color:white !important;
+    color: white;
 }
-nav .navbar-nav li img{
+
+nav .navbar-nav li img {
     padding: 12px 0;
 }
 
-.nav-link:hover{
+.nav-link:hover {
     color: #cecece !important;
 }
 
-.text-item{
+.nav-dropdown {
+    color: #0f002f !important;
+}
+
+.nav-dropdown:hover {
+    font-weight: bold;
+}
+
+.nav-dropdown:focus {
+    background-color: white;
+}
+
+.text-item {
     text-transform: none;
     font-family: 'Roboto', sans-serif;
     color: #ededed !important;
     font-size: 1.75em;
-    letter-spacing:0.05em;
+    letter-spacing: 0.05em;
 }
-.homepage-text-2{
-     font-size: 1.40em;
-     color: #a8a8a8 !important;
+
+.homepage-text-2 {
+    font-size: 1.40em;
+    color: #a8a8a8 !important;
 }
-.homepage-important-text{
+
+.homepage-important-text {
     text-transform: uppercase;
     color: #ffffff !important;
 }
-.search-suggession{
-    font-family: 'ubuntu',sans-serif;
+
+.search-suggession {
+    font-family: 'ubuntu', sans-serif;
     font-size: 1.20em;
     color: #ffffff !important;
 }
-.submit-btn{
+
+.submit-btn {
     height: 78%;
     width: 25%;
-    border:none;
-    background: url(../images/search-icon-sm.png) no-repeat center center,#B8009D ;
+    border: none;
+    background: url(../images/search-icon-sm.png) no-repeat center center, #B8009D;
 }
-.submit-btn:hover{
+
+.submit-btn:hover {
     background-color: #990683;
 }
-.con-hei{
-    height:100vh;
+
+.con-hei {
+    height: 100vh;
 }
+
 @media only screen and (max-width: 500px) {
-    .text-item{
+    .text-item {
         font-size: 1.40em;
     }
-    .homepage-text-2{
+
+    .homepage-text-2 {
         font-size: 1.20em;
     }
-    .navbar-brand{
+
+    .navbar-brand {
         font-size: 1.60em;
         letter-spacing: 0.05em;
     }
 }
+
 @media only screen and (max-height: 680px) {
-    .text-item{
+    .text-item {
         font-size: 1.50em;
     }
-     .homepage-text-2{
+
+    .homepage-text-2 {
         font-size: 1.20em;
     }
-    .search-suggession{
+
+    .search-suggession {
         font-size: 1em;
     }
-    .navbar-brand{
+
+    .navbar-brand {
         font-size: 1.35em;
         letter-spacing: 0.05em;
     }
 }
+
 @media only screen and (max-width: 400px) {
-      @media (max-height: 700px) {
-        .text-item{
-             font-size: 1.1em;
+    @media (max-height: 700px) {
+        .text-item {
+            font-size: 1.1em;
         }
-        .homepage-text-2{
+
+        .homepage-text-2 {
             font-size: 0.80em;
         }
-        .search-suggession{
+
+        .search-suggession {
             font-size: 0.80em;
         }
-      }
+    }
 }
 
-.nav-scroll{
-    background-image: linear-gradient(to right,#1a005e, #060009,#330148);
+.nav-scroll {
+    background-image: linear-gradient(to right, #1a005e, #060009, #330148);
     transition: ease-in-out 0.5s;
 }
