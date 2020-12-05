@@ -7,32 +7,32 @@ header{
     background-size: cover;
     background-position: center center;
 }
-
+/*------------ Band Logo phytochemdb--------------*/
 .navbar-brand{
     text-transform: lowercase;
     font-family: 'Offside', cursive;
     font-size: 1.88em;
     letter-spacing: 0.07em;
 }
+/*------------List items of navigation bar------------*/
 nav .navbar-nav li a{
     text-transform: capitalize;
     font-family: 'Titillium Web', sans-serif;
     font-size: 20px;
     color:white !important;
 }
+/*---------------added an Icon Right side---------*/
 nav .navbar-nav li img{
     padding: 12px 0;
 }
 
+/*--------------Hover effect on navar list --------------*/
 .nav-link:hover{
     color: #cecece !important;
 }
-
+/*--------------- Bodies First Text (A Large and Scientific Rigorous........)------ */
 .text-item{
-
-/*
-    font-family: 'Prompt', sans-serif;
-*/
+/*    font-family: 'Prompt', sans-serif;*/
     /* font-family: 'Libre Baskerville', serif; */
     font-family: 'Libre Franklin', sans-serif;
     /* font-family: 'Proza Libre', sans-serif; */
@@ -43,30 +43,47 @@ nav .navbar-nav li img{
     font-size: 1.62em;
     letter-spacing: 0.05em;
 }
+/*--------------- Bodies Second Text (The pharmacological properties........)------ */
 .homepage-text-2{
     font-family: 'Rubik', sans-serif;
     font-size: 1.40em;
     color: #A9A9A1 !important;
 }
+
+/*--------------- Bolded text on PHYTOCHEMICAL DATABASE at Firt Text box-----------*/
 .homepage-important-text{
     text-transform: uppercase;
     color: #ffffff !important;
 }
+/* ------------   Search Suggession under the search Box-----------*/
 .search-suggession{
    font-family: 'Titillium Web', sans-serif;
     font-size: 1.20em;
     color: #ffffff !important;
      letter-spacing: 0.05em;
 }
+/*---------------To Change submit button Color-----------*/
 .submit-btn{
     background-color: #b8009d;
 }
 .submit-btn:hover{
     background-color: #990683;
 }
+/*--------------- Container Height with the viewport-------------*/
 .con-hei{
     height:100vh;
 }
+/*-------------- Navar Background Color added class -----------*/
+.navbar{
+    background-image: linear-gradient(to right,#1a005e, #060009,#330148);
+    transition: ease-in-out 0.5s;
+}
+/*-----------making sticky ((When in homepage navbar background will be hidden ))-------------*/
+.navbar.sticky{
+    background-image: none;
+}
+
+/*-------------------- For Responsive ness ------------------*/
 @media only screen and (max-width: 500px) {
     .text-item{
         font-size: 1.10em;
@@ -79,7 +96,7 @@ nav .navbar-nav li img{
         letter-spacing: 0.05em;
     }
 }
-
+/*------------added Responsive ness for Morden Phones -----------*/
 @media only screen and (max-width: 450px) {
       @media only screen and (min-height: 850px) {
         .text-item{
@@ -97,7 +114,7 @@ nav .navbar-nav li img{
         }
     }
 }
-
+/*------------added Responsive ness for OLD Phones -----------*/
 @media only screen and (max-width: 400px) {
       @media only screen and (max-height: 700px) {
         .text-item{
@@ -114,12 +131,4 @@ nav .navbar-nav li img{
             letter-spacing: 0.05em;
         }
     }
-}
-.navbar{
-    background-image: linear-gradient(to right,#1a005e, #060009,#330148);
-    transition: ease-in-out 0.5s;
-}
-
-.navbar.sticky{
-    background-image: none;
 }
