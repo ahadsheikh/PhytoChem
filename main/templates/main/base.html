@@ -32,7 +32,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top nav-scroll">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top nav-scroll">
         <div class="container">
             <a class="navbar-brand" href="/">phytochemdb<span>.</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,5 +97,29 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    <script>
+            $(document).ready(function(){
+                var pathname = window.location.pathname;
+                if(pathname=="/")
+                  $('.navbar','body').addClass("sticky");
+                else
+                    $('.navbar','body').removeClass("sticky");
+            });
+            $(document).ready(function(){
+                var pathname = window.location.pathname;
+                if(pathname=="/")
+                  $('body').addClass("st");
+                else
+                    $('body').removeClass("st");
+            });
+            $(document).ready(function(){
+                var width = $(window).width();
+                var height = $(window).height();
+                if(width <= 400 && height<=800)
+                    $("#hide").click(function(){
+                        $(".homepage-text-2").hide();
+                    });
+            });
+    </script>
 </body>
 </html>
