@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Libre+Franklin&family=Proza+Libre&family=Rubik&family=Taviraj&display=swap');
 
 header{
     background-image: linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,0.2)), url(../images/background-image.png);
@@ -28,30 +29,37 @@ nav .navbar-nav li img{
 }
 
 .text-item{
-    text-transform: none;
-    font-family: 'Roboto', sans-serif;
-    color: #ededed !important;
-    font-size: 1.75em;
-    letter-spacing:0.05em;
+
+/*
+    font-family: 'Prompt', sans-serif;
+*/
+    /* font-family: 'Libre Baskerville', serif; */
+    font-family: 'Libre Franklin', sans-serif;
+    /* font-family: 'Proza Libre', sans-serif; */
+     /* font-family: 'Rubik', sans-serif; */
+    /*font-family: 'Taviraj', serif;*/
+    font-weight: 500;
+    color: #e9e9e9 !important;
+    font-size: 1.62em;
+    letter-spacing: 0.05em;
 }
 .homepage-text-2{
-     font-size: 1.40em;
-     color: #a8a8a8 !important;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.40em;
+    color: #A9A9A1 !important;
 }
 .homepage-important-text{
     text-transform: uppercase;
     color: #ffffff !important;
 }
 .search-suggession{
-    font-family: 'ubuntu',sans-serif;
+   font-family: 'Titillium Web', sans-serif;
     font-size: 1.20em;
     color: #ffffff !important;
+     letter-spacing: 0.05em;
 }
 .submit-btn{
-    height: 78%;
-    width: 25%;
-    border:none;
-    background: url(../images/search-icon-sm.png) no-repeat center center,#B8009D ;
+    background-color: #b8009d;
 }
 .submit-btn:hover{
     background-color: #990683;
@@ -61,35 +69,39 @@ nav .navbar-nav li img{
 }
 @media only screen and (max-width: 500px) {
     .text-item{
-        font-size: 1.40em;
+        font-size: 1.10em;
     }
     .homepage-text-2{
-        font-size: 1.20em;
+        font-size: 0.95em;
     }
     .navbar-brand{
-        font-size: 1.60em;
+        font-size: 1.1em;
         letter-spacing: 0.05em;
     }
 }
-@media only screen and (max-height: 680px) {
-    .text-item{
-        font-size: 1.50em;
-    }
-     .homepage-text-2{
-        font-size: 1.20em;
-    }
-    .search-suggession{
-        font-size: 1em;
-    }
-    .navbar-brand{
-        font-size: 1.35em;
-        letter-spacing: 0.05em;
-    }
-}
-@media only screen and (max-width: 400px) {
-      @media (max-height: 700px) {
+
+@media only screen and (max-width: 450px) {
+      @media only screen and (min-height: 850px) {
         .text-item{
-             font-size: 1.1em;
+             font-size: 1.3em;
+        }
+        .homepage-text-2{
+            font-size: 1.1em;
+        }
+        .search-suggession{
+            font-size: 1em;
+        }
+        .navbar-brand{
+            font-size: 1.40em;
+            letter-spacing: 0.05em;
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+      @media only screen and (max-height: 700px) {
+        .text-item{
+             font-size: 0.9em;
         }
         .homepage-text-2{
             font-size: 0.80em;
@@ -97,10 +109,17 @@ nav .navbar-nav li img{
         .search-suggession{
             font-size: 0.80em;
         }
-      }
+        .navbar-brand{
+            font-size: 1.20em;
+            letter-spacing: 0.05em;
+        }
+    }
 }
-
-.nav-scroll{
+.navbar{
     background-image: linear-gradient(to right,#1a005e, #060009,#330148);
     transition: ease-in-out 0.5s;
+}
+
+.navbar.sticky{
+    background-image: none;
 }
