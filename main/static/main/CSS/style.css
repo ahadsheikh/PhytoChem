@@ -1,6 +1,11 @@
 body{
     background-color:#f4f3f5;
+    margin-top: 10vh;
 }
+body.st{
+    margin-top: 0;
+}
+
 /*           ------ writting for plant and Chemical Comound code --------*/
 .plant-about {
     text-transform: capitalize;
