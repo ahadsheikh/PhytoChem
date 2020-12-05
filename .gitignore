@@ -1,7 +1,5 @@
-# Project Iqnore
-static/
-
 # dev ignore
+/static/
 media/
 core/utils/data/
 

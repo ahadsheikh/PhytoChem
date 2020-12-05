@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block body %}
+    <div class="container">
+        <div align="center">
+            <div class="mt-4 border border-">
+                <p class="h4 text-danger font-weight-bold">You have been logged out !</p>
+
+                <form class="my-2" action="{% url 'user:login' %}" method="get">
+                    <button type="submit" class="btn btn-primary">Log In</button>
+                    <span class="font-weight-bold text-success"> Now!</span>
+                </form>
+            </div>
+            <div class="border border-success mt-2">
+                <form class="my-2" action="{% url 'user:register' %}" method="get">
+                    <p>You doesn't have <strong>Account</strong>?</p>
+                    <button type="submit" class="btn btn-success">Create Account</button>
+                </form>
+                <form class="my-2" action="{% url 'main:index' %}" method="get">
+                    <p>or</p>
+                    <button type="submit" class="btn btn-success">Home</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -21,15 +21,6 @@ def df_to_sdf(compounds_df, file):
                              properties=list(compounds_df.columns))
 
 
-def df_to_pdb(compounds_df, file):
-    with open(file, 'w') as fi:
-        pdbwriter = Chem.PDBWriter(fi)
-        for _, compound in compounds_df.iterrows():
-            mol = Chem.MolFromSmiles(compound.Smiles)
-            pdbwriter.write(mol)
-        pdbwriter.close()
-
-
 def get_src_from_image_tag(html):
     soup = BeautifulSoup(str(html), "html.parser")
     return soup.img['src']
@@ -65,6 +56,7 @@ def update_db_from_df(compounds_df, plant=None):
         if plant:
             plant, _ = Plant.objects.get_or_create(name=plant)
             cur_compound.plants.add(plant)
+    update_sdf()
 
 
 def handle_new_sdf(path, plant=None, change_db=True):

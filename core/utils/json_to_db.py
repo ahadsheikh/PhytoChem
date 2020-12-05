@@ -51,5 +51,4 @@ def json_to_db(path):
 
             if i % 100 == 0:
                 print('{} data processed'.format(i))
-
     update_sdf()

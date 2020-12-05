@@ -1,0 +1,88 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}
+    Login
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static '/account/css/style.css' %}">
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block body %}
+    <main class="my-form">
+        <div class="cotainer">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Log In</div>
+                        <div>
+                            {% for error in form.non_field_errors %}
+                                <p class="text text-danger px-3 font-weight-bold">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        <div class="card-body">
+                            <form name="my-form" onsubmit="return validform()" method="post">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="email" class="form-control" name="username"
+                                               placeholder="E-Mail">
+                                        {% for field in form %}
+                                            {% if field.name == 'email' %}
+                                                {% for error in field.errors %}
+                                                    <p class="text text-danger">{{ error }}</p>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="password"
+                                           class="col-md-4 col-form-label text-md-right">Password</label>
+                                    <div class="col-md-6">
+                                        <input type="password" id="password1" class="form-control" name="password"
+                                               placeholder="Password">
+                                        {% for field in form %}
+                                            {% if field.name == 'password' %}
+                                                {% for error in field.errors %}
+                                                    <p class="text text-danger">{{ error }}</p>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Log In
+                                    </button>
+                                </div>
+                            </form>
+                            <div class="col-md-6 offset-md-4 mt-2">
+                                <a href="#" class="font-weight-bold">Forgotten Password?</a>
+                            </div>
+                            <hr>
+                            <div class="mt-1" align="center">
+                                <form class="my-2" action="{% url 'user:register' %}" method="get">
+                                    <p>You doesn't have <strong>Account</strong>?</p>
+                                    <button type="submit" class="btn btn-success">Create Account</button>
+                                </form>
+                                <form class="my-2" action="{% url 'main:index' %}" method="get">
+                                    <p>or</p>
+                                    <button type="submit" class="btn btn-success">Home</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+{% endblock %}

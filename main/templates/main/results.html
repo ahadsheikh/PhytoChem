@@ -18,19 +18,17 @@
             <!--  Download panel -->
             {% if compounds %}
                 <div class="chemical-about">Showing {{ compounds|length }} result(s) matching your query</div>
-                 <div>
-                    <form method="get" action="{% url 'main:download_all_results' %}">
-                            <a class="download-all-option p-2 rounded" href="{% url 'main:download_compound' request.GET.search %}">Download Results (SDF)</a>
-                    </form>
-
-                 </div>
-            {% for compound in compounds %}
+                <a class="download-all-option p-2 rounded" href="{% url 'main:download_compound' request.GET.search %}">Download
+                    results as sdf</a>
+                {% for compound in compounds %}
                     <div class="row mb-3 p-3 mt-5 shadow-sm bg-white">
                         <div class="w-100 py-2 chemical-id-top">
                             <span class="float-left">
-                                <a class="download-as-option p-2 rounded" href="{% url "main:compound"  compound.id %}">{{ compound.PID }}</a></span>
+                                <a class="download-as-option p-2 rounded"
+                                   href="{% url "main:compound"  compound.id %}">{{ compound.PID }}</a></span>
                             <span class="float-right">
-                                <a class="download-as-option p-2 rounded" href="{% url 'main:download_compound' compound.PID %}">Download</a>
+                                <a class="download-as-option p-2 rounded"
+                                   href="{% url 'main:download_compound' compound.PID %}">Download</a>
                             </span>
                         </div>
                         <div class="row px-3 my-2 chemical-recomand-parent justify-content-start">
@@ -42,21 +40,22 @@
                         </div>
                         <div class="row justify-content-center align-item-center w-100">
                             <div class="col-sm">
-                                <a href="{% url "main:compound"  compound.id %}"><img src="{{ compound.ROMol }}" class="img-responsive center-block d-block mx-auto"></a>
+                                <a href="{% url "main:compound"  compound.id %}"><img src="{{ compound.ROMol }}"
+                                                                                      class="img-responsive center-block d-block mx-auto"></a>
                             </div>
                             <div class="row col-sm">
                                 <div class="d-flex flex-column justify-content-center align-items-start ">
                                     <a class="stop-highlight" href="{% url "main:compound"  compound.id %}">
                                         <div class="stop-highlight">
-                                             <span class="font-weight-bold pull-left">Molecular Formula:</span>
-                                             <span class="pull-right">{{ compound.Molecular_Formula }}</span>
-                                         </div>
+                                            <span class="font-weight-bold pull-left">Molecular Formula:</span>
+                                            <span class="pull-right">{{ compound.Molecular_Formula }}</span>
+                                        </div>
                                     </a>
-                                     <a class="stop-highlight" href="{% url "main:compound"  compound.id %}">
+                                    <a class="stop-highlight" href="{% url "main:compound"  compound.id %}">
                                         <div>
-                                             <span class="font-weight-bold pull-left">Canonical SMILES:</span>
-                                             <span class="pull-right text-wrap text-break">{{ compound.Smiles }}</span>
-                                         </div>
+                                            <span class="font-weight-bold pull-left">Canonical SMILES:</span>
+                                            <span class="pull-right text-wrap text-break">{{ compound.Smiles }}</span>
+                                        </div>
                                     </a>
                                 </div>
                             </div>
