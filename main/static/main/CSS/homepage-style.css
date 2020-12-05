@@ -11,7 +11,7 @@ header{
 .navbar-brand{
     text-transform: lowercase;
     font-family: 'Offside', cursive;
-    font-size: 1.88em;
+    font-size: 1.75em;
     letter-spacing: 0.07em;
 }
 /*------------List items of navigation bar------------*/
@@ -32,21 +32,21 @@ nav .navbar-nav li img{
 }
 /*--------------- Bodies First Text (A Large and Scientific Rigorous........)------ */
 .text-item{
-/*    font-family: 'Prompt', sans-serif;*/
+    /* font-family: 'Prompt', sans-serif; */
     /* font-family: 'Libre Baskerville', serif; */
-    font-family: 'Libre Franklin', sans-serif;
+    /* font-family: 'Libre Franklin', sans-serif; */
     /* font-family: 'Proza Libre', sans-serif; */
-     /* font-family: 'Rubik', sans-serif; */
+     font-family: 'Rubik', sans-serif;
     /*font-family: 'Taviraj', serif;*/
     font-weight: 500;
     color: #e9e9e9 !important;
-    font-size: 1.62em;
-    letter-spacing: 0.05em;
+    font-size: 1.52em;
+    letter-spacing: 0.06em;
 }
 /*--------------- Bodies Second Text (The pharmacological properties........)------ */
 .homepage-text-2{
     font-family: 'Rubik', sans-serif;
-    font-size: 1.40em;
+    font-size: 1.30em;
     color: #A9A9A1 !important;
 }
 
