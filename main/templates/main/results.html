@@ -6,12 +6,10 @@
     <div class="container">
         <div class="row d-flex align-items-start justify-content-center flex-column col-md" style="height: 10vh;">
             <form class="container d-flex p-0" action="{% url 'main:results' %}" method="get">
-                    <input id="hide" class="form-control mt-3 mr-1 p-4 search-input"
-                           name="search" value="{{ request.GET.search }}"
-                           type="text" placeholder="Search Phytochems" aria-label="Search">
-                    <button class="btn mt-3 mr-1 px-4 py-2 submit-btn" type="submit" value=" ">
-                        <img src="{% static '/main/images/search-icon-sm.png' %}" alt="icon">
-                    </button>
+                <input class="form-control mt-3 mr-1 p-4 search-input"
+                       name="search" value="{{ request.GET.search }}"
+                       type="text" placeholder="Search phytochems E.x: C28H56" aria-label="Search">
+                <button class="rounded mt-3 mr-1 p-1 submit-btn" type="submit" value=" "></button>
             </form>
         </div>
         <div class="py-4 mt-5 ">
