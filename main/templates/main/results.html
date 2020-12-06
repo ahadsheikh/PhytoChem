@@ -1,5 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load main_extras %}
 
 {% block title %}Search results for {{ request.GET.search }} | Phytochem Database{% endblock %}
 {% block body %}
@@ -19,13 +20,13 @@
             {% if compounds %}
                 <div class="chemical-about">Showing {{ compounds|length }} result(s) matching your query</div>
                 <a class="download-all-option p-2 rounded" href="{% url 'main:download_compound' request.GET.search %}">Download
-                    results as sdf</a>
+                    Results</a>
                 {% for compound in compounds %}
                     <div class="row mb-3 p-3 mt-5 shadow-sm bg-white">
                         <div class="w-100 py-2 chemical-id-top">
                             <span class="float-left">
                                 <a class="download-as-option p-2 rounded"
-                                   href="{% url "main:compound"  compound.id %}">{{ compound.PID }}</a></span>
+                                   href="{% url "main:compound"  compound.id %}">{{ compound.PID|short_id }}</a></span>
                             <span class="float-right">
                                 <a class="download-as-option p-2 rounded"
                                    href="{% url 'main:download_compound' compound.PID %}">Download</a>

@@ -1,5 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load main_extras %}
 
 {% block title %}{{ compound.PID }} | Phytochem Database{% endblock %}
 {% block body %}
@@ -11,7 +12,7 @@
             </div>
             <div class="w-100 p-2 chemical-id-top">
                 <span class="float-left">
-                    <a href="#" class="p-2 rounded">{{ compound.PID }}</a></span>
+                    <a href="#" class="p-2 rounded">{{ compound.PID|short_id }}</a></span>
                 <span class="float-right">
                     <a class="p-2 rounded download-as-option" href="{% url 'main:download_compound' compound.PID %}">Download</a>
                 </span>

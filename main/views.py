@@ -25,6 +25,8 @@ def results(request):
     if len(search) != 0:
         if search.isnumeric():
             search = 'Phytochem_' + search.zfill(6)
+        elif search[0] == 'P' and search[1:].isnumeric():
+            search = 'Phytochem_' + search[1:].zfill(6)
         compounds = Compound.objects.filter(
             Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search) | Q(plants__name__iexact=search)).distinct()
         context = {'compounds': compounds}
