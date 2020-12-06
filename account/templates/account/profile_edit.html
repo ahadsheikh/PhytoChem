@@ -3,14 +3,34 @@
 {% block body %}
     <div class="container">
         {% for message in messages %}
-            <div class="text-info">{{ message }}</div>
+            <div class="text-success bg-secondary p-3 h4 rounded">{{ message }}</div>
         {% endfor %}
-        Profile_Edit
+        <h2 align="center">Edit Information</h2>
         <div>
             <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-info">Edit</button>
+                {% for f in form %}
+                    <div class="form-group">
+                        {% if f.html_name == 'about' %}
+                            <label for="inputId"
+                                   class="text-success font-weight-bold">{{ f.html_name|capfirst }}</label>
+                            <textarea class="form-control" id="inputId" name="{{ f.name }}"
+                                       cols="40" rows="10" maxlength="500">{{ f.value }}</textarea>
+                            {% for error in f.errors %}
+                                <p class="text text-danger">{{ error }}</p>
+                            {% endfor %}
+                        {% else %}
+                            <label for="inputId"
+                                   class="text-success font-weight-bold">{{ f.html_name|capfirst }}</label>
+                            <input type="{{ f.widget_type }}" class="form-control" id="inputId" name="{{ f.name }}"
+                                   value="{{ f.value }}">
+                            {% for error in f.errors %}
+                                <p class="text text-danger">{{ error }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Save</button>
             </form>
         </div>
     </div>

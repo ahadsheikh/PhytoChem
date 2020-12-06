@@ -48,8 +48,10 @@ def profile_edit(request):
         if accUpForm.is_valid():
             print(accUpForm.cleaned_data)
             accUpForm.save()
-            messages.success(request, "Successfully Edit Done")
+            messages.success(request, "Successfully Saved")
             return redirect('user:profile_edit')
+        else:
+            return render(request, 'account/profile_edit.html', {'form': accUpForm})
 
     accUpForm = AccountUpdateForm(instance=request.user)
 
