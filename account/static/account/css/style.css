@@ -15,7 +15,11 @@
     margin-left: 0;
     margin-right: 0;
 }
-
+.card-header{
+    font-family:  Helvetica,Arial,'sans-serif';
+    font-size: 1.5em;
+    font-weight: 600;
+}
 .login-form
 {
     padding-top: 1.5rem;

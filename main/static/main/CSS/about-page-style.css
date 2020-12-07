@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+
 .team-name{
     font-family:  Helvetica,Arial,'sans-serif';
     font-size: 2em;
     font-weight: 600;
 }
 .developer-cls{
-    color: #9292fd;
+    color: #5a5afb;
 }
 .collaborator-name{
     font-family:  Helvetica,Arial,'sans-serif';
@@ -21,9 +23,19 @@
 
     font-family: 'Roboto', sans-serif;
      /* font-family: 'Rubik', sans-serif; */
+     /* font-family: 'Bree Serif', serif; */
     /* font-family:  Helvetica,Arial,'sans-serif'; */
     font-size: 1em;
     font-weight: 500;
+}
+
+.dropdown .dropdown-menu .dropdown-item{
+    background-color: #ffffff !important;
+    color: black !important;
+} 
+.dropdown .dropdown-menu .dropdown-item:hover{
+    background-color: #100031 !important;
+    color: white !important;
 }
 
 .dev-link a{
