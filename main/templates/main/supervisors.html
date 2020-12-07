@@ -2,57 +2,120 @@
 {% load static %}
 {% block title %}Contact | Phytochem Database{% endblock %}
 {% block body %}
-    <div class="container">
-        <h2 align="center">Supervisors</h2>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Professor Shahriar Zaman</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Microbiology Laboratory, Department of Genetic Engineering and
-                    Biotechnology, University of Rajshahi, Bangladesh</h6>
-                <p>
-                    Currently I am working as Professor in the Department of Genetic Engineering and Biotechnology at
-                    the University of Rajshahi, Bangladesh. I received my PhD and Postdoc from RU. My research focuses
-                    on Microbiology, Environmental microbiology, Plant physiology, Enzymology, Medicinal chemistry,
-                    Molecular biology, and Biochemistry.
-                </p>
-                <p>Email: <a href="mailto://szaman@ru.ac.bd" class="card-link">szaman@ru.ac.bd</a></p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Dr. Md. Salah Uddin</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Associate Professor, Microbiology Laboratory, Department of
-                    Genetic Engineering and Biotechnology, University of Rajshahi, Bangladesh
-                </h6>
-                <p>
-                    Currently I am working as an Associate Professor in the Department of Genetic Engineering and
-                    Biotechnology at the University of Rajshahi. I received my Ph.D. on Environmental Microbiology and
-                    Wastewater Treatment from School of Environmental and Biological Science and Technology, Dalian
-                    University of Technology, Dalian, China. My research focuses on Microbiology, Environmental
-                    Microbiology, Wastewater Treatment, Medicinal Chemistry, and Molecular Biology.
-                </p>
-                <p>Email: <a href="mailto://salim.geb@ru.ac.bd" class="card-link">salim.geb@ru.ac.bd</a></p>
-                <p><a href="https://www.researchgate.net/profile/Md_Uddin254" class="card-link">ResearchGate</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Dr. Md. Abu Saleh</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Associate Professor at Department of Genetic Engineering
-                    and biotechnology, University of Rajshahi. Bangladesh
-                </h6>
-                <p>Currently I am working as an Associate Professor in the Department of Genetic Engineering and
-                    Biotechnology at the University of Rajshahi, Bangladesh. I received my PhD on enzymology and
-                    enzyme kinetics from CAS, China. My research focuses on microbiology, enzymology, medicinal
-                    chemistry, bioinformatics, and protein modeling.
-                </p>
-
-                <p>Email: <a href="mailto://saleh@ru.ac.bd" class="card-link">saleh@ru.ac.bd</a></p>
-                <p><a href="https://www.linkedin.com/in/dr-md-abu-saleh-a1144553/"
-                      class="card-link">LinkedIn</a></p>
-                <p><a href="https://www.researchgate.net/profile/Md_Saleh3" class="card-link">ResearchGate</a>
-                </p>
-            </div>
-        </div>
+    <div class="container bg-white shadow-sm">
+         <div class="row pl-2">
+             <div class="col-md-5 my-auto">
+                 <div class="font-italic team-name row flex-column align-items-center about-page-title">
+                     <div >Honerable</div>
+                     <div class="developer-cls">Supervisors</div>
+                 </div>
+             </div>
+             <div class="col-md-7 about-devoloper" style="height:100vh;">
+                 <!-- Professor Shahriar Zaman profile   -->
+                 <div class="row flex-column my-4 px-2">
+                        <div class="row d-flex justify-content-between mx-2">
+                            <h3 class="collaborator-name">Professor Shahriar Zaman</h3>
+                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="mx-2 mt-2 collaborator-about">About</h3>
+                        <h6 class="mx-2 mb-2 text-muted">Microbiology Laboratory, Department of Genetic Engineering and
+                             Biotechnology <br> University of Rajshahi, Bangladesh</h6>
+                        <p class="mx-2 mb-2 about-researcher">
+                            Currently I am working as Professor in the Department of Genetic Engineering and Biotechnology at
+                            the University of Rajshahi, Bangladesh. I received my PhD and Postdoc from RU. My research focuses
+                            on Microbiology, Environmental microbiology, Plant physiology, Enzymology, Medicinal chemistry,
+                            Molecular biology, and Biochemistry.
+                        </p>
+                        <div class="row d-flex justify-content-end mx-2 mt-2">
+                            <p class="dev-link mx-1">
+                                <a href="mailto://szaman@ru.ac.bd">
+                                    <span class="fa-stack fa-1x">
+                                         <i class="fa fa-circle fa-stack-2x icon-background" ></i>
+                                          <i class="fa fa-envelope fa-stack-1x"></i>
+                                     </span>
+                                </a>
+                            </p>
+                            <p class="dev-link mx-1">
+                                <a href=" " target="_blank">
+                                    <img src="{% static '/main/images/ResearchGate.png'%}" alt="ResearchGate">
+                                </a>
+                            </p>
+                        </div>
+                 </div>
+                 <hr>
+                  <!-- Dr. Md. Salah Uddin profile   -->
+                 <div class="row flex-column my-4 px-2">
+                        <div class="row d-flex justify-content-between mx-2">
+                            <h3 class="collaborator-name">Dr. Md. Salah Uddin</h3>
+                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="mx-2 mt-2 collaborator-about">About</h3>
+                        <h6 class="mx-2 mb-2 text-muted">Associate Professor, Microbiology Laboratory, Department of
+                    Genetic Engineering and Biotechnology <br> University of Rajshahi, Bangladesh</h6>
+                        <p class="mx-2 mb-2 about-researcher">
+                            Currently I am working as an Associate Professor in the Department of Genetic Engineering and
+                            Biotechnology at the University of Rajshahi. I received my Ph.D. on Environmental Microbiology and
+                            Wastewater Treatment from School of Environmental and Biological Science and Technology, Dalian
+                            University of Technology, Dalian, China. My research focuses on Microbiology, Environmental
+                            Microbiology, Wastewater Treatment, Medicinal Chemistry, and Molecular Biology.
+                        </p>
+                        <div class="row d-flex justify-content-end mx-2 mt-2">
+                            <p class="dev-link mx-1">
+                                <a href="mailto://salim.geb@ru.ac.bd">
+                                    <span class="fa-stack fa-1x">
+                                         <i class="fa fa-circle fa-stack-2x icon-background" ></i>
+                                          <i class="fa fa-envelope fa-stack-1x"></i>
+                                     </span>
+                                </a>
+                            </p>
+                            <p class="dev-link mx-1">
+                                <a href="https://www.researchgate.net/profile/Md_Uddin254" target="_blank">
+                                    <img src="{% static '/main/images/ResearchGate.png'%}" alt="ResearchGate">
+                                </a>
+                            </p>
+                        </div>
+                 </div>
+                 <hr>
+                 <!-- Dr. Md. Abu Saleh profile   -->
+                 <div class="row flex-column my-4 px-2">
+                        <div class="row d-flex justify-content-between mx-2">
+                            <h3 class="collaborator-name">Dr. Md. Abu Saleh</h3>
+                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="mx-2 mt-2 collaborator-about">About</h3>
+                        <h6 class="mx-2 mb-2 text-muted">Associate Professor at Department of Genetic Engineering
+                    and biotechnology <br> University of Rajshahi ,Bangladesh</h6>
+                        <p class="mx-2 mb-2 about-researcher">
+                             Currently I am working as an Associate Professor in the Department of Genetic Engineering and
+                             Biotechnology at the University of Rajshahi, Bangladesh. I received my PhD on enzymology and
+                             enzyme kinetics from CAS, China. My research focuses on microbiology, enzymology, medicinal
+                             chemistry, bioinformatics, and protein modeling.
+                        </p>
+                        <div class="row d-flex justify-content-end mx-2 mt-2">
+                            <p class="dev-link mx-1">
+                                <a href="mailto://saleh@ru.ac.bd">
+                                    <span class="fa-stack fa-1x">
+                                         <i class="fa fa-circle fa-stack-2x icon-background" ></i>
+                                          <i class="fa fa-envelope fa-stack-1x"></i>
+                                     </span>
+                                </a>
+                            </p>
+                            <p class="dev-link mx-1">
+                                <a href="https://www.linkedin.com/in/dr-md-abu-saleh-a1144553/" target="_blank">
+                                    <span class="fa-stack fa-1x">
+                                         <i class="fa fa-circle fa-stack-2x icon-background" ></i>
+                                          <i class="fa fa-envelope fa-stack-1x"></i>
+                                     </span>
+                                </a>
+                            </p>
+                            <p class="dev-link mx-1">
+                                <a href="https://www.researchgate.net/profile/Md_Saleh3" target="_blank">
+                                    <img src="{% static '/main/images/ResearchGate.png'%}" alt="ResearchGate">
+                                </a>
+                            </p>
+                        </div>
+                 </div>
+             </div>
+         </div>
     </div>
 {% endblock %}
