@@ -1,5 +1,5 @@
 body{
-    background-color:#f4f3f5;
+    background-color:#fafafa;
     margin-top: 10vh;
 }
 body.st{
@@ -121,6 +121,12 @@ a.stop-highlight{
     .plant-about {
         font-size: 1.30em;
     }
+}
+
+@media screen and (max-width: 540px) {
+     .team-name{
+        font-size: 1.75em !important;
+     }
 }
 
 /*           ------ End plant and Chemical Comound code --------*/
