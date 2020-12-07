@@ -1,26 +1,80 @@
 {% extends 'main/base.html' %}
-
+{% load static %}
 {% block body %}
-    <div class="container">
-        <div class="bg-info font-weight-bold p-3">Profile Information</div>
-        <div>
-            <strong>Email: </strong>{{ user_d.email }} <br>
-            <strong>First Name: </strong>{{ user_d.first_name }} <br>
-            <strong>Last Name: </strong>{{ user_d.last_name }} <br>
-            <strong>Location: </strong>{{ user_d.location }} <br>
-            <strong>LinkedIn: </strong><a href="{{ user_d.linkedin }}" target="_blank">{{ user_d.linkedin }}</a> <br>
-            <strong>ResearchGate: </strong><a href="{{ user_d.researchgate }}" target="_blank">{{ user_d.researchgate }}</a> <br>
-            <strong>About: </strong>{{ user_d.about }} <br>
-        </div>
-        {% if user.username == user_d.username %}
-            <div class="mt-3">
-                <a class="btn btn-info mb-2" href="{% url 'user:profile_edit' %}">Edit Profile</a>
+    <div class="container bg-white">
+        <div class="row d-flex">
+            <div class="col-md-6">
+                <div class="row d-flex justify-content-start p-2">
+                    <div class="profile-title">{{ user_d.first_name }} {{ user_d.last_name }}</div>
+                </div>
             </div>
-        {% endif %}
-        <div>
-            {% for con in contributions %}
-                    <div class="row d-flex mb-2 p-2" style="border-radius: 10px; background: #dbeabf">
-                        <div class="col-md-4 py-2" style="margin: auto; border-radius: 10px">
+            <div class="col-md-6">
+                <div class="row d-flex justify-content-end p-2">
+                    {% if user.username == user_d.username %}
+                        <a href="{% url 'user:profile_edit' %}">
+                            <button class="btn btn-outline-dark" type="button">Edit Info.</button>
+                        </a>
+                    {% endif %}
+<!--                    <button type="button" class="btn btn-outline-dark">Edit Info</button>-->
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row d-flex">
+            <div class="col-md-6">
+                <div class="row d-flex justify-content-start py-2 px-2 profile-info ">
+                    Profile Information
+                </div>
+                <div class="row d-flex justify-content-start py-1 px-2 ">
+                    <div class="type-of-info"><strong>User Name:</strong></div>
+                    <div class="user-name px-2">{{ user_d.first_name }} {{ user_d.last_name }}</div>
+                </div>
+
+                <div class="row d-flex justify-content-start py-1 px-2 ">
+                    <div class="type-of-info"><strong>Location:</strong></div>
+                    <div class="user-name px-2">{{ user_d.location }}</div>
+                </div>
+
+                <div class="row d-flex justify-content-start flex-column mt-2">
+                    <p class="mx-1 px-2">
+                        <span class="fa-stack fa-1x">
+                                <i class="fa fa-circle fa-stack-2x icon-background" ></i>
+                                <i class="fa fa-envelope fa-stack-1x"></i>
+                        </span>
+                        <a class="dev-link-profile" href="mailto://{{ user_d.email }}">
+                            {{ user_d.email }}
+                        </a>
+                    </p>
+                    <p class="mx-1 px-2">
+                        <span class="fa-stack fa-1x">
+                                <i class="fa fa-circle fa-stack-2x icon-background" ></i>
+                                <i class="fa fa-linkedin fa-stack-1x"></i>
+                        </span>
+                        <a  class="dev-link-profile" href="{{ user_d.linkedin }}" target="_blank">
+                            {{ user_d.linkedin }}
+                        </a>
+                    </p>
+
+                    <p class="mx-1 px-2">
+                        <a class="dev-link-profile" href="{{ user_d.researchgate }}" target="_blank">
+                            <img src="{% static '/main/images/ResearchGate.png'%}" alt="ResearchGate">
+                            {{ user_d.researchgate }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-5">
+                  <div class="row d-flex justify-content-start px-3 profile-info ">
+                    About
+                </div>
+                <hr>
+                <div class="about-researcher">{{ user_d.about }}</div>
+            </div>
+        </div>
+
+        {% for con in contributions %}
+                    <div class="row d-flex mb-2 p-2 rounded" style="background: #e1e1f6">
+                        <div class="col-md-4 py-2 rounded" style="margin: auto;">
                             <a href="#"><strong>{{ con.plant_name }}</strong></a>
                             <small>{{ con.created_at }}</small>
                         </div>
@@ -28,7 +82,7 @@
                             <div class="d-flex justify-content-end">
                                 <div class="ml-1">
                                     {% if con.status == 0%}
-                                        <span class="btn btn-info" >Reviewing</span>
+                                        <span class="btn btn-light" >Reviewing</span>
                                     {% elif con.status == 1%}
                                         <span class="btn btn-success">Accepted</span>
                                     {% else %}
@@ -38,7 +92,6 @@
                             </div>
                         </div>
                     </div>
-            {% endfor %}
-        </div>
+        {% endfor %}
     </div>
 {% endblock %}

@@ -147,3 +147,35 @@ a.stop-highlight{
 .icon-background{
     color:#e1e1f6;
 }
+
+/*  ============Writting css for profile=========*/
+/*Profile Title*/
+.profile-title{
+    /* font-family:  Helvetica,Arial,'sans-serif'; */
+    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
+    font-size: 1.90em;
+    font-weight: 600;
+}
+.profile-info{
+        /* font-family:  Helvetica,Arial,'sans-serif'; */
+        font-family: 'Poppins', sans-serif;
+        /* font-family: 'Roboto', sans-serif; */
+        font-size: 1.5em;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        color: #747474;
+}
+.type-of-info{
+     font-family:  Helvetica,Arial,'sans-serif';
+     /* font-family: 'Poppins', sans-serif; */
+     /* font-family: 'Roboto', sans-serif; */
+     font-size: 1em;
+     color: #2e2e2e;
+}
+.user-name{
+     /* font-family:  Helvetica,Arial,'sans-serif'; */
+     font-family: 'Poppins', sans-serif;
+     /* font-family: 'Roboto', sans-serif; */
+     font-size: 1em;
+}
