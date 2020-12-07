@@ -1,0 +1,39 @@
+.team-name{
+    font-family:  Helvetica,Arial,'sans-serif';
+    font-size: 2em;
+    font-weight: 600;
+}
+.developer-cls{
+    color: #9292fd;
+}
+.collaborator-name{
+    font-family:  Helvetica,Arial,'sans-serif';
+    font-size: 1.5em;
+    font-weight: 600;
+}
+.collaborator-about{
+    text-transform: uppercase;
+    font-family:  Helvetica,Arial,'sans-serif';
+    font-size: 1.1em;
+    color: #000000 ;
+}
+.about-researcher{
+
+    font-family: 'Roboto', sans-serif;
+     /* font-family: 'Rubik', sans-serif; */
+    /* font-family:  Helvetica,Arial,'sans-serif'; */
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.dev-link a{
+    color: #03000e;
+}
+.dev-link a:hover{
+    color: #272727;
+}
+.about-devoloper{
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
