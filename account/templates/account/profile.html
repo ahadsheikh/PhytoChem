@@ -8,7 +8,7 @@
                     <div class="profile-title">{{ user_d.first_name }} {{ user_d.last_name }}</div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5 mx-2">
                 <div class="row d-flex justify-content-end p-2">
                     {% if user.username == user_d.username %}
                         <a href="{% url 'user:profile_edit' %}">
@@ -21,7 +21,7 @@
         </div>
         <hr>
         <div class="row d-flex">
-            <div class="col-md-6">
+            <div class="col-md-6 mx-2">
                 <div class="row d-flex justify-content-start py-2 px-2 profile-info ">
                     Profile Information
                 </div>

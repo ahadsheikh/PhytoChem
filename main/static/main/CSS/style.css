@@ -123,11 +123,21 @@ a.stop-highlight{
     }
 }
 
+/*-------------navbar COllapse color for phone-------------*/
+@media (max-width: 767px) {
+  .navbar-collapse
+    {
+        background-color:#100031;
+    }
+}
+/*Devloper name */
 @media screen and (max-width: 540px) {
      .team-name{
         font-size: 1.75em !important;
      }
 }
+
+
 
 /*           ------ End plant and Chemical Comound code --------*/
 .smile {
