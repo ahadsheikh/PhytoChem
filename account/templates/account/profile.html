@@ -2,6 +2,9 @@
 {% load static %}
 {% block body %}
     <div class="container bg-white">
+        {% for message in messages %}
+            <div class="text-success bg-secondary p-3 h4 rounded">{{ message }}</div>
+        {% endfor %}
         <div class="row d-flex">
             <div class="col-md-6">
                 <div class="row d-flex justify-content-start p-2">
@@ -12,7 +15,7 @@
                 <div class="row d-flex justify-content-end p-2">
                     {% if user.username == user_d.username %}
                         <a href="{% url 'user:profile_edit' %}">
-                            <button class="btn btn-outline-dark" type="button">Edit Info.</button>
+                            <button class="btn btn-outline-dark" type="button">Settings</button>
                         </a>
                     {% endif %}
                     <!--                    <button type="button" class="btn btn-outline-dark">Edit Info</button>-->

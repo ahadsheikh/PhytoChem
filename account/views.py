@@ -44,12 +44,10 @@ def profile(request, id):
 def profile_edit(request):
     if request.method == 'POST':
         accUpForm = AccountUpdateForm(request.POST, instance=request.user)
-        print(request.POST)
         if accUpForm.is_valid():
-            print(accUpForm.cleaned_data)
             accUpForm.save()
             messages.success(request, "Successfully Saved")
-            return redirect('user:profile_edit')
+            return redirect('user:profile', request.user.id)
         else:
             return render(request, 'account/profile_edit.html', {'form': accUpForm})
 

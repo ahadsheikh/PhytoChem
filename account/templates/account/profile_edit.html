@@ -2,10 +2,7 @@
 
 {% block body %}
     <div class="container">
-        {% for message in messages %}
-            <div class="text-success bg-secondary p-3 h4 rounded">{{ message }}</div>
-        {% endfor %}
-        <h2 align="center">Edit Information</h2>
+        <h2 align="center">Information</h2>
         <div>
             <form method="post">
                 {% csrf_token %}
