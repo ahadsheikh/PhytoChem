@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A large and scientific rigorous phytochemical
                                       database dedicated to Computer-Aided Drug Designing,
-                                      Lead Optimization, Virtual Screening and Molecular Docking." />
+                                      Lead Optimization, Virtual Screening and Molecular Docking."/>
     <title>
-    {% if not title %}
-        {% block title %}
-        {% endblock %}
-    {% else %}
-        {{ title }}
-    {% endif %}
+        {% if not title %}
+            {% block title %}
+            {% endblock %}
+        {% else %}
+            {{ title }}
+        {% endif %}
     </title>
     <link rel="shortcut icon" href="{% static '/main/images/title-icon.png' %}" type="image/x-icon">
 
@@ -63,22 +63,26 @@
 
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {% if view_name == 'main:about' %}active{% endif %}"
+                           href="{% url 'main:about' %}">About Us</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {% if view_name == 'main:contact' %}active{% endif %}"
                            href="{% url 'main:contact' %}">Contact</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {% if 'main:about' in view_name %}active{% endif %}"
-                           id="about" href="{% url 'main:about' %}" role="button"
-                           aria-haspopup="true" aria-expanded="false">About</a>
-                        <div class="dropdown-menu" aria-labelledby="about">
-                            <a class="nav-dropdown dropdown-item {% if view_name == 'main:about-research-team' %}active{% endif %}"
-                               href="{% url 'main:about-research-team' %}">Research
+                        <a class="nav-link dropdown-toggle {% if 'main:members' in view_name %}active{% endif %}"
+                           id="member" href="{% url 'main:members' %}" role="button"
+                           aria-haspopup="true" aria-expanded="false">Members</a>
+                        <div class="dropdown-menu" aria-labelledby="member">
+                            <a class="nav-dropdown dropdown-item {% if view_name == 'main:member-research-team' %}active{% endif %}"
+                               href="{% url 'main:member-research-team' %}">Research
                                 Team</a>
-                            <a class="nav-dropdown dropdown-item {% if view_name == 'main:about-dev-team' %}active{% endif %}"
-                               href="{% url 'main:about-dev-team' %}">Developer
+                            <a class="nav-dropdown dropdown-item {% if view_name == 'main:member-dev-team' %}active{% endif %}"
+                               href="{% url 'main:member-dev-team' %}">Developer
                                 Team</a>
-                            <a class="nav-dropdown dropdown-item {% if view_name == 'main:about-supervisors' %}active{% endif %}"
-                               href="{% url 'main:about-supervisors' %}">Supervisors</a>
+                            <a class="nav-dropdown dropdown-item {% if view_name == 'main:member-supervisors' %}active{% endif %}"
+                               href="{% url 'main:member-supervisors' %}">Supervisors</a>
                         </div>
                     </li>
                     {% if request.user.is_superuser %}
@@ -121,39 +125,39 @@
 
 {% block body %}
 {% endblock %}
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-    <script src="{% static 'main/scripts/dropdown.js' %}"></script>
-    <script>
-            $(document).ready(function(){
-                var pathname = window.location.pathname;
-                if(pathname=="/")
-                  $('.navbar','body').addClass("sticky");
-                else
-                    $('.navbar','body').removeClass("sticky");
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="{% static 'main/scripts/dropdown.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        var pathname = window.location.pathname;
+        if (pathname == "/")
+            $('.navbar', 'body').addClass("sticky");
+        else
+            $('.navbar', 'body').removeClass("sticky");
+    });
+    $(document).ready(function () {
+        var pathname = window.location.pathname;
+        if (pathname == "/")
+            $('body').addClass("st");
+        else
+            $('body').removeClass("st");
+    });
+    $(document).ready(function () {
+        var width = $(window).width();
+        var height = $(window).height();
+        if (width <= 400 && height <= 800)
+            $("#hide").click(function () {
+                $(".homepage-text-2").hide();
             });
-            $(document).ready(function(){
-                var pathname = window.location.pathname;
-                if(pathname=="/")
-                  $('body').addClass("st");
-                else
-                    $('body').removeClass("st");
-            });
-            $(document).ready(function(){
-                var width = $(window).width();
-                var height = $(window).height();
-                if(width <= 400 && height<=800)
-                    $("#hide").click(function(){
-                        $(".homepage-text-2").hide();
-                    });
-            });
-    </script>
+    });
+</script>
 </body>
 </html>

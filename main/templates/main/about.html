@@ -1,13 +1,17 @@
 {% extends "main/base.html" %}
 {% load static %}
-{% block title %}Contact | Phytochem Database{% endblock %}
+{% block title %}About Us | Phytochem Database{% endblock %}
 {% block body %}
     <div class="container">
-        <div class="py-3">
-            The database contains {{ n_compounds }} phytochems from {{ n_plants }} plants.
-        </div>
-        <a href="{% url 'main:about-research-team' %}">Research team</a><br>
-        <a href="{% url 'main:about-dev-team' %}">Developer team</a><br>
-        <a href="{% url 'main:about-supervisors' %}">Supervisors</a><br>
+        <p class="text-item homepage-text-1 m-1" >A Large and Scientific Rigorous <br> <span
+                class="homepage-important-text">phytochemical database</span> dedicated to
+            Computer-Aided Drug Designing,
+            Lead Optimization, Virtual Screening and Molecular Docking.</p>
+        <p class="text-item homepage-text-2 m-1">The pharmacological properties and
+            Lipinski rule of five will be available for each of the corresponding compounds.
+        </p>
+        <p class="h3">The database contains <span class="text text-success">{{ n_compounds }}</span> phytochems from
+            <span class="text text-success">{{ n_plants }}</span> plants.</p>
+
     </div>
 {% endblock %}

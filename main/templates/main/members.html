@@ -1,0 +1,10 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}Members | Phytochem Database{% endblock %}
+{% block body %}
+    <div class="container">
+        <a href="{% url 'main:member-research-team' %}">Research team</a><br>
+        <a href="{% url 'main:member-dev-team' %}">Developer team</a><br>
+        <a href="{% url 'main:member-supervisors' %}">Supervisors</a><br>
+    </div>
+{% endblock %}

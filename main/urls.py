@@ -11,9 +11,10 @@ urlpatterns = [
     path('contact/', TemplateView.as_view(template_name='main/contact.html'), name='contact'),
 
     path('about/', views.about, name='about'),
-    path('about/research-team', TemplateView.as_view(template_name='main/research-team.html'), name='about-research-team'),
-    path('about/dev-team', TemplateView.as_view(template_name='main/dev-team.html'), name='about-dev-team'),
-    path('about/supervisors', TemplateView.as_view(template_name='main/supervisors.html'), name='about-supervisors'),
+    path('members/', views.members, name='members'),
+    path('members/research-team', TemplateView.as_view(template_name='main/research-team.html'), name='member-research-team'),
+    path('members/dev-team', TemplateView.as_view(template_name='main/dev-team.html'), name='member-dev-team'),
+    path('members/supervisors', TemplateView.as_view(template_name='main/supervisors.html'), name='member-supervisors'),
 
     path('results/', views.results, name='results'),
     path('download/', views.download_file, name='download_all_results'),
