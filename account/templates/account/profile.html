@@ -15,7 +15,7 @@
                             <button class="btn btn-outline-dark" type="button">Edit Info.</button>
                         </a>
                     {% endif %}
-<!--                    <button type="button" class="btn btn-outline-dark">Edit Info</button>-->
+                    <!--                    <button type="button" class="btn btn-outline-dark">Edit Info</button>-->
                 </div>
             </div>
         </div>
@@ -36,35 +36,40 @@
                 </div>
 
                 <div class="row d-flex justify-content-start flex-column mt-2">
-                    <p class="mx-1 px-2">
+                    {% if user_d.email %}
+                        <p class="mx-1 px-2">
                         <span class="fa-stack fa-1x">
-                                <i class="fa fa-circle fa-stack-2x icon-background" ></i>
+                                <i class="fa fa-circle fa-stack-2x icon-background"></i>
                                 <i class="fa fa-envelope fa-stack-1x"></i>
                         </span>
-                        <a class="dev-link-profile" href="mailto://{{ user_d.email }}">
-                            {{ user_d.email }}
-                        </a>
-                    </p>
-                    <p class="mx-1 px-2">
+                            <a class="dev-link-profile" href="mailto://{{ user_d.email }}">
+                                {{ user_d.email }}
+                            </a>
+                        </p>
+                    {% endif %}
+                    {% if user_d.linkedin %}
+                        <p class="mx-1 px-2">
                         <span class="fa-stack fa-1x">
-                                <i class="fa fa-circle fa-stack-2x icon-background" ></i>
+                                <i class="fa fa-circle fa-stack-2x icon-background"></i>
                                 <i class="fa fa-linkedin fa-stack-1x"></i>
                         </span>
-                        <a  class="dev-link-profile" href="{{ user_d.linkedin }}" target="_blank">
-                            {{ user_d.linkedin }}
-                        </a>
-                    </p>
-
-                    <p class="mx-1 px-2">
-                        <a class="dev-link-profile" href="{{ user_d.researchgate }}" target="_blank">
-                            <img src="{% static '/main/images/ResearchGate.png'%}" alt="ResearchGate">
-                            {{ user_d.researchgate }}
-                        </a>
-                    </p>
+                            <a class="dev-link-profile" href="{{ user_d.linkedin }}" target="_blank">
+                                {{ user_d.linkedin }}
+                            </a>
+                        </p>
+                    {% endif %}
+                    {% if user_d.researchgate %}
+                        <p class="mx-1 px-2">
+                            <a class="dev-link-profile" href="{{ user_d.researchgate }}" target="_blank">
+                                <img src="{% static '/main/images/researchgate.png' %}" alt="ResearchGate">
+                                {{ user_d.researchgate }}
+                            </a>
+                        </p>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-5">
-                  <div class="row d-flex justify-content-start px-3 profile-info ">
+                <div class="row d-flex justify-content-start px-3 profile-info ">
                     About
                 </div>
                 <hr>
@@ -73,25 +78,25 @@
         </div>
 
         {% for con in contributions %}
-                    <div class="row d-flex mb-2 p-2 rounded" style="background: #e1e1f6">
-                        <div class="col-md-4 py-2 rounded" style="margin: auto;">
-                            <a href="#"><strong>{{ con.plant_name }}</strong></a>
-                            <small>{{ con.created_at }}</small>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="d-flex justify-content-end">
-                                <div class="ml-1">
-                                    {% if con.status == 0%}
-                                        <span class="btn btn-light" >Reviewing</span>
-                                    {% elif con.status == 1%}
-                                        <span class="btn btn-success">Accepted</span>
-                                    {% else %}
-                                        <span class="btn btn-danger">Rejected</span>
-                                    {% endif %}
-                                </div>
-                            </div>
+            <div class="row d-flex mb-2 p-2 rounded" style="background: #e1e1f6">
+                <div class="col-md-4 py-2 rounded" style="margin: auto;">
+                    <a href="#"><strong>{{ con.plant_name }}</strong></a>
+                    <small>{{ con.created_at }}</small>
+                </div>
+                <div class="col-md-8">
+                    <div class="d-flex justify-content-end">
+                        <div class="ml-1">
+                            {% if con.status == 0 %}
+                                <span class="btn btn-light">Reviewing</span>
+                            {% elif con.status == 1 %}
+                                <span class="btn btn-success">Accepted</span>
+                            {% else %}
+                                <span class="btn btn-danger">Rejected</span>
+                            {% endif %}
                         </div>
                     </div>
+                </div>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}
