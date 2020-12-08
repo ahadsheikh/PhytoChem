@@ -67,8 +67,8 @@
                            href="{% url 'main:about' %}">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if view_name == 'main:contact' %}active{% endif %}"
-                           href="{% url 'main:contact' %}">Contact</a>
+                        <a class="nav-link {% if view_name == 'contribute:submit-data' %}active{% endif %}"
+                           href="{% url 'contribute:submit_data' %}">Submit</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {% if 'main:members' in view_name %}active{% endif %}"
@@ -85,6 +85,10 @@
                                href="{% url 'main:member-supervisors' %}">Supervisors</a>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if view_name == 'main:contact' %}active{% endif %}"
+                           href="{% url 'main:contact' %}">Contact</a>
+                    </li>
                     {% if request.user.is_superuser %}
                         <li class="nav-item">
                             <a class="nav-link {% if view_name == 'dash:dashboard' %}active{% endif %}"
@@ -92,10 +96,6 @@
                         </li>
                     {% endif %}
                     {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link {% if view_name == 'contribute:submit-data' %}active{% endif %}"
-                               href="{% url 'contribute:submit_data' %}">Submit</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link {% if view_name == 'user:profile' %}active{% endif %}"
                                href="{% url 'user:profile' user.id %}">{{ user.first_name }}</a>

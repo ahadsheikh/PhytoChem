@@ -3,15 +3,15 @@
 {% block title %}About Us | Phytochem Database{% endblock %}
 {% block body %}
     <div class="container">
-        <p class="text-item homepage-text-1 m-1" >A Large and Scientific Rigorous <br> <span
-                class="homepage-important-text">phytochemical database</span> dedicated to
+        <p class="h4">A Large and Scientific Rigorous <span class="font-weight-bold text text-success">PhytoChemical Database</span>
+            dedicated to <br>
             Computer-Aided Drug Designing,
             Lead Optimization, Virtual Screening and Molecular Docking.</p>
-        <p class="text-item homepage-text-2 m-1">The pharmacological properties and
+        <p class="h3 mt-3">The database contains <span class="text text-success">{{ n_compounds }}</span> phytochems from
+            <span class="text text-success">{{ n_plants }}</span> plants.</p>
+        <p style="color:#43436d;" class="h5" >The pharmacological properties and
             Lipinski rule of five will be available for each of the corresponding compounds.
         </p>
-        <p class="h3">The database contains <span class="text text-success">{{ n_compounds }}</span> phytochems from
-            <span class="text text-success">{{ n_plants }}</span> plants.</p>
 
     </div>
 {% endblock %}
