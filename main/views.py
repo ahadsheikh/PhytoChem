@@ -12,6 +12,10 @@ def index(request):
     return render(request, 'main/index.html')
 
 
+def members(request):
+    return render(request, 'main/members.html')
+
+
 def about(request):
     context = {
         'n_compounds': Compound.objects.all().count(),

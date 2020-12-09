@@ -22,7 +22,7 @@ urlpatterns = [
     path('', include('main.urls', namespace='main')),
     path('dashboard/', include('dashboard.urls', namespace='dash')),
     path('submit-data/', include('submit_data.urls', namespace='contribute')),
-    path('about/', TemplateView.as_view(template_name="main/about.html"), name='about'),
+    path('about/', TemplateView.as_view(template_name="main/members.html"), name='about'),
 
     # Auth System
     path('accounts/', include('account.urls', namespace='user')),

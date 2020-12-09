@@ -8,7 +8,7 @@
         <div class="row p-2 rounded plant-title ">
             <div class="col-md d-flex justify-content-center">
                 <img class="ml-2 mr-2 plant-image" src="{% static '/main/images/Chemical.png' %}" alt="Logo">
-                <p class="chemical-title">{{ compound.Molecular_Formula }}</p>
+                <p class="chemical-title">{{ compound.Molecular_Formula|chem_formula|safe }}</p>
             </div>
             <div class="w-100 p-2 chemical-id-top">
                 <span class="float-left">
@@ -35,7 +35,7 @@
                 </tr>
                 <tr>
                     <td class="font-weight-bold">Molecular Formula:</td>
-                    <td>{{ compound.Molecular_Formula }}</td>
+                    <td>{{ compound.Molecular_Formula|chem_formula|safe }}</td>
                 </tr>
                 <tr>
                     <td class="font-weight-bold">Canonical SMILES:</td>

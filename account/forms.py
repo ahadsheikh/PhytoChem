@@ -18,5 +18,5 @@ class AccountUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Account
-        fields = ['email', 'first_name', 'last_name', 'location', 'linkedin', 'researchgate', 'about']
+        fields = ['first_name', 'last_name', 'location', 'linkedin', 'researchgate', 'about']
 

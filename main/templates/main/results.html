@@ -49,7 +49,7 @@
                                     <a class="stop-highlight" href="{% url "main:compound"  compound.id %}">
                                         <div class="stop-highlight">
                                             <span class="font-weight-bold pull-left">Molecular Formula:</span>
-                                            <span class="pull-right">{{ compound.Molecular_Formula }}</span>
+                                            <span class="pull-right">{{ compound.Molecular_Formula|chem_formula|safe }}</span>
                                         </div>
                                     </a>
                                     <a class="stop-highlight" href="{% url "main:compound"  compound.id %}">
