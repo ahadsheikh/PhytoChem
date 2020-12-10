@@ -5,11 +5,54 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
+from django.contrib import messages, auth
 
 from submit_data.models import Contribution
-from account.forms import AccountForm, AccountUpdateForm
-from .models import Account
+from account.forms import AccountForm, AccountUpdateForm, ForgotPasswordForm, AcceptForgotPasswordCodeForm
+from .models import Account, ForgotPasswordCode
+
+
+from random import randint
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('main:index')
+
+
+def forgot_password(request):
+    if request.method == 'POST':
+        form = ForgotPasswordForm(request.POST)
+        if form.is_valid():
+            try:
+                user = Account.objects.get(email=form.cleaned_data['email'])
+                code = randint(100000, 999999)
+                forgetCode = ForgotPasswordCode.objects.filter(user=user)
+                if not forgetCode:
+                    ForgotPasswordCode.objects.create(user=user, code=code)
+                return render(request, 'account/submit_code.html', {'email': user.email})
+            except Account.DoesNotExist:
+                errors = ("Account doesn't exists", )
+                return render(request, 'account/forgot_password.html', {'errors': errors})
+    return render(request, 'account/forgot_password.html', {})
+
+
+def code_accept(request):
+    if request.method == 'POST':
+        accForgotForm = AcceptForgotPasswordCodeForm(request.POST)
+        if accForgotForm.is_valid():
+            user = None
+            try:
+                user = Account.objects.get(email=accForgotForm.cleaned_data['email'])
+            except Account.DoesNotExist:
+                errors = ('Not Valid Code',)
+                return render(request, 'account/forgot_password.html', {'errors': errors})
+
+        else:
+            errors = ('Not Valid Code', )
+            return render(request, 'account/forgot_password.html', {'errors': errors})
+
+    return HttpResponse('Not permitted Request')
 
 
 def register(request):

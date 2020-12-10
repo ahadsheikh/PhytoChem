@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 
 
-from account.models import Account
+from account.models import Account, ForgotPasswordCode
 
 
 class CustomUserAdmin(UserAdmin):
@@ -27,3 +27,4 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(Account, CustomUserAdmin)
+admin.site.register(ForgotPasswordCode)
