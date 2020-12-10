@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from django.core.validators import MinValueValidator
 
 from .models import Account
 
@@ -19,4 +20,14 @@ class AccountUpdateForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = ['first_name', 'last_name', 'location', 'linkedin', 'researchgate', 'about']
+
+
+class ForgotPasswordForm(forms.Form):
+    email = forms.EmailField(required=True)
+
+
+class AcceptForgotPasswordCodeForm(forms.Form):
+    email = forms.EmailField(required=True)
+    code = forms.IntegerField(required=True)
+
 

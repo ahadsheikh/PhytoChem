@@ -14,10 +14,8 @@ urlpatterns = [
         'login/',
         LoginView.as_view(template_name='account/login.html'),
         name='login'),
-    path(
-        'logout/',
-        LogoutView.as_view(template_name='account/logout.html'),
-        name='logout'),
+    path('logout/', views.logout, name='logout'),
+    path('forgot-password/', views.forgot_password, name='forgot_password'),
     path('profile-edit/', views.profile_edit, name='profile_edit'),
     # Test
 ]
