@@ -1,8 +1,12 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% load main_extras %}
-
-{% block title %}{{ compound.PID }} | Phytochem Database{% endblock %}
+{% block meta-attrs %}
+    <meta name="description" content="Phytochemical with Canonical SMILES: {{ compound.Smiles }}">
+    <meta name="keywords"
+          content="phytochemdb.com, phytochemical, compounds, {{ compound.Smiles }}, {{ compound.PID }}, {{ compound.Molecular_Formula }}">
+{% endblock %}
+{% block title %}{{ compound.PID }}{% endblock %}
 {% block body %}
     <div class="container shadow-sm bg-white">
         <div class="row p-2 rounded plant-title ">

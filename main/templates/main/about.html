@@ -1,17 +1,38 @@
 {% extends "main/base.html" %}
 {% load static %}
-{% block title %}About Us | Phytochem Database{% endblock %}
+{% block meta-attrs %}
+    <meta name="description" content="About phytochemdb.com project">
+    <meta name="keywords" content="phytochemdb.com, phytochemical, compounds, about">
+{% endblock %}
+{% block title %}About{% endblock %}
 {% block body %}
-    <div class="container">
-        <p class="h4">A Large and Scientific Rigorous <span class="font-weight-bold text text-success">PhytoChemical Database</span>
-            dedicated to <br>
-            Computer-Aided Drug Designing,
-            Lead Optimization, Virtual Screening and Molecular Docking.</p>
-        <p class="h3 mt-3">The database contains <span class="text text-success">{{ n_compounds }}</span> phytochems from
-            <span class="text text-success">{{ n_plants }}</span> plants.</p>
-        <p style="color:#43436d;" class="h5" >The pharmacological properties and
-            Lipinski rule of five will be available for each of the corresponding compounds.
+    <div class="container pt-3">
+        <p class="lead">The premier phytochemical database, phytochemdb.com, represents an authentic
+            repository site for plant-derived phytochemicals that can ameliorate Computer-Aided Drug Design, Lead
+            Optimization, Virtual Screening, and Molecular Docking as well as in the bioinformatics sector.
+            <br>
+            Currently, {{ n_plants }} plants from the Asian territory and their corresponding {{ n_compounds }}
+            phytochemicals are available in this database that will escalate promptly.
+            <br>
+            This database assembles the Molecular Formula, 3D structure, Canonical SMILES, Molecular Weight, Hydrogen
+            Bond Acceptor Count, Hydrogen Bond Donor Count, Molar Refractivity, Topological polar surface area (TPSA),
+            WlogP, and Lipinski rule of five with the number of violations for each compound.
+            <br>
+            Anyone can inquiry about phytochemicals by the unique accession number, Canonical SMILES, Molecular formula,
+            and plant names as well. Phytochemicals obtained from each plant can be found all together by simply
+            searching the name of the plant.
+            <br>
+            This plant-derived phytochemical database will be immensely efficient for the researchers, professors, and
+            learners of bioinformatics who are inquisitive at computer-aided Drug Designing, Lead Optimization, Visual
+            Screening, and Molecular Docking.
+            <br>
+            Researchers who have screened phytochemicals in their laboratory and already published their data can
+            contribute to this database. They can upload the three-dimensional structure of the phytochemicals in this
+            database and the new uploaded compound will get a unique accession number after passing the review
+            procedure.
+            <br>
+            For submission of data kindly follow the <a href="http://www.phytochemdb.com/submit-data/">link</a>. You
+            will need to create a free account first.
         </p>
-
     </div>
 {% endblock %}

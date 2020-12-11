@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A large and scientific rigorous phytochemical
-                                      database dedicated to Computer-Aided Drug Designing,
-                                      Lead Optimization, Virtual Screening and Molecular Docking."/>
+
+    {% block meta-attrs %}
+    {% endblock %}
+
     <title>
         {% if not title %}
             {% block title %}
             {% endblock %}
+            | Phytochem Database
         {% else %}
             {{ title }}
         {% endif %}
@@ -64,7 +66,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if view_name == 'main:about' %}active{% endif %}"
-                           href="{% url 'main:about' %}">About Us</a>
+                           href="{% url 'main:about' %}">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if view_name == 'contribute:submit-data' %}active{% endif %}"
@@ -126,114 +128,119 @@
 {% block body %}
 {% endblock %}
 
-<footer class="footer py-3 ">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <p href="">
-                    <img src="{% static '/main/images/phytochem-icon.png'%}" alt="Phytochem-icon">
-                </p>
-            </div>
-            <div class="row d-flex justify-content-center pb-3">
-                <div class="footer-title">phytochem database</div>
-            </div>
-            <div class="row d-flex justify-content-center ">
-                <a href="">
-                    <i class="fa fa-facebook-official px-2 footer-icon-color"></i>
-                </a>
-                <a href="">
-                    <i class="fa fa-linkedin-square px-2 footer-icon-color"></i>
-                </a>
-                <a href="">
-                    <i class="fa fa-twitter fa-1x px-2 footer-icon-color"></i>
-                </a>
-                <a href="">
-                    <i class="fa fa fa-youtube-play px-2 footer-icon-color"></i>
-                </a>
-                <a href="">
-                    <i class="fa fa-github px-2 footer-icon-color"></i>
-                </a>
-                <a class="px-2" href="/" target="_blank">
-                        <img src="{% static '/main/images/researchgate-logo-16px.png'%}" alt=" researchgate-icon">
-                </a>
-            </div>
-            <hr style="border-color: rgba(255,255,255,0.1);">
-            <div class="row d-flex justify-content-center py-3">
-                <div class="col-md-6">
-                    <div class="row footer-icon-color">
-                        <div class="col-md-4">
-                            <a href="{% url 'main:about' %}">
-                                <p class="footer-icon-color">About Us</p>
-                            </a>
-                            <a href="{% url 'main:about' %}">
-                                <p class="footer-icon-color">Vision</p>
-                            </a>
+{% with request.resolver_match.view_name as view_name %}
+    {% if view_name != 'main:index' %}
+        <footer class="footer py-3 ">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <p href="">
+                        <img src="{% static '/main/images/phytochem-icon.png' %}" alt="Phytochem-icon">
+                    </p>
+                </div>
+                <div class="row d-flex justify-content-center pb-3">
+                    <div class="footer-title">phytochem database</div>
+                </div>
+                <div class="row d-flex justify-content-center ">
+                    <a href="">
+                        <i class="fa fa-facebook-official px-2 footer-icon-color"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa fa-linkedin-square px-2 footer-icon-color"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa fa-twitter fa-1x px-2 footer-icon-color"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa fa fa-youtube-play px-2 footer-icon-color"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa fa-github px-2 footer-icon-color"></i>
+                    </a>
+                    <a class="px-2" href="/" target="_blank">
+                        <img src="{% static '/main/images/researchgate-logo-16px.png' %}" alt=" researchgate-icon">
+                    </a>
+                </div>
+                <hr style="border-color: rgba(255,255,255,0.1);">
+                <div class="row d-flex justify-content-center py-3">
+                    <div class="col-md-6">
+                        <div class="row footer-icon-color">
+                            <div class="col-md-4">
+                                <a href="{% url 'main:about' %}">
+                                    <p class="footer-icon-color">About Us</p>
+                                </a>
+                                <a href="{% url 'main:about' %}">
+                                    <p class="footer-icon-color">Vision</p>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{% url 'contribute:submit_data' %}">
+                                    <p class="footer-icon-color">Contribute</p>
+                                </a>
+                                <a href="{% url 'contribute:submit_data' %}">
+                                    <p class="footer-icon-color"></p>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{% url 'contribute:submit_data' %}">
+                                    <p class="footer-icon-color">Search</p>
+                                </a>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <a href="{% url 'contribute:submit_data' %}">
-                                <p class="footer-icon-color">Contribute</p>
-                            </a>
-                            <a href="{% url 'contribute:submit_data' %}">
-                                <p class="footer-icon-color"></p>
-                            </a>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row d-flex justify-content-start px-3 footer-icon-color">
+                            Contact
                         </div>
-                        <div class="col-md-4">
-                            <a href="{% url 'contribute:submit_data' %}">
-                                <p class="footer-icon-color">Search</p>
-                            </a>
+                        <div class="row" style="font-size:0.9em;">
+                            <div class="col-md-6">
+                                <div class="py-2" style="color: #a8a8a8;">Shafi Mahmud</div>
+                                <p>
+                                <span class="fa-stack fa-1x">
+                                    <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                                    <i class="fa fa-envelope fa-stack-1x icon-backgroun"></i>
+                                </span>
+                                    <a href="mailto://shafimahmudfz@gmail.com" class="card-link text-break py-2">shafimahmudfz@gmail.com</a>
+                                </p>
+                                <p>
+                                <span class="fa-stack fa-1x">
+                                    <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                                    <i class="fa fa-phone fa-stack-1x"></i>
+                                </span>
+                                    <a href="tel:+8801679770136">+880 1679-770136</a>
+                                </p>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="p-2" style="color: #a8a8a8;">Dr. Md. Abu Saleh</div>
+                                <p>
+                                <span class="fa-stack fa-1x">
+                                    <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                                    <i class="fa fa-envelope fa-stack-1x icon-backgroun"></i>
+                                </span>
+                                    <a href="mailto://saleh@ru.ac.bd"
+                                       class="card-link text-break py-2">saleh@ru.ac.bd</a>
+                                </p>
+                                <p>
+                                <span class="fa-stack fa-1x">
+                                    <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                                    <i class="fa fa-phone fa-stack-1x"></i>
+                                </span>
+                                    <a href="tel:+8801716731747">+880 1716-731747</a>
+                                </p>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="row d-flex justify-content-start px-3 footer-icon-color">
-                        Contact
-                    </div>
-                    <div class="row" style="font-size:0.9em;">
-                        <div class="col-md-6" >
-                            <div class="py-2" style="color: #a8a8a8;">Shafi Mahmud</div>
-                            <p>
-                                <span class="fa-stack fa-1x">
-                                    <i class="fa fa-circle fa-stack-2x icon-background" ></i>
-                                    <i class="fa fa-envelope fa-stack-1x icon-backgroun"></i>
-                                </span>
-                                <a href="mailto://shafimahmudfz@gmail.com" class="card-link text-break py-2">shafimahmudfz@gmail.com</a>
-                            </p>
-                            <p >
-                                <span class="fa-stack fa-1x">
-                                    <i class="fa fa-circle fa-stack-2x icon-background" ></i>
-                                    <i class="fa fa-phone fa-stack-1x"></i>
-                                </span>
-                                <a href="tel:+8801679770136">+880 1679-770136</a>
-                            </p>
+                <div class="row d-flex justify-content-start p-2">
 
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="p-2" style="color: #a8a8a8;">Dr. Md. Abu Saleh</div>
-                            <p>
-                                <span class="fa-stack fa-1x">
-                                    <i class="fa fa-circle fa-stack-2x icon-background" ></i>
-                                    <i class="fa fa-envelope fa-stack-1x icon-backgroun"></i>
-                                </span>
-                                <a href="mailto://saleh@ru.ac.bd" class="card-link text-break py-2">saleh@ru.ac.bd</a>
-                            </p>
-                            <p >
-                                <span class="fa-stack fa-1x">
-                                    <i class="fa fa-circle fa-stack-2x icon-background" ></i>
-                                    <i class="fa fa-phone fa-stack-1x"></i>
-                                </span>
-                                <a href="tel:+8801716731747">+880 1716-731747</a>
-                            </p>
-
-                        </div>
-                    </div>
+                    <p class="footer-icon-color">© 2020 phytochemdb, Inc.</p>
                 </div>
             </div>
-            <div class="row d-flex justify-content-start p-2">
-
-                <p class="footer-icon-color">© 2020 phytochemdb, Inc.</p>
-            </div>
-        </div>
- </footer>
+        </footer>
+    {% endif %}
+{% endwith %}
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

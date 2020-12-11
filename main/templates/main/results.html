@@ -1,18 +1,21 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% load main_extras %}
-
-{% block title %}Search results for {{ request.GET.search }} | Phytochem Database{% endblock %}
+{% block meta-attrs %}
+    <meta name="description" content="Search results for {{ request.GET.search }} in phytochemdb.com">
+    <meta name="keywords" content="phytochemdb.com, phytochemical, compounds, {{ request.GET.search }}">
+{% endblock %}
+{% block title %}Search results for {{ request.GET.search }}{% endblock %}
 {% block body %}
     <div class="container">
         <div class="row d-flex align-items-start justify-content-center flex-column col-md" style="height: 10vh;">
             <form class="container d-flex p-0" action="{% url 'main:results' %}" method="get">
-                    <input id="hide" class="form-control mt-3 mr-1 p-4 search-input"
-                           name="search" value="{{ request.GET.search }}"
-                           type="text" placeholder="Search Phytochems" aria-label="Search">
-                    <button class="btn mt-3 mr-1 px-4 py-2 submit-btn" type="submit" value=" ">
-                        <img src="{% static '/main/images/search-icon-sm.png' %}" alt="icon">
-                    </button>
+                <input id="hide" class="form-control mt-3 mr-1 p-4 search-input"
+                       name="search" value="{{ request.GET.search }}"
+                       type="text" placeholder="Search Phytochems" aria-label="Search">
+                <button class="btn mt-3 mr-1 px-4 py-2 submit-btn" type="submit" value=" ">
+                    <img src="{% static '/main/images/search-icon-sm.png' %}" alt="icon">
+                </button>
             </form>
         </div>
         <div class="py-4 mt-5 ">

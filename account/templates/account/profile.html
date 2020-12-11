@@ -1,5 +1,11 @@
 {% extends 'main/base.html' %}
 {% load static %}
+{% block meta-attrs %}
+    <meta name="description" content="{{ user_d.first_name }} {{ user_d.last_name }}'s profile in phytochemdb.com">
+    <meta name="keywords"
+          content="phytochemdb.com, phytochemical, compounds, {{ user_d.username }}, {{ user_d.first_name }}, {{ user_d.last_name }}">
+{% endblock %}
+{% block title %}{{ user_d.first_name }} {{ user_d.last_name }}'s profile{% endblock %}
 {% block body %}
     <div class="container bg-white">
         {% for message in messages %}

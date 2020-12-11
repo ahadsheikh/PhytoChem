@@ -1,7 +1,10 @@
 {% extends "main/base.html" %}
 {% load static %}
-
-{% block title %}Submit Data | Phytochem Database{% endblock %}
+{% block meta-attrs %}
+    <meta name="description" content="Submit data to phytochemdb.com">
+    <meta name="keywords" content="phytochemdb.com, phytochemical, compounds, submit data">
+{% endblock %}
+{% block title %}Submit Data{% endblock %}
 {% block body %}
     <div class="container">
         <h3>Upload Your File</h3>
@@ -45,7 +48,7 @@
                        placeholder="Enter Publication Link or DOI Link">
                 <small id="plantHelp" class="form-text text-muted">Your data related publication link or doi
                     link.</small>
-                 {% for field in form %}
+                {% for field in form %}
                     {% if field.html_name == 'pub_link' %}
                         {% for error in field.errors %}
                             <p class="text text-danger">{{ error }}</p>
@@ -65,7 +68,7 @@
                 <input type="url" class="form-control" id="mendeley_data_link" name="mendeley_data_link"
                        aria-describedby="plantHelp" placeholder="Enter Mendeley Data Link...">
                 <small id="plantHelp" class="form-text text-muted">Publication data mendeley link.</small>
-                 {% for field in form %}
+                {% for field in form %}
                     {% if field.html_name == 'mendeley_data_link' %}
                         {% for error in field.errors %}
                             <p class="text text-danger">{{ error }}</p>

@@ -1,12 +1,20 @@
 {% extends "main/base.html" %}
 {% load static %}
 
-{% block title %}Home | Phytochem Database{% endblock %}
+{% block meta-attrs %}
+    <meta name="description" content="A large phytochemical database dedicated to
+                    Computer-Aided Drug Designing,
+                    Lead Optimization, Virtual Screening and Molecular Docking.">
+    <meta name="keywords" content="phytochemdb.com, phytochemical, compounds">
+{% endblock %}
+
+{% block title %}Home{% endblock %}
 {% block body %}
     <header>
         <div class="container">
             <div class="row d-flex align-items-start justify-content-center flex-column col-md-8 con-hei">
-                <p class="text-item homepage-text-1 m-1">A Large and Scientific Rigorous <br> <span class="homepage-important-text">phytochemical database</span> dedicated to
+                <p class="text-item homepage-text-1 m-1">A Large <br> <span class="homepage-important-text">phytochemical database</span>
+                    dedicated to
                     Computer-Aided Drug Designing,
                     Lead Optimization, Virtual Screening and Molecular Docking.</p>
                 <p class="text-item homepage-text-2 m-1">The pharmacological properties and
@@ -20,8 +28,12 @@
                         <img src="{% static '/main/images/search-icon-sm.png' %}" alt="icon">
                     </button>
                 </form>
-                 <div class="search-suggession mt-2">Search Phytochems by ID, Canonical SMILES, Molecular Formula or Plant Name</div>
-                <div class="text-item">You can <a href="{% url 'contribute:submit_data' %}">CONTRIBUTE</a> too to this database</div>
+                <div class="search-suggession mt-2">Search Phytochems by ID, Canonical SMILES, Molecular Formula or
+                    Plant Name
+                </div>
+                <div class="text-item">You can <a href="{% url 'contribute:submit_data' %}">CONTRIBUTE</a> too to this
+                    database
+                </div>
             </div>
         </div>
     </header>

@@ -1,6 +1,10 @@
 {% extends 'main/base.html' %}
 {% load static %}
-
+{% block meta-attrs %}
+    <meta name="description" content="Create new account in phytochemdb.com and contribute">
+    <meta name="keywords"
+          content="phytochemdb.com, phytochemical, compounds, register, contribute">
+{% endblock %}
 {% block title %}
     Register
 {% endblock %}
@@ -72,7 +76,8 @@
 
 
                                 <div class="form-group row">
-                                    <label for="password1" class="col-md-4 col-form-label text-md-right">Password</label>
+                                    <label for="password1"
+                                           class="col-md-4 col-form-label text-md-right">Password</label>
                                     <div class="col-md-6">
                                         <input type="password" id="password1" class="form-control" name="password1">
                                         {% for field in form %}
