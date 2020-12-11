@@ -123,11 +123,21 @@ a.stop-highlight{
     }
 }
 
+/*-------------navbar COllapse color for phone-------------*/
+@media (max-width: 767px) {
+  .navbar-collapse
+    {
+        background-color:#100031;
+    }
+}
+/*Devloper name */
 @media screen and (max-width: 540px) {
      .team-name{
         font-size: 1.75em !important;
      }
 }
+
+
 
 /*           ------ End plant and Chemical Comound code --------*/
 .smile {
@@ -179,3 +189,20 @@ a.stop-highlight{
      /* font-family: 'Roboto', sans-serif; */
      font-size: 1em;
 }
+
+
+/* ===============Footer Code Start ======================== */
+footer{
+    background-color:#0f002f;
+}
+.footer-title{
+    text-transform: capitalize;
+    font-family: 'Offside', cursive;
+    font-size: 1.2em;
+   /* color: #7c7c7c;*/
+    color: #a8a8a8;
+}
+.footer-icon-color{
+    color: #a8a8a8;
+}
+/* ===============Footer Code end ======================== */
