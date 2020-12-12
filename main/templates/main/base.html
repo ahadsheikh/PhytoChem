@@ -49,7 +49,7 @@
     {% endblock %}
 
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top nav-scroll">
     <div class="container">
         <a class="navbar-brand" href="/">phytochemdb<span>.</span></a>
@@ -130,7 +130,7 @@
 
 {% with request.resolver_match.view_name as view_name %}
     {% if view_name != 'main:index' %}
-        <footer class="footer py-3 ">
+        <footer class="footer py-3 mt-auto">
             <div class="container">
                 <div class="row d-flex justify-content-center">
                     <p href="">
