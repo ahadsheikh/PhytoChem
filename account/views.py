@@ -64,12 +64,16 @@ def register(request):
             form.save()
             user = authenticate(username=email, password=password)
             login(request, user)
-            return redirect('user:profile', user.id)
+            return redirect('user:verify_email')
         else:
             return render(request, 'account/register.html', {'form': form})
     else:
         form = AccountForm()
     return render(request, 'account/register.html', {'form': form})
+
+
+def verify_email(request):
+    return HttpResponse("Hi")
 
 
 @login_required

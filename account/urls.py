@@ -8,6 +8,7 @@ app_name = "user"
 
 urlpatterns = [
     path('register/', views.register, name='register'),
+    path('verifyemail/', views.verify_email, name='verify_email'),
     path('profile/<int:id>/', views.profile, name='profile'),
     # path('login/', views.login_page, name='login'),
     path(

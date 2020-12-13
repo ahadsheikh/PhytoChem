@@ -66,6 +66,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # Custom Middleware
     'core.middlewares.AdminLoginMiddleware',
+    'account.middleware.IsEmailVarrifiedMiddleware',
 ]
 
 ROOT_URLCONF = 'biochemdata.urls'
@@ -150,5 +151,10 @@ LOGIN_REDIRECT_URL = '/'
 #     'django.contrib.auth.backends.ModelBackend',
 #     'userauth.backends.EmailBackend'
 # ]
+
+INCLUDE_TO_IS_ACTIVE_MIDDLEWARE = [
+    'account.views.profile',
+    'account.views.profile_edit',
+]
 
 AUTH_USER_MODEL = 'account.Account'
