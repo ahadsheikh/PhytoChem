@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.contrib import auth
 
+from random import randint
+
 
 class CustomUserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -83,3 +85,18 @@ class ForgotPasswordCode(models.Model):
 
     def __str__(self):
         return self.user.email
+
+
+# Useful Functions
+def code_generate(user):
+    code = randint(100000, 999999)
+    ForgotPasswordCode.objects.create(user=user, code=code)
+    return code
+
+
+def code_remove(user):
+    try:
+        f = ForgotPasswordCode.objects.get(user=user)
+        f.delete()
+    except ForgotPasswordCode.DoesNotExist:
+        pass

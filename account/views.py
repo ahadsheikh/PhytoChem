@@ -6,8 +6,7 @@ from django.contrib import messages, auth
 
 from submit_data.models import Contribution
 from account.forms import AccountForm, AccountUpdateForm, ForgotPasswordForm, AcceptForgotPasswordCodeForm
-from .models import Account, ForgotPasswordCode
-
+from .models import Account, ForgotPasswordCode, code_generate, code_remove
 
 from random import randint
 
@@ -70,6 +69,7 @@ def register(request):
 
 
 def verify_email(request):
+
     return HttpResponse("Hi")
 
 
@@ -98,6 +98,3 @@ def profile_edit(request):
     accUpForm = AccountUpdateForm(instance=request.user)
 
     return render(request, 'account/profile_edit.html', {'form': accUpForm})
-
-
-
