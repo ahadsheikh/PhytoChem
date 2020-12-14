@@ -1,13 +1,7 @@
-{% extends 'main/base.html' %}
-{% block title %}
-    Email Verification
-{% endblock %}
+{% autoescape off %}
+Hi {{ user.first_name }},
 
-{% block body %}
-    <div class="container">
-        <form action="">
-            <input type="text" name="code" placeholder="Enter Code">
-            <input type="submit">
-        </form>
-    </div>
-{% endblock %}
+Please click on the link below to confirm your registration:
+
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}

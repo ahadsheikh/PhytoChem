@@ -1,14 +1,14 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
-from django.views.generic import TemplateView
 
 from . import views
+from .views import ActivateAccount
 
 app_name = "user"
 
 urlpatterns = [
     path('register/', views.register, name='register'),
-    path('verifyemail/', views.verify_email, name='verify_email'),
+    path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
     path('profile/<int:id>/', views.profile, name='profile'),
     # path('login/', views.login_page, name='login'),
     path(

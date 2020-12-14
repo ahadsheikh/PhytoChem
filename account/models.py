@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.contrib import auth
+from django.db import IntegrityError
 
 from random import randint
 
@@ -90,7 +91,11 @@ class ForgotPasswordCode(models.Model):
 # Useful Functions
 def code_generate(user):
     code = randint(100000, 999999)
-    ForgotPasswordCode.objects.create(user=user, code=code)
+    try:
+        ForgotPasswordCode.objects.create(user=user, code=123456)
+    except IntegrityError:
+        f = ForgotPasswordCode.objects.get(user=user)
+        f.code = code
     return code
 
 
