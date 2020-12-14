@@ -34,11 +34,6 @@ ALLOWED_HOSTS = [
     '*',
 ]
 
-# Include App to Middleware
-INCLUDE_TO_ADMINLOGINMIDDLEWARE = [
-    'dashboard.views'
-]
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -66,7 +61,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # Custom Middleware
     'core.middlewares.AdminLoginMiddleware',
-    'account.middleware.IsEmailVarrifiedMiddleware',
+]
+
+# Include App to Middleware
+INCLUDE_TO_ADMINLOGINMIDDLEWARE = [
+    'dashboard.views'
 ]
 
 ROOT_URLCONF = 'biochemdata.urls'
@@ -151,11 +150,6 @@ LOGIN_REDIRECT_URL = '/'
 #     'django.contrib.auth.backends.ModelBackend',
 #     'userauth.backends.EmailBackend'
 # ]
-
-INCLUDE_TO_IS_ACTIVE_MIDDLEWARE = [
-    'account.views.profile',
-    'account.views.profile_edit',
-]
 
 AUTH_USER_MODEL = 'account.Account'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

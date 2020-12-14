@@ -91,22 +91,3 @@ class ForgotPasswordCode(models.Model):
 
     def __str__(self):
         return self.user.email
-
-
-# Useful Functions
-def code_generate(user):
-    code = randint(100000, 999999)
-    try:
-        ForgotPasswordCode.objects.create(user=user, code=123456)
-    except IntegrityError:
-        f = ForgotPasswordCode.objects.get(user=user)
-        f.code = code
-    return code
-
-
-def code_remove(user):
-    try:
-        f = ForgotPasswordCode.objects.get(user=user)
-        f.delete()
-    except ForgotPasswordCode.DoesNotExist:
-        pass
