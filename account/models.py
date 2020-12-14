@@ -4,7 +4,6 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.contrib import auth
 from django.db import IntegrityError
 
-from random import randint
 
 
 class CustomUserManager(BaseUserManager):
@@ -81,13 +80,3 @@ class Account(AbstractUser):
         send_mail(subject, message, from_email='Phytochem Database Admin <admin@phytochemdb.com',
                   recipient_list=[self.email], fail_silently=False)
 
-
-class ForgotPasswordCode(models.Model):
-    user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    code = models.IntegerField(blank=True)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.user.email
