@@ -33,7 +33,7 @@ class ActivateAccount(View):
             user.save()
             login(request, user)
             messages.success(request, ('Your account have been confirmed.'))
-            return redirect('user:profile')
+            return redirect('user:profile', user.id)
         else:
             messages.warning(request, ('The confirmation link was invalid, possibly because it has already been used.'))
             return redirect('user:register')
@@ -101,7 +101,7 @@ def register(request):
 
             messages.success(request, ('Please Confirm your email to complete registration.'))
 
-            return redirect('login')
+            return redirect('user:login')
         else:
             return render(request, 'account/register.html', {'form': form})
     else:

@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.contrib import auth
@@ -75,6 +76,10 @@ class Account(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
+
+    def email_user(self, subject, message):
+        send_mail(subject, message, from_email='Phytochem Database Admin <admin@phytochemdb.com',
+                  recipient_list=[self.email], fail_silently=False)
 
 
 class ForgotPasswordCode(models.Model):
