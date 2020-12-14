@@ -157,5 +157,5 @@ EMAIL_HOST = 'phytochemdb.com'
 EMAIL_PORT = 1025
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False
+EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Phytochem Database <admin@phytochemdb.com>'
