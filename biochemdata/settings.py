@@ -153,7 +153,7 @@ LOGIN_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'account.Account'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'localhost'
+EMAIL_HOST = 'phytochemdb.com'
 EMAIL_PORT = 1025
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
