@@ -27,4 +27,3 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(Account, CustomUserAdmin)
-admin.site.register(ForgotPasswordCode)
