@@ -40,8 +40,9 @@ def register(request):
                 'token': account_activation_token.make_token(user),
             })
             user.is_active = False
+            user.save()
             if user.email_user(subject, message) == 1:
-                messages.success(request, ('Please Confirm your email to complete password_change.'))
+                messages.success(request, 'Please Confirm your email to complete password_change.')
             else:
                 messages.warning(request, 'Failed to send email')
             return redirect('user:login')
@@ -65,10 +66,10 @@ class ActivateAccount(View):
             user.is_active = True
             user.save()
             login(request, user)
-            messages.success(request, ('Your account have been confirmed.'))
+            messages.success(request, 'Your account have been confirmed.')
             return redirect('user:profile', user.id)
         else:
-            messages.warning(request, ('The confirmation link was invalid, possibly because it has already been used.'))
+            messages.warning(request, 'The confirmation link was invalid, possibly because it has already been used.')
             return redirect('user:register')
 
 
