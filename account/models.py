@@ -5,7 +5,6 @@ from django.contrib import auth
 from django.db import IntegrityError
 
 
-
 class CustomUserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
 
@@ -77,6 +76,5 @@ class Account(AbstractUser):
     objects = CustomUserManager()
 
     def email_user(self, subject, message):
-        send_mail(subject, message, from_email='Phytochem Database Admin <admin@phytochemdb.com',
-                  recipient_list=[self.email], fail_silently=False)
-
+        return send_mail(subject, message, from_email='Phytochem Database Admin <admin@phytochemdb.com',
+                         recipient_list=[self.email], fail_silently=False)

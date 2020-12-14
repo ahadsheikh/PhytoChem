@@ -32,17 +32,18 @@ def register(request):
             user = authenticate(username=email, password=password)
             current_site = get_current_site(request)
 
-            subject = 'Activate Your MySite Account'
+            subject = 'Activate Your phytochemdb.com Account'
             message = render_to_string('account/email_verification.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
-            user.email_user(subject, message)
-
-            messages.success(request, ('Please Confirm your email to complete password_change.'))
-
+            user.is_active = False
+            if user.email_user(subject, message) == 1:
+                messages.success(request, ('Please Confirm your email to complete password_change.'))
+            else:
+                messages.warning(request, 'Failed to send email')
             return redirect('user:login')
         else:
             return render(request, 'account/register.html', {'form': form})
