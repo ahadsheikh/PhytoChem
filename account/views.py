@@ -42,9 +42,9 @@ def register(request):
             user.is_active = False
             user.save()
             if user.email_user(subject, message) == 1:
-                messages.success(request, 'Please Confirm your email to complete password_change.')
+                messages.success(request, 'Please Confirm your email to complete registration.')
             else:
-                messages.warning(request, 'Failed to send email')
+                messages.warning(request, 'Failed to confirm email')
             return redirect('user:login')
         else:
             return render(request, 'account/register.html', {'form': form})
