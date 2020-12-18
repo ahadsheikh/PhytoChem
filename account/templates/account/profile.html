@@ -11,9 +11,8 @@
 {% endblock %}
 {% block body %}
     <div class="container bg-white">
-    <div class="p-3 h4 rounded success-message" >message</div>
         {% for message in messages %}
-            <div class="text-success p-3 h4 rounded success-message" >{{ message }}</div>
+            <div class="p-3 h5 rounded success-message" >{{ message }}</div>
         {% endfor %}
         <div class="row d-flex">
             <div class="col-md-6">
