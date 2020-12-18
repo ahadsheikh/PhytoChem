@@ -151,6 +151,7 @@ LOGIN_REDIRECT_URL = '/'
 #     'userauth.backends.EmailBackend'
 # ]
 
+# Mail Server Configuration
 AUTH_USER_MODEL = 'account.Account'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'phytochemdb.com'
@@ -159,3 +160,6 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Phytochem Database Admin <admin@phytochemdb.com>'
+
+# Setting range of time for email verification and password reset
+PASSWORD_RESET_TIMEOUT = 3600
