@@ -20,9 +20,10 @@
 {% block body %}
     <main class="my-form">
         <div class="cotainer">
-            <div>
+            <div align="center">
+                <p class="h3 text-danger">Please check your email and confirm the link to complete registration.</p>
                 {% for error in form.non_field_errors %}
-                    <p class="text text-danger">{{ error }}</p>
+                    <p class="text text-danger font-weight-bold">{{ error }}</p>
                 {% endfor %}
             </div>
             <div class="row justify-content-center">
@@ -103,8 +104,8 @@
                                         Register
                                     </button>
                                 </div>
+                            </form>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>

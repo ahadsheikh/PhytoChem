@@ -33,7 +33,7 @@ def register(request):
             current_site = get_current_site(request)
 
             subject = 'Activate Your phytochemdb.com Account'
-            message = render_to_string('account/email_verification.html', {
+            message = render_to_string('email_verification/email_verification.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -42,10 +42,10 @@ def register(request):
             user.is_active = False
             user.save()
             if user.email_user(subject, message) == 1:
-                messages.success(request, 'Please Confirm your email to complete registration.')
+                messages.success(request, 'Please check your email and confirm the link to complete registration.')
             else:
                 messages.warning(request, 'Failed to confirm email')
-            return redirect('user:login')
+            return redirect('user:register')
         else:
             return render(request, 'account/register.html', {'form': form})
     else:
@@ -69,8 +69,8 @@ class ActivateAccount(View):
             messages.success(request, 'Your account have been confirmed.')
             return redirect('user:profile', user.id)
         else:
-            messages.warning(request, 'The confirmation link was invalid, possibly because it has already been used.')
-            return redirect('user:register')
+            # messages.warning(request, 'The confirmation link was invalid, possibly because it has already been used.')
+            return render(request, 'email_verification/invalid_link.html')
 
 
 @login_required
