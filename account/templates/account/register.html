@@ -21,9 +21,8 @@
     <main class="my-form">
         <div class="cotainer">
             <div align="center">
-                <p class="h3 text-danger">Please check your email and confirm the link to complete registration.</p>
-                {% for error in form.non_field_errors %}
-                    <p class="text text-danger font-weight-bold">{{ error }}</p>
+                {% for message in messages %}
+                    <p class="text text-danger font-weight-bold">{{ message }}</p>
                 {% endfor %}
             </div>
             <div class="row justify-content-center">

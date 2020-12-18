@@ -56,11 +56,21 @@ def register(request):
 class ActivateAccount(View):
 
     def get(self, request, uidb64, token, *args, **kwargs):
+        invalid_link = '''
+        The email confirmation link was invalid, possibly because it has already been used.
+        Please request a new password reset.
+        '''
+        expired_link = '''
+        User already confirmed registration! Link expired.  
+        '''
         try:
             uid = force_text(urlsafe_base64_decode(uidb64))
             user = Account.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
+
+        if user and user.is_active:
+            return render(request, 'email_verification/invalid_link.html', {'vallidation_error': expired_link})
 
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
@@ -70,7 +80,7 @@ class ActivateAccount(View):
             return redirect('user:profile', user.id)
         else:
             # messages.warning(request, 'The confirmation link was invalid, possibly because it has already been used.')
-            return render(request, 'email_verification/invalid_link.html')
+            return render(request, 'email_verification/invalid_link.html', {'vallidation_error': invalid_link})
 
 
 @login_required
