@@ -42,7 +42,7 @@ def register(request):
             user.is_active = False
             user.save()
             if user.email_user(subject, message) == 1:
-                messages.success(request, 'Please Confirm your email to complete password_change.')
+                messages.success(request, 'Please Confirm your email to complete registration.')
             else:
                 messages.warning(request, 'Failed to send email')
             return redirect('user:login')
@@ -61,7 +61,7 @@ class ActivateAccount(View):
             user = Account.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
-
+        print('Hi', user, account_activation_token.check_token(user, token))
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
             user.save()
