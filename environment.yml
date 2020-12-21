@@ -11,3 +11,4 @@ dependencies:
     - beautifulsoup4==4.9.3
     - python-dotenv==0.15.0
     - django-utils-six==2.0
+    - django-crispy-forms==1.10.0
