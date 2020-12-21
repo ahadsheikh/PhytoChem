@@ -31,3 +31,9 @@
     margin-left: 0;
     margin-right: 0;
 }
+
+.success-message{
+    color: green;
+    background: #c3f6ce;
+    text-align: center
+}

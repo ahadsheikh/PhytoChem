@@ -23,18 +23,6 @@ urlpatterns = [
         name='login'),
     path('logout/', views.logout, name='logout'),
 
-    re_path(r'^password_reset/$',
-            PasswordResetView.as_view(template_name='password_change/password_reset_form.html'),
-            name='password_reset'),
-    re_path(r'^password_reset/done/$',
-            PasswordResetDoneView.as_view(template_name='password_change/password_reset_done.html'),
-            name='password_reset_done'),
-    re_path(
-        r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        PasswordResetConfirmView.as_view(template_name='password_change/password_reset_confirm.html'),
-        name='password_reset_confirm'),
-    re_path(r'^reset/done/$',
-            PasswordResetCompleteView.as_view(template_name='password_change/password_reset_complete.html'),
-            name='password_reset_complete'),
+    path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
     # Test
 ]

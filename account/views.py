@@ -1,5 +1,4 @@
 from django.contrib.sites.shortcuts import get_current_site
-from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
@@ -32,8 +31,8 @@ def register(request):
             user = authenticate(username=email, password=password)
             current_site = get_current_site(request)
 
-            subject = 'Activate Your phytochemdb.com Account'
-            message = render_to_string('account/email_verification.html', {
+            subject = 'Activate Your Phytochem Database Account'
+            message = render_to_string('email_verification/email_verification.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -42,10 +41,10 @@ def register(request):
             user.is_active = False
             user.save()
             if user.email_user(subject, message) == 1:
-                messages.success(request, 'Please Confirm your email to complete registration.')
+                messages.success(request, 'Please check your email and confirm the link to complete registration.')
             else:
-                messages.warning(request, 'Failed to send email')
-            return redirect('user:login')
+                messages.warning(request, 'Failed to confirm email')
+            return redirect('user:register')
         else:
             return render(request, 'account/register.html', {'form': form})
     else:
@@ -56,12 +55,18 @@ def register(request):
 class ActivateAccount(View):
 
     def get(self, request, uidb64, token, *args, **kwargs):
+        invalid_link = '''
+        The email confirmation link was invalid, possibly because it has already been used.
+        Please request a new password reset.
+        '''
+        expired_link = '''
+        User already confirmed registration! Link expired.  
+        '''
         try:
             uid = force_text(urlsafe_base64_decode(uidb64))
             user = Account.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
-        print('Hi', user, account_activation_token.check_token(user, token))
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
             user.save()
@@ -69,8 +74,8 @@ class ActivateAccount(View):
             messages.success(request, 'Your account have been confirmed.')
             return redirect('user:profile', user.id)
         else:
-            messages.warning(request, 'The confirmation link was invalid, possibly because it has already been used.')
-            return redirect('user:register')
+            # messages.warning(request, 'The confirmation link was invalid, possibly because it has already been used.')
+            return render(request, 'email_verification/invalid_link.html', {'vallidation_error': invalid_link})
 
 
 @login_required

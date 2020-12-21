@@ -2,7 +2,6 @@ from django.core.mail import send_mail
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.contrib import auth
-from django.db import IntegrityError
 
 
 class CustomUserManager(BaseUserManager):
@@ -63,6 +62,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class Account(AbstractUser):
+    """Additional User Information"""
     username = None
     email = models.EmailField(verbose_name='Email', max_length=100, unique=True)
     location = models.CharField(max_length=100, blank=True)
@@ -76,6 +76,6 @@ class Account(AbstractUser):
     objects = CustomUserManager()
 
     def email_user(self, subject, message):
-        print(self.email)
-        return send_mail(subject, message, from_email='Phytochem Database Admin <admin@phytochemdb.com',
+        """Function to send mail to the user"""
+        return send_mail(subject, message, from_email='Phytochem Database Admin <noreply@phytochemdb.com>',
                          recipient_list=[self.email], fail_silently=False)
