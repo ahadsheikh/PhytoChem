@@ -160,9 +160,6 @@
                         <a href="{% url 'contribute:submit_data' %}">
                             <p class="footer-icon-color">Contribute</p>
                         </a>
-                        <a href="{% url 'contribute:submit_data' %}">
-                            <p class="footer-icon-color"></p>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -251,6 +248,13 @@
             $("#hide").click(function () {
                 $(".homepage-text-2").hide();
             });
+    });
+    $(window).scroll(function () {
+        if ($(window).scrollTop() >= 50) {
+            $('.navbar').css('background', 'linear-gradient(to right,#1a005e, #060009,#330148)');
+        } else {
+            $('.navbar').css('background', 'transparent');
+        }
     });
 </script>
 </body>
