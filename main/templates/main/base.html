@@ -164,24 +164,27 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="row d-flex justify-content-start px-3 footer-icon-color">
+                <div class="row d-flex justify-content-start px-3 footer-icon-color h5">
                     Contact with us
                 </div>
+                <hr style="border-color: rgba(255,255,255,0.1);">
                 <div class="row" style="font-size:0.9em;">
                     <div class="col-md-6">
                         <div class="py-2" style="color: #a8a8a8;">Shafi Mahmud</div>
                         <p>
                                 <span class="fa-stack fa-1x">
                                     <i class="fa fa-circle fa-stack-2x icon-background"></i>
-                                    <i class="fa fa-envelope fa-stack-1x icon-backgroun"></i>
+                                    <i class="fa fa-envelope fa-stack-1x icon-background"></i>
                                 </span>
-                            <a href="mailto://shafimahmudfz@gmail.com" class="card-link text-break py-2">shafimahmudfz@gmail.com</a>
+                            <a href="mailto://shafimahmudfz@gmail.com" class="card-link text-break py-2">
+                                shafimahmudfz@gmail.com
+                            </a>
                         </p>
                         <p>
-                                <span class="fa-stack fa-1x">
-                                    <i class="fa fa-circle fa-stack-2x icon-background"></i>
-                                    <i class="fa fa-phone fa-stack-1x"></i>
-                                </span>
+                            <span class="fa-stack fa-1x">
+                                <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                                <i class="fa fa-phone fa-stack-1x"></i>
+                            </span>
                             <a href="tel:+8801679770136">+880 1679-770136</a>
                         </p>
 
@@ -190,18 +193,18 @@
                     <div class="col-md-6">
                         <div class="p-2" style="color: #a8a8a8;">Dr. Md. Abu Saleh</div>
                         <p>
-                                <span class="fa-stack fa-1x">
-                                    <i class="fa fa-circle fa-stack-2x icon-background"></i>
-                                    <i class="fa fa-envelope fa-stack-1x icon-backgroun"></i>
-                                </span>
+                            <span class="fa-stack fa-1x">
+                                <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                                <i class="fa fa-envelope fa-stack-1x icon-background"></i>
+                            </span>
                             <a href="mailto://saleh@ru.ac.bd"
                                class="card-link text-break py-2">saleh@ru.ac.bd</a>
                         </p>
                         <p>
-                                <span class="fa-stack fa-1x">
-                                    <i class="fa fa-circle fa-stack-2x icon-background"></i>
-                                    <i class="fa fa-phone fa-stack-1x"></i>
-                                </span>
+                            <span class="fa-stack fa-1x">
+                                <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                                <i class="fa fa-phone fa-stack-1x"></i>
+                            </span>
                             <a href="tel:+8801716731747">+880 1716-731747</a>
                         </p>
 
@@ -210,7 +213,6 @@
             </div>
         </div>
         <div class="row d-flex justify-content-start p-2">
-
             <p class="footer-icon-color">&copy 2020 phytochemdb.com</p>
         </div>
     </div>
@@ -225,37 +227,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script src="{% static 'main/scripts/dropdown.js' %}"></script>
-<script>
-    $(document).ready(function () {
-        var pathname = window.location.pathname;
-        if (pathname == "/")
-            $('.navbar', 'body').addClass("sticky");
-        else
-            $('.navbar', 'body').removeClass("sticky");
-    });
-    $(document).ready(function () {
-        var pathname = window.location.pathname;
-        if (pathname == "/")
-            $('body').addClass("st");
-        else
-            $('body').removeClass("st");
-    });
-    $(document).ready(function () {
-        var width = $(window).width();
-        var height = $(window).height();
-        if (width <= 400 && height <= 800)
-            $("#hide").click(function () {
-                $(".homepage-text-2").hide();
-            });
-    });
-    $(window).scroll(function () {
-        if ($(window).scrollTop() >= 50) {
-            $('.navbar').css('background', 'linear-gradient(to right,#1a005e, #060009,#330148)');
-        } else {
-            $('.navbar').css('background', 'transparent');
-        }
-    });
-</script>
+<script src="{% static 'main/scripts/script.js' %}"></script>
 </body>
 </html>
