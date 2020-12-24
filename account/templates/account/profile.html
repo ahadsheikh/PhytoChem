@@ -12,7 +12,7 @@
 {% block body %}
     <div class="container bg-white">
         {% for message in messages %}
-            <div class="p-3 h5 rounded success-message" >{{ message }}</div>
+            <div class="p-3 h5 rounded success-message">{{ message }}</div>
         {% endfor %}
         <div class="row d-flex">
             <div class="col-md-6">
@@ -23,9 +23,18 @@
             <div class="col-md-6">
                 <div class="row d-flex justify-content-end p-2">
                     {% if user.username == user_d.username %}
-                        <a href="{% url 'user:profile_edit' %}">
-                            <button class="btn btn-outline-dark" type="button">Settings</button>
+                        <a href="#" id="settingsMenuLink" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-cog fa-2x" style="color:#000000;"></i>
                         </a>
+                        <div class="dropdown-menu" aria-labelledby="settingsMenuLink">
+                            <a class="dropdown-item" href="{% url 'user:profile_edit' %}">
+                                <button class="btn btn-outline-dark" type="button">Edit Profile</button>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <button class="btn btn-outline-dark" type="button">Change Password</button>
+                            </a>
+                        </div>
                     {% endif %}
                     <!--                    <button type="button" class="btn btn-outline-dark">Edit Info</button>-->
                 </div>

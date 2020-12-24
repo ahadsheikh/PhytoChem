@@ -79,19 +79,23 @@
                                href="{% url 'main:member-supervisors' %}">Supervisors</a>
                         </div>
                     </li>
-                    {% if request.user.is_superuser %}
-                        <li class="nav-item">
-                            <a class="nav-link {% if view_name == 'dash:dashboard' %}active{% endif %}"
-                               href="{% url 'dash:dashboard' %}">Dashboard</a>
-                        </li>
-                    {% endif %}
+
                     {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link {% if view_name == 'user:profile' %}active{% endif %}"
-                               href="{% url 'user:profile' user.id %}">{{ user.first_name }}</a>
-                        </li>
-                        <li class="nav-item {% if view_name == 'user:logout' %}active{% endif %}">
-                            <a class="nav-link" href="{% url 'user:logout' %}">Log Out</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarProfileMenuLink" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ user.first_name }} &nbsp;
+                                <i class="fa fa-user"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarProfileMenuLink">
+                                <a class="dropdown-item {% if view_name == 'user:profile' %}active{% endif %}"
+                                   href="{% url 'user:profile' user.id %}">{{ user.first_name }}</a>
+                                {% if request.user.is_superuser %}
+                                    <a class="dropdown-item {% if view_name == 'dash:dashboard' %}active{% endif %}"
+                                       href="{% url 'dash:dashboard' %}">Dashboard</a>
+                                {% endif %}
+                                <a class="dropdown-item" href="{% url 'user:logout' %}">Log Out</a>
+                            </div>
                         </li>
                     {% else %}
                         <li class="nav-item">
@@ -103,9 +107,6 @@
                                href="{% url 'user:register' %}">Register</a>
                         </li>
                     {% endif %}
-                    <li class="nav-item active">
-                        <img src="{% static '/main/images/login.png' %}" alt="login">
-                    </li>
                 </ul>
             </div>
         {% endwith %}
