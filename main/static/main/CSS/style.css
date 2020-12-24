@@ -6,6 +6,12 @@ body.st{
     margin-top: 0;
 }
 
+/* Style the active class (and buttons on mouse-over) */
+.active, .btn:hover {
+  background-color: rgba(153, 146, 146, 0.3);
+  color: white;
+}
+
 /*           ------ writting for plant and Chemical Comound code --------*/
 .plant-about {
     text-transform: capitalize;
@@ -100,7 +106,7 @@ a.download-all-option:hover{
     font-size: 18px;
     font-family: 'Titillium Web', sans-serif;
     border-radius: 5px;
-    border: none;
+    border: n
 }
 
 a.stop-highlight{
@@ -108,6 +114,7 @@ a.stop-highlight{
     color: black;
 }
     /* Added media Query for some page  */
+    /* 🤣🤣🤣 */
 @media screen and (max-width: 540px) {
   .chemical-about {
     font-size: 6vw;
