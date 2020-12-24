@@ -7,22 +7,24 @@ from django.contrib.auth.views import LoginView, \
 from django.urls import path, re_path, reverse_lazy
 
 from . import views
-from .views import ActivateAccount
+from .views import ActivateAccount, PasswordChange
 
 app_name = "user"
 
 urlpatterns = [
+    # Profile
     path('profile/<int:id>/', views.profile, name='profile'),
     path('profile-edit/', views.profile_edit, name='profile_edit'),
 
-    path('register/', views.register, name='register'),
+    # Activate Account
     path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
-    path(
-        'login/',
-        LoginView.as_view(template_name='account/login.html'),
-        name='login'),
+
+    # Auth
+    path('login/', LoginView.as_view(template_name='account/login.html'), name='login'),
+    path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
 
+    # Forget Password
     path('password_reset/', PasswordResetView.as_view(template_name='password_change/password_reset_form.html',
                                                       email_template_name='password_change/password_reset_email.html',
                                                       success_url=reverse_lazy('user:password_reset_done')),
@@ -38,6 +40,6 @@ urlpatterns = [
          PasswordResetCompleteView.as_view(template_name='password_change/password_reset_complete.html'),
          name='password_reset_complete'),
 
-    path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
-    # Test
+    # Password Change
+    path('password_change/', PasswordChange.as_view(), name='password_change'),
 ]

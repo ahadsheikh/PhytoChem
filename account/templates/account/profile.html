@@ -32,7 +32,9 @@
                                 <button class="btn btn-outline-dark" type="button">Edit Profile</button>
                             </a>
                             <a class="dropdown-item" href="#">
-                                <button class="btn btn-outline-dark" type="button">Change Password</button>
+                                <form action="{% url 'user:password_change' %}">
+                                    <button class="btn btn-outline-dark" type="submit">Change Password</button>
+                                </form>
                             </a>
                         </div>
                     {% endif %}
