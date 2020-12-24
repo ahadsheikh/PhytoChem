@@ -95,7 +95,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarProfileMenuLink">
                                 <a class="dropdown-item {% if view_name == 'user:profile' %}active{% endif %}"
-                                   href="{% url 'user:profile' user.id %}">{{ user.first_name }}</a>
+                                   href="{% url 'user:profile' user.id %}">Profile</a>
                                 {% if request.user.is_superuser %}
                                     <a class="dropdown-item {% if view_name == 'dash:dashboard' %}active{% endif %}"
                                        href="{% url 'dash:dashboard' %}">Dashboard</a>
