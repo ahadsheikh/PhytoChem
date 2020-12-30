@@ -1,6 +1,10 @@
+import re
+
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.conf import settings
 
 import os
@@ -89,11 +93,18 @@ def download_file(request, search):
     return prepare_download(dw_file)
 
 
+@login_required
 # View for downloading all file
 def download_all_file(request):
+    user_email = request.user.email
+    tld = re.search("@\w+\.([\w]+)([\.\w]*)", user_email).group(1)
     name = 'all_data.sdf'
     file_path = os.path.join(settings.MEDIA_ROOT, name)
-    return prepare_download(file_path)
+    if tld == 'ac' or tld == 'edu':
+        return prepare_download(file_path)
+    else:
+        messages.warning(request, 'You must login with your institutional mail to download the dataset')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 # not view
