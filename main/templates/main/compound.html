@@ -71,7 +71,7 @@
                 </tr>
                 <tr>
                     <td class="font-weight-bold">Lipinski:</td>
-                    <td>
+                    <td style="background-color: {{ violation_color|color_extract:lipinski }}">
                         {% if lipinski < 2 %}
                             Yes, {{ lipinski }} violation
                         {% else %}

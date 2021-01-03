@@ -53,10 +53,12 @@ def compound(request, id):
     lipinski = (compound.H_Bond_Donors > 5) + (compound.H_Bond_Acceptors > 10) + \
                (compound.Molecular_Weight >= 500) + (compound.logP > 5)
     plants = compound.plants.all()
+    violation_color = [ '#2ECC71', '#ABEBC6', '#FADBD8', '#E74C3C', '#B03A2E']
     context = {
         'compound': compound,
         'plants': plants,
-        'lipinski': lipinski
+        'lipinski': lipinski,
+        'violation_color': violation_color
     }
     return render(request, 'main/compound.html', context=context)
 

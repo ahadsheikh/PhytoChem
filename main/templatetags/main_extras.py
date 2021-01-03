@@ -24,3 +24,11 @@ def chem_formula(str):
 
 
 register.filter('chem_formula', chem_formula)
+
+
+def color_extract(arr, code):
+    print(code)
+    return arr[code];
+
+
+register.filter('color_extract', color_extract)
