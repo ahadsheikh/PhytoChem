@@ -119,17 +119,21 @@
     </div>
 </nav>
 <!--header Area or Nav area has Finished-->
-
-<div class="container">
+<div class="fluid">
     {% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-success" role="alert">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
+        {% for message in messages %}
+            {% if request.path == '/' %}
+                <div class="alert alert-success font-weight-bold" align="center" role="alert" style="float:top; position: absolute;">
+                    {{ message }}
+                </div>
+            {% else %}
+                <div class="alert alert-success font-weight-bold" align="center" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 </div>
-
 {% block body %}
 {% endblock %}
 
