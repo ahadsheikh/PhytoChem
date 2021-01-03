@@ -29,6 +29,8 @@ def get_src_from_image_tag(html):
 def update_sdf():
     compounds_df = pd.DataFrame(list(Compound.objects.all().values())).drop(['id', 'created_at', 'updated_at'], axis=1)
     PandasTools.AddMoleculeColumnToFrame(compounds_df, 'Smiles', 'ROMol', includeFingerprints=True)
+    if not os.path.exists('media'):
+        os.makedirs('media')
     df_to_sdf(compounds_df, 'media/all_data.sdf')
 
 

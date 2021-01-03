@@ -9,7 +9,7 @@ from django.conf import settings
 
 import os
 from main.models import Compound, Plant
-from core.utils.QueryHandler import query_to_df, df_to_sdf
+from core.utils.QueryHandler import query_to_df, df_to_sdf, update_sdf
 
 
 def index(request):
@@ -109,6 +109,8 @@ def download_all_file(request):
 
 # not view
 def prepare_download(path):
+    if not os.path.exists(path):
+        update_sdf()
     if os.path.exists(path):
         with open(path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type='application/octet-stream')
