@@ -8,14 +8,6 @@
 {% block body %}
     <div class="container">
         <h3>Upload Your File</h3>
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-success" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-
         <div>
             {% for error in form.non_field_errors %}
                 <p class="text text-danger">{{ error }}</p>
