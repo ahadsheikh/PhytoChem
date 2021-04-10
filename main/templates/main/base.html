@@ -123,11 +123,13 @@
     {% if messages %}
         {% for message in messages %}
             {% if request.path == '/' %}
-                <div class="alert alert-success font-weight-bold" align="center" role="alert" style="float:top; position: absolute;">
+                <div class="{% if message.tags == 'success' %}alert alert-success{% else %}alert alert-danger{% endif %} font-weight-bold"
+                     align="center" role="alert" style="float:top; position: absolute;">
                     {{ message }}
                 </div>
             {% else %}
-                <div class="alert alert-success font-weight-bold" align="center" role="alert">
+                <div class="{% if message.tags == 'success' %}alert alert-success{% else %}alert alert-danger{% endif %} font-weight-bold"
+                     align="center" role="alert">
                     {{ message }}
                 </div>
             {% endif %}
@@ -254,5 +256,10 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="{% static 'main/scripts/script.js' %}"></script>
+
+<!--Local Scripts-->
+{% block scripts %}
+{% endblock %}
+
 </body>
 </html>

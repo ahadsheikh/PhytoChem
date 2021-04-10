@@ -1,29 +1,51 @@
 {% extends 'main/base.html' %}
+{% load static %}
 {% block title %}Admin Dashboard{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'submit_data/css/styles.css' %}">
+{% endblock %}
+
 {% block body %}
     <div class="container pt-5">
-        <form action="{% url 'dash:dash_upload' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="plantText" class="text-success font-weight-bold">Plant</label>
-                <input type="text" class="form-control" id="plantText" name="plant" aria-describedby="plantHelp"
-                       placeholder="Enter Plant Name">
-                <small id="plantHelp" class="form-text text-muted">If the compounds from a specific plant then put plant
-                    name or left it blank.</small>
-            </div>
-            <div class="form-group">
-                <label for="sdfFile" class="text-success font-weight-bold">Compound file input(sdf format)</label>
-                <input type="file" class="form-control-file" id="sdfFile" name="file">
-                {% for field in form %}
-                    {% if field.html_name == 'file' %}
-                        {% for error in field.errors %}
-                            <p class="text text-danger">{{ error }}</p>
-                        {% endfor %}
-                    {% endif %}
+        <div id="form-div">
+            <h4>Upload Direct</h4>
+            <div>
+                {% for error in form.non_field_errors %}
+                    <p class="text text-danger">{{ error }}</p>
                 {% endfor %}
+                <div id="message" style="margin: 5px 10px"></div>
             </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
-        </form>
+            <form id="form-data" action="{% url 'dash:dash_upload' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="plantText" class="text-success font-weight-bold">Plant</label>
+                    <input type="text" class="form-control" id="plantText" name="plant" aria-describedby="plantHelp"
+                           placeholder="Enter Plant Name">
+                    <small id="plantHelp" class="form-text text-muted">If the compounds from a specific plant then put
+                        plant
+                        name or left it blank.</small>
+                </div>
+                <div class="form-group">
+                    <label for="sdfFile" class="text-success font-weight-bold">Compound file input(sdf format)</label>
+                    <input type="file" class="form-control-file" id="sdfFile" name="file">
+                    {% for field in form %}
+                        {% if field.html_name == 'file' %}
+                            {% for error in field.errors %}
+                                <p class="text text-danger">{{ error }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="d-flex">
+                    <button type="submit" id="submit-btn" class="btn btn-primary mr-2">Upload</button>
+                    <div class="spinner-border mr-2" role="status" id="loading-div" style="display: none;">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+
+            </form>
+        </div>
 
         <div>
             <div class="row mt-2">
@@ -67,4 +89,8 @@
         </div>
 
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'dashboard/scripts/script.js' %}"></script>
 {% endblock %}

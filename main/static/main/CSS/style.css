@@ -8,8 +8,9 @@ body.st{
 
 /* Style the active class (and buttons on mouse-over) */
 .active, .btn:hover {
-  background-color: rgba(153, 146, 146, 0.3);
-  color: white;
+    background-color: rgba(153, 146, 146, 0.3);
+    border-radius: 5px;
+    color: black;
 }
 
 /*           ------ writting for plant and Chemical Comound code --------*/
