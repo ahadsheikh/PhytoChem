@@ -118,14 +118,14 @@ def profile(request, id):
 @login_required
 def profile_edit(request):
     if request.method == 'POST':
-        accUpForm = AccountUpdateForm(request.POST, instance=request.user)
-        if accUpForm.is_valid():
-            accUpForm.save()
+        acc_up_form = AccountUpdateForm(request.POST, instance=request.user)
+        if acc_up_form.is_valid():
+            acc_up_form.save()
             messages.success(request, "Successfully Saved")
             return redirect('user:profile', request.user.id)
         else:
-            return render(request, 'account/profile_edit.html', {'form': accUpForm})
+            return render(request, 'account/profile_edit.html', {'form': acc_up_form})
 
-    accUpForm = AccountUpdateForm(instance=request.user)
+    acc_up_form = AccountUpdateForm(instance=request.user)
 
-    return render(request, 'account/profile_edit.html', {'form': accUpForm})
+    return render(request, 'account/profile_edit.html', {'form': acc_up_form})

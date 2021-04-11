@@ -97,26 +97,27 @@
             </div>
         </div>
 
-        {% for con in contributions %}
-            <div class="row d-flex mb-2 p-2 rounded" style="background: #e1e1f6">
-                <div class="col-md-4 py-2 rounded" style="margin: auto;">
-                    <a href="#"><strong>{{ con.plant_name }}</strong></a>
-                    <small>{{ con.created_at }}</small>
-                </div>
-                <div class="col-md-8">
-                    <div class="d-flex justify-content-end">
-                        <div class="ml-1">
+        <h3 class="font-weight-bold" style="color: #747474;">Submitted Data Info</h3>
+        <div class="ml-3">
+            {% for con in contributions %}
+                <div class="row mb-1 rounded" style="background: #e1e1f6">
+                    <div class="col-md-4 d-flex rounded align-items-baseline" style="margin: auto;">
+                        <strong class="mr-1 text-success">{{ con.plant_name }}</strong>
+                        <small class="">{{ con.created_at }}</small>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="d-flex justify-content-end align-items-center">
                             {% if con.status == 0 %}
-                                <span class="btn btn-light">Reviewing</span>
+                                <span class="text text-dark py-2">Reviewing</span>
                             {% elif con.status == 1 %}
-                                <span class="btn btn-success">Accepted</span>
+                                <span class="text text-success py-2">Accepted</span>
                             {% else %}
-                                <span class="btn btn-danger">Rejected</span>
+                                <span class="text text-danger py-2">Rejected</span>
                             {% endif %}
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

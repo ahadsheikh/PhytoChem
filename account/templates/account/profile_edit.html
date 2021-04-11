@@ -12,7 +12,7 @@
                             <label for="inputId"
                                    class="text-success font-weight-bold">{{ f.html_name|capfirst }}</label>
                             <textarea class="form-control" id="inputId" name="{{ f.name }}"
-                                       cols="40" rows="10" maxlength="500">{{ f.value }}</textarea>
+                                      cols="40" rows="10" maxlength="500" placeholder="Enter {{ f.html_name }}">{{ f.value }}</textarea>
                             {% for error in f.errors %}
                                 <p class="text text-danger">{{ error }}</p>
                             {% endfor %}
@@ -20,7 +20,7 @@
                             <label for="inputId"
                                    class="text-success font-weight-bold">{{ f.html_name|title }}</label>
                             <input type="{{ f.widget_type }}" class="form-control" id="inputId" name="{{ f.name }}"
-                                   value="{{ f.value }}">
+                                   value="{{ f.value }}" placeholder="Enter {{ f.html_name }}">
                             {% for error in f.errors %}
                                 <p class="text text-danger">{{ error }}</p>
                             {% endfor %}
@@ -30,5 +30,6 @@
                 <button type="submit" class="btn btn-primary mb-2">Save</button>
             </form>
         </div>
+    </div>
     </div>
 {% endblock %}
