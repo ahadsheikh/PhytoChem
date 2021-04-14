@@ -17,6 +17,7 @@ def index(request):
 @login_required
 def upload(request):
     if request.method == 'POST':
+        print(request)
         form = ContributionForm(request.POST, request.FILES)
         if form.is_valid():
             upload_path = 'media/submittedFiles'
@@ -27,7 +28,7 @@ def upload(request):
             return redirect('contribute:submit_data')
 
         else:
-            # messages.success(request, "File Validation Failed, You need to upload SDF file")
+            messages.error(request, "Data Validation Failed. See below for details.")
             return render(request, 'submit_data/index.html', {'form': form})
     else:
         form = ContributionForm()

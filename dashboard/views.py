@@ -33,6 +33,7 @@ def upload(request):
             messages.success(request, "Upload File Successfully")
             return redirect('dash:dashboard')
         else:
+            messages.error(request, "Data Validation Failed. See below for details.")
             return render(request, 'dashboard/dash.html', {'form': form})
 
     elif request.user.is_superuser:
