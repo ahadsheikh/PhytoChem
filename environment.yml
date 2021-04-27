@@ -12,4 +12,4 @@ dependencies:
     - python-dotenv==0.15.0
     - django-utils-six==2.0
     - django-crispy-forms==1.10.0
-    - psycopg2-2.8.6
+    - psycopg2
