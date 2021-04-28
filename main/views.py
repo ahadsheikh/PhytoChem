@@ -8,63 +8,65 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.conf import settings
 
 import os
+
+from django.views.generic import TemplateView, ListView, DetailView
+
 from main.models import Compound, Plant
 from core.utils.QueryHandler import query_to_df, df_to_sdf, update_sdf
 
 
-def index(request):
-    return render(request, 'main/index.html')
-
-
-def members(request):
-    return render(request, 'main/members.html')
-
-
-def about(request):
-    context = {
+class AboutView(TemplateView):
+    extra_context = {
         'n_compounds': Compound.objects.all().count(),
         'n_plants': Plant.objects.all().count()
     }
-    return render(request, 'main/about.html', context=context)
+    template_name = 'main/about.html'
 
 
-def results(request):
-    search = request.GET['search']
-    if len(search) != 0:
-        if search.isnumeric():
-            search = 'Phytochem_' + search.zfill(6)
-        elif search[0] == 'P' and search[1:].isnumeric():
-            search = 'Phytochem_' + search[1:].zfill(6)
-        compounds = Compound.objects.filter(
-            Q(PID=search) | Q(Smiles=search) | Q(Molecular_Formula=search) | Q(plants__name__iexact=search)).distinct()
-        context = {'compounds': compounds}
-        return render(request, 'main/results.html', context=context)
-    return redirect('/')
+class QueryResultListView(ListView):
+    paginate_by = 10
+    template_name = 'main/results.html'
+    context_object_name = 'compounds'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Compound.objects.filter(Q(id=query)
+                                           | Q(PID=query)
+                                           | Q(Smiles=query)
+                                           | Q(Molecular_Formula=query)
+                                           | Q(plants__name__iexact=query)).distinct()
+        else:
+            return Compound.objects.none()
 
 
-def plant(request, id):
-    plant = get_object_or_404(Plant, id=id)
-    compounds = plant.compound_set.all()
-    context = {
-        'plant': plant,
-        'compounds': compounds
-    }
-    return render(request, 'main/plant.html', context=context)
+class PlantCompoundsListView(ListView):
+    template_name = 'main/plant.html'
+    context_object_name = 'compounds'
+
+    def get_queryset(self):
+        self.plant = get_object_or_404(Plant, id=self.kwargs['pk'])
+        return Compound.objects.filter(plants=self.plant).order_by('id')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['plant'] = self.plant
+        return context
 
 
-def compound(request, id):
-    compound = get_object_or_404(Compound,id=id)
-    lipinski = (compound.H_Bond_Donors > 5) + (compound.H_Bond_Acceptors > 10) + \
-               (compound.Molecular_Weight >= 500) + (compound.logP > 5)
-    plants = compound.plants.all()
-    violation_color = [ '#2ECC71', '#ABEBC6', '#FADBD8', '#E74C3C', '#B03A2E']
-    context = {
-        'compound': compound,
-        'plants': plants,
-        'lipinski': lipinski,
-        'violation_color': violation_color
-    }
-    return render(request, 'main/compound.html', context=context)
+class CompoundDetailView(DetailView):
+    model = Compound
+    template_name = 'main/compound.html'
+    context_object_name = 'compound'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        lipinski = (self.get_object().H_Bond_Donors > 5) + (self.get_object().H_Bond_Acceptors > 10) + \
+                   (self.get_object().Molecular_Weight >= 500) + (self.get_object().logP > 5)
+        violation_color = ['#2ECC71', '#ABEBC6', '#FADBD8', '#E74C3C', '#B03A2E']
+        context['lipinski'] = lipinski
+        context['violation_color'] = violation_color
+        return context
 
 
 # view for download a query results
