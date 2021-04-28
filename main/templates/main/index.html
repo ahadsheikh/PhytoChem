@@ -22,7 +22,7 @@
                 </p>
                 <form class="container d-flex p-0" action="{% url 'main:results' %}" method="get">
                     <input id="hide" class="form-control mt-3 mr-1 p-4 w-80 search-input"
-                           name="search" value="{{ request.GET.search }}"
+                           name="q" value="{{ request.GET.q }}"
                            type="text" placeholder="Search Phytochems" aria-label="Search">
                     <button class="btn mt-3 mr-1 px-4 py-2 submit-btn" type="submit" value=" ">
                         <img src="{% static '/main/images/search-icon-sm.png' %}" alt="icon">

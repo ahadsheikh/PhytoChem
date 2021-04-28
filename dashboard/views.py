@@ -9,7 +9,6 @@ from django.utils.decorators import decorator_from_middleware
 
 from core.middlewares import AdminLoginMiddleware
 from dashboard.forms import UploadFileForm
-from main.views import prepare_download
 from submit_data.models import Contribution
 from core.utils.QueryHandler import handle_new_sdf
 
