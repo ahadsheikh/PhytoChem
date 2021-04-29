@@ -1,16 +1,16 @@
-import re
-from io import StringIO
-
-import pandas as pd
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseForbidden, FileResponse
 from django.conf import settings
-
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView
+
+import re
+from io import StringIO
+import pandas as pd
 from rdkit.Chem import PandasTools
+
 from main.models import Compound, Plant
 
 

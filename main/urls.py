@@ -2,17 +2,22 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from . import views
+<< << << < HEAD
 from .views import AboutView, QueryResultListView, PlantCompoundsListView, CompoundDetailView, FileDownloadView, \
     FullDownloadView
+== == == =
+from .views import AboutView, QueryResultListView, PlantCompoundsListView, CompoundDetailView
+>> >> >> > 8168370
+c873d22c69df247782dac64dac2179360
 
 app_name = "main"
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='main/index.html'), name='index'),
-    path('members/', TemplateView.as_view(template_name='main/members.html'), name='members'),
     path('contact/', TemplateView.as_view(template_name='main/contact.html'), name='contact'),
     path('about/', AboutView.as_view(), name='about'),
 
+    path('members/', TemplateView.as_view(template_name='main/members.html'), name='members'),
     path('members/research-team', TemplateView.as_view(template_name='main/research-team.html'),
          name='member-research-team'),
     path('members/dev-team', TemplateView.as_view(template_name='main/dev-team.html'),
