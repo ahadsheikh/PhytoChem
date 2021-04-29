@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block link %}
-    <link rel="stylesheet" href="{% static 'submit_data/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'data_submission/css/styles.css' %}">
 {% endblock %}
 
 {% block title %}Submit Data{% endblock %}
@@ -20,7 +20,7 @@
                 {% endfor %}
                 <div id="message" style="margin: 5px 10px"></div>
             </div>
-            <form id="form-data" action="{% url 'contribute:user_upload' %}" method="post"
+            <form id="form-data" action="{% url 'data_submission:index' %}" method="post"
                   enctype="multipart/form-data">
                 {% csrf_token %}
 
@@ -31,9 +31,9 @@
                     <input type="text" class="form-control" id="plantText" name="plant_name"
                            aria-describedby="plantHelp"
                            placeholder="Enter Plant Name">
-                    <small id="plantHelp" class="form-text text-muted">If the compounds from a specific plant then put
-                        plant
-                        name or left it blank.</small>
+                    <small id="plantHelp" class="form-text text-muted">
+                        If the compounds from a specific plant then put plant name or left it blank.
+                    </small>
                     {% for field in form %}
                         {% if field.html_name == 'plant_name' %}
                             {% for error in field.errors %}
@@ -43,12 +43,14 @@
                     {% endfor %}
                 </div>
                 <div class="form-group">
-                    <label for="pub_link" class="text-success font-weight-bold">Publication Link <span
-                            style="color: red;">*</span></label>
+                    <label for="pub_link" class="text-success font-weight-bold">
+                        Publication Link <span style="color: red;">*</span>
+                    </label>
                     <input type="url" class="form-control" id="pub_link" name="pub_link" aria-describedby="plantHelp"
                            placeholder="Enter Publication Link or DOI Link">
-                    <small id="plantHelp" class="form-text text-muted">Your data related publication link or doi
-                        link.</small>
+                    <small id="plantHelp" class="form-text text-muted">
+                        Your data related publication link or doi link.
+                    </small>
                     {% for field in form %}
                         {% if field.html_name == 'pub_link' %}
                             {% for error in field.errors %}
@@ -94,7 +96,6 @@
                     <div class="spinner-border mr-2" role="status" id="loading-div" style="display: none;">
                         <span class="sr-only"></span>
                     </div>
-{#                    <button id="cancel-btn" class="btn btn-primary" style="display: none;">Cancel Upload</button>#}
                 </div>
             </form>
         </div>
@@ -102,5 +103,5 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'submit_data/scripts/script.js' %}"></script>
+    <script src="{% static 'data_submission/scripts/script.js' %}"></script>
 {% endblock %}

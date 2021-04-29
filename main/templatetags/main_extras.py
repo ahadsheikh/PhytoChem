@@ -1,15 +1,10 @@
 from django import template
 
-register = template.Library()
-
 
 # Make id short
 def short_id(value):
     v = int(value.split('_')[1])
     return 'P' + str(v)
-
-
-register.filter('short_id', short_id)
 
 
 # Make a formula name as like real formula structure with subscript
@@ -23,12 +18,12 @@ def chem_formula(str):
     return s_formula
 
 
-register.filter('chem_formula', chem_formula)
-
-
 def color_extract(arr, code):
     print(code)
     return arr[code];
 
 
+register = template.Library()
+register.filter('short_id', short_id)
+register.filter('chem_formula', chem_formula)
 register.filter('color_extract', color_extract)

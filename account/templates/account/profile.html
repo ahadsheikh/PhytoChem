@@ -25,42 +25,41 @@
                             <i class="fa fa-cog fa-2x" style="color:#000000;"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="settingsMenuLink">
-                            <a class="dropdown-item" href="{% url 'user:profile_edit' %}">
+                            <a class="dropdown-item" href="{% url 'account:profile_edit' %}">
                                 <button class="btn btn-outline-dark" type="button">Edit Profile</button>
                             </a>
                             <a class="dropdown-item" href="#">
-                                <form action="{% url 'user:password_change' %}">
+                                <form action="{% url 'account:password_change' %}">
                                     <button class="btn btn-outline-dark" type="submit">Change Password</button>
                                 </form>
                             </a>
                         </div>
                     {% endif %}
-                    <!--                    <button type="button" class="btn btn-outline-dark">Edit Info</button>-->
                 </div>
             </div>
         </div>
         <hr>
         <div class="row d-flex">
             <div class="col-md-6 mx-2">
-                <div class="row d-flex justify-content-start py-2 px-2 profile-info ">
+                <div class="row d-flex justify-content-start py-2 px-2 profile-info">
                     Profile Information
                 </div>
                 <div class="row d-flex justify-content-start py-1 px-2 ">
-                    <div class="type-of-info"><strong>User Name:</strong></div>
+                    <div class="type-of-info"><strong>Name:</strong></div>
                     <div class="user-name px-2">{{ user_d.first_name }} {{ user_d.last_name }}</div>
                 </div>
-
-                <div class="row d-flex justify-content-start py-1 px-2 ">
-                    <div class="type-of-info"><strong>Location:</strong></div>
-                    <div class="user-name px-2">{{ user_d.location }}</div>
-                </div>
-
+                {% if user_d.location %}
+                    <div class="row d-flex justify-content-start py-1 px-2 ">
+                        <div class="type-of-info"><strong>Location:</strong></div>
+                        <div class="user-name px-2">{{ user_d.location }}</div>
+                    </div>
+                {% endif %}
                 <div class="row d-flex justify-content-start flex-column mt-2">
                     {% if user_d.email %}
                         <p class="mx-1 px-2">
                         <span class="fa-stack fa-1x">
-                                <i class="fa fa-circle fa-stack-2x icon-background"></i>
-                                <i class="fa fa-envelope fa-stack-1x"></i>
+                            <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                            <i class="fa fa-envelope fa-stack-1x"></i>
                         </span>
                             <a class="dev-link-profile" href="mailto://{{ user_d.email }}">
                                 {{ user_d.email }}
@@ -70,8 +69,8 @@
                     {% if user_d.linkedin %}
                         <p class="mx-1 px-2">
                         <span class="fa-stack fa-1x">
-                                <i class="fa fa-circle fa-stack-2x icon-background"></i>
-                                <i class="fa fa-linkedin fa-stack-1x"></i>
+                            <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                            <i class="fa fa-linkedin fa-stack-1x"></i>
                         </span>
                             <a class="dev-link-profile" href="{{ user_d.linkedin }}" target="_blank">
                                 {{ user_d.linkedin }}
@@ -89,35 +88,36 @@
                 </div>
             </div>
             <div class="col-md-5">
-                <div class="row d-flex justify-content-start px-3 profile-info ">
-                    About
-                </div>
-                <hr>
-                <div class="about-researcher">{{ user_d.about }}</div>
+                {% if user_d.about %}
+                    <div class="row d-flex justify-content-start px-3 profile-info ">About</div>
+                    <hr>
+                    <div class="about-researcher">{{ user_d.about }}</div>
+                {% endif %}
             </div>
         </div>
-
-        <h3 class="font-weight-bold" style="color: #747474;">Submitted Data Info</h3>
-        <div class="ml-3">
-            {% for con in contributions %}
-                <div class="row mb-1 rounded" style="background: #e1e1f6">
-                    <div class="col-md-4 d-flex rounded align-items-baseline" style="margin: auto;">
-                        <strong class="mr-1 text-success">{{ con.plant_name }}</strong>
-                        <small class="">{{ con.created_at }}</small>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="d-flex justify-content-end align-items-center">
-                            {% if con.status == 0 %}
-                                <span class="text text-dark py-2">Reviewing</span>
-                            {% elif con.status == 1 %}
-                                <span class="text text-success py-2">Accepted</span>
-                            {% else %}
-                                <span class="text text-danger py-2">Rejected</span>
-                            {% endif %}
+        {% if contributions %}
+            <h3 class="font-weight-bold profile-info" style="color: #747474;">Submitted Data Info</h3>
+            <div class="ml-3">
+                {% for con in contributions %}
+                    <div class="row mb-1 rounded" style="background: #e1e1f6">
+                        <div class="col-md-4 d-flex rounded align-items-baseline" style="margin: auto;">
+                            <strong class="mr-1 text-success">{{ con.plant_name }}</strong>
+                            <small class="">{{ con.created_at }}</small>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="d-flex justify-content-end align-items-center">
+                                {% if con.status == 0 %}
+                                    <span class="text text-dark py-2">Reviewing</span>
+                                {% elif con.status == 1 %}
+                                    <span class="text text-success py-2">Accepted</span>
+                                {% else %}
+                                    <span class="text text-danger py-2">Rejected</span>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

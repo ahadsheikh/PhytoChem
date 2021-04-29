@@ -3,7 +3,7 @@ Hi {{ user.first_name }},
 
 Please click on the link below to confirm your registration:
 
-https://{{ domain }}{% url 'user:activate' uidb64=uid token=token %}
+https://{{ domain }}{% url 'account:activate' uidb64=uid token=token %}
 
 You cannot reply to this email.
 {% endautoescape %}

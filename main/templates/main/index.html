@@ -13,26 +13,27 @@
     <header>
         <div class="container">
             <div class="row d-flex align-items-start justify-content-center flex-column col-md-8 con-hei">
-                <p class="text-item homepage-text-1 m-1">A Large <br> <span class="homepage-important-text">phytochemical database</span>
-                    dedicated to
-                    Computer-Aided Drug Designing,
-                    Lead Optimization, Virtual Screening and Molecular Docking.</p>
-                <p class="text-item homepage-text-2 m-1">The pharmacological properties and
-                    Lipinski rule of five will be available for each of the corresponding compounds.
+                <p class="text-item homepage-text-1 m-1">
+                    A Large <br> <span class="homepage-important-text">phytochemical database</span>
+                    dedicated to Computer-Aided Drug Designing, Lead Optimization, Virtual Screening
+                    and Molecular Docking.
+                </p>
+                <p class="text-item homepage-text-2 m-1">
+                    The pharmacological properties and Lipinski rule of five will be
+                    available for each of the corresponding compounds.
                 </p>
                 <form class="container d-flex p-0" action="{% url 'main:results' %}" method="get">
                     <input id="hide" class="form-control mt-3 mr-1 p-4 w-80 search-input"
-                           name="q" value="{{ request.GET.q }}"
-                           type="text" placeholder="Search Phytochems" aria-label="Search">
+                           name="q" type="text" placeholder="Search Phytochems" aria-label="Search">
                     <button class="btn mt-3 mr-1 px-4 py-2 submit-btn" type="submit" value=" ">
                         <img src="{% static '/main/images/search-icon-sm.png' %}" alt="icon">
                     </button>
                 </form>
-                <div class="search-suggession mt-2">Search Phytochems by ID, Canonical SMILES, Molecular Formula or
-                    Plant Name
+                <div class="search-suggestion mt-2">
+                    Search Phytochems by ID, Canonical SMILES, Molecular Formula or Plant Name
                 </div>
-                <div class="text-item">You can <a href="{% url 'contribute:submit_data' %}">CONTRIBUTE</a> too to this
-                    database
+                <div class="text-item">
+                    <a href="{% url 'data_submission:index' %}">Contribute to this database</a>
                 </div>
             </div>
         </div>

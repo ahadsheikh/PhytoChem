@@ -38,7 +38,7 @@
                         <div class="row px-3 my-2 chemical-recomand-parent justify-content-start">
                             <br>
                             {% for plant in compound.plants.all %}
-                                <a class="chemical-recomand"
+                                <a class="chemical-recommend"
                                    href="{% url "main:plant" plant.id %}">{{ plant.name }}</a>
                             {% endfor %}
                         </div>
