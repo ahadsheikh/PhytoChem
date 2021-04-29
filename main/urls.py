@@ -1,14 +1,7 @@
 from django.urls import path
 from django.views.generic import TemplateView
-
-from . import views
-<< << << < HEAD
 from .views import AboutView, QueryResultListView, PlantCompoundsListView, CompoundDetailView, FileDownloadView, \
     FullDownloadView
-== == == =
-from .views import AboutView, QueryResultListView, PlantCompoundsListView, CompoundDetailView
->> >> >> > 8168370
-c873d22c69df247782dac64dac2179360
 
 app_name = "main"
 
