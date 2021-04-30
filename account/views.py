@@ -1,29 +1,22 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
-from django.contrib.auth import authenticate
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages, auth
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 from django.utils.encoding import force_text, force_bytes
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.views.generic import View
+from django.views.generic import View, DetailView
 
-from submit_data.models import Contribution
+from data_submission.models import Contribution
 from account.forms import AccountForm, AccountUpdateForm, PasswordChangeForm
 from .models import Account
 from account.tokens import account_activation_token
 
 
-def logout(request):
-    auth.logout(request)
-    return redirect('main:index')
-
-
-def register(request):
-    if request.method == 'POST':
+class RegisterView(View):
+    def post(self, request):
         form = AccountForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
@@ -34,7 +27,7 @@ def register(request):
 
             subject = 'Activate Your Phytochem Database Account'
             message = render_to_string('email_verification/email_verification.html', {
-                'user': user,
+                'account': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
@@ -45,16 +38,16 @@ def register(request):
                 messages.success(request, 'Please check your email and confirm the link to complete registration.')
             else:
                 messages.warning(request, 'Failed to confirm email')
-            return redirect('user:register')
+            return redirect('account:register')
         else:
             return render(request, 'account/register.html', {'form': form})
-    else:
+
+    def get(self, request):
         form = AccountForm()
-    return render(request, 'account/register.html', {'form': form})
+        return render(request, 'account/register.html', {'form': form})
 
 
 class ActivateAccount(View):
-
     def get(self, request, uidb64, token, *args, **kwargs):
         invalid_link = '''
         The email confirmation link was invalid, possibly because it has already been used.
@@ -73,9 +66,8 @@ class ActivateAccount(View):
             user.save()
             login(request, user)
             messages.success(request, 'Your account have been confirmed.')
-            return redirect('user:profile', user.id)
+            return redirect('account:profile', user.id)
         else:
-            # messages.warning(request, 'The confirmation link was invalid, possibly because it has already been used.')
             return render(request, 'email_verification/invalid_link.html', {'vallidation_error': invalid_link})
 
 
@@ -92,7 +84,7 @@ class PasswordChange(LoginRequiredMixin, View):
 
             subject = 'Activate Your Phytochem Database Account'
             message = render_to_string('email_verification/email_verification.html', {
-                'user': user,
+                'account': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
@@ -104,28 +96,28 @@ class PasswordChange(LoginRequiredMixin, View):
                 return render(request, 'password_change/password_reset_form.html', {'form': form})
 
 
-@login_required
-def profile(request, id):
-    user = get_object_or_404(Account, id=id)
-    contributions = Contribution.objects.filter(user=user).order_by('-created_at')
-    context = {
-        'user_d': user,
-        'contributions': contributions
-    }
-    return render(request, 'account/profile.html', context=context)
+class ProfileView(DetailView):
+    model = Account
+    context_object_name = 'user_d'
+    template_name = 'account/profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        contributions = Contribution.objects.filter(user=self.get_object()).order_by('-created_at')
+        context['contributions'] = contributions
+        return context
 
 
-@login_required
-def profile_edit(request):
-    if request.method == 'POST':
+class ProfileEditView(LoginRequiredMixin, View):
+    def post(self, request):
         acc_up_form = AccountUpdateForm(request.POST, instance=request.user)
         if acc_up_form.is_valid():
             acc_up_form.save()
             messages.success(request, "Successfully Saved")
-            return redirect('user:profile', request.user.id)
+            return redirect('account:profile', request.user.id)
         else:
             return render(request, 'account/profile_edit.html', {'form': acc_up_form})
 
-    acc_up_form = AccountUpdateForm(instance=request.user)
-
-    return render(request, 'account/profile_edit.html', {'form': acc_up_form})
+    def get(self, request):
+        acc_up_form = AccountUpdateForm(instance=request.user)
+        return render(request, 'account/profile_edit.html', {'form': acc_up_form})

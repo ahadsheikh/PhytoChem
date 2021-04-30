@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseForbidden, FileResponse
@@ -95,7 +96,7 @@ class FileDownloadView(View):
         return SDFResponse(compounds, search)
 
 
-class FullDownloadView(View):
+class FullDownloadView(LoginRequiredMixin, View):
     def get(self, request):
         academic_mail = re.search(r"@\w+\.([\w]+)([\.\w]*)", request.user.email).group(1) in ['ac', 'edu']
         if not request.user.is_superuser and not academic_mail:
