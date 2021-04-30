@@ -31,8 +31,7 @@ class QueryResultListView(ListView):
     def get_queryset(self):
         query = self.request.GET.get('q')
         if query:
-            return Compound.objects.filter(Q(id=query)
-                                           | Q(PID=query)
+            return Compound.objects.filter(Q(PID__endswith=query)
                                            | Q(Smiles=query)
                                            | Q(Molecular_Formula=query)
                                            | Q(plants__name__iexact=query)).distinct()
@@ -88,8 +87,7 @@ class SDFResponse(HttpResponse):
 
 class FileDownloadView(View):
     def get(self, request, search):
-        compounds = Compound.objects.filter(Q(id=search)
-                                            | Q(PID=search)
+        compounds = Compound.objects.filter(Q(PID__endswith=search)
                                             | Q(Smiles=search)
                                             | Q(Molecular_Formula=search)
                                             | Q(plants__name__iexact=search))
