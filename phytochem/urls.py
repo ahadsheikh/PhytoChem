@@ -8,5 +8,5 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls', namespace='dash')),
     path('data-submission/', include('data_submission.urls', namespace='data_submission')),
     # Auth System
-    path('account/', include('account.urls', namespace='account')),
+    path('user/', include('account.urls', namespace='account')),
 ]
