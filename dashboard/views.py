@@ -1,32 +1,28 @@
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 import os
 
-from django.utils.decorators import decorator_from_middleware
+from django.views import View
+from django.views.generic import ListView, DetailView
 
-from core.middlewares import AdminLoginMiddleware
 from dashboard.forms import UploadFileForm
-from main.views import prepare_download
-from submit_data.models import Contribution
+from data_submission.models import Contribution
 from core.utils.QueryHandler import handle_new_sdf
 
 
-@login_required(redirect_field_name='next')
-def dash_index(request):
+class SubmissionView(ListView):
+    model = Contribution
+    template_name = 'dashboard/dash.html'
+
+    def get_queryset(self):
         contributors = Contribution.objects.all().order_by('-created_at')
-        context = {
-            'title': 'Dashboard',
-            'contributors': contributors
-        }
-        return render(request, 'dashboard/dash.html', context=context)
+        return contributors
 
 
-@login_required(redirect_field_name='next')
-def upload(request):
-    if request.method == 'POST' and request.user.is_superuser:
+class UploadView(View):
+    def post(self, request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             handle_file(request.FILES['file'], request.POST['plant'])
@@ -36,40 +32,33 @@ def upload(request):
             messages.error(request, "Data Validation Failed. See below for details.")
             return render(request, 'dashboard/dash.html', {'form': form})
 
-    elif request.user.is_superuser:
+    def get(self, request):
         form = UploadFileForm()
         return render(request, 'dashboard/dash.html', {'form': form})
-    else:
-        return HttpResponseNotFound('You are not permitted.')
 
 
-@login_required()
-def show_submitted_files(request, cid):
-    contribution = get_object_or_404(Contribution, pk=cid)
-    new_df = handle_new_sdf(contribution.file.path, change_db=False)
-    print(new_df)
-    context = {
-        'new_data': new_df.values.tolist(),
-        'contributor': contribution.user.first_name + ' ' + contribution.user.last_name,
-        'contributor_id': contribution.id,
-        'pub_link': contribution.pub_link,
-        'data_desc': contribution.data_description,
-        'mendeley_data': contribution.mendeley_data_link,
-        'plant': contribution.plant_name
-    }
-    return render(request, 'dashboard/show_data.html', context=context)
+class SubmittedFileDetailView(DetailView):
+    model = Contribution
+    template_name = 'dashboard/show_data.html'
+    context_object_name = 'contribution'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        new_df = handle_new_sdf(self.get_object().file.path, change_db=False)
+        context['new_data'] = new_df.values.tolist()
+        return context
 
 
-@login_required()
-def download_new_file(request, cid):
-    contribution = get_object_or_404(Contribution, pk=cid)
-    return prepare_download(contribution.file.path)
+class SubmittedFileDownloadView(View):
+    def get(self, request, cid):
+        contribution = Contribution.objects.get(id=cid)
+        response = FileResponse(open(contribution.file.path, 'rb'), as_attachment=True, content_type='text/plain')
+        return response
 
 
-@login_required()
-def reject_contribution(request, cid):
-    contribution = get_object_or_404(Contribution, pk=cid)
-    if request.method == 'POST' and request.user.is_superuser:
+class RejectSubmissionView(View):
+    def post(self, request, cid):
+        contribution = get_object_or_404(Contribution, pk=cid)
         contribution.status = 2
         contribution.save()
         path = contribution.file.path
@@ -77,17 +66,12 @@ def reject_contribution(request, cid):
             os.remove(path)
         except FileNotFoundError:
             pass
-
         return redirect('dash:dashboard')
-    return HttpResponse(
-        'You are not permitted to do that'
-    )
 
 
-@login_required()
-def accept_contribution(request, cid):
-    contribution = get_object_or_404(Contribution, pk=cid)
-    if request.method == 'POST' and request.user.is_superuser:
+class AcceptSubmissionView(View):
+    def post(self, request, cid):
+        contribution = get_object_or_404(Contribution, pk=cid)
         contribution.status = 1
         contribution.save()
         path = contribution.file.path
@@ -96,11 +80,7 @@ def accept_contribution(request, cid):
             os.remove(path)
         except FileNotFoundError:
             pass
-
         return redirect('dash:dashboard')
-    return HttpResponse(
-        'You are not permitted to do that'
-    )
 
 
 # Not path view

@@ -1,19 +1,27 @@
-body{
-    /*background-color:#fafafa;*/
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#wrapper {
+    min-height: 100%;
+}
+
+body {
     margin-top: 10vh;
 }
-body.st{
+
+body.st {
     margin-top: 0;
 }
 
-/* Style the active class (and buttons on mouse-over) */
 .active, .btn:hover {
     background-color: rgba(153, 146, 146, 0.3);
     border-radius: 5px;
     color: black;
 }
 
-/*           ------ writting for plant and Chemical Comound code --------*/
 .plant-about {
     text-transform: capitalize;
     font-family: 'Roboto', sans-serif;
@@ -34,13 +42,13 @@ body.st{
 
 .chemical-about {
     font-family: 'Roboto', sans-serif;
-    padding:5px 0;
+    padding: 5px 0;
     font-size: 1.70em;
     font-weight: 500;
     color: #1f1f1f;
 }
 
-.chemical-recomand {
+.chemical-recommend {
     font-family: 'Titillium Web', sans-serif;
     font-size: 17px;
     border-radius: 10px;
@@ -49,105 +57,112 @@ body.st{
     padding: 4px 16px;
     color: #161616;
 }
-.chemical-recomand:hover {
+
+.chemical-recommend:hover {
     background-color: #bbd6db;
     color: #0f002f;
     text-decoration: none;
 }
-.phytochem-found{
+
+.phytochem-found {
     font-size: larger;
     font-family: 'Roboto', sans-serif;
-    font-weight: 500; 
+    font-weight: 500;
 }
-em.plants-l{
+
+em.plants-l {
     font-size: large;
     font-family: 'Roboto', sans-serif;
-    font-weight: 500; 
+    font-weight: 500;
 }
-.chemical-recomand-parent{
-    overflow-y:auto;
-    overflow-x:hidden;
+
+.chemical-recomand-parent {
+    overflow-y: auto;
+    overflow-x: hidden;
     height: 3em;
 }
-.chemical-id-top a{
-    text-decoration : none;
+
+.chemical-id-top a {
+    text-decoration: none;
     font-family: 'Roboto', sans-serif;
     /* background-color: #2f0142; */
     background-color: #0f002f;
-    color:white;
-}
-.chemical-id-top a:hover{
-    background-color: #5c0681;
-    color:white;
+    color: white;
 }
 
-a.download-all-option{
-    text-decoration : none;
+.chemical-id-top a:hover {
+    background-color: #5c0681;
+    color: white;
+}
+
+a.download-all-option {
+    text-decoration: none;
     font-family: 'Roboto', sans-serif;
     background-color: #0f002f;
-    color:white;
+    color: white;
     letter-spacing: 0.05em;
     font-weight: 500;
 }
-a.download-all-option:hover{
+
+a.download-all-option:hover {
     background-color: #5c0681;
-    color:white;
+    color: white;
 }
 
-.download-btn{
-    background-color:#dae3e7;
+.download-btn {
+    background-color: #dae3e7;
     border-radius: 5px;
     border: none;
 }
-.download-btn:hover{
-    background-color:#7cc4e6;
+
+.download-btn:hover {
+    background-color: #7cc4e6;
 }
-.download-type{
-    background-color:#dae3e7;
+
+.download-type {
+    background-color: #dae3e7;
     font-size: 18px;
     font-family: 'Titillium Web', sans-serif;
     border-radius: 5px;
     border: n
 }
 
-a.stop-highlight{
+a.stop-highlight {
     text-decoration: none;
     color: black;
 }
-    /* Added media Query for some page  */
-    /* 🤣🤣🤣 */
+
 @media screen and (max-width: 540px) {
-  .chemical-about {
-    font-size: 6vw;
-  }
-  .download-as-option{
-      font-size: .90em;
-  }
-  a.download-all-option{
-      font-size: 0.9em;
+    .chemical-about {
+        font-size: 6vw;
     }
+
+    .download-as-option {
+        font-size: .90em;
+    }
+
+    a.download-all-option {
+        font-size: 0.9em;
+    }
+
     .plant-about {
         font-size: 1.30em;
     }
 }
 
-/*-------------navbar COllapse color for phone-------------*/
 @media (max-width: 767px) {
-  .navbar-collapse
-    {
-        background-color:#100031;
+    .navbar-collapse {
+        background-color: #100031;
     }
 }
-/*Devloper name */
+
+/* Developer name */
 @media screen and (max-width: 540px) {
-     .team-name{
+    .team-name {
         font-size: 1.75em !important;
-     }
+    }
 }
 
-
-
-/*           ------ End plant and Chemical Comound code --------*/
 .smile {
     min-width: 160px;
     max-width: 160px;
@@ -161,56 +176,47 @@ a.stop-highlight{
     margin: 10px;
 }
 
-/*Font contact */
-.icon-background{
-    color:#e1e1f6;
+.icon-background {
+    color: #e1e1f6;
 }
 
-/*  ============Writting css for profile=========*/
-/*Profile Title*/
-.profile-title{
-    /* font-family:  Helvetica,Arial,'sans-serif'; */
-    /* font-family: 'Poppins', sans-serif; */
+.profile-title {
     font-family: 'Roboto', sans-serif;
     font-size: 1.90em;
     font-weight: 600;
 }
-.profile-info{
-        /* font-family:  Helvetica,Arial,'sans-serif'; */
-        /* font-family: 'Poppins', sans-serif; */
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.5em;
-        font-weight: 600;
-        letter-spacing: 0.03em;
-        color: #747474;
-}
-.type-of-info{
-     font-family:  Helvetica,Arial,'sans-serif';
-     /* font-family: 'Poppins', sans-serif; */
-     /* font-family: 'Roboto', sans-serif; */
-     font-size: 1em;
-     color: #2e2e2e;
-}
-.user-name{
-     /* font-family:  Helvetica,Arial,'sans-serif'; */
-     font-family: 'Poppins', sans-serif;
-     /* font-family: 'Roboto', sans-serif; */
-     font-size: 1em;
+
+.profile-info {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #747474;
 }
 
-
-/* ===============Footer Code Start ======================== */
-footer{
-    background-color:#0f002f;
+.type-of-info {
+    font-family: Helvetica, Arial, 'sans-serif';
+    font-size: 1em;
+    color: #2e2e2e;
 }
-.footer-title{
+
+.user-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+}
+
+footer {
+    background-color: #0f002f;
+    margin-top: auto;
+}
+
+.footer-title {
     text-transform: capitalize;
     font-family: 'Offside', cursive;
     font-size: 1.2em;
-   /* color: #7c7c7c;*/
     color: #a8a8a8;
 }
-.footer-icon-color{
+
+.footer-icon-color {
     color: #a8a8a8;
 }
-/* ===============Footer Code end ======================== */

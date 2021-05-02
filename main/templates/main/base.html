@@ -4,51 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     {% block meta-attrs %}
     {% endblock %}
 
-    <title>
-        {% if not title %}
-            {% block title %}
-            {% endblock %}
-            | Phytochem Database
-        {% else %}
-            {{ title }}
-        {% endif %}
-    </title>
+    <title>{% block title %}{% endblock %} - PhytochemDB</title>
+
     <link rel="shortcut icon" href="{% static '/main/images/phytochem-title-icon.png' %}" type="image/x-icon">
-
-    <!--Some Font Added-->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Offside&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Ubuntu:ital,wght@0,500;1,400&display=swap"
-          rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap">
-    <!--Font Awsome link adding-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!--bootstrap file added-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <!-- Project Statics-->
     <link rel="stylesheet" href="{% static '/main/CSS/style.css' %}">
     <link rel="stylesheet" href="{% static '/main/CSS/homepage-style.css' %}">
     <link rel="stylesheet" href="{% static '/main/CSS/about-page-style.css' %}">
 
-    <!-- Project App Statics-->
     {% block link %}
     {% endblock %}
-
 </head>
+
 <body class="d-flex flex-column min-vh-100">
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top nav-scroll">
     <div class="container">
@@ -74,11 +47,9 @@
                            aria-haspopup="true" aria-expanded="true">Members</a>
                         <div class="dropdown-menu" aria-labelledby="member">
                             <a class="nav-dropdown dropdown-item {% if view_name == 'main:member-research-team' %}active{% endif %}"
-                               href="{% url 'main:member-research-team' %}">Research
-                                Team</a>
+                               href="{% url 'main:member-research-team' %}">Research Team</a>
                             <a class="nav-dropdown dropdown-item {% if view_name == 'main:member-dev-team' %}active{% endif %}"
-                               href="{% url 'main:member-dev-team' %}">Developer
-                                Team</a>
+                               href="{% url 'main:member-dev-team' %}">Developer Team</a>
                             <a class="nav-dropdown dropdown-item {% if view_name == 'main:member-supervisors' %}active{% endif %}"
                                href="{% url 'main:member-supervisors' %}">Supervisors</a>
                         </div>
@@ -87,30 +58,30 @@
                     {% if user.is_authenticated %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle
-                               {% if 'user:' in view_name or 'dash:dashboard' in view_name %}active{% endif %}"
-                               href="#" id="navbarProfileMenuLink" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               {% if 'account:' in view_name or 'dash:dashboard' in view_name %}active{% endif %}"
+                               href="#" id="navbarProfileMenuLink" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
                                 {{ user.first_name }} &nbsp;
                                 <i class="fa fa-user"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarProfileMenuLink">
-                                <a class="dropdown-item {% if view_name == 'user:profile' %}active{% endif %}"
-                                   href="{% url 'user:profile' user.id %}">Profile</a>
+                                <a class="dropdown-item {% if view_name == 'account:profile' %}active{% endif %}"
+                                   href="{% url 'account:profile' user.id %}">Profile</a>
                                 {% if request.user.is_superuser %}
                                     <a class="dropdown-item {% if view_name == 'dash:dashboard' %}active{% endif %}"
                                        href="{% url 'dash:dashboard' %}">Dashboard</a>
                                 {% endif %}
-                                <a class="dropdown-item" href="{% url 'user:logout' %}">Log Out</a>
+                                <a class="dropdown-item" href="{% url 'account:logout' %}">Log Out</a>
                             </div>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link {% if view_name == 'user:login' %}active{% endif %}"
-                               href="{% url 'user:login' %}">Login</a>
+                            <a class="nav-link {% if view_name == 'account:login' %}active{% endif %}"
+                               href="{% url 'account:login' %}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% if view_name == 'user:register' %}active{% endif %}"
-                               href="{% url 'user:register' %}">Register</a>
+                            <a class="nav-link {% if view_name == 'account:register' %}active{% endif %}"
+                               href="{% url 'account:register' %}">Register</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -118,58 +89,38 @@
         {% endwith %}
     </div>
 </nav>
-<!--header Area or Nav area has Finished-->
+
 <div class="fluid">
     {% if messages %}
         {% for message in messages %}
             {% if request.path == '/' %}
-                <div class="{% if message.tags == 'success' %}alert alert-success{% else %}alert alert-danger{% endif %} font-weight-bold"
-                     align="center" role="alert" style="float:top; position: absolute;">
+                <div class="{% if message.tags == 'success' %}alert alert-success{% else %}alert alert-danger{% endif %}
+                font-weight-bold" align="center" role="alert" style="float:top; position: absolute;">
                     {{ message }}
                 </div>
             {% else %}
-                <div class="{% if message.tags == 'success' %}alert alert-success{% else %}alert alert-danger{% endif %} font-weight-bold"
-                     align="center" role="alert">
+                <div class="{% if message.tags == 'success' %}alert alert-success{% else %}alert alert-danger{% endif %}
+                font-weight-bold" align="center" role="alert">
                     {{ message }}
                 </div>
             {% endif %}
         {% endfor %}
     {% endif %}
 </div>
-{% block body %}
-{% endblock %}
-
-
+<div id="wrapper">
+    {% block body %}
+    {% endblock %}
+</div>
 <footer class="footer py-3 mt-auto">
     <div class="container">
         <div class="row d-flex justify-content-center">
-            <p href="">
+            <p>
                 <img src="{% static '/main/images/phytochem-icon.png' %}" alt="Phytochem-icon">
             </p>
         </div>
         <div class="row d-flex justify-content-center pb-3">
             <div class="footer-title">phytochem database</div>
         </div>
-        {#                <div class="row d-flex justify-content-center ">#}
-        {#                    <a href="">#}
-        {#                        <i class="fa fa-facebook-official px-2 footer-icon-color"></i>#}
-        {#                    </a>#}
-        {#                    <a href="">#}
-        {#                        <i class="fa fa-linkedin-square px-2 footer-icon-color"></i>#}
-        {#                    </a>#}
-        {#                    <a href="">#}
-        {#                        <i class="fa fa-twitter fa-1x px-2 footer-icon-color"></i>#}
-        {#                    </a>#}
-        {#                    <a href="">#}
-        {#                        <i class="fa fa fa-youtube-play px-2 footer-icon-color"></i>#}
-        {#                    </a>#}
-        {#                    <a href="">#}
-        {#                        <i class="fa fa-github px-2 footer-icon-color"></i>#}
-        {#                    </a>#}
-        {#                    <a class="px-2" href="/" target="_blank">#}
-        {#                        <img src="{% static '/main/images/researchgate-logo-16px.png' %}" alt=" researchgate-icon">#}
-        {#                    </a>#}
-        {#                </div>#}
         <hr style="border-color: rgba(255,255,255,0.1);">
         <div class="row d-flex justify-content-center py-3">
             <div class="col-md-6">
@@ -180,7 +131,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="{% url 'contribute:submit_data' %}">
+                        <a href="{% url 'data_submission:index' %}">
                             <p class="footer-icon-color">Contribute</p>
                         </a>
                     </div>
@@ -192,18 +143,16 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="row d-flex justify-content-start px-3 footer-icon-color h5">
-                    Contact with us
-                </div>
+                <div class="row d-flex justify-content-start px-3 footer-icon-color h5">Contact with us</div>
                 <hr style="border-color: rgba(255,255,255,0.1);">
                 <div class="row" style="font-size:0.9em;">
                     <div class="col-md-6">
                         <div class="py-2" style="color: #a8a8a8;">Shafi Mahmud</div>
                         <p>
-                                <span class="fa-stack fa-1x">
-                                    <i class="fa fa-circle fa-stack-2x icon-background"></i>
-                                    <i class="fa fa-envelope fa-stack-1x"></i>
-                                </span>
+                            <span class="fa-stack fa-1x">
+                                <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                                <i class="fa fa-envelope fa-stack-1x"></i>
+                            </span>
                             <a href="mailto://shafimahmudfz@gmail.com" class="card-link text-break py-2">
                                 shafimahmudfz@gmail.com
                             </a>
@@ -215,9 +164,7 @@
                             </span>
                             <a href="tel:+8801679770136">+880 1679-770136</a>
                         </p>
-
                     </div>
-
                     <div class="col-md-6">
                         <div class="p-2" style="color: #a8a8a8;">Dr. Md. Abu Saleh</div>
                         <p>
@@ -235,13 +182,12 @@
                             </span>
                             <a href="tel:+8801716731747">+880 1716-731747</a>
                         </p>
-
                     </div>
                 </div>
             </div>
         </div>
         <div class="row d-flex justify-content-start p-2">
-            <p class="footer-icon-color">&copy 2020 phytochemdb.com</p>
+            <p class="footer-icon-color">&copy; 2020 phytochemdb.com</p>
         </div>
     </div>
 </footer>
@@ -257,9 +203,7 @@
         crossorigin="anonymous"></script>
 <script src="{% static 'main/scripts/script.js' %}"></script>
 
-<!--Local Scripts-->
 {% block scripts %}
 {% endblock %}
-
 </body>
 </html>

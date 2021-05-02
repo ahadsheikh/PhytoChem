@@ -76,6 +76,6 @@ class Account(AbstractUser):
     objects = CustomUserManager()
 
     def email_user(self, subject, message):
-        """Function to send mail to the user"""
+        """Function to send mail to the account"""
         return send_mail(subject, message, from_email='Phytochem Database Admin <noreply@phytochemdb.com>',
                          recipient_list=[self.email], fail_silently=False)

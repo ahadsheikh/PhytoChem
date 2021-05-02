@@ -1,4 +1,4 @@
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseForbidden
 from django.conf import settings
 
 
@@ -12,7 +12,7 @@ class AdminLoginMiddleware(object):
 
     def process_view(self, request, view_func, *view_args, **view_kargs):
         # Get the view name as a string
-        view_name = view_func.__module__ # '.'.join((view_func.__module__, view_func.__name__))
+        view_name = view_func.__module__
 
         # If the view name is in our exclusion list, exit early
         inclusion_set = getattr(settings, 'INCLUDE_TO_ADMINLOGINMIDDLEWARE', [])
@@ -20,4 +20,4 @@ class AdminLoginMiddleware(object):
             return None
 
         if not request.user.is_superuser:
-            return HttpResponseNotFound('You are not permitted')
+            return HttpResponseForbidden('You are not permitted')

@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('status', models.SmallIntegerField(default=0)),
                 ('file', models.FileField(upload_to='submittedFiles', validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['sdf']), core.utils.QueryHandler.validate_sdf])),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('account', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

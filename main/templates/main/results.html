@@ -5,13 +5,13 @@
     <meta name="description" content="Search results for {{ request.GET.search }} in phytochemdb.com">
     <meta name="keywords" content="phytochemdb.com, phytochemical, compounds, {{ request.GET.search }}">
 {% endblock %}
-{% block title %}Search results for {{ request.GET.search }}{% endblock %}
+{% block title %}Search results for {{ request.GET.q }}{% endblock %}
 {% block body %}
     <div class="container">
         <div class="row d-flex align-items-start justify-content-center flex-column col-md" style="height: 10vh;">
             <form class="container d-flex p-0" action="{% url 'main:results' %}" method="get">
                 <input id="hide" class="form-control mt-3 mr-1 p-4 search-input"
-                       name="search" value="{{ request.GET.search }}"
+                       name="q" value="{{ request.GET.q }}"
                        type="text" placeholder="Search Phytochems" aria-label="Search">
                 <button class="btn mt-3 mr-1 px-4 py-2 submit-btn" type="submit" value=" ">
                     <img src="{% static '/main/images/search-icon-sm.png' %}" alt="icon">
@@ -22,7 +22,7 @@
             <!--  Download panel -->
             {% if compounds %}
                 <div class="chemical-about">Showing {{ compounds|length }} result(s) matching your query</div>
-                <a class="download-all-option p-2 rounded" href="{% url 'main:download_compound' request.GET.search %}">Download
+                <a class="download-all-option p-2 rounded" href="{% url 'main:download_compound' request.GET.q %}">Download
                     Results</a>
                 {% for compound in compounds %}
                     <div class="row mb-3 p-3 mt-5 shadow-sm bg-white">
@@ -38,7 +38,7 @@
                         <div class="row px-3 my-2 chemical-recomand-parent justify-content-start">
                             <br>
                             {% for plant in compound.plants.all %}
-                                <a class="chemical-recomand"
+                                <a class="chemical-recommend"
                                    href="{% url "main:plant" plant.id %}">{{ plant.name }}</a>
                             {% endfor %}
                         </div>
