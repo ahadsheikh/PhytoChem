@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
@@ -13,19 +12,16 @@ from data_submission.models import Contribution
 from core.utils.QueryHandler import handle_new_sdf
 
 
-class SubmissionView(LoginRequiredMixin, ListView):
+class SubmissionView(ListView):
     model = Contribution
     template_name = 'dashboard/dash.html'
-    redirect_field_name = 'next'
 
     def get_queryset(self):
         contributors = Contribution.objects.all().order_by('-created_at')
         return contributors
 
 
-class UploadView(LoginRequiredMixin, View):
-    redirect_field_name = 'next'
-
+class UploadView(View):
     def post(self, request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
@@ -41,11 +37,10 @@ class UploadView(LoginRequiredMixin, View):
         return render(request, 'dashboard/dash.html', {'form': form})
 
 
-class SubmittedFileDetailView(LoginRequiredMixin, DetailView):
+class SubmittedFileDetailView(DetailView):
     model = Contribution
     template_name = 'dashboard/show_data.html'
     context_object_name = 'contribution'
-    redirect_field_name = 'next'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -54,18 +49,14 @@ class SubmittedFileDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class SubmittedFileDownloadView(LoginRequiredMixin, View):
-    redirect_field_name = 'next'
-
+class SubmittedFileDownloadView(View):
     def get(self, request, cid):
         contribution = Contribution.objects.get(id=cid)
         response = FileResponse(open(contribution.file.path, 'rb'), as_attachment=True, content_type='text/plain')
         return response
 
 
-class RejectSubmissionView(LoginRequiredMixin, View):
-    redirect_field_name = 'next'
-
+class RejectSubmissionView(View):
     def post(self, request, cid):
         contribution = get_object_or_404(Contribution, pk=cid)
         contribution.status = 2
@@ -78,9 +69,7 @@ class RejectSubmissionView(LoginRequiredMixin, View):
         return redirect('dash:dashboard')
 
 
-class AcceptSubmissionView(LoginRequiredMixin, View):
-    redirect_field_name = 'next'
-
+class AcceptSubmissionView(View):
     def post(self, request, cid):
         contribution = get_object_or_404(Contribution, pk=cid)
         contribution.status = 1
