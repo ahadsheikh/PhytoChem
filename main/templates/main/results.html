@@ -37,13 +37,6 @@
                                    href="{% url 'main:download_compound' compound.PID %}">Download</a>
                             </span>
                         </div>
-                        <div class="row px-3 my-2 plant-names justify-content-start">
-                            <br>
-                            {% for plant in compound.plants.all %}
-                                <a class="chemical-recommend"
-                                   href="{% url "main:plant" plant.id %}">{{ plant.name }}</a>
-                            {% endfor %}
-                        </div>
                         <div class="row justify-content-center align-item-center w-100">
                             <div class="col-sm">
                                 <a href="{% url "main:compound"  compound.id %}"><img src="{{ compound.ROMol }}"
