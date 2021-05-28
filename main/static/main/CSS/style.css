@@ -1,7 +1,10 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+body {
+    background-color: #fafafa;
+    margin-top: 10vh;
+}
+
+body.st {
+    margin-top: 0;
 }
 
 #wrapper {
@@ -23,11 +26,14 @@ body.st {
 }
 
 .plant-about {
-    text-transform: capitalize;
     font-family: 'Roboto', sans-serif;
     font-size: 1.70em;
     font-weight: 500;
     color: #1f1f1f;
+}
+
+#plant-name {
+    /*display: none;*/
 }
 
 .chemical-title {
@@ -74,12 +80,6 @@ em.plants-l {
     font-size: large;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
-}
-
-.chemical-recomand-parent {
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: 3em;
 }
 
 .chemical-id-top a {

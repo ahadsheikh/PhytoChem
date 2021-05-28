@@ -12,7 +12,7 @@
         <div class="row p-2 rounded plant-title ">
             <div class="col-md d-flex justify-content-center">
                 <img class="ml-2 mr-2 plant-image" src="{% static '/main/images/Chemical.png' %}" alt="Logo">
-                <p class="chemical-title">{{ compound.Molecular_Formula|chem_formula|safe }}</p>
+                <p class="chemical-title">{{ compound.Smiles }}</p>
             </div>
             <div class="w-100 p-2 chemical-id-top">
                 <span class="float-left">
@@ -23,63 +23,175 @@
             </div>
         </div>
         <div class="chemical-about mt-2 mb-2">The phytochem is found in these plants</div>
-        <div class="row mb-3 ml-2 mt-2 chemical-recomand-parent justify-content-start">
+        <button class="chemical-recommend btn btn-toggle" id="plant-name-toggle">Show/Hide plants</button>
+        <div id="plant-name" class="row m-1 p-1 justify-content-start border rounded">
             {% for plant in compound.plants.all %}
                 <a class="chemical-recommend" href="{% url "main:plant" plant.id %}">
                     {{ plant.name }}
                 </a>
             {% endfor %}
         </div>
-        <div class="row mb-3">
-            <table class="table">
-                <tr>
-                    <td colspan="2">
-                        <img class="img-responsive mx-auto d-block" src="{{ compound.ROMol }}" alt="">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="font-weight-bold">Molecular Formula:</td>
-                    <td>{{ compound.Molecular_Formula|chem_formula|safe }}</td>
-                </tr>
-                <tr>
-                    <td class="font-weight-bold">Canonical SMILES:</td>
-                    <td class="smile">{{ compound.Smiles }}</td>
-                </tr>
-                <tr>
-                    <td class="font-weight-bold">Molecular Weight:</td>
-                    <td>{{ compound.Molecular_Weight|floatformat:3 }} g/mol</td>
-                </tr>
-                <tr>
-                    <td class="font-weight-bold">Hydrogen Bond Acceptor Count:</td>
-                    <td>{{ compound.H_Bond_Acceptors }}</td>
-                </tr>
-                <tr>
-                    <td class="font-weight-bold">Hydrogen Bond Donor Count:</td>
-                    <td>{{ compound.H_Bond_Donors }}</td>
-                </tr>
-                <tr>
-                    <td class="font-weight-bold">Molar Refractivity:</td>
-                    <td>{{ compound.Molar_Refractivity|floatformat:3 }}</td>
-                </tr>
-                <tr>
-                    <td class="font-weight-bold">TPSA:</td>
-                    <td>{{ compound.TPSA|floatformat:3 }} Å²</td>
-                </tr>
-                <tr>
-                    <td class="font-weight-bold">WlogP:</td>
-                    <td>{{ compound.logP|floatformat:3 }}</td>
-                </tr>
-                <tr>
-                    <td class="font-weight-bold">Lipinski:</td>
-                    <td style="background-color: {{ violation_color|color_extract:lipinski }}">
-                        {% if lipinski < 2 %}
-                            Yes, {{ lipinski }} violation
-                        {% else %}
-                            No, {{ lipinski }} violations
-                        {% endif %}
-                    </td>
-                </tr>
-            </table>
+        <div class="row justify-content-center">
+            {% if compound.Molecule_Name %}
+                <h2 class="chemical-title mt-auto mb-auto">{{ compound.Molecule_Name }}</h2>
+            {% endif %}
+            <div class="border border-dark bg-secondary">
+                <img class="img-responsive mx-auto d-block" src="{{ compound.ROMol }}" alt="">
+            </div>
+        </div>
+        <div class="row mb-3 ml-2 mt-2 justify-content-between">
+            <div class="col-sm-6">
+                <h3 class="chemical-about">Physicochemical Properties</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Formula</th>
+                            <td>{{ compound.Molecular_Formula|chem_formula|safe }}</td>
+                        </tr>
+                        <tr>
+                            <th>Molecular Weight</th>
+                            <td>{{ compound.Molecular_Weight|floatformat:3 }}</td>
+                        </tr>
+                        <tr>
+                            <th>No of heavy atoms</th>
+                            <td>{{ compound.Heavy_Atoms }}</td>
+                        </tr>
+                        <tr>
+                            <th>No of aromatic heavy atoms</th>
+                            <td>{{ compound.Arom_Heavy_Atoms }}</td>
+                        </tr>
+                        <tr>
+                            <th>Fraction Csp3</th>
+                            <td>{{ compound.Fraction_Csp3|floatformat:3 }}</td>
+                        </tr>
+                        <tr>
+                            <th>No of rotatable bonds</th>
+                            <td>{{ compound.Rotatable_bonds }}</td>
+                        </tr>
+                        <tr>
+                            <th>No of H-bond acceptors</th>
+                            <td>{{ compound.H_Bond_Acceptors }}</td>
+                        </tr>
+                        <tr>
+                            <th>No. H-bond donors</th>
+                            <td>{{ compound.H_Bond_Donors }}</td>
+                        </tr>
+                        <tr>
+                            <th>Molar Refractivity</th>
+                            <td>{{ compound.Molar_Refractivity|floatformat:3 }}</td>
+                        </tr>
+                        <tr>
+                            <th>TPSA</th>
+                            <td>{{ compound.TPSA|floatformat:3 }}</td>
+                        </tr>
+                        <tr>
+                            <th>iLogP</th>
+                            <td>{{ compound.iLOGP|floatformat:3 }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <h3 class="chemical-about">Pharmacokinetics</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>GI absorption</th>
+                            <td>{{ compound.GI_absorption }}</td>
+                        </tr>
+                        <tr>
+                            <th>BBB permeant</th>
+                            <td>{{ compound.BBB_permeant }}</td>
+                        </tr>
+                        <tr>
+                            <th>P-gp substrate</th>
+                            <td>{{ compound.P_gp_substrate }}</td>
+                        </tr>
+                        <tr>
+                            <th>CYP1A2 inhibitor</th>
+                            <td>{{ compound.CYP1A2_inhibitor }}</td>
+                        </tr>
+                        <tr>
+                            <th>CYP2C19 inhibitor</th>
+                            <td>{{ compound.CYP2C19_inhibitor }}</td>
+                        </tr>
+                        <tr>
+                            <th>CYP2D6 inhibitor</th>
+                            <td>{{ compound.CYP2D6_inhibitor }}</td>
+                        </tr>
+                        <tr>
+                            <th>CYP3A4 inhibitor</th>
+                            <td>{{ compound.CYP3A4_inhibitor }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <h3 class="chemical-about">Lipophilicity</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Log Kp (skin permeation)</th>
+                            <td>{{ compound.LogKp|floatformat:3 }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <h3 class="chemical-about">Druglikeness</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Lipinski</th>
+                            <td>{{ compound.Lipinski }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ghose</th>
+                            <td>{{ compound.Ghose }}</td>
+                        </tr>
+                        <tr>
+                            <th>Veber</th>
+                            <td>{{ compound.Veber }}</td>
+                        </tr>
+                        <tr>
+                            <th>Egan</th>
+                            <td>{{ compound.Egan }}</td>
+                        </tr>
+                        <tr>
+                            <th>Muegge</th>
+                            <td>{{ compound.Muegge }}</td>
+                        </tr>
+                        <tr>
+                            <th>Bioavailability Score</th>
+                            <td>{{ compound.Bioavailability_Score|floatformat:3 }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <h3 class="chemical-about">Medicinal Chemistry</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>PAINS</th>
+                            <td>{{ compound.PAINS }}</td>
+                        </tr>
+                        <tr>
+                            <th>Brenk</th>
+                            <td>{{ compound.Brenk }}</td>
+                        </tr>
+                        <tr>
+                            <th>Leadlikeness</th>
+                            <td>{{ compound.Leadlikeness }}</td>
+                        </tr>
+                        <tr>
+                            <th>Synthetic accessibility</th>
+                            <td>{{ compound.Synthetic_accessibility|floatformat:3 }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $('#plant-name-toggle').click(function () {
+            $('#plant-name').toggle();
+        });
+    </script>
 {% endblock %}

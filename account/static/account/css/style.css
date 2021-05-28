@@ -1,38 +1,36 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-.navbar-laravel
-{
-    box-shadow: 0 2px 4px rgba(0,0,0,.04);
+
+.navbar-laravel {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
 }
 
-.my-form
-{
+.my-form {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
 }
 
-.my-form .row
-{
+.my-form .row {
     margin-left: 0;
     margin-right: 0;
 }
-.card-header{
-    font-family:  Helvetica,Arial,'sans-serif';
+
+.card-header {
+    font-family: Helvetica, Arial, 'sans-serif';
     font-size: 1.5em;
     font-weight: 600;
 }
-.login-form
-{
+
+.login-form {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
 }
 
-.login-form .row
-{
+.login-form .row {
     margin-left: 0;
     margin-right: 0;
 }
 
-.success-message{
+.success-message {
     color: green;
     background: #c3f6ce;
     text-align: center

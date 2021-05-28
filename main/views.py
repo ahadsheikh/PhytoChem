@@ -24,24 +24,30 @@ class AboutView(TemplateView):
 
 
 class QueryResultListView(ListView):
-    paginate_by = 10
     template_name = 'main/results.html'
     context_object_name = 'compounds'
+    paginate_by = 10
 
     def get_queryset(self):
-        query = self.request.GET.get('q')
-        if query:
-            return Compound.objects.filter(Q(PID__endswith=query)
-                                           | Q(Smiles=query)
-                                           | Q(Molecular_Formula=query)
-                                           | Q(plants__name__iexact=query)).distinct()
+        self.query = self.request.GET.get('q')
+        if self.query:
+            return Compound.objects.filter(Q(PID__endswith=self.query)
+                                           | Q(Smiles=self.query)
+                                           | Q(Molecular_Formula=self.query)
+                                           | Q(plants__name__iexact=self.query)).distinct()
         else:
             return Compound.objects.none()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(QueryResultListView, self).get_context_data()
+        context['query'] = self.query
+        return context
 
 
 class PlantCompoundsListView(ListView):
     template_name = 'main/plant.html'
     context_object_name = 'compounds'
+    paginate_by = 10
 
     def get_queryset(self):
         self.plant = get_object_or_404(Plant, id=self.kwargs['pk'])
@@ -60,10 +66,7 @@ class CompoundDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        lipinski = (self.get_object().H_Bond_Donors > 5) + (self.get_object().H_Bond_Acceptors > 10) + \
-                   (self.get_object().Molecular_Weight >= 500) + (self.get_object().logP > 5)
         violation_color = ['#2ECC71', '#ABEBC6', '#FADBD8', '#E74C3C', '#B03A2E']
-        context['lipinski'] = lipinski
         context['violation_color'] = violation_color
         return context
 

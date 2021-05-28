@@ -2,16 +2,16 @@
 {% load static %}
 {% load main_extras %}
 {% block meta-attrs %}
-    <meta name="description" content="Search results for {{ request.GET.search }} in phytochemdb.com">
+    <meta name="description" content="Search results for {{ query }} in phytochemdb.com">
     <meta name="keywords" content="phytochemdb.com, phytochemical, compounds, {{ request.GET.search }}">
 {% endblock %}
-{% block title %}Search results for {{ request.GET.q }}{% endblock %}
+{% block title %}Search results for {{ query }}{% endblock %}
 {% block body %}
     <div class="container">
         <div class="row d-flex align-items-start justify-content-center flex-column col-md" style="height: 10vh;">
             <form class="container d-flex p-0" action="{% url 'main:results' %}" method="get">
                 <input id="hide" class="form-control mt-3 mr-1 p-4 search-input"
-                       name="q" value="{{ request.GET.q }}"
+                       name="q" value="{{ query }}"
                        type="text" placeholder="Search Phytochems" aria-label="Search">
                 <button class="btn mt-3 mr-1 px-4 py-2 submit-btn" type="submit" value=" ">
                     <img src="{% static '/main/images/search-icon-sm.png' %}" alt="icon">
@@ -21,7 +21,9 @@
         <div class="py-4 mt-5 ">
             <!--  Download panel -->
             {% if compounds %}
-                <div class="chemical-about">Showing {{ compounds|length }} result(s) matching your query</div>
+                <div class="chemical-about">Showing {{ page_obj.start_index }}-{{ page_obj.end_index }}
+                    of {{ page_obj.paginator.count }} phytochems matching your query
+                </div>
                 <a class="download-all-option p-2 rounded" href="{% url 'main:download_compound' request.GET.q %}">Download
                     Results</a>
                 {% for compound in compounds %}
@@ -35,7 +37,7 @@
                                    href="{% url 'main:download_compound' compound.PID %}">Download</a>
                             </span>
                         </div>
-                        <div class="row px-3 my-2 chemical-recomand-parent justify-content-start">
+                        <div class="row px-3 my-2 plant-names justify-content-start">
                             <br>
                             {% for plant in compound.plants.all %}
                                 <a class="chemical-recommend"
@@ -66,6 +68,32 @@
                         </div>
                     </div>
                 {% endfor %}
+                {% if is_paginated %}
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                            <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                        {% endif %}
+                        {% for i in paginator.page_range %}
+                            {% if page_obj.number == i %}
+                                <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span>
+                                </li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link"
+                                                         href="?q={{ query }}&page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?q={{ query }}&page={{ page_obj.next_page_number }}">&raquo;</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
             {% else %}
                 <h3>Not Found</h3>
             {% endif %}

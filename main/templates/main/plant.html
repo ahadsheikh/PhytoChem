@@ -16,7 +16,8 @@
         </div>
         <div class="row content shadow-sm bg-light">
             <div class="col-md">
-                <div class="plant-about mt-4 mb-2">This plant contains these phytochems</div>
+                <div class="plant-about mt-4 mb-2">Showing {{ page_obj.start_index }}-{{ page_obj.end_index }}
+                    of {{ page_obj.paginator.count }} phytochems this plant contain</div>
                 <a class="download-all-option rounded p-2" href="{% url 'main:download_compound' plant.name %}">
                     Download Results
                 </a>
@@ -29,16 +30,11 @@
                                 </a>
                             </span>
                             <span class="float-right">
-                                <a class="p-2 rounded download-as-option" href="{% url 'main:download_compound' compound.PID %}">
+                                <a class="p-2 rounded download-as-option"
+                                   href="{% url 'main:download_compound' compound.PID %}">
                                     Download
                                 </a>
                             </span>
-                        </div>
-                        <div class="row my-3 mx-3 chemical-recomand-parent justify-content-start">
-                            <br>
-                            {% for plant in compound.plants.all %}
-                                <a class="chemical-recommend" href="{% url "main:plant" plant.id %}">{{ plant.name }}</a>
-                            {% endfor %}
                         </div>
                         <div class="row justify-contents-center align-item-center w-100">
                             <div class="col-sm">
@@ -65,6 +61,32 @@
                         </div>
                     </div>
                 {% endfor %}
+                {% if is_paginated %}
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                            <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                        {% endif %}
+                        {% for i in paginator.page_range %}
+                            {% if page_obj.number == i %}
+                                <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span>
+                                </li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link"
+                                                         href="?q={{ query }}&page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?q={{ query }}&page={{ page_obj.next_page_number }}">&raquo;</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
             </div>
         </div>
     </div>
