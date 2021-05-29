@@ -43,7 +43,7 @@ class Compound(models.Model):
     CYP2C9_inhibitor = models.CharField(max_length=10, null=True, blank=True)
     CYP2D6_inhibitor = models.CharField(max_length=10, null=True, blank=True)
     CYP3A4_inhibitor = models.CharField(max_length=10, null=True, blank=True)
-    LogKp = models.FloatField(blank=True)
+    LogKp = models.FloatField(null=True, blank=True)
 
     # Druglikeness
     Lipinski = models.IntegerField(null=True, blank=True)
