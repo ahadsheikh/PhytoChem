@@ -40,16 +40,17 @@ class Compound(models.Model):
     P_gp_substrate = models.CharField(max_length=10, blank=True)
     CYP1A2_inhibitor = models.CharField(max_length=10, blank=True)
     CYP2C19_inhibitor = models.CharField(max_length=10, blank=True)
+    CYP2C9_inhibitor = models.CharField(max_length=10, blank=True)
     CYP2D6_inhibitor = models.CharField(max_length=10, blank=True)
     CYP3A4_inhibitor = models.CharField(max_length=10, blank=True)
     LogKp = models.FloatField(blank=True)
 
     # Druglikeness
     Lipinski = models.IntegerField(blank=True)
-    Ghose = models.BooleanField(blank=True)
-    Veber = models.BooleanField(blank=True)
-    Egan = models.BooleanField(blank=True)
-    Muegge = models.BooleanField(blank=True)
+    Ghose = models.IntegerField(blank=True)
+    Veber = models.IntegerField(blank=True)
+    Egan = models.IntegerField(blank=True)
+    Muegge = models.IntegerField(blank=True)
     Bioavailability_Score = models.FloatField(blank=True)
 
     # Medicinal Chemistry
