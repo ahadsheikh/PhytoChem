@@ -32,8 +32,8 @@ body.st {
     color: #1f1f1f;
 }
 
-#plant-name {
-    /*display: none;*/
+.show-plant {
+    display: none;
 }
 
 .chemical-title {

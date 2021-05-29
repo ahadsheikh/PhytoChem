@@ -3,7 +3,6 @@
 {% load main_extras %}
 {% block meta-attrs %}
     <meta name="description" content="Search results for {{ query }} in phytochemdb.com">
-    <meta name="keywords" content="phytochemdb.com, phytochemical, compounds, {{ request.GET.search }}">
 {% endblock %}
 {% block title %}Search results for {{ query }}{% endblock %}
 {% block body %}
@@ -24,7 +23,7 @@
                 <div class="chemical-about">Showing {{ page_obj.start_index }}-{{ page_obj.end_index }}
                     of {{ page_obj.paginator.count }} phytochems matching your query
                 </div>
-                <a class="download-all-option p-2 rounded" href="{% url 'main:download_compound' request.GET.q %}">Download
+                <a class="download-all-option p-2 rounded" href="{% url 'main:download_compound' query %}">Download
                     Results</a>
                 {% for compound in compounds %}
                     <div class="row mb-3 p-3 mt-5 shadow-sm bg-white">

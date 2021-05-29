@@ -3,8 +3,6 @@
 {% load main_extras %}
 {% block meta-attrs %}
     <meta name="description" content="Phytochemical with Canonical SMILES: {{ compound.Smiles }}">
-    <meta name="keywords"
-          content="phytochemdb.com, phytochemical, compounds, {{ compound.Smiles }}, {{ compound.PID }}, {{ compound.Molecular_Formula }}">
 {% endblock %}
 {% block title %}{{ compound.PID }}{% endblock %}
 {% block body %}
@@ -24,7 +22,7 @@
         </div>
         <div class="chemical-about mt-2 mb-2">The phytochem is found in these plants</div>
         <button class="chemical-recommend btn btn-toggle" id="plant-name-toggle">Show/Hide plants</button>
-        <div id="plant-name" class="row m-1 p-1 justify-content-start border rounded">
+        <div id="plant-name" class="show-plant row m-1 p-1 justify-content-start border rounded">
             {% for plant in compound.plants.all %}
                 <a class="chemical-recommend" href="{% url "main:plant" plant.id %}">
                     {{ plant.name }}
@@ -114,6 +112,10 @@
                             <td>{{ compound.CYP2C19_inhibitor }}</td>
                         </tr>
                         <tr>
+                            <th>CYP2C9 inhibitor</th>
+                            <td>{{ compound.CYP2C9_inhibitor }}</td>
+                        </tr>
+                        <tr>
                             <th>CYP2D6 inhibitor</th>
                             <td>{{ compound.CYP2D6_inhibitor }}</td>
                         </tr>
@@ -191,7 +193,7 @@
 {% block scripts %}
     <script>
         $('#plant-name-toggle').click(function () {
-            $('#plant-name').toggle();
+            $('#plant-name').toggleClass('show-plant');
         });
     </script>
 {% endblock %}
