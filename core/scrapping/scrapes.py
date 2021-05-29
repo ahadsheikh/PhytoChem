@@ -1,5 +1,9 @@
 from bs4 import BeautifulSoup
 import requests
+from io import StringIO
+import csv
+
+from main.models import Compound
 
 
 def single_smiles_scrape(smiles: str) -> str:
@@ -17,3 +21,63 @@ def single_smiles_scrape(smiles: str) -> str:
     csv_data = requests.get(csv_link)
 
     return csv_data.text
+
+
+def swissCSV_to_db(compound):
+    print("Scrapping data for " + compound.Smiles + "...")
+    csvdata = StringIO(single_smiles_scrape(compound.Smiles))
+    print("Done.")
+
+    csv_reader = csv.reader(csvdata, delimiter=',')
+
+    lc = 0
+    for row in csv_reader:
+        if lc == 1:
+            print("Filling ID: " + compound.PID + ", Formula:" + compound.Molecular_Formula + "...")
+
+            compound.Molecule_Name = row[0]
+
+            # Physicochemical Properties
+            compound.Molecular_Formula = row[2]
+            compound.Molecular_Weight = row[3]
+            compound.Heavy_Atoms = row[4]
+            compound.Arom_Heavy_Atoms = row[5]
+            compound.Fraction_Csp3 = row[6]
+            compound.Rotatable_bonds = row[7]
+            compound.H_Bond_Acceptors = row[8]
+            compound.H_Bond_Donors = row[9]
+            compound.Molar_Refractivity = row[10]
+            compound.TPSA = row[11]
+
+            # Lipophilicity
+            compound.iLOGP = row[12]
+
+            # Pharmacokinetics
+            compound.GI_absorption = row[30]
+            compound.BBB_permeant = row[31]
+            compound.P_gp_substrate = row[32]
+            compound.CYP1A2_inhibitor = row[33]
+            compound.CYP2C19_inhibitor = row[34]
+            compound.CYP2C9_inhibitor = row[35]
+            compound.CYP2D6_inhibitor = row[36]
+            compound.CYP3A4_inhibitor = row[37]
+            compound.LogKp = row[38]
+
+            # Druglikeness
+            compound.Lipinski = row[39]
+            compound.Ghose = row[40]
+            compound.Veber = row[41]
+            compound.Egan = row[42]
+            compound.Bioavailability_Score = row[44]
+
+            # Medicinal Chemistry
+            compound.PAINS = row[45]
+            compound.Brenk = row[46]
+            compound.Leadlikeness = row[47]
+            compound.Synthetic_accessibility = row[48]
+
+            compound.save()
+
+            print(f"Done compound\n")
+
+        lc += 1
