@@ -31,7 +31,7 @@ class QueryResultListView(ListView):
     def get_queryset(self):
         self.query = self.request.GET.get('q')
         if self.query:
-            return Compound.objects.filter(Q(PID__endswith=self.query)
+            return Compound.objects.filter(Q(id=int(self.query) if self.query.isdigit() else 0)
                                            | Q(Smiles=self.query)
                                            | Q(Molecular_Formula=self.query)
                                            | Q(plants__name__iexact=self.query)).distinct()
