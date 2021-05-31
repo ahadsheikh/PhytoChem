@@ -75,7 +75,9 @@ class AcceptSubmissionView(View):
         contribution.status = 1
         contribution.save()
         path = contribution.file.path
-        handle_new_sdf(path, plant=contribution.plant_name)
+
+        # Task: os.system() code for at command to schedule job
+        # handle_new_sdf(path, plant=contribution.plant_name)
         try:
             os.remove(path)
         except FileNotFoundError:
@@ -93,8 +95,11 @@ def handle_file(f, plant=None):
     with open('media/upload/' + filename, 'wb') as des:
         for chunk in f.chunks():
             des.write(chunk)
-    try:
-        sdf_file = 'media/upload/' + filename
-        handle_new_sdf(sdf_file, plant)
-    finally:
-        os.remove('media/upload/' + filename)
+
+    # Task: os.system() code for at command to schedule job
+
+    # try:
+    #     sdf_file = 'media/upload/' + filename
+    #     handle_new_sdf(sdf_file, plant)
+    # finally:
+    #     os.remove('media/upload/' + filename)

@@ -51,7 +51,7 @@
             <div class="row mt-2">
                 <h3>Review Contributor Data</h3>
             </div>
-            {% for con in contributors %}
+            {% for con in object_list %}
                 {% if con.status == 0 %}
                     <div class="row p-2 d-flex mb-2" style="border-radius: 10px; background: #DBEABF">
                         <div class="col-md-4 py-2" style="margin: auto; border-radius: 10px">
@@ -70,13 +70,13 @@
                                     </button>
                                 </div>
                                 <div class="ml-1">
-                                    <form action="{% url 'dash:accept_contribution_data' con.id %}" method="post">
+                                    <form action="{% url 'dash:accept_submission_data' con.id %}" method="post">
                                         {% csrf_token %}
                                         <button class="btn btn-success">Accept</button>
                                     </form>
                                 </div>
                                 <div class="ml-1">
-                                    <form action="{% url 'dash:reject_contribution_data' con.id %}" method="post">
+                                    <form action="{% url 'dash:reject_submission_data' con.id %}" method="post">
                                         {% csrf_token %}
                                         <button type="submit" class="btn btn-danger">Reject</button>
                                     </form>
