@@ -50,6 +50,8 @@ def swisscsv_to_db(cur_compound_no, smiles, mol):
             compound.Smiles = smiles
             compound.ROMol = get_src_from_image_tag(str(mol))  # image of the molecule
 
+            if row[0].startswith('Molecule'):
+                row[0] = None
             compound.Molecule_Name = row[0]
             # Physicochemical Properties
             compound.Molecular_Formula = row[2]
