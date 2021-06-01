@@ -1,15 +1,12 @@
 from django.http import FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-
-import os
-
 from django.views import View
 from django.views.generic import ListView, DetailView
-
+import os
+from core.save_to_db import save_to_db
 from dashboard.forms import UploadFileForm
 from data_submission.models import Contribution
-from core.utils.QueryHandler import handle_new_sdf
 
 
 class SubmissionView(ListView):
@@ -17,7 +14,7 @@ class SubmissionView(ListView):
     template_name = 'dashboard/dash.html'
 
     def get_queryset(self):
-        contributors = Contribution.objects.all().order_by('-created_at')
+        contributors = Contribution.objects.filter(status=0).order_by('-created_at')
         return contributors
 
 
@@ -42,12 +39,6 @@ class SubmittedFileDetailView(DetailView):
     template_name = 'dashboard/show_data.html'
     context_object_name = 'contribution'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        new_df = handle_new_sdf(self.get_object().file.path, change_db=False)
-        context['new_data'] = new_df.values.tolist()
-        return context
-
 
 class SubmittedFileDownloadView(View):
     def get(self, request, cid):
@@ -57,7 +48,7 @@ class SubmittedFileDownloadView(View):
 
 
 class RejectSubmissionView(View):
-    def post(self, request, cid):
+    def get(self, request, cid):
         contribution = get_object_or_404(Contribution, pk=cid)
         contribution.status = 2
         contribution.save()
@@ -70,14 +61,13 @@ class RejectSubmissionView(View):
 
 
 class AcceptSubmissionView(View):
-    def post(self, request, cid):
+    def get(self, request, cid):
         contribution = get_object_or_404(Contribution, pk=cid)
         contribution.status = 1
         contribution.save()
         path = contribution.file.path
-
-        # Task: os.system() code for at command to schedule job
-        # handle_new_sdf(path, plant=contribution.plant_name)
+        plant = contribution.plant_name
+        save_to_db(plant, path, 0)
         try:
             os.remove(path)
         except FileNotFoundError:
@@ -85,21 +75,13 @@ class AcceptSubmissionView(View):
         return redirect('dash:dashboard')
 
 
-# Not path view
-def handle_file(f, plant=None):
-    filename = f.__str__()
-
-    if not os.path.isdir('media/upload'):
-        os.mkdir('media')
-        os.mkdir('media/upload')
+def handle_file(path, plant):
+    filename = path.__str__()
+    os.makedirs('media/upload', exist_ok=True)
     with open('media/upload/' + filename, 'wb') as des:
-        for chunk in f.chunks():
+        for chunk in path.chunks():
             des.write(chunk)
-
-    # Task: os.system() code for at command to schedule job
-
-    # try:
-    #     sdf_file = 'media/upload/' + filename
-    #     handle_new_sdf(sdf_file, plant)
-    # finally:
-    #     os.remove('media/upload/' + filename)
+    try:
+        save_to_db(plant, 'media/upload/' + filename, 0)
+    finally:
+        os.remove('media/upload/' + filename)

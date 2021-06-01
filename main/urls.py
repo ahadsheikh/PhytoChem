@@ -26,3 +26,4 @@ urlpatterns = [
     path('download/', FileDownloadView.as_view(), name='download_all_results'),
     path('download/all/', FullDownloadView.as_view(), name='all-file-download'),
 ]
+

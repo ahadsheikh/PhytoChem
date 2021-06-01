@@ -7,11 +7,7 @@
 {% block title %}{{ compound.PID }}{% endblock %}
 {% block body %}
     <div class="container shadow-sm bg-white">
-        <div class="row p-2 rounded plant-title ">
-            <div class="col-md d-flex justify-content-center">
-                <img class="ml-2 mr-2 plant-image" src="{% static '/main/images/Chemical.png' %}" alt="Logo">
-                <p class="chemical-title">{{ compound.Smiles }}</p>
-            </div>
+        <div class="p-2 rounded plant-title align-center">
             <div class="w-100 p-2 chemical-id-top">
                 <span class="float-left">
                     <a href="#" class="p-2 rounded">{{ compound.PID|short_id }}</a></span>
@@ -29,12 +25,23 @@
                 </a>
             {% endfor %}
         </div>
-        <div class="row justify-content-center">
-            {% if compound.Molecule_Name %}
-                <h2 class="chemical-title mt-auto mb-auto">{{ compound.Molecule_Name }}</h2>
-            {% endif %}
-            <div class="border border-dark bg-secondary">
+        <div class="row mb-3 ml-2 mt-2 justify-content-between">
+            <div class="col-md-4 border">
                 <img class="img-responsive mx-auto d-block" src="{{ compound.ROMol }}" alt="">
+            </div>
+            <div class="col-md-8 table-responsive">
+                <table class="table table-striped">
+                    {% if compound.Molecule_Name %}
+                        <tr>
+                            <th>Molecule Name</th>
+                            <td>{{ compound.Molecule_Name }}</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <th>Canonical SMILES</th>
+                        <td class="text-wrap text-break">{{ compound.Smiles }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
         <div class="row mb-3 ml-2 mt-2 justify-content-between">

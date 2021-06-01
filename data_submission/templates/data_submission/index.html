@@ -26,7 +26,7 @@
 
                 <input type="hidden" name="user" value="{{ user.id }}">
                 <div class="form-group">
-                    <label for="plantText" class="text-success font-weight-bold">Plant Name <span
+                    <label for="plantText" class="text-success font-weight-bold">Plant Name<span
                             style="color: red;">*</span></label>
                     <input type="text" class="form-control" id="plantText" name="plant_name"
                            aria-describedby="plantHelp"
@@ -35,7 +35,7 @@
                         If the compounds from a specific plant then put plant name or left it blank.
                     </small>
                     {% for field in form %}
-                        {% if field.html_name == 'plant_name' %}
+                        {% if field.html_name == 'plantText' %}
                             {% for error in field.errors %}
                                 <p class="text text-danger">{{ error }}</p>
                             {% endfor %}

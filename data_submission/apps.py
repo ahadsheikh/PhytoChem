@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class SubmitDataConfig(AppConfig):
+class DataSubmissionConfig(AppConfig):
     name = 'data_submission'

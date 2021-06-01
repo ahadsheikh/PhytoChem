@@ -100,9 +100,8 @@ class FileDownloadView(View):
 class FullDownloadView(LoginRequiredMixin, View):
     def get(self, request):
         academic_mail = re.search(r"@\w+\.([\w]+)([\.\w]*)", request.user.email).group(1) in ['ac', 'edu']
-        if not request.user.is_superuser and not academic_mail:
+        if not request.user.is_superuser or not academic_mail:
             messages.warning(request, 'You must login with your institutional mail to download the dataset')
             return HttpResponseForbidden()
         absolute_path = '{}/{}'.format(settings.MEDIA_ROOT, 'all_data.sdf')
-        response = FileResponse(open(absolute_path, 'rb'), as_attachment=True, content_type='text/plain')
-        return response
+        return FileResponse(open(absolute_path, 'rb'), as_attachment=True, content_type='text/plain')

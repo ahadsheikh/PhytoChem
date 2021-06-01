@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     # Apps
     'main.apps.MainConfig',
     'dashboard.apps.DashboardConfig',
-    'data_submission.apps.SubmitDataConfig',
+    'data_submission.apps.DataSubmissionConfig',
     'account.apps.AccountConfig',
 ]
 
