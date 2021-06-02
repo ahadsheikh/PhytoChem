@@ -106,7 +106,7 @@ def get_src_from_image_tag(html):
 
 def save_sdf(plant, path):
     sdf = Chem.SDMolSupplier(path)  # read sdf
-    cur_compound_no = Compound.objects.all().count()
+    cur_compound_no = Compound.objects.order_by('PID').last()
     for mol in sdf:
         smiles = Chem.MolToSmiles(mol)  # get smiles
         # check if this compound already exists
@@ -122,10 +122,6 @@ def save_sdf(plant, path):
         except Plant.DoesNotExist:
             plant = Plant.objects.create(name=plant)
         cur_compound.plants.add(plant)
-
-#from core.save_to_db import save_to_db
-#save_to_db('','/home/shafquat/Downloads/Amazonian Brazilian Plant Files (Rohon)',1)
-#save_to_db('', '/home/shafquat/Downloads/Brazilian Amazonian Plant files (Suvro)', 2)
 
 
 # option 0: single sdf
