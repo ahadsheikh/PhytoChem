@@ -106,7 +106,7 @@ def get_src_from_image_tag(html):
 
 def save_sdf(plant, path):
     sdf = Chem.SDMolSupplier(path)  # read sdf
-    cur_compound_no = Compound.objects.order_by('PID').last()
+    cur_compound_no = Compound.objects.order_by('id').last().id
     for mol in sdf:
         smiles = Chem.MolToSmiles(mol)  # get smiles
         # check if this compound already exists
