@@ -57,3 +57,37 @@ _('form-data').addEventListener('submit', (e) => {
     // e.preventDefault();
     uploadFile();
 });
+
+
+// Make local date
+rows = document.getElementsByClassName("contributer-row")
+const months = {
+    'January': 1,
+    'February': 2,
+    'March': 3,
+    'April': 4,
+    'May': 5,
+    'June': 6,
+    'July': 7,
+    'August': 8,
+    'September': 9,
+    'October': 10,
+    'November': 11,
+    'December': 12
+}
+const monthsRev = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+for(i = 0; i < rows.length; i++){
+    dateTag = rows[i].getElementsByTagName('small')
+    UTCTime = dateTag[0].innerText
+    let l = UTCTime.split(' ')
+    const month = l[0]
+    const day = l[1].substring(0, l[1].length-1)
+    const year = l[2].substring(0, l[2].length-1)
+    const time = l[3]
+    const partOfTheDay = l[4].repeat(',','').toUpperCase()
+    let lt = new Date(`${month}/${day}/${year} ${time} ${partOfTheDay} UTC`)
+
+    const dateTimeShow = `${lt.getDate()}, ${monthsRev[lt.getMonth()]} ${lt.getFullYear()} ${lt.toLocaleTimeString()}`
+    dateTag[0].innerHTML = dateTimeShow
+}

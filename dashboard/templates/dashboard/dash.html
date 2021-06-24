@@ -62,7 +62,7 @@
             {% for con in object_list %}
                 {% if con.status == 0 %}
                     <div class="row p-2 d-flex mb-2" style="border-radius: 10px; background: #DBEABF">
-                        <div class="col-md-4 py-2" style="margin: auto; border-radius: 10px">
+                        <div class="col-md-4 py-2 contributer-row" style="margin: auto; border-radius: 10px">
                             <a href="#"><strong>{{ con.user.first_name }} {{ con.user.last_name }} : <span
                                     style="color: #65BF02">{{ con.plant_name }}</span></strong></a>
                             <small>{{ con.created_at }}</small>
