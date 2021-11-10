@@ -35,7 +35,8 @@ class RegisterView(View):
             user.is_active = False
             user.save()
             if user.email_user(subject, message) == 1:
-                messages.success(request, 'Please check your email and confirm the link to complete registration.')
+                messages.success(request, 'Please check your email inbox or spam and confirm the link to complete '
+                                          'registration.')
             else:
                 messages.warning(request, 'Failed to confirm email')
             return redirect('account:register')
