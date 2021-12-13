@@ -1,0 +1,28 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block meta-attrs %}
+    <meta name="description" content="phytochemdb.com manual">
+{% endblock %}
+{% block title %}Manual{% endblock %}
+{% block body %}
+    <div class="container pt-3">
+        <p class="lead" style="text-align: justify">
+            This database can be used by using different keywords and information’s.
+            In order to explore the compound information’s the user can search by
+        </p>
+        <ol>
+            <li>Plant name</li>
+            <li>Molecular Formula</li>
+            <li>Canonical Smile</li>
+            <li>Unique Accession ID</li>
+        </ol>
+        <p class="lead" style="text-align: justify">
+            Researchers who have screened phytochemicals in their laboratory and
+            already published their data can contribute to this database.
+            They can upload the three-dimensional structure of the phytochemicals in this database
+            and the new uploaded compound will get a unique accession number after passing the review procedure.
+            For submission of data kindly follow the <a href="{% url 'data_submission:index' %}">link</a>.
+            You will need to create a free account first.
+        </p>
+    </div>
+{% endblock %}

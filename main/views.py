@@ -23,6 +23,10 @@ class AboutView(TemplateView):
     template_name = 'main/about.html'
 
 
+class ManualView(TemplateView):
+    template_name = 'main/manual.html'
+
+
 class QueryResultListView(ListView):
     template_name = 'main/results.html'
     context_object_name = 'compounds'
