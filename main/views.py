@@ -102,7 +102,7 @@ class FileDownloadView(View):
         return SDFResponse(compounds, search)
 
 
-class FullDownloadView(LoginRequiredMixin, View):
+class FullDownloadView(View):
     def get(self, request):
         absolute_path = '{}/{}'.format(settings.MEDIA_ROOT, 'all_data.sdf')
         return FileResponse(open(absolute_path, 'rb'), as_attachment=True, content_type='text/plain')
