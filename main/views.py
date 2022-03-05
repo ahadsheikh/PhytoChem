@@ -2,12 +2,11 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseForbidden, FileResponse
+from django.http import HttpResponse, FileResponse
 from django.conf import settings
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView
 
-import re
 from io import StringIO
 import pandas as pd
 from rdkit.Chem import PandasTools
@@ -70,7 +69,8 @@ class CompoundDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        violation_color = ['#2ECC71', '#ABEBC6', '#FADBD8', '#E74C3C', '#B03A2E']
+        violation_color = ['#2ECC71', '#ABEBC6',
+                           '#FADBD8', '#E74C3C', '#B03A2E']
         context['violation_color'] = violation_color
         return context
 
@@ -79,7 +79,8 @@ class SDFResponse(HttpResponse):
     def __init__(self, data, output_name):
         output = StringIO()
         compounds_df = pd.DataFrame(list(data.values())).drop('id', axis=1)
-        PandasTools.AddMoleculeColumnToFrame(compounds_df, 'Smiles', 'ROMol', includeFingerprints=True)
+        PandasTools.AddMoleculeColumnToFrame(
+            compounds_df, 'Smiles', 'ROMol', includeFingerprints=True)
         PandasTools.WriteSDF(compounds_df, output, molColName='ROMol', idName='PID',
                              properties=list(compounds_df.columns))
 
@@ -103,9 +104,5 @@ class FileDownloadView(View):
 
 class FullDownloadView(LoginRequiredMixin, View):
     def get(self, request):
-        academic_mail = re.search(r"@\w+\.([\w]+)([\.\w]*)", request.user.email).group(1) in ['ac', 'edu']
-        if not request.user.is_superuser or not academic_mail:
-            messages.warning(request, 'You must login with your institutional mail to download the dataset')
-            return HttpResponseForbidden()
         absolute_path = '{}/{}'.format(settings.MEDIA_ROOT, 'all_data.sdf')
         return FileResponse(open(absolute_path, 'rb'), as_attachment=True, content_type='text/plain')
