@@ -29,10 +29,15 @@ def single_smiles_scrape(smiles: str) -> str:
     s = requests.post(url, data={'smiles': smiles})
 
     soup = BeautifulSoup(s.content, 'html.parser')
-    csv_div = soup.find('div', attrs={
-        "style": "float: right; width: 250px; height: 30px; text-align: left; font: 13pt  Helvetica,Verdana, "
-                 "sans-serif;"})
+    csv_div = soup.find_all('div')
+    csv_div = reversed(csv_div)
+    for csv in csv_div:
+        if "Retrieve data" in csv.text:
+            csv_div = csv
+            break
+
     csv_link = "http://www.swissadme.ch/" + csv_div.a['href']
+
     csv_data = requests.get(csv_link)
     return csv_data.text
 
